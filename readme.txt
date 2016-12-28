@@ -1,18 +1,18 @@
-=== Delicious Readings ===
+=== Pinboard Bookmarks ===
 Contributors: aldolat
-Donate link: http://dev.aldolat.it/projects/delicious-readings/
-Tags: delicious, readings, bookmarks, widget
+Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
+Tags: pinboard, readings, bookmarks, widget
 Requires at least: 3.0
-Tested up to: 4.6
-Stable tag: 2.4.2
+Tested up to: 4.7
+Stable tag: 1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Publish your readings on your WordPress blog using your Delicious Bookmarks.
+Publish your bookmarks on your WordPress blog using your Pinboard account.
 
 == Description ==
 
-This plugin allows you to publish some of your Delicious bookmarks on your blog:
+This plugin allows you to publish your Pinboard bookmarks on your blog:
 it retrieves the bookmarks from a specific tag and publishes them on your sidebar.
 
 It could be useful, for example, to publish your readings on the Web.
@@ -96,42 +96,6 @@ where `USERNAME` is your username on Delicious and `TAG-NAME` is the tag that co
 So, for example, a link could be: `http://delicious.com/v2/rss/myusername/mytag`. Obviously adjust it to your real username ad tag.
 
 == Changelog ==
-
-= 2.4.2 =
-
-* Removed sponsored link in the feed.
-
-= 2.4.1 =
-
-* Switched to PHP5 __contruct() in creating the widget.
-
-= 2.4 =
-
-* NEW: The user can fetch up to 100 items (props by alassafin.f).
-
-= 2.3 =
-
-* NEW: The items can now be displayed in random order (props by whaus).
-
-= 2.2 =
-
-* Fixed a typo that breaks hyperlink if "nofollow" is inactive (thanks to whaus).
-
-= 2.1 =
-
-* Fixed a bug where the shortcode displayed the output before a custom introductory text (thanks to eggepegge).
-
-= 2.0 =
-
-* NEW: Added the shortcode to display your reading list on a static page or on a single post (thanks to @redhatgal for the tip).
-* Minor bug fixings.
-
-= 1.1 =
-
-* Moved the widget into a separate file.
-* Fixed a typo in the widget panel.
-* Fixed a bug in the "nofollow" value for rel attribute.
-* Security focusing.
 
 = 1.0 =
 First release of the plugin.

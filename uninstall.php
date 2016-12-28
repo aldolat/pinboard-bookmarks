@@ -1,6 +1,6 @@
 <?php
 /**
- * Delicious Readings Uninstall
+ * Pinboard Bookmarks Uninstall
  *
  * @since 1.0
  */
@@ -10,4 +10,4 @@ if( !defined( 'ABSPATH' ) && !defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
 // Delete options from the database
-delete_option( 'widget_dr-widget' );
+delete_option( 'widget_pinboard-bookmarks-widget' );
