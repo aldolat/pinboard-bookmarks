@@ -1,0 +1,222 @@
+# Copyright (C) 2010 Delicious Readings
+# This file is distributed under the same license as the Delicious Readings package.
+# Aldo Latino <aldolat@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: Delicious Readings\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/delicious-readings\n"
+"POT-Creation-Date: 2014-05-04 08:35:57+00:00\n"
+"PO-Revision-Date: 2014-05-04 10:37+0200\n"
+"Last-Translator: Aldo Latino <aldolat@gmail.com>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: delicious-readings-shortcode.php:19 delicious-readings-widget.php:103
+#: delicious-readings.php:68
+msgid "Stored on:"
+msgstr "Archiviato il:"
+
+#: delicious-readings-shortcode.php:21 delicious-readings-widget.php:105
+#: delicious-readings.php:70
+msgid "Tags:"
+msgstr "Tag:"
+
+#: delicious-readings-shortcode.php:25 delicious-readings-widget.php:110
+#: delicious-readings.php:74
+msgid "More posts"
+msgstr "Altri post"
+
+#. #-#-#-#-#  delicious-readings.pot (Delicious Readings 2.4)  #-#-#-#-#
+#. Description of the plugin/theme
+#: delicious-readings-widget.php:28
+msgid "Publish a reading list using your Delicious bookmarks"
+msgstr "Pubblica una lista delle tue letture usando i segnalibri su Delicious"
+
+#. #-#-#-#-#  delicious-readings.pot (Delicious Readings 2.4)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: delicious-readings-widget.php:34
+msgid "Delicious Readings"
+msgstr "Delicious Readings"
+
+#: delicious-readings-widget.php:96
+msgid "My Readings"
+msgstr "Le mie letture"
+
+#: delicious-readings-widget.php:128
+msgid ""
+"This widget allows you to publish a list of Delicious bookmarks in your "
+"website. This widget can retrieve those bookmarks and publish them in your "
+"sidebar."
+msgstr ""
+"Questo widget consente di pubblicare un elenco di segnalibri di Delicious nel "
+"proprio sito. Il widget può prelevare questi segnalibri e pubblicarli nella "
+"barra laterale."
+
+#: delicious-readings-widget.php:132
+msgid "Title:"
+msgstr "Titolo:"
+
+#: delicious-readings-widget.php:139
+msgid "Enter the feed URL:"
+msgstr "Inserisci l'URL del feed:"
+
+#: delicious-readings-widget.php:144
+msgid "Examples of Delicious RSS URLs:"
+msgstr "Esempi di indirizzi RSS di Delicious:"
+
+#: delicious-readings-widget.php:147
+msgid ""
+"Also, you can insert the feed from a service like FeedBurner or Yahoo Pipes, "
+"if Delicious is not directly available to your server."
+msgstr ""
+"Infine, si può anche immettere il feed da un servizio come FeedBurner o "
+"Yahoo Pipes, se il tuo server non può accedere direttamente a Delicious."
+
+#: delicious-readings-widget.php:153
+msgid "Maximum number of items (maximum 100 items):"
+msgstr "Numero massimo di elementi (100 al massimo):"
+
+#: delicious-readings-widget.php:161
+msgid "Display items in random order"
+msgstr "Visualizza le voci in ordine casuale"
+
+#: delicious-readings-widget.php:167
+msgid "Minimum time between two fetchings (in seconds, minimum 3600):"
+msgstr "Tempo minimo fra due prelievi (in secondi, minimo 3600): "
+
+#: delicious-readings-widget.php:177
+msgid "Add %s to links"
+msgstr "Aggiungi %s ai link"
+
+#: delicious-readings-widget.php:180
+msgid "It will be added only to the link in titles, not in tag links too."
+msgstr "Sarà aggiunto solo ai link nei titoli, e non anche in quelli dei tag."
+
+#: delicious-readings-widget.php:188
+msgid "Display the bookmark description"
+msgstr "Vsualizza la descrizione del segnalibro"
+
+#: delicious-readings-widget.php:194
+msgid "Lenght of the description (in words):"
+msgstr "Lunghezza della descrizione (in parole):"
+
+#: delicious-readings-widget.php:196
+msgid "(%s means full text)"
+msgstr "(%s visualizza tutto il testo)"
+
+#: delicious-readings-widget.php:206
+msgid "Display the date of the bookmark"
+msgstr "Visualizza la data del segnalibro"
+
+#: delicious-readings-widget.php:212
+msgid "Text before the date:"
+msgstr "Testo prima della data:"
+
+#: delicious-readings-widget.php:216 delicious-readings-widget.php:234
+msgid "A space will be added after the text."
+msgstr "Dopo il testo verrà aggiunto uno spazio."
+
+#: delicious-readings-widget.php:224
+msgid "Display tags"
+msgstr "Visualizza i tag"
+
+#: delicious-readings-widget.php:230
+msgid "Text before tags list:"
+msgstr "Testo prima dei tag:"
+
+#: delicious-readings-widget.php:240
+msgid "Display an hashtag %s before each tag"
+msgstr "Visualizza un hashtag %s prima di ogni segnalibro"
+
+#: delicious-readings-widget.php:249
+msgid "Display an arrow after each title"
+msgstr "Visualizza una freccia dopo ogni titolo"
+
+#: delicious-readings-widget.php:258
+msgid "Display the link to the entire tag archive"
+msgstr "Visualizza il link all'intero archivio del tag"
+
+#: delicious-readings-widget.php:264
+msgid "Use this text for the archive link:"
+msgstr "Usa questo testo per il link all'archivio:"
+
+#: delicious-readings-widget.php:272
+msgid "Display an arrow after the link to the archive"
+msgstr "Visualizza una freccia dopo il link all'archivio"
+
+#: delicious-readings-widget.php:281
+msgid "Open links in a new browser tab"
+msgstr "Apri i link in una nuova scheda del browser"
+
+#: delicious-readings.php:104
+msgid "There was a problem with your feed! The error is %s"
+msgstr "C'è un problema col tuo feed! L'errore è %s"
+
+#: delicious-readings.php:112
+msgid "No items."
+msgstr "Nessun articolo."
+
+#: delicious-readings.php:124
+msgid "Read &laquo;%s&raquo;"
+msgstr "Leggi &laquo;%s&raquo;"
+
+#: delicious-readings.php:150
+msgid "Go to the bookmark stored on Delicious."
+msgstr "Vai al segnalibro archiviato su Delicious."
+
+#: delicious-readings.php:165
+msgid "Go to the tag %s su Delicious"
+msgstr "Vai al tag %s archiviato su Delicious."
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.aldolat.it/wordpress/wordpress-plugins/delicious-readings/"
+msgstr "http://www.aldolat.it/wordpress/wordpress-plugins/delicious-readings/"
+
+#. Author of the plugin/theme
+msgid "Aldo Latino"
+msgstr "Aldo Latino"
+
+#. Author URI of the plugin/theme
+msgid "http://www.aldolat.it/"
+msgstr "http://www.aldolat.it/"
+
+#~ msgid "Usually the feed URL for a Delicious tag has this form: %s."
+#~ msgstr ""
+#~ "Di solito l'URL del feed di un tag di Delicious ha questa forma: %s."
+
+#~ msgid ""
+#~ "So, for example, if your username is %1$s and the tag is %2$s, the feed "
+#~ "URL will be %3$s."
+#~ msgstr ""
+#~ "Così, per esempio, se il tuo nome utente è %1$s e il tag è %2$s, l'URL "
+#~ "del feed sarà %3$s."
+
+#~ msgid "Publish a reading list using your Delicious bookmarks."
+#~ msgstr ""
+#~ "Pubblica una lista di letture usando i tuoi segnalibri su Delicious."
+
+#~ msgid "Display date"
+#~ msgstr "Visualizza la data"
+
+#~ msgid "Display arrow in titles"
+#~ msgstr "Visualizza la freccia nei titoli"
+
+#~ msgid "The error is %s"
+#~ msgstr "L'errore è %s"
+
+#~ msgid "Truncate descriptions at char:"
+#~ msgstr "Tronca la descrizione al carattere:"
+
+#~ msgid "Read \"%s\""
+#~ msgstr "Leggi \"%s\""
+
+#~ msgid "Other readings"
+#~ msgstr "Altre letture"
