@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
-		'feed_url'         => '',
+		'nickname'         => '',
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -42,15 +42,16 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	include_once( ABSPATH . WPINC . '/feed.php' );
 
-	/*
-	Pinboard offers 50 items by default.
-	If the user wants more than 50 items, we have to add '?count=XX' at the end of the URL.
-	Also, let's figure out if the user has already added the "?count=XX" parameter in the URL.
-	*/
-	$count_in_url = strpos( $feed_url, '?count=' );
-	if ( ! $count_in_url && $quantity > 50 ) {
-		$feed_url = $feed_url . '?count=' . $quantity;
-	}
+    if( $display_arrow )    $arrow        = '&nbsp;&rarr;';             else $arrow        = '';
+    if( isset( $new_tab ) ) $new_tab_link = ' target="_blank"';         else $new_tab_link = '';
+    if( $nofollow )         $rel_txt      = ' rel="bookmark nofollow"'; else $rel_txt      = ' rel="bookmark"';
+
+    $pinboard_url     = 'https://pinboard.in/u:' . $nickname;
+    $pinboard_tag_url = $pinboard_url . $nickname . '/t:';
+    $pinboard_rss_url = 'https://feeds.pinboard.in/rss/u:' . $nickname . '/';
+
+    if ( 400 < $quantity ) $quantity = 400;
+	$feed_url = $pinboard_rss_url . '?count=' . $quantity;
 
 	$rss = fetch_feed( $feed_url );
 
@@ -76,10 +77,6 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				$output .= '<li class="pinboard-bookmarks-list-li">';
 
 					// Title
-					if( $display_arrow )    $arrow        = '&nbsp;&rarr;';            else $arrow = '';
-					if( isset( $new_tab ) ) $new_tab_link = ' target="_blank"';
-					if( $nofollow )         $rel_txt      = ' rel="bookmark nofollow"'; else $rel_txt = ' rel="bookmark"';
-
 					$title = sprintf( __( 'Read &laquo;%s&raquo;', 'pinboard-bookmarks' ), $item->get_title() );
 
 					$output .= '<p class="pinboard-bookmarks-list-title">';
@@ -114,16 +111,20 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 					// Tag
 					if( $display_tags ) {
-						$tags = (array) $item->get_item_tags( '', 'category' );
-						$output .= '<p class="pinboard-bookmarks-list-tags">';
-							if( $tags_text ) $output .= $tags_text . ' ';
-							if( $display_hashtag ) $hashtag = '#';
-							foreach( $tags as $tag ) {
-								$the_domain = isset( $tag['attribs']['']['domain'] ) ? $tag['attribs']['']['domain'] : '';
-								$the_tag    = isset( $tag['data'] ) ? $tag['data'] : '';
-								$output .= $hashtag . '<a rel="bookmark" href="' . $the_domain . $tag['data'] . '" title="' . sprintf( __( 'Go to the tag %s su Delicious', 'pinboard-bookmarks' ), $hashtag . $the_tag ) . '"' . $new_tab_link . '>' .  $the_tag . '</a> ';
-							}
-						$output .= '</p>';
+						$tags = (array) $item->get_categories();
+                        if ( $tags ) {
+    						$output .= '<p class="pinboard-bookmarks-list-tags">';
+    							if( $tags_text ) $output .= $tags_text . ' ';
+    							if( $display_hashtag ) $hashtag = '#';
+    							foreach( $tags as $tag ) {
+                                    $item_tags = $tag->get_label();
+                                    $item_tags = (array) explode( ' ', $item_tags );
+                                    foreach ( $item_tags as $item_tag ) {
+        								$output .= $hashtag . '<a rel="bookmark" href="' . $pinboard_tag_url . strtolower( $item_tag ) . '/" title="' . sprintf( __( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) . '"' . $new_tab_link . '>' .  $item_tag . '</a> ';
+                                    }
+    							}
+    						$output .= '</p>';
+                        }
 					}
 
 				$output .= '</li>';
@@ -137,7 +138,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if( ! is_wp_error( $rss ) && $display_archive ) {
 		if( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
 		$output .= '<p class="pinboard-bookmarks-list-more">';
-			$output .= '<a href="' .  $rss->get_link() . '"' .  $new_tab_link . '>';
+			$output .= '<a href="' . $rss->get_link() . '"' .  $new_tab_link . '>';
 				$output .= $archive_text . $arrow;
 			$output .= '</a>';
 		$output .= '</p>';

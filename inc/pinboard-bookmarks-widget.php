@@ -46,7 +46,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		echo $before_widget;
 		if ( $title ) echo $before_title . $title . $after_title;
 		pinboard_bookmarks_fetch_feed( array(
-			'feed_url'         => $instance['feed_url'],
+			'nickname'         => $instance['nickname'],
 			'quantity'         => $instance['quantity'],
 			'random'           => $instance['random'],
 			'display_desc'     => $instance['display_desc'],
@@ -69,7 +69,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title']             = strip_tags( $new_instance['title'] );
-		$instance['feed_url']          = esc_url( strip_tags( $new_instance['feed_url'] ) );
+		$instance['nickname']          = strip_tags( $new_instance['nickname'] );
 		$instance['quantity']          = absint( strip_tags( $new_instance['quantity'] ) );
 			if( $instance['quantity'] == '' || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if( $instance['quantity'] > 400 ) $instance['quantity'] = 400;
@@ -98,7 +98,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function form($instance) {
 		$defaults = array(
 			'title'            => __( 'My Bookmarks', 'pinboard-bookmarks' ),
-			'feed_url'         => '',
+			'nickname'         => '',
 			'quantity'         => 5,
 			'random'           => false,
 			'display_desc'     => false,
@@ -131,25 +131,22 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		<p>
 			<?php _e( 'This widget allows you to publish a list of Pinboard bookmarks in your website. This widget can retrieve those bookmarks and publish them in your sidebar.', 'pinboard-bookmarks' ); ?>
 		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>">
-				<?php _e( 'Title:', 'pinboard-bookmarks' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
-		</p>
+
+        <?php // Title
+        pinboard_bookmarks_form_input_text(
+            __( 'Title:', 'pinboard-bookmarks' ),
+            $this->get_field_id( 'title' ),
+            $this->get_field_name( 'title' ),
+            esc_attr( $instance['title'] ),
+            __( 'My bookmarks on Pinboard', 'pinboard-bookmarks' )
+        );
+        ?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'feed_url' ); ?>">
-				<?php _e( 'Enter the feed URL:', 'pinboard-bookmarks' ); ?>
+			<label for="<?php echo $this->get_field_id( 'nickname' ); ?>">
+				<?php _e( 'Enter your nickname on Pinboard:', 'pinboard-bookmarks' ); ?>
 			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'feed_url' ); ?>" name="<?php echo $this->get_field_name( 'feed_url' ); ?>" type="text" value="<?php echo esc_attr( $instance['feed_url'] ); ?>" />
-			<br />
-			<em>
-				<?php _e( 'Examples of Delicious RSS URLs:', 'pinboard-bookmarks' ); ?><br />
-				<strong>http://feeds.pinboard.in/rss/u:username/</strong><br />
-				<strong>http://feeds.pinboard.in/rss/u:username/t:tag1/</strong><br />
-				<?php _e( 'Also, you can insert the feed from a service like FeedBurner or Yahoo Pipes, if Delicious is not directly available to your server.', 'pinboard-bookmarks' ); ?>
-			</em>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'nickname' ); ?>" name="<?php echo $this->get_field_name( 'nickname' ); ?>" type="text" value="<?php echo esc_attr( $instance['nickname'] ); ?>" />
 		</p>
 
 		<p>
@@ -259,7 +256,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $display_archive ); ?> value="1" id="<?php echo $this->get_field_id( 'display_archive' ); ?>" name="<?php echo $this->get_field_name( 'display_archive' ); ?>" />
 			<label for="<?php echo $this->get_field_id( 'display_archive' ); ?>">
-				<?php _e( 'Display the link to the entire tag archive', 'pinboard-bookmarks' ); ?>
+				<?php _e( 'Display the link to my bookmarks archive on Pinboard', 'pinboard-bookmarks' ); ?>
 			</label>
 		</p>
 
