@@ -62,7 +62,9 @@ function pinboard_bookmarks_setup() {
 	 *
 	 * @since 1.0
 	 */
-	// Load the main functions.
+    // Load the core functions.
+    require_once( plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-core.php' );
+	// Load the functions.
 	require_once( plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-functions.php' );
 	// Load the shortcode.
 	require_once( plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-shortcode.php' );
