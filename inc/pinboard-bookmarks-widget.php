@@ -47,7 +47,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 		pinboard_bookmarks_fetch_feed( array(
 			'username'         => $instance['username'],
-            'tags_list'        => $instance['tags_list'],
+            'tags'             => $instance['tags'],
 			'quantity'         => $instance['quantity'],
 			'random'           => $instance['random'],
 			'display_desc'     => $instance['display_desc'],
@@ -71,8 +71,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title']             = strip_tags( $new_instance['title'] );
-        $instance['tags_list']         = strip_tags( $new_instance['tags_list'] );
-            $instance['tags_list'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags_list'] ) );
+        $instance['tags']              = strip_tags( $new_instance['tags'] );
+            $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
 		$instance['username']          = strip_tags( $new_instance['username'] );
 		$instance['quantity']          = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
@@ -103,7 +103,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$defaults = array(
 			'title'            => esc_html__( 'My Bookmarks', 'pinboard-bookmarks' ),
 			'username'         => '',
-            'tags_list'        => '',
+            'tags'             => '',
 			'quantity'         => 5,
 			'random'           => false,
 			'display_desc'     => false,
@@ -172,9 +172,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
             // Tags
             pinboard_bookmarks_form_input_text(
                 esc_html__( 'Tags:', 'pinboard-bookmarks' ),
-                $this->get_field_id( 'tags_list' ),
-                $this->get_field_name( 'tags_list' ),
-                esc_attr( $instance['tags_list'] ),
+                $this->get_field_id( 'tags' ),
+                $this->get_field_name( 'tags' ),
+                esc_attr( $instance['tags'] ),
                 esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
                 esc_html__( 'Enter a space separated list of tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
             );

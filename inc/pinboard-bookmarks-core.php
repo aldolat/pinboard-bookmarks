@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
 		'username'         => '',
-        'tags_list'        => '',
+        'tags'             => '',
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -39,7 +39,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
-    if ( ! $username && ! $tags_list ) {
+    if ( ! $username && ! $tags ) {
         echo '<p class="pinboard-bookmarks error">';
         esc_html_e( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
         echo '</p>';
@@ -61,8 +61,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     $pinboard_user_tag_url = $pinboard_user_url . '/t:';
 
     // Build the tags list
-    if ( $tags_list ) {
-        $tags_for_url = pinboard_bookmarks_get_tags_for_url( $tags_list );
+    if ( $tags ) {
+        $tags_for_url = pinboard_bookmarks_get_tags_for_url( $tags );
     } else {
         $tags_for_url = '';
     }
@@ -139,12 +139,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 				// Tags
 				if ( $display_tags ) {
-					$tags = (array) $item->get_categories();
-                    if ( $tags ) {
+					$tags_list = (array) $item->get_categories();
+                    if ( $tags_list ) {
 						$output .= '<p class="pinboard-bookmarks-list-tags">';
 							if ( $tags_text ) $output .= $tags_text . ' ';
 							if ( $display_hashtag ) $hashtag = '#';
-							foreach( $tags as $tag ) {
+							foreach( $tags_list as $tag ) {
                                 $item_tags = $tag->get_label();
                                 $item_tags = (array) explode( ' ', $item_tags );
                                 if ( $username ) {

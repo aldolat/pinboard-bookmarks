@@ -18,7 +18,7 @@
 function pinboard_bookmarks_sc( $atts ) {
 	extract( shortcode_atts( array(
         'username'         => '',
-        'tags_list'        => '',
+        'tags'             => '',
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
