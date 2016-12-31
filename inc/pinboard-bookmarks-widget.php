@@ -164,7 +164,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
         <div class="pinboard-bookmarks-widget-content">
 
-            <h4 class="no-border"><?php esc_html_e( 'Informations' ); ?></h4>
+            <h4 class="no-border"><?php esc_html_e( 'Informations', 'pinboard-bookmarks' ); ?></h4>
 
     		<p>
     			<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter your username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
@@ -174,7 +174,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 <?php esc_html_e( 'Please note that your username or one tag is required, at least.', 'pinboard-bookmarks' ); ?>
             </p>
 
-            <h4><?php esc_html_e( 'Title of the widget' ); ?></h4>
+            <h4><?php esc_html_e( 'Title of the widget', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Title
@@ -186,7 +186,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' )
             ); ?>
 
-            <h4><?php esc_html_e( 'Basic Setup' ); ?></h4>
+            <h4><?php esc_html_e( 'Basic Setup', 'pinboard-bookmarks' ); ?></h4>
 
             <?php // Username
             pinboard_bookmarks_form_input_text(
@@ -235,7 +235,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'In seconds. Minimum 1800 seconds (30 minutes).', 'pinboard-bookmarks' )
             ); ?>
 
-            <h4><?php esc_html_e( 'Bookmarks description' ); ?></h4>
+            <h4><?php esc_html_e( 'Bookmark description', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Description
@@ -256,7 +256,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 sprintf( esc_html__( '(In words. %s means full text)', 'pinboard-bookmarks' ), '<code>0</code>' )
             ); ?>
 
-            <h4><?php esc_html_e( 'Date of the bookmarks' ); ?></h4>
+            <h4><?php esc_html_e( 'Date of the bookmark', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Date
@@ -277,7 +277,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'A space will be added after the text.', 'pinboard-bookmarks' )
             ); ?>
 
-            <h4><?php esc_html_e( 'Tags of the bookmarks' ); ?></h4>
+            <h4><?php esc_html_e( 'Tags of the bookmark', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Tags
@@ -306,7 +306,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 checked( $display_hashtag, true, false )
             ); ?>
 
-            <h4><?php esc_html_e( 'Link to the archive' ); ?></h4>
+            <h4><?php esc_html_e( 'Link to the archive', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Archive
@@ -334,7 +334,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 checked( $display_arch_arr, true, false )
             ); ?>
 
-            <h4><?php esc_html_e( 'Other options' ); ?></h4>
+            <h4><?php esc_html_e( 'Other options', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Arrow
