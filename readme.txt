@@ -8,92 +8,106 @@ Stable tag: 1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Publish your bookmarks on your WordPress blog using your Pinboard account.
+Publish Pinboard bookmarks on your WordPress blog.
 
 == Description ==
 
-This plugin allows you to publish your Pinboard bookmarks on your blog:
-it retrieves the bookmarks from a specific tag and publishes them on your sidebar.
+Pinboard Bookmarks allows you to publish bookmarks from Pinboard on your blog. The plugin lets you:
 
-It could be useful, for example, to publish your readings on the Web.
-Let's say that you read a webpage and bookmark it as "readings".
-This plugin can get the bookmarks from the tag "readings" (or whatever it is) and display them on a widget in your sidebar. You can also use a shortcode if you want to display your reading list on a static page or on a single post.
+* retrieve the bookmarks from your account (or any account) on Pinboard;
+* retrieve the bookmarks from one or more tags of your account (ar any account);
+* retrieve the latest bookmarks from Pinboard using one or more tags.
 
-The plugin may display for each tag:
+This plugin has also a shortcode, so you can publish the bookmarks in a post or a page.
 
-* The title with link
-* The description if any
-* The date of the bookmark
-* The tags assigned to the bookmark
-* The link to the entire archive of that tag on Delicious
+The plugin may display for each tag (you choose what to display):
+
+* The title with link;
+* The description if any;
+* The date of the bookmark;
+* The tags assigned to the bookmark;
+* The link to the entire archive of that tag on Pinboard;
+* Display items in random order.
 
 After the plugin's activation, you will have a new widget in Appearance / Widgets.
 
-**Usage as shortcode**
+*Usage as shortcode*
 
-You can also use the plugin's shortcode to display your list on a static page or on a single post. Use:
+You can also use the plugin's shortcode to display your list on a static page or on a single post. Example usage:
 
-`[dreadings feed_url="http://delicious.com/v2/rss/USERNAME/TAG-NAME"]`
+`[pbsc username="johndoe"]`
 
-Change `USERNAME` and `TAG-NAME` as required.
+Change `username` as required.
 
-In the widget you can use the full set of options. So, for example, if you want to display the tags, use:
+In the widget you can use the full set of options. So, for example, if you want to fetch the feed from bookmarks that have `books` and `comics` tags and display the tags, use:
 
-`[dreadings feed_url="http://delicious.com/v2/rss/USERNAME/TAG-NAME" display_tags=true]`
+`[pbsc username="johndoe" tags="books comics" display_tags=true]`
 
-**Usage as PHP function**
+Note that the the plugin will fetch bookmarks that have both the tags `books` and `comics`.
 
-You can also use the main PHP function directly in your theme. Add these lines where you want it be displayed:
+This is the list of the options for the shortcode:
 
-`if ( function_exists( 'dr_fetch_feed' ) ) {
+* `username` (string) - A username on Pinboard.
+* `tags` (string) - A space separated list of tags or a single tag.
+* `quantity` (integer) - The number of bookmarks you want to display (Pinboard accepts 400 at most).
+* `random` (boolean, true/false) - If a random order should be used.
+* `display_desc` (boolean, true/false) - If the tag description should be displayed.
+* `truncate` (integer) - The maximum number of words the description should have.
+* `display_date` (boolean, true/false) - If the date of the bookmark (when it was archived on Pinboard) should be displayed.
+* `date_text` (string) - The text to be prepended to the date of the bookmark.
+* `display_tags` (boolean, true/false) - If the tags should be displayed.
+* `tags_text` (string) - The text to be prepended to the tags of the bookmark.
+* `display_hashtag` (boolean, true/false) - If the tags should be prefixed with an hashtag (`#`),
+* `display_arrow` (boolean, true/false) - If an HTML arrow shound be appended to the title of the bookmarks.
+* `display_archive` (boolean, true/false) - If the link to the archive on Pinboard should be displayed.
+* `archive_text` (string) - The text to be used for the archive on Pinboard.
+* `display_arch_arr` (boolean, true/false) - If an HTML arrow shound be appended to the archive text.
+* `new_tab` (boolean, true/false) - If the links should be open in a new browser tab.
+* `nofollow` (boolean, true/false) - If a `nofollow` attribute should be added the the links of the bookmark title.
+
+*Usage as PHP function*
+
+You can also use the main PHP function directly in your theme. Add these lines where you want it be displayed (the function echoes the result):
+
+`if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 	$args = array(
-		'feed_url'         => '',
-		'quantity'         => 5,
-		'display_desc'     => false,
-		'truncate'         => 0,
-		'display_date'     => false,
-		'date_text'        => 'Stored on:',
-		'display_tags'     => false,
-		'tags_text'        => 'Tags:',
-		'display_hashtag'  => true,
-		'display_arrow'    => false,
-		'display_archive'  => true,
-		'archive_text'     => 'More posts',
-		'display_arch_arr' => true,
-		'new_tab'          => false,
-		'nofollow'         => true,
+	'username'         => '',
+	'tags'             => '',
+	'quantity'         => 5,
+	'random'           => false,
+	'display_desc'     => false,
+	'truncate'         => 0,
+	'display_date'     => false,
+	'date_text'        => 'Stored on:'
+	'display_tags'     => false,
+	'tags_text'        => 'Tags:'
+	'display_hashtag'  => true,
+	'display_arrow'    => false,
+	'display_archive'  => true,
+	'archive_text'     => 'See the bookmarks on Pinboard'
+	'display_arch_arr' => true,
+	'new_tab'          => false,
+	'nofollow'         => true,
 	);
-	dr_fetch_feed( $args );
+	pinboard_bookmarks_fetch_feed( $args );
 }`
 
 Make sure to properly use the opening and closing tags `<?php` and `?>` respectively.
 
-The only mandatory option is `feed_url`. Also change `USERNAME` and `TAG-NAME` as required. The other options are the default options which you can change according your needs. It isn't necessary to insert all of them.
+The only mandatory options are `username` and `tags`; you have to use one of them at least. The other options are the default options which you can change according your needs. It isn't necessary to insert all of them.
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
-1. From your WordPress dashboard search the plugin Delicious Readings, install and activate it.
+1. From your WordPress dashboard search the plugin Pinboard Bookmarks, install and activate it.
 1. Add the new widget on your sidebar.
-1. The only necessary thing to do is to add the feed of the tag on Delicious to retrieve.
+1. The only necessary thing to do is to add a username or one or more tags.
 
 == Screenshots ==
 
 1. The dashboard panel to set up the widget
 2. An example of rendered widget
-
-== Frequently Asked Questions ==
-
-= The rendered text on my blog is not similar to the screenshot =
-
-You have to modify the style.css of yout theme to fit your needs.
-
-= What link have I to insert in the widget? =
-
-The link for the feed of a specific Delicious tag is like this: `http://delicious.com/v2/rss/USERNAME/TAG-NAME`
-where `USERNAME` is your username on Delicious and `TAG-NAME` is the tag that collects all your bookmarks to be published.
-So, for example, a link could be: `http://delicious.com/v2/rss/myusername/mytag`. Obviously adjust it to your real username ad tag.
 
 == Changelog ==
 

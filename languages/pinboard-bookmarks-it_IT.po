@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: Delicious Readings\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
 "bookmarks\n"
-"POT-Creation-Date: 2016-12-31 17:00+0100\n"
-"PO-Revision-Date: 2016-12-31 17:00+0100\n"
+"POT-Creation-Date: 2016-12-31 18:38+0100\n"
+"PO-Revision-Date: 2016-12-31 18:39+0100\n"
 "Last-Translator: Aldo Latino <aldolat@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -30,15 +30,17 @@ msgid "Tags:"
 msgstr "Tag:"
 
 #: inc/pinboard-bookmarks-core.php:34 inc/pinboard-bookmarks-shortcode.php:33
-#: inc/pinboard-bookmarks-widget.php:147
-msgid "See bookmarks on Pinboard"
-msgstr ""
+#: inc/pinboard-bookmarks-widget.php:147 inc/pinboard-bookmarks-widget.php:326
+msgid "See the bookmarks on Pinboard"
+msgstr "Guarda i segnalibri su Pinboard"
 
 #: inc/pinboard-bookmarks-core.php:44
 msgid ""
 "You have not properly configured the widget. Please, add a username or a tag "
 "at least."
 msgstr ""
+"Non hai configurato il widget in modo corretto. Aggiungi almeno un nome "
+"utente o un tag"
 
 #: inc/pinboard-bookmarks-core.php:89
 msgid "There was a problem with your feed! The error is %s"
@@ -58,56 +60,48 @@ msgstr "Vai al segnalibro archiviato su Delicious."
 
 #: inc/pinboard-bookmarks-core.php:156
 msgid "View the tag %s on Pinboard"
-msgstr ""
+msgstr "Guarda il tag %s su Pinboard"
 
 #: inc/pinboard-bookmarks-functions.php:79
-#, fuzzy
 msgid "Click here to rate and review this plugin on WordPress.org"
 msgstr "Fai clic qui per valutare e recensire questo plugin su WordPress.org"
 
 #: inc/pinboard-bookmarks-functions.php:79
-#, fuzzy
 msgid "Rate this plugin"
 msgstr "Valuta questo plugin"
 
 #: inc/pinboard-bookmarks-widget.php:29
-#, fuzzy
 msgid "Publish a bookmarks list using your Pinboard bookmarks"
-msgstr "Pubblica una lista delle tue letture usando i segnalibri su Delicious"
+msgstr "Pubblica una lista di segnalibri usando i segnalibri su Pinboard"
 
 #. Plugin Name of the plugin/theme
 #: inc/pinboard-bookmarks-widget.php:38
 msgid "Pinboard Bookmarks"
-msgstr ""
+msgstr "Pinboard Bookmarks"
 
-#: inc/pinboard-bookmarks-widget.php:132
-msgid "My Bookmarks"
-msgstr ""
+#: inc/pinboard-bookmarks-widget.php:132 inc/pinboard-bookmarks-widget.php:186
+msgid "My bookmarks on Pinboard"
+msgstr "I miei segnalibri su Pinboard"
 
 #: inc/pinboard-bookmarks-widget.php:167
-#, fuzzy
 msgid "Informations"
-msgstr ""
-"Usare questa opzione solo per fini di debug. Si noti che le informazioni "
-"saranno rese pubbliche sul sito."
+msgstr "Informazioni"
 
 #: inc/pinboard-bookmarks-widget.php:170
-#, fuzzy
 msgid ""
 "This widget allows you to publish a list of Pinboard bookmarks in your "
-"sidebar. Simply enter your username on Pinboard and/or one or more tags. "
-"Then click on Save button."
+"sidebar. Simply enter a username on Pinboard and/or one or more tags. Then "
+"click on Save button."
 msgstr ""
-"Questo widget consente di pubblicare un elenco di segnalibri di Delicious "
-"nel proprio sito. Il widget può prelevare questi segnalibri e pubblicarli "
-"nella barra laterale."
+"Questo widget ti permette di pubblicare una lista di segnalibri di Pinboard "
+"nella barra laterale. Ti basta inserire un nome utente e/o uno o più tag. "
+"Quindi fai clic sul pulsante Salva."
 
 #: inc/pinboard-bookmarks-widget.php:174
-msgid "Please note that your username or one tag is required, at least."
-msgstr ""
+msgid "Please note that a username or one tag is required, at least."
+msgstr "Nota che è necessario inserire almeno un nome utente oppure un tag."
 
 #: inc/pinboard-bookmarks-widget.php:177
-#, fuzzy
 msgid "Title of the widget"
 msgstr "Titolo del widget"
 
@@ -115,77 +109,69 @@ msgstr "Titolo del widget"
 msgid "Title:"
 msgstr "Titolo:"
 
-#: inc/pinboard-bookmarks-widget.php:186
-msgid "My bookmarks on Pinboard"
-msgstr ""
-
 #: inc/pinboard-bookmarks-widget.php:189
 msgid "Basic Setup"
-msgstr ""
+msgstr "Impostazioni di base"
 
 #: inc/pinboard-bookmarks-widget.php:193
 msgid "Username on Pinboard:"
-msgstr ""
+msgstr "Nome utente su Pinboard:"
 
 #: inc/pinboard-bookmarks-widget.php:197
 msgid "username"
-msgstr ""
+msgstr "nomeutente"
 
 #: inc/pinboard-bookmarks-widget.php:206
 msgid "books reading comics"
-msgstr ""
+msgstr "libri letture fumetti"
 
 #: inc/pinboard-bookmarks-widget.php:207
 msgid ""
 "Enter a space separated list of tags. The plugin will fetch bookmarks from "
 "this list of tags."
 msgstr ""
+"Inserisci una lista di tag separata da spazi. Il plugin preleverà i "
+"segnalibri da questa lista di tag."
 
 #: inc/pinboard-bookmarks-widget.php:212
-#, fuzzy
 msgid "Maximum number of items:"
-msgstr "Numero massimo di elementi (100 al massimo):"
+msgstr "Numero massimo di elementi:"
 
 #: inc/pinboard-bookmarks-widget.php:217
 msgid "Maximum 400 items."
-msgstr ""
+msgstr "Al massimo 400 elementi."
 
 #: inc/pinboard-bookmarks-widget.php:222
 msgid "Display items in random order"
 msgstr "Visualizza le voci in ordine casuale"
 
 #: inc/pinboard-bookmarks-widget.php:230
-#, fuzzy
 msgid "Minimum time between two fetchings:"
-msgstr "Tempo minimo fra due prelievi (in secondi, minimo 3600): "
+msgstr "Tempo minimo fra due prelievi: "
 
 #: inc/pinboard-bookmarks-widget.php:235
 msgid "In seconds. Minimum 1800 seconds (30 minutes)."
-msgstr ""
+msgstr "In secondi. Almeno 1800 secondi (30 minuti)."
 
 #: inc/pinboard-bookmarks-widget.php:238
-#, fuzzy
-msgid "Bookmarks description"
-msgstr "Vsualizza la descrizione del segnalibro"
+msgid "Bookmark description"
+msgstr "Descrizione del segnalibro"
 
 #: inc/pinboard-bookmarks-widget.php:243
 msgid "Display the bookmark description"
 msgstr "Vsualizza la descrizione del segnalibro"
 
 #: inc/pinboard-bookmarks-widget.php:251
-#, fuzzy
 msgid "Length of the description:"
-msgstr "Lunghezza della descrizione (in parole):"
+msgstr "Lunghezza della descrizione:"
 
 #: inc/pinboard-bookmarks-widget.php:256
-#, fuzzy
 msgid "(In words. %s means full text)"
-msgstr "(%s visualizza tutto il testo)"
+msgstr "(in parole. %s visualizza tutto il testo)"
 
 #: inc/pinboard-bookmarks-widget.php:259
-#, fuzzy
-msgid "Date of the bookmarks"
-msgstr "Visualizza la data del segnalibro"
+msgid "Date of the bookmark"
+msgstr "Data del segnalibro"
 
 #: inc/pinboard-bookmarks-widget.php:264
 msgid "Display the date of the bookmark"
@@ -196,18 +182,16 @@ msgid "Text before the date:"
 msgstr "Testo prima della data:"
 
 #: inc/pinboard-bookmarks-widget.php:276
-#, fuzzy
 msgid "Stored on"
-msgstr "Archiviato il:"
+msgstr "Archiviato il"
 
 #: inc/pinboard-bookmarks-widget.php:277 inc/pinboard-bookmarks-widget.php:298
 msgid "A space will be added after the text."
 msgstr "Dopo il testo verrà aggiunto uno spazio."
 
 #: inc/pinboard-bookmarks-widget.php:280
-#, fuzzy
-msgid "Tags of the bookmarks"
-msgstr "Visualizza la data del segnalibro"
+msgid "Tags of the bookmark"
+msgstr "Tag del segnalibro"
 
 #: inc/pinboard-bookmarks-widget.php:285
 msgid "Display tags"
@@ -222,31 +206,22 @@ msgid "Display an hashtag %s before each tag"
 msgstr "Visualizza un hashtag %s prima di ogni segnalibro"
 
 #: inc/pinboard-bookmarks-widget.php:309
-#, fuzzy
 msgid "Link to the archive"
-msgstr "Link all'archivio di"
+msgstr "Link all'archivio"
 
 #: inc/pinboard-bookmarks-widget.php:314
-#, fuzzy
 msgid "Display the link to my bookmarks archive on Pinboard"
-msgstr "Visualizza il link all'intero archivio del tag"
+msgstr "Visualizza il link all'archivio dei segnalibri su Pinboard"
 
 #: inc/pinboard-bookmarks-widget.php:322
-#, fuzzy
 msgid "Text for the archive link:"
-msgstr "Usa questo testo per il link all'archivio"
-
-#: inc/pinboard-bookmarks-widget.php:326
-#, fuzzy
-msgid "See the bookmarks on Pinboard"
-msgstr "Visualizza il link all'intero archivio del tag"
+msgstr "Testo per il link all'archivio:"
 
 #: inc/pinboard-bookmarks-widget.php:331
 msgid "Display an arrow after the link to the archive"
 msgstr "Visualizza una freccia dopo il link all'archivio"
 
 #: inc/pinboard-bookmarks-widget.php:337
-#, fuzzy
 msgid "Other options"
 msgstr "Altre opzioni"
 
@@ -267,9 +242,8 @@ msgid "It will be added only to the link in titles, not in tag links too."
 msgstr "Sarà aggiunto solo ai link nei titoli, e non anche in quelli dei tag."
 
 #. Plugin URI of the plugin/theme
-#, fuzzy
 msgid "http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/"
-msgstr "http://www.aldolat.it/wordpress/wordpress-plugins/delicious-readings/"
+msgstr "http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/"
 
 #. Description of the plugin/theme
 msgid "Publish a reading list using your Delicious bookmarks"
@@ -282,6 +256,9 @@ msgstr "Aldo Latino"
 #. Author URI of the plugin/theme
 msgid "http://www.aldolat.it/"
 msgstr "http://www.aldolat.it/"
+
+#~ msgid "My Bookmarks"
+#~ msgstr "I miei segnalibri"
 
 #~ msgid "More posts"
 #~ msgstr "Altri post"
