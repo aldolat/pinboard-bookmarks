@@ -71,35 +71,35 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title']             = strip_tags( $new_instance['title'] );
+        $instance['username']          = strip_tags( $new_instance['username'] );
         $instance['tags']              = strip_tags( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
-		$instance['username']          = strip_tags( $new_instance['username'] );
 		$instance['quantity']          = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
-		$instance['random']            = $new_instance['random'];
-		$instance['display_date']      = $new_instance['display_date'];
+        isset( $instance['random'] ) ? $instance['random'] = $new_instance['random'] : $instance['random'] = false;
+        isset( $instance['display_date'] ) ? $instance['display_date'] = $new_instance['display_date'] : $instance['display_date'] = false;
 		$instance['date_text']         = trim( strip_tags( $new_instance['date_text'] ) );
-		$instance['display_desc']      = $new_instance['display_desc'];
+        isset( $instance['display_desc'] ) ? $instance['display_desc'] = $new_instance['display_desc'] : $instance['display_desc'] = false;
 		$instance['truncate']          = absint( strip_tags( $new_instance['truncate'] ) );
 			if ( '' == $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) $instance['truncate'] = 0;
-		$instance['display_tags']      = $new_instance['display_tags'];
+        isset( $instance['display_tags'] ) ? $instance['display_tags'] = $new_instance['display_tags'] : $instance['display_tags'] = false;
 		$instance['tags_text']         = strip_tags( $new_instance['tags_text'] );
 		$instance['display_hashtag']   = $new_instance['display_hashtag'];
-		$instance['display_arrow']     = $new_instance['display_arrow'];
+        isset( $instance['display_arrow'] ) ? $instance['display_arrow'] = $new_instance['display_arrow'] : $instance['display_arrow'] = false;
 		$instance['time']              = absint( strip_tags( $new_instance['time'] ) );
 			if ( '' == $instance['time'] || ! is_numeric( $instance['time'] ) ) $instance['time'] = 1800;
 			if ( 1800 > $instance['time'] ) $instance['time'] = 1800;
 		$instance['display_archive']   = $new_instance['display_archive'];
 		$instance['archive_text']      = strip_tags( $new_instance['archive_text'] );
 		$instance['display_arch_arr']  = $new_instance['display_arch_arr'];
-		$instance['new_tab']           = $new_instance['new_tab'];
+        isset( $instance['new_tab'] ) ? $instance['new_tab'] = $new_instance['new_tab'] : $instance['new_tab'] = false;
 		$instance['nofollow']          = $new_instance['nofollow'];
 
 		return $instance;
 	}
 
-	public function form($instance) {
+	public function form( $instance ) {
 		$defaults = array(
 			'title'            => esc_html__( 'My Bookmarks', 'pinboard-bookmarks' ),
 			'username'         => '',
