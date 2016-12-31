@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: Delicious Readings\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
 "bookmarks\n"
-"POT-Creation-Date: 2016-12-31 18:38+0100\n"
-"PO-Revision-Date: 2016-12-31 18:39+0100\n"
+"POT-Creation-Date: 2016-12-31 18:47+0100\n"
+"PO-Revision-Date: 2016-12-31 18:48+0100\n"
 "Last-Translator: Aldo Latino <aldolat@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -256,61 +256,3 @@ msgstr "Aldo Latino"
 #. Author URI of the plugin/theme
 msgid "http://www.aldolat.it/"
 msgstr "http://www.aldolat.it/"
-
-#~ msgid "My Bookmarks"
-#~ msgstr "I miei segnalibri"
-
-#~ msgid "More posts"
-#~ msgstr "Altri post"
-
-#~ msgid "Delicious Readings"
-#~ msgstr "Delicious Readings"
-
-#~ msgid "My Readings"
-#~ msgstr "Le mie letture"
-
-#~ msgid "Enter the feed URL:"
-#~ msgstr "Inserisci l'URL del feed:"
-
-#~ msgid "Examples of Delicious RSS URLs:"
-#~ msgstr "Esempi di indirizzi RSS di Delicious:"
-
-#~ msgid ""
-#~ "Also, you can insert the feed from a service like FeedBurner or Yahoo "
-#~ "Pipes, if Delicious is not directly available to your server."
-#~ msgstr ""
-#~ "Infine, si può anche immettere il feed da un servizio come FeedBurner o "
-#~ "Yahoo Pipes, se il tuo server non può accedere direttamente a Delicious."
-
-#~ msgid "Go to the tag %s su Delicious"
-#~ msgstr "Vai al tag %s archiviato su Delicious."
-
-#~ msgid "Usually the feed URL for a Delicious tag has this form: %s."
-#~ msgstr ""
-#~ "Di solito l'URL del feed di un tag di Delicious ha questa forma: %s."
-
-#~ msgid ""
-#~ "So, for example, if your username is %1$s and the tag is %2$s, the feed "
-#~ "URL will be %3$s."
-#~ msgstr ""
-#~ "Così, per esempio, se il tuo nome utente è %1$s e il tag è %2$s, l'URL "
-#~ "del feed sarà %3$s."
-
-#~ msgid "Publish a reading list using your Delicious bookmarks."
-#~ msgstr ""
-#~ "Pubblica una lista di letture usando i tuoi segnalibri su Delicious."
-
-#~ msgid "Display date"
-#~ msgstr "Visualizza la data"
-
-#~ msgid "Display arrow in titles"
-#~ msgstr "Visualizza la freccia nei titoli"
-
-#~ msgid "The error is %s"
-#~ msgstr "L'errore è %s"
-
-#~ msgid "Truncate descriptions at char:"
-#~ msgstr "Tronca la descrizione al carattere:"
-
-#~ msgid "Read \"%s\""
-#~ msgstr "Leggi \"%s\""

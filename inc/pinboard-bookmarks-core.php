@@ -155,6 +155,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                 foreach ( $item_tags as $item_tag ) {
     								$output .= $hashtag . '<a rel="bookmark" href="' . $url . strtolower( $item_tag ) . '/" title="' . sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) . '"' . $new_tab_link . '>' .  $item_tag . '</a> ';
                                 }
+                                // Removes the trailing space after the last tag.
+                                $output = trim( $output );
 							}
 						$output .= '</p>';
                     }
