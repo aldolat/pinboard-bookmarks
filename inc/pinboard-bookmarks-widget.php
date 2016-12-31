@@ -323,7 +323,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_id( 'archive_text' ),
                 $this->get_field_name( 'archive_text' ),
                 esc_attr( $instance['archive_text'] ),
-                esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' )
+                esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' )
             );
 
             // Archive arrow
