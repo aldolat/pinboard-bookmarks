@@ -121,7 +121,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 								$output .= wp_trim_words( $item->get_description(), $truncate, '&hellip;' );
 							$output .= '</p>';
 						} else {
-							$output .= '<p  class="reading-list-desc">' . $item->get_description() . '</p>';
+							$output .= '<p  class="pinboard-bookmarks-list-desc">' . $item->get_description() . '</p>';
 						}
 					}
 				}
