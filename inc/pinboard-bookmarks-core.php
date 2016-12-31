@@ -31,7 +31,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_hashtag'  => true,
 		'display_arrow'    => false,
 		'display_archive'  => true,
-		'archive_text'     => esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' ),
+		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,

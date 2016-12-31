@@ -144,7 +144,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arrow'    => false,
 			'time'             => 1800,
 			'display_archive'  => true,
-			'archive_text'     => esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' ),
+			'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
 			'display_arch_arr' => true,
 			'new_tab'          => false,
 			'nofollow'         => true
