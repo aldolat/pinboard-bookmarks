@@ -1,20 +1,20 @@
-# Copyright (C) 2010 Delicious Readings
-# This file is distributed under the same license as the Delicious Readings package.
-# Aldo Latino <aldolat@gmail.com>, 2014.
+# Copyright (C) 2016 Pinboard Bookmarks
+# This file is distributed under the same license as the Pinboard Bookmarks package.
+# Aldo Latino <aldolat@gmail.com>, 2016.
 msgid ""
 msgstr ""
-"Project-Id-Version: Delicious Readings\n"
+"Project-Id-Version: Pinboard Bookmarks\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
 "bookmarks\n"
-"POT-Creation-Date: 2016-12-31 18:47+0100\n"
-"PO-Revision-Date: 2016-12-31 18:48+0100\n"
+"POT-Creation-Date: 2016-12-31 18:59+0100\n"
+"PO-Revision-Date: 2016-12-31 19:04+0100\n"
 "Last-Translator: Aldo Latino <aldolat@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
@@ -55,8 +55,8 @@ msgid "Read &laquo;%s&raquo;"
 msgstr "Leggi &laquo;%s&raquo;"
 
 #: inc/pinboard-bookmarks-core.php:134
-msgid "Go to the bookmark stored on Delicious."
-msgstr "Vai al segnalibro archiviato su Delicious."
+msgid "Go to the bookmark stored on Pinboard."
+msgstr "Vai al segnalibro archiviato su Pinboard."
 
 #: inc/pinboard-bookmarks-core.php:156
 msgid "View the tag %s on Pinboard"
@@ -246,8 +246,8 @@ msgid "http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/"
 msgstr "http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/"
 
 #. Description of the plugin/theme
-msgid "Publish a reading list using your Delicious bookmarks"
-msgstr "Pubblica una lista delle tue letture usando i segnalibri su Delicious"
+msgid "Publish Pinboard bookmarks on your WordPress blog."
+msgstr "Pubblica segnalibri di Pinboard sul tuo blog WordPress."
 
 #. Author of the plugin/theme
 msgid "Aldo Latino"

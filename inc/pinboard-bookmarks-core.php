@@ -131,7 +131,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					$bookmark_date = date_i18n( get_option( 'date_format' ), strtotime( $item->get_date() ), false );
 					$output .= '<p class="pinboard-bookmarks-list-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a rel="bookmark" href="' . $item->get_id() . '" title="' . esc_attr__( 'Go to the bookmark stored on Delicious.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
+						$output .= '<a rel="bookmark" href="' . $item->get_id() . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
 							$output .= $bookmark_date;
 						$output .= '</a>';
 					$output .= '</p>';
