@@ -129,7 +129,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$defaults = array(
-			'title'            => esc_html__( 'My Bookmarks', 'pinboard-bookmarks' ),
+			'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
 			'username'         => '',
             'tags'             => '',
 			'quantity'         => 5,

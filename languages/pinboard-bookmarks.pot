@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Pinboard Bookmarks 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
 "bookmarks\n"
-"POT-Creation-Date: 2016-12-31 16:00:05+00:00\n"
+"POT-Creation-Date: 2016-12-31 16:03:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,8 +25,8 @@ msgid "Tags:"
 msgstr ""
 
 #: inc/pinboard-bookmarks-core.php:34 inc/pinboard-bookmarks-shortcode.php:33
-#: inc/pinboard-bookmarks-widget.php:147
-msgid "See bookmarks on Pinboard"
+#: inc/pinboard-bookmarks-widget.php:147 inc/pinboard-bookmarks-widget.php:326
+msgid "See the bookmarks on Pinboard"
 msgstr ""
 
 #: inc/pinboard-bookmarks-core.php:44
@@ -208,10 +208,6 @@ msgstr ""
 
 #: inc/pinboard-bookmarks-widget.php:322
 msgid "Text for the archive link:"
-msgstr ""
-
-#: inc/pinboard-bookmarks-widget.php:326
-msgid "See the bookmarks on Pinboard"
 msgstr ""
 
 #: inc/pinboard-bookmarks-widget.php:331
