@@ -17,7 +17,7 @@
 
 function pinboard_bookmarks_sc( $atts ) {
 	extract( shortcode_atts( array(
-        'nickname'         => '',
+        'username'         => '',
         'tags_list'        => '',
 		'quantity'         => 5,
 		'random'           => false,
@@ -30,7 +30,7 @@ function pinboard_bookmarks_sc( $atts ) {
 		'display_hashtag'  => true,
 		'display_arrow'    => false,
 		'display_archive'  => true,
-		'archive_text'     => esc_html__( 'More posts', 'pinboard-bookmarks' ),
+		'archive_text'     => esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' ),
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,

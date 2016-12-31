@@ -46,7 +46,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		if ( $title ) echo $before_title . $title . $after_title;
 
 		pinboard_bookmarks_fetch_feed( array(
-			'nickname'         => $instance['nickname'],
+			'username'         => $instance['username'],
             'tags_list'        => $instance['tags_list'],
 			'quantity'         => $instance['quantity'],
 			'random'           => $instance['random'],
@@ -72,16 +72,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title']             = strip_tags( $new_instance['title'] );
         $instance['tags_list']         = strip_tags( $new_instance['tags_list'] );
-            $instance['tags_list'] = str_replace( array( ', ', ' ,' ), ' ', $instance['tags_list'] );
-            $instance['tags_list'] = preg_replace( '!\s+!', ' ', $instance['tags_list'] );
-            $instance['tags_list'] = trim( $instance['tags_list'] );
-		$instance['nickname']          = strip_tags( $new_instance['nickname'] );
+            $instance['tags_list'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags_list'] ) );
+		$instance['username']          = strip_tags( $new_instance['username'] );
 		$instance['quantity']          = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
 		$instance['random']            = $new_instance['random'];
 		$instance['display_date']      = $new_instance['display_date'];
-		$instance['date_text']         = strip_tags( $new_instance['date_text'] );
+		$instance['date_text']         = trim( strip_tags( $new_instance['date_text'] ) );
 		$instance['display_desc']      = $new_instance['display_desc'];
 		$instance['truncate']          = absint( strip_tags( $new_instance['truncate'] ) );
 			if ( '' == $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) $instance['truncate'] = 0;
@@ -90,8 +88,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['display_hashtag']   = $new_instance['display_hashtag'];
 		$instance['display_arrow']     = $new_instance['display_arrow'];
 		$instance['time']              = absint( strip_tags( $new_instance['time'] ) );
-			if ( '' == $instance['time'] || ! is_numeric( $instance['time'] ) ) $instance['time'] = 3600;
-			if ( 3600 < $instance['time'] ) $instance['time'] = 3600;
+			if ( '' == $instance['time'] || ! is_numeric( $instance['time'] ) ) $instance['time'] = 1800;
+			if ( 1800 > $instance['time'] ) $instance['time'] = 1800;
 		$instance['display_archive']   = $new_instance['display_archive'];
 		$instance['archive_text']      = strip_tags( $new_instance['archive_text'] );
 		$instance['display_arch_arr']  = $new_instance['display_arch_arr'];
@@ -104,7 +102,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function form($instance) {
 		$defaults = array(
 			'title'            => esc_html__( 'My Bookmarks', 'pinboard-bookmarks' ),
-			'nickname'         => '',
+			'username'         => '',
             'tags_list'        => '',
 			'quantity'         => 5,
 			'random'           => false,
@@ -116,9 +114,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 			'display_hashtag'  => true,
 			'display_arrow'    => false,
-			'time'             => 3600,
+			'time'             => 1800,
 			'display_archive'  => true,
-			'archive_text'     => esc_html__( 'More bookmarks', 'pinboard-bookmarks' ),
+			'archive_text'     => esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' ),
 			'display_arch_arr' => true,
 			'new_tab'          => false,
 			'nofollow'         => true
@@ -135,170 +133,217 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$new_tab          = (bool) $instance['new_tab'];
 		$nofollow         = (bool) $instance['nofollow'];
 		?>
-		<p>
-			<?php _e( 'This widget allows you to publish a list of Pinboard bookmarks in your website. This widget can retrieve those bookmarks and publish them in your sidebar.', 'pinboard-bookmarks' ); ?>
-		</p>
 
-        <?php // Title
-        pinboard_bookmarks_form_input_text(
-            esc_html__( 'Title:', 'pinboard-bookmarks' ),
-            $this->get_field_id( 'title' ),
-            $this->get_field_name( 'title' ),
-            esc_attr( $instance['title'] ),
-            esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' )
-        );
+        <div class="pinboard-bookmarks-widget-content">
 
-        pinboard_bookmarks_form_input_text(
-            esc_html__( 'Enter your nickname on Pinboard:', 'pinboard-bookmarks' ),
-            $this->get_field_id( 'nickname' ),
-            $this->get_field_name( 'nickname' ),
-            esc_attr( $instance['nickname'] ),
-            esc_html__( 'nickname', 'pinboard-bookmarks' )
-        );
+            <h4><?php esc_html_e( 'Informations' ); ?></h4>
 
-        pinboard_bookmarks_form_input_text(
-            esc_html__( 'Enter tags (optional):', 'pinboard-bookmarks' ),
-            $this->get_field_id( 'tags_list' ),
-            $this->get_field_name( 'tags_list' ),
-            esc_attr( $instance['tags_list'] ),
-            esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
-            esc_html__( 'This is optional. Enter a space or comma separated list of tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
-        );
+    		<p>
+    			<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter your username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
+    		</p>
 
-        ?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'quantity' ); ?>">
-				<?php _e( 'Maximum number of items (maximum 400 items):', 'pinboard-bookmarks' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'quantity' ); ?>" name="<?php echo $this->get_field_name( 'quantity' ); ?>" type="text" value="<?php echo esc_attr( $instance['quantity'] ); ?>" />
-		</p>
+            <p>
+                <?php esc_html_e( 'Please note that your username or one tag is required, at least.', 'pinboard-bookmarks' ); ?>
+            </p>
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $random ); ?> value="1" id="<?php echo $this->get_field_id( 'random' ); ?>" name="<?php echo $this->get_field_name( 'random' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'random' ); ?>">
-				<?php printf( esc_html__( 'Display items in random order', 'pinboard-bookmarks' ), '<code>random</code>' ); ?>
-			</label>
-		</p>
+            <h4><?php esc_html_e( 'Title of the widget' ); ?></h4>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'time' ); ?>">
-				<?php _e( 'Minimum time between two fetchings (in seconds, minimum 3600):', 'pinboard-bookmarks' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'time' ); ?>" name="<?php echo $this->get_field_name( 'time' ); ?>" type="text" value="<?php echo esc_attr( $instance['time'] ); ?>" />
-		</p>
+            <?php
+            // Title
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Title:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'title' ),
+                $this->get_field_name( 'title' ),
+                esc_attr( $instance['title'] ),
+                esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' )
+            ); ?>
 
-		<hr />
+            <h4><?php esc_html_e( 'Basic Setup' ); ?></h4>
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $nofollow ); ?> value="1" id="<?php echo $this->get_field_id( 'nofollow' ); ?>" name="<?php echo $this->get_field_name( 'nofollow' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'nofollow' ); ?>">
-				<?php printf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ); ?>
-			</label>
-			<br />
-			<em><?php _e( 'It will be added only to the link in titles, not in tag links too.', 'pinboard-bookmarks' ); ?></em>
-		</p>
+            <?php // Username
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Username on Pinboard:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'username' ),
+                $this->get_field_name( 'username' ),
+                esc_attr( $instance['username'] ),
+                esc_html__( 'username', 'pinboard-bookmarks' )
+            );
 
-		<hr />
+            // Tags
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Tags:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'tags_list' ),
+                $this->get_field_name( 'tags_list' ),
+                esc_attr( $instance['tags_list'] ),
+                esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
+                esc_html__( 'Enter a space separated list of tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
+            );
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_desc ); ?> value="1" id="<?php echo $this->get_field_id( 'display_desc' ); ?>" name="<?php echo $this->get_field_name( 'display_desc' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_desc' ); ?>">
-				<?php _e( 'Display the bookmark description', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
+            // Number of items
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Maximum number of items:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'quantity' ),
+                $this->get_field_name( 'quantity' ),
+                esc_attr( $instance['quantity'] ),
+                '5',
+                esc_html__( 'Maximum 400 items.', 'pinboard-bookmarks' )
+            );
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'truncate' ); ?>">
-				<?php _e( 'Lenght of the description (in words):', 'pinboard-bookmarks' ); ?>
-				<br />
-				<?php printf( esc_html__( '(%s means full text)', 'pinboard-bookmarks' ), '<code>0</code>' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'truncate' ); ?>" name="<?php echo $this->get_field_name( 'truncate' ); ?>" type="text" value="<?php echo esc_attr( $instance['truncate'] ); ?>" />
-		</p>
+            // Random order
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display items in random order', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'random' ),
+                $this->get_field_name( 'random' ),
+                checked( $random, true, false )
+            );
 
-		<hr />
+            // Time
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Minimum time between two fetchings:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'time' ),
+                $this->get_field_name( 'time' ),
+                esc_attr( $instance['time'] ),
+                '1800',
+                esc_html__( 'In seconds. Minimum 1800 seconds (30 minutes).', 'pinboard-bookmarks' )
+            ); ?>
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_date ); ?> value="1" id="<?php echo $this->get_field_id( 'display_date' ); ?>" name="<?php echo $this->get_field_name( 'display_date' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_date' ); ?>">
-				<?php _e( 'Display the date of the bookmark', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
+    		<hr />
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'date_text' ); ?>">
-				<?php _e( 'Text before the date:', 'pinboard-bookmarks' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'date_text' ); ?>" name="<?php echo $this->get_field_name( 'date_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['date_text'] ); ?>" />
-			<br />
-			<em><?php _e( 'A space will be added after the text.', 'pinboard-bookmarks' ); ?></em>
-		</p>
+            <h4><?php esc_html_e( 'Bookmarks description' ); ?></h4>
 
-		<hr />
+            <?php
+            // Description
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display the bookmark description', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_desc' ),
+                $this->get_field_name( 'display_desc' ),
+                checked( $display_desc, true, false )
+            );
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_tags ); ?> value="1" id="<?php echo $this->get_field_id( 'display_tags' ); ?>" name="<?php echo $this->get_field_name( 'display_tags' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_tags' ); ?>">
-				<?php _e( 'Display tags', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
+            // Description length
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Length of the description:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'truncate' ),
+                $this->get_field_name( 'truncate' ),
+                esc_attr( $instance['truncate'] ),
+                '50',
+                sprintf( esc_html__( '(In words. %s means full text)', 'pinboard-bookmarks' ), '<code>0</code>' )
+            ); ?>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'tags_text' ); ?>">
-				<?php _e( 'Text before tags list:', 'pinboard-bookmarks' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'tags_text' ); ?>" name="<?php echo $this->get_field_name( 'tags_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['tags_text'] ); ?>" />
-			<br />
-			<em><?php _e( 'A space will be added after the text.', 'pinboard-bookmarks' ); ?></em>
-		</p>
+    		<hr />
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_hashtag ); ?> value="1" id="<?php echo $this->get_field_id( 'display_hashtag' ); ?>" name="<?php echo $this->get_field_name( 'display_hashtag' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_hashtag' ); ?>">
-				<?php printf( esc_html__( 'Display an hashtag %s before each tag', 'pinboard-bookmarks' ), '(<code>#</code>)' ); ?>
-			</label>
-		</p>
+            <h4><?php esc_html_e( 'Date of the bookmarks' ); ?></h4>
 
-		<hr />
+            <?php
+            // Date
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display the date of the bookmark', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_date' ),
+                $this->get_field_name( 'display_date' ),
+                checked( $display_date, true, false )
+            );
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_arrow ); ?> value="1" id="<?php echo $this->get_field_id( 'display_arrow' ); ?>" name="<?php echo $this->get_field_name( 'display_arrow' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_arrow' ); ?>">
-				<?php _e( 'Display an arrow after each title', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
+            // Text for the date
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Text before the date:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'date_text' ),
+                $this->get_field_name( 'date_text' ),
+                esc_attr( $instance['date_text'] ),
+                esc_html__( 'Stored on', 'pinboard-bookmarks' ),
+                esc_html__( 'A space will be added after the text.', 'pinboard-bookmarks' )
+            ); ?>
 
-		<hr />
+    		<hr />
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_archive ); ?> value="1" id="<?php echo $this->get_field_id( 'display_archive' ); ?>" name="<?php echo $this->get_field_name( 'display_archive' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_archive' ); ?>">
-				<?php _e( 'Display the link to my bookmarks archive on Pinboard', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
+            <h4><?php esc_html_e( 'Tags of the bookmarks' ); ?></h4>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'archive_text' ); ?>">
-				<?php _e( 'Use this text for the archive link:', 'pinboard-bookmarks' ); ?>
-			</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'archive_text' ); ?>" name="<?php echo $this->get_field_name( 'archive_text' ); ?>" type="text" value="<?php echo esc_attr( $instance['archive_text'] ); ?>" />
-		</p>
+            <?php
+            // Tags
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display tags', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_tags' ),
+                $this->get_field_name( 'display_tags' ),
+                checked( $display_tags, true, false )
+            );
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $display_arch_arr ); ?> value="1" id="<?php echo $this->get_field_id( 'display_arch_arr' ); ?>" name="<?php echo $this->get_field_name( 'display_arch_arr' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'display_arch_arr' ); ?>">
-				<?php _e( 'Display an arrow after the link to the archive', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
+            // Text for tags
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Text before tags list:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'tags_text' ),
+                $this->get_field_name( 'tags_text' ),
+                esc_attr( $instance['tags_text'] ),
+                esc_html__( 'Tags:', 'pinboard-bookmarks' ),
+                esc_html__( 'A space will be added after the text.', 'pinboard-bookmarks' )
+            );
 
-		<hr />
+            // Hashtag
+            pinboard_bookmarks_form_checkbox(
+                sprintf( esc_html__( 'Display an hashtag %s before each tag', 'pinboard-bookmarks' ), '(<code>#</code>)' ),
+                $this->get_field_id( 'display_hashtag' ),
+                $this->get_field_name( 'display_hashtag' ),
+                checked( $display_hashtag, true, false )
+            ); ?>
 
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $new_tab ); ?> value="1" id="<?php echo $this->get_field_id( 'new_tab' ); ?>" name="<?php echo $this->get_field_name( 'new_tab' ); ?>" />
-			<label for="<?php echo $this->get_field_id( 'new_tab' ); ?>">
-				<?php _e( 'Open links in a new browser tab', 'pinboard-bookmarks' ); ?>
-			</label>
-		</p>
-		<?php
-	}
+    		<hr />
+
+            <h4><?php esc_html_e( 'Link to the archive' ); ?></h4>
+
+            <?php
+            // Archive
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display the link to my bookmarks archive on Pinboard', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_archive' ),
+                $this->get_field_name( 'display_archive' ),
+                checked( $display_archive, true, false )
+            );
+
+            // Text for archive
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Text for the archive link:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'archive_text' ),
+                $this->get_field_name( 'archive_text' ),
+                esc_attr( $instance['archive_text'] ),
+                esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' )
+            );
+
+            // Archive arrow
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display an arrow after the link to the archive', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_arch_arr' ),
+                $this->get_field_name( 'display_arch_arr' ),
+                checked( $display_arch_arr, true, false )
+            ); ?>
+
+    		<hr />
+
+            <h4><?php esc_html_e( 'Other options' ); ?></h4>
+
+            <?php
+            // Arrow
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display an arrow after each title', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_arrow' ),
+                $this->get_field_name( 'display_arrow' ),
+                checked( $display_arrow, true, false )
+            );
+
+            // Open links in new tab
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Open links in a new browser tab', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'new_tab' ),
+                $this->get_field_name( 'new_tab' ),
+                checked( $new_tab, true, false )
+            );
+
+            // No follow
+            pinboard_bookmarks_form_checkbox(
+                sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                $this->get_field_id( 'nofollow' ),
+                $this->get_field_name( 'nofollow' ),
+                checked( $nofollow, true, false ),
+                __( 'It will be added only to the link in titles, not in tag links too.', 'pinboard-bookmarks' )
+            ); ?>
+
+        </div>
+	<?php }
 }

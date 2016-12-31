@@ -1,0 +1,17 @@
+/**
+ * Pinboard Bookmarks CSS styles for admin UI
+ * @since 1.0
+ */
+
+.pinboard-bookmarks-widget-content ::-webkit-input-placeholder {
+	color: #ccc;
+}
+.pinboard-bookmarks-widget-content :-moz-placeholder {  /* Firefox 18- */
+	color: #ccc;
+}
+.pinboard-bookmarks-widget-content ::-moz-placeholder { /* Firefox 19+ */
+	color: #ccc;
+}
+.pinboard-bookmarks-widget-content :-ms-input-placeholder {
+	color: #ccc;
+}

@@ -1,171 +1,245 @@
-# Copyright (C) 2014 Delicious Readings
-# This file is distributed under the same license as the Delicious Readings package.
+# Copyright (C) 2016 Pinboard Bookmarks
+# This file is distributed under the same license as the Pinboard Bookmarks package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Delicious Readings 2.4\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/delicious-readings\n"
-"POT-Creation-Date: 2014-05-04 08:35:57+00:00\n"
+"Project-Id-Version: Pinboard Bookmarks 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
+"bookmarks\n"
+"POT-Creation-Date: 2016-12-31 13:16:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: delicious-readings-shortcode.php:19 delicious-readings-widget.php:103
-#: delicious-readings.php:68
+#: inc/pinboard-bookmarks-core.php:28 inc/pinboard-bookmarks-shortcode.php:27
+#: inc/pinboard-bookmarks-widget.php:112
 msgid "Stored on:"
 msgstr ""
 
-#: delicious-readings-shortcode.php:21 delicious-readings-widget.php:105
-#: delicious-readings.php:70
+#: inc/pinboard-bookmarks-core.php:30 inc/pinboard-bookmarks-shortcode.php:29
+#: inc/pinboard-bookmarks-widget.php:114 inc/pinboard-bookmarks-widget.php:174
+#: inc/pinboard-bookmarks-widget.php:275
 msgid "Tags:"
 msgstr ""
 
-#: delicious-readings-shortcode.php:25 delicious-readings-widget.php:110
-#: delicious-readings.php:74
-msgid "More posts"
+#: inc/pinboard-bookmarks-core.php:34 inc/pinboard-bookmarks-shortcode.php:33
+#: inc/pinboard-bookmarks-widget.php:119 inc/pinboard-bookmarks-widget.php:306
+msgid "See bookmarks on Pinboard"
 msgstr ""
 
-#. #-#-#-#-#  delicious-readings.pot (Delicious Readings 2.4)  #-#-#-#-#
-#. Description of the plugin/theme
-#: delicious-readings-widget.php:28
-msgid "Publish a reading list using your Delicious bookmarks"
-msgstr ""
-
-#. #-#-#-#-#  delicious-readings.pot (Delicious Readings 2.4)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: delicious-readings-widget.php:34
-msgid "Delicious Readings"
-msgstr ""
-
-#: delicious-readings-widget.php:96
-msgid "My Readings"
-msgstr ""
-
-#: delicious-readings-widget.php:128
+#: inc/pinboard-bookmarks-core.php:44
 msgid ""
-"This widget allows you to publish a list of Delicious bookmarks in your "
-"website. This widget can retrieve those bookmarks and publish them in your "
-"sidebar."
+"You have not properly configured the widget. Please, add a nickname or a tag "
+"at least."
 msgstr ""
 
-#: delicious-readings-widget.php:132
-msgid "Title:"
-msgstr ""
-
-#: delicious-readings-widget.php:139
-msgid "Enter the feed URL:"
-msgstr ""
-
-#: delicious-readings-widget.php:144
-msgid "Examples of Delicious RSS URLs:"
-msgstr ""
-
-#: delicious-readings-widget.php:147
-msgid ""
-"Also, you can insert the feed from a service like FeedBurner or Yahoo Pipes, "
-"if Delicious is not directly available to your server."
-msgstr ""
-
-#: delicious-readings-widget.php:153
-msgid "Maximum number of items (maximum 100 items):"
-msgstr ""
-
-#: delicious-readings-widget.php:161
-msgid "Display items in random order"
-msgstr ""
-
-#: delicious-readings-widget.php:167
-msgid "Minimum time between two fetchings (in seconds, minimum 3600):"
-msgstr ""
-
-#: delicious-readings-widget.php:177
-msgid "Add %s to links"
-msgstr ""
-
-#: delicious-readings-widget.php:180
-msgid "It will be added only to the link in titles, not in tag links too."
-msgstr ""
-
-#: delicious-readings-widget.php:188
-msgid "Display the bookmark description"
-msgstr ""
-
-#: delicious-readings-widget.php:194
-msgid "Lenght of the description (in words):"
-msgstr ""
-
-#: delicious-readings-widget.php:196
-msgid "(%s means full text)"
-msgstr ""
-
-#: delicious-readings-widget.php:206
-msgid "Display the date of the bookmark"
-msgstr ""
-
-#: delicious-readings-widget.php:212
-msgid "Text before the date:"
-msgstr ""
-
-#: delicious-readings-widget.php:216 delicious-readings-widget.php:234
-msgid "A space will be added after the text."
-msgstr ""
-
-#: delicious-readings-widget.php:224
-msgid "Display tags"
-msgstr ""
-
-#: delicious-readings-widget.php:230
-msgid "Text before tags list:"
-msgstr ""
-
-#: delicious-readings-widget.php:240
-msgid "Display an hashtag %s before each tag"
-msgstr ""
-
-#: delicious-readings-widget.php:249
-msgid "Display an arrow after each title"
-msgstr ""
-
-#: delicious-readings-widget.php:258
-msgid "Display the link to the entire tag archive"
-msgstr ""
-
-#: delicious-readings-widget.php:264
-msgid "Use this text for the archive link:"
-msgstr ""
-
-#: delicious-readings-widget.php:272
-msgid "Display an arrow after the link to the archive"
-msgstr ""
-
-#: delicious-readings-widget.php:281
-msgid "Open links in a new browser tab"
-msgstr ""
-
-#: delicious-readings.php:104
+#: inc/pinboard-bookmarks-core.php:89
 msgid "There was a problem with your feed! The error is %s"
 msgstr ""
 
-#: delicious-readings.php:112
+#: inc/pinboard-bookmarks-core.php:100
 msgid "No items."
 msgstr ""
 
-#: delicious-readings.php:124
+#: inc/pinboard-bookmarks-core.php:108
 msgid "Read &laquo;%s&raquo;"
 msgstr ""
 
-#: delicious-readings.php:150
+#: inc/pinboard-bookmarks-core.php:134
 msgid "Go to the bookmark stored on Delicious."
 msgstr ""
 
-#: delicious-readings.php:165
-msgid "Go to the tag %s su Delicious"
+#: inc/pinboard-bookmarks-core.php:156
+msgid "View the tag %s on Pinboard"
+msgstr ""
+
+#: inc/pinboard-bookmarks-functions.php:79
+msgid "Click here to rate and review this plugin on WordPress.org"
+msgstr ""
+
+#: inc/pinboard-bookmarks-functions.php:79
+msgid "Rate this plugin"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:26
+msgid "Publish a bookmarks list using your Pinboard bookmarks"
+msgstr ""
+
+#. #-#-#-#-#  pinboard-bookmarks.pot (Pinboard Bookmarks 1.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: inc/pinboard-bookmarks-widget.php:35
+msgid "Pinboard Bookmarks"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:104
+msgid "My Bookmarks"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:139
+msgid "Informations"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:142
+msgid ""
+"This widget allows you to publish a list of Pinboard bookmarks in your "
+"sidebar. Simply enter your username on Pinboard and/or one or more tags. "
+"Then click on Save button."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:146
+msgid "Please note that your username or one tag is required, at least."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:149
+msgid "Title of the widget"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:154
+msgid "Title:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:158
+msgid "My bookmarks on Pinboard"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:161
+msgid "Basic Setup"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:165
+msgid "Username on Pinboard:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:169
+msgid "nickname"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:178
+msgid "books reading comics"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:179
+msgid ""
+"Enter a space separated list of tags. The plugin will fetch bookmarks from "
+"this list of tags."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:184
+msgid "Maximum number of items:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:189
+msgid "Maximum 400 items."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:194
+msgid "Display items in random order"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:202
+msgid "Minimum time between two fetchings:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:207
+msgid "In seconds. Minimum 1800 seconds (30 minutes)."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:212
+msgid "Bookmarks description"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:217
+msgid "Display the bookmark description"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:225
+msgid "Length of the description:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:230
+msgid "(In words. %s means full text)"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:235
+msgid "Date of the bookmarks"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:240
+msgid "Display the date of the bookmark"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:248
+msgid "Text before the date:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:252
+msgid "Stored on"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:253 inc/pinboard-bookmarks-widget.php:276
+msgid "A space will be added after the text."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:258
+msgid "Tags of the bookmarks"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:263
+msgid "Display tags"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:271
+msgid "Text before tags list:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:281
+msgid "Display an hashtag %s before each tag"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:289
+msgid "Link to the archive"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:294
+msgid "Display the link to my bookmarks archive on Pinboard"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:302
+msgid "Text for the archive link:"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:311
+msgid "Display an arrow after the link to the archive"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:319
+msgid "Other options"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:324
+msgid "Display an arrow after each title"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:332
+msgid "Open links in a new browser tab"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:340
+msgid "Add %s to links"
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:344
+msgid "It will be added only to the link in titles, not in tag links too."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://www.aldolat.it/wordpress/wordpress-plugins/delicious-readings/"
+msgid "http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Publish a reading list using your Delicious bookmarks"
 msgstr ""
 
 #. Author of the plugin/theme

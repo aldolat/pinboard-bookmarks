@@ -18,7 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
-		'nickname'         => '',
+		'username'         => '',
         'tags_list'        => '',
 		'quantity'         => 5,
 		'random'           => false,
@@ -31,7 +31,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_hashtag'  => true,
 		'display_arrow'    => false,
 		'display_archive'  => true,
-		'archive_text'     => esc_html__( 'More posts', 'pinboard-bookmarks' ),
+		'archive_text'     => esc_html__( 'See bookmarks on Pinboard', 'pinboard-bookmarks' ),
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
@@ -39,9 +39,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
-    if ( ! $nickname && ! $tags_list ) {
+    if ( ! $username && ! $tags_list ) {
         echo '<p class="pinboard-bookmarks error">';
-        esc_html_e( 'You have not properly configured the widget. Please, add a nickname or a tag at least.', 'pinboard-bookmarks' );
+        esc_html_e( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
         echo '</p>';
         return;
     }
@@ -56,8 +56,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     $pinboard_rss_url      = 'https://feeds.pinboard.in/rss';
     $pinboard_tag_url      = $pinboard_url . '/t:';
 
-    $pinboard_user_url     = $pinboard_url . '/u:' . $nickname;
-    $pinboard_rss_user_url = $pinboard_rss_url . '/u:' . $nickname;
+    $pinboard_user_url     = $pinboard_url . '/u:' . $username;
+    $pinboard_rss_user_url = $pinboard_rss_url . '/u:' . $username;
     $pinboard_user_tag_url = $pinboard_user_url . '/t:';
 
     // Build the tags list
@@ -68,7 +68,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     }
 
     // Build the RSS url
-    if ( $nickname ) {
+    if ( $username ) {
         $feed_url = $pinboard_rss_user_url . $tags_for_url . '/?count=' . $quantity;
         $archive_url = $pinboard_user_url . $tags_for_url;
     } else {
@@ -147,7 +147,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 							foreach( $tags as $tag ) {
                                 $item_tags = $tag->get_label();
                                 $item_tags = (array) explode( ' ', $item_tags );
-                                if ( $nickname ) {
+                                if ( $username ) {
                                     $url = $pinboard_tag_url;
                                 } else {
                                     $url = $pinboard_user_tag_url;

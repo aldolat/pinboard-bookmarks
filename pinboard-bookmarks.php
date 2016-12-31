@@ -48,7 +48,7 @@ function pinboard_bookmarks_setup() {
 	/*
 	 * Define the version of the plugin.
 	 */
-	define( 'PB_PLUGIN_VERSION', '1.0' );
+	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.0' );
 
 	/*
 	 * Load the translation.
@@ -79,6 +79,13 @@ function pinboard_bookmarks_setup() {
 	 * @since 1.0
 	 */
 	add_action( 'widgets_init', 'pinboard_bookmarks_load_widget' );
+
+    /*
+	 * Load the script.
+	 *
+	 * @since 1.00
+	 */
+	add_action( 'admin_enqueue_scripts', 'pinboard_bookmarks_load_scripts' );
 
 	/*
 	 * Add links to plugins list line.
