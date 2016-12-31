@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Pinboard Bookmarks
- * Description:  Publish a reading list using your Delicious bookmarks
+ * Description:  Publish Pinboard bookmarks on your WordPress blog.
  * Plugin URI: http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/
  * Author: Aldo Latino
  * Author URI: http://www.aldolat.it/
