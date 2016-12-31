@@ -167,11 +167,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
             <h4 class="no-border"><?php esc_html_e( 'Informations', 'pinboard-bookmarks' ); ?></h4>
 
     		<p>
-    			<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter your username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
+    			<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter a username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
     		</p>
 
             <p>
-                <?php esc_html_e( 'Please note that your username or one tag is required, at least.', 'pinboard-bookmarks' ); ?>
+                <?php esc_html_e( 'Please note that a username or one tag is required, at least.', 'pinboard-bookmarks' ); ?>
             </p>
 
             <h4><?php esc_html_e( 'Title of the widget', 'pinboard-bookmarks' ); ?></h4>
