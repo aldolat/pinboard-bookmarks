@@ -3,6 +3,16 @@
  * @since 1.0
  */
 
+.pinboard-bookmarks-widget-content h4 {
+	border-top: 1px solid #a0a5aa;
+	padding-top: 1em;
+}
+
+.pinboard-bookmarks-widget-content h4.no-border {
+	border-top: 0 none;
+	padding-top: 0;
+}
+
 .pinboard-bookmarks-widget-content ::-webkit-input-placeholder {
 	color: #ccc;
 }

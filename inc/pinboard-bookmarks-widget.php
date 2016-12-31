@@ -20,6 +20,9 @@
  * @since 1.0
  */
 class Pinboard_Bookmarks_Widget extends WP_Widget {
+    /**
+	 * Register widget with WordPress.
+	 */
 	public function __construct() {
 		$widget_ops = array(
 			'classname'   => 'pinboard_bookmarks_widget',
@@ -38,6 +41,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		);
 	}
 
+    /**
+	 * Front-end display of widget.
+	 *
+	 * @see WP_Widget::widget()
+	 *
+	 * @param array $args     Widget arguments.
+	 * @param array $instance Saved values from database.
+	 */
 	public function widget( $args, $instance ) {
 		extract( $args );
 
@@ -68,37 +79,54 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		echo $after_widget;
 	}
 
+    /**
+	 * Sanitize widget form values as they are saved.
+	 *
+	 * @see WP_Widget::update()
+	 *
+	 * @param array $new_instance Values just sent to be saved.
+	 * @param array $old_instance Previously saved values from database.
+	 *
+	 * @return array Updated safe values to be saved.
+	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-		$instance['title']             = strip_tags( $new_instance['title'] );
-        $instance['username']          = strip_tags( $new_instance['username'] );
-        $instance['tags']              = strip_tags( $new_instance['tags'] );
+		$instance = (array) $old_instance;
+		$instance['title'] = strip_tags( $new_instance['title'] );
+        $instance['username'] = strip_tags( $new_instance['username'] );
+        $instance['tags'] = strip_tags( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
-		$instance['quantity']          = absint( strip_tags( $new_instance['quantity'] ) );
+		$instance['quantity'] = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
-        isset( $instance['random'] ) ? $instance['random'] = $new_instance['random'] : $instance['random'] = false;
-        isset( $instance['display_date'] ) ? $instance['display_date'] = $new_instance['display_date'] : $instance['display_date'] = false;
-		$instance['date_text']         = trim( strip_tags( $new_instance['date_text'] ) );
-        isset( $instance['display_desc'] ) ? $instance['display_desc'] = $new_instance['display_desc'] : $instance['display_desc'] = false;
-		$instance['truncate']          = absint( strip_tags( $new_instance['truncate'] ) );
+        $instance['random'] = isset( $new_instance['random'] ) ? $new_instance['random'] : false;
+        $instance['display_date'] = isset( $new_instance['display_date'] ) ? $new_instance['display_date'] : false;
+		$instance['date_text'] = trim( strip_tags( $new_instance['date_text'] ) );
+        $instance['display_desc'] = isset( $new_instance['display_desc'] ) ? $new_instance['display_desc'] : false;
+		$instance['truncate'] = absint( strip_tags( $new_instance['truncate'] ) );
 			if ( '' == $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) $instance['truncate'] = 0;
-        isset( $instance['display_tags'] ) ? $instance['display_tags'] = $new_instance['display_tags'] : $instance['display_tags'] = false;
-		$instance['tags_text']         = strip_tags( $new_instance['tags_text'] );
-		$instance['display_hashtag']   = $new_instance['display_hashtag'];
-        isset( $instance['display_arrow'] ) ? $instance['display_arrow'] = $new_instance['display_arrow'] : $instance['display_arrow'] = false;
-		$instance['time']              = absint( strip_tags( $new_instance['time'] ) );
+        $instance['display_tags'] = isset( $new_instance['display_tags'] ) ? $new_instance['display_tags'] : false;
+		$instance['tags_text'] = strip_tags( $new_instance['tags_text'] );
+		$instance['display_hashtag'] = $new_instance['display_hashtag'];
+        $instance['display_arrow'] = isset( $new_instance['display_arrow'] ) ? $new_instance['display_arrow'] : false;
+		$instance['time'] = absint( strip_tags( $new_instance['time'] ) );
 			if ( '' == $instance['time'] || ! is_numeric( $instance['time'] ) ) $instance['time'] = 1800;
 			if ( 1800 > $instance['time'] ) $instance['time'] = 1800;
-		$instance['display_archive']   = $new_instance['display_archive'];
-		$instance['archive_text']      = strip_tags( $new_instance['archive_text'] );
-		$instance['display_arch_arr']  = $new_instance['display_arch_arr'];
-        isset( $instance['new_tab'] ) ? $instance['new_tab'] = $new_instance['new_tab'] : $instance['new_tab'] = false;
-		$instance['nofollow']          = $new_instance['nofollow'];
+		$instance['display_archive'] = $new_instance['display_archive'];
+		$instance['archive_text'] = strip_tags( $new_instance['archive_text'] );
+		$instance['display_arch_arr'] = $new_instance['display_arch_arr'];
+        $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
+		$instance['nofollow'] = $new_instance['nofollow'];
 
 		return $instance;
 	}
 
+    /**
+	 * Back-end widget form.
+	 *
+	 * @see WP_Widget::form()
+	 *
+	 * @param array $instance Previously saved values from database.
+	 */
 	public function form( $instance ) {
 		$defaults = array(
 			'title'            => esc_html__( 'My Bookmarks', 'pinboard-bookmarks' ),
@@ -136,7 +164,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
         <div class="pinboard-bookmarks-widget-content">
 
-            <h4><?php esc_html_e( 'Informations' ); ?></h4>
+            <h4 class="no-border"><?php esc_html_e( 'Informations' ); ?></h4>
 
     		<p>
     			<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter your username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
@@ -207,8 +235,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'In seconds. Minimum 1800 seconds (30 minutes).', 'pinboard-bookmarks' )
             ); ?>
 
-    		<hr />
-
             <h4><?php esc_html_e( 'Bookmarks description' ); ?></h4>
 
             <?php
@@ -230,8 +256,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 sprintf( esc_html__( '(In words. %s means full text)', 'pinboard-bookmarks' ), '<code>0</code>' )
             ); ?>
 
-    		<hr />
-
             <h4><?php esc_html_e( 'Date of the bookmarks' ); ?></h4>
 
             <?php
@@ -252,8 +276,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'Stored on', 'pinboard-bookmarks' ),
                 esc_html__( 'A space will be added after the text.', 'pinboard-bookmarks' )
             ); ?>
-
-    		<hr />
 
             <h4><?php esc_html_e( 'Tags of the bookmarks' ); ?></h4>
 
@@ -284,8 +306,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 checked( $display_hashtag, true, false )
             ); ?>
 
-    		<hr />
-
             <h4><?php esc_html_e( 'Link to the archive' ); ?></h4>
 
             <?php
@@ -313,8 +333,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_name( 'display_arch_arr' ),
                 checked( $display_arch_arr, true, false )
             ); ?>
-
-    		<hr />
 
             <h4><?php esc_html_e( 'Other options' ); ?></h4>
 
