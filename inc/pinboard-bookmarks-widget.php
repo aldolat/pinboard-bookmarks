@@ -209,7 +209,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_name( 'tags' ),
                 esc_attr( $instance['tags'] ),
                 esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
-                esc_html__( 'Enter a space separated list of tags (maximum 3 tags). The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
+                esc_html__( 'Enter a space separated list of tags, up to 3 tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
             );
 
             // Number of items
