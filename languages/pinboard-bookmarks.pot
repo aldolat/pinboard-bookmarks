@@ -1,31 +1,31 @@
-# Copyright (C) 2016 Pinboard Bookmarks
+# Copyright (C) 2017 Pinboard Bookmarks
 # This file is distributed under the same license as the Pinboard Bookmarks package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinboard Bookmarks 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
 "bookmarks\n"
-"POT-Creation-Date: 2016-12-31 17:59:09+00:00\n"
+"POT-Creation-Date: 2017-01-01 08:00:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: inc/pinboard-bookmarks-core.php:28 inc/pinboard-bookmarks-shortcode.php:27
-#: inc/pinboard-bookmarks-widget.php:140
+#: inc/pinboard-bookmarks-widget.php:145
 msgid "Stored on:"
 msgstr ""
 
 #: inc/pinboard-bookmarks-core.php:30 inc/pinboard-bookmarks-shortcode.php:29
-#: inc/pinboard-bookmarks-widget.php:142 inc/pinboard-bookmarks-widget.php:202
-#: inc/pinboard-bookmarks-widget.php:297
+#: inc/pinboard-bookmarks-widget.php:147 inc/pinboard-bookmarks-widget.php:207
+#: inc/pinboard-bookmarks-widget.php:302
 msgid "Tags:"
 msgstr ""
 
 #: inc/pinboard-bookmarks-core.php:34 inc/pinboard-bookmarks-shortcode.php:33
-#: inc/pinboard-bookmarks-widget.php:147 inc/pinboard-bookmarks-widget.php:326
+#: inc/pinboard-bookmarks-widget.php:152 inc/pinboard-bookmarks-widget.php:331
 msgid "See the bookmarks on Pinboard"
 msgstr ""
 
@@ -35,23 +35,23 @@ msgid ""
 "at least."
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:89
+#: inc/pinboard-bookmarks-core.php:94
 msgid "There was a problem with your feed! The error is %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:100
+#: inc/pinboard-bookmarks-core.php:105
 msgid "No items."
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:108
+#: inc/pinboard-bookmarks-core.php:113
 msgid "Read &laquo;%s&raquo;"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:134
+#: inc/pinboard-bookmarks-core.php:139
 msgid "Go to the bookmark stored on Pinboard."
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:156
+#: inc/pinboard-bookmarks-core.php:161
 msgid "View the tag %s on Pinboard"
 msgstr ""
 
@@ -73,160 +73,160 @@ msgstr ""
 msgid "Pinboard Bookmarks"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:132 inc/pinboard-bookmarks-widget.php:186
+#: inc/pinboard-bookmarks-widget.php:137 inc/pinboard-bookmarks-widget.php:191
 msgid "My bookmarks on Pinboard"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:167
+#: inc/pinboard-bookmarks-widget.php:172
 msgid "Informations"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:170
+#: inc/pinboard-bookmarks-widget.php:175
 msgid ""
 "This widget allows you to publish a list of Pinboard bookmarks in your "
 "sidebar. Simply enter a username on Pinboard and/or one or more tags. Then "
 "click on Save button."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:174
+#: inc/pinboard-bookmarks-widget.php:179
 msgid "Please note that a username or one tag is required, at least."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:177
+#: inc/pinboard-bookmarks-widget.php:182
 msgid "Title of the widget"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:182
+#: inc/pinboard-bookmarks-widget.php:187
 msgid "Title:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:189
+#: inc/pinboard-bookmarks-widget.php:194
 msgid "Basic Setup"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:193
+#: inc/pinboard-bookmarks-widget.php:198
 msgid "Username on Pinboard:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:197
+#: inc/pinboard-bookmarks-widget.php:202
 msgid "username"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:206
+#: inc/pinboard-bookmarks-widget.php:211
 msgid "books reading comics"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:207
-msgid ""
-"Enter a space separated list of tags. The plugin will fetch bookmarks from "
-"this list of tags."
-msgstr ""
-
 #: inc/pinboard-bookmarks-widget.php:212
-msgid "Maximum number of items:"
+msgid ""
+"Enter a space separated list of tags, up to 3 tags. The plugin will fetch "
+"bookmarks from this list of tags."
 msgstr ""
 
 #: inc/pinboard-bookmarks-widget.php:217
-msgid "Maximum 400 items."
+msgid "Maximum number of items:"
 msgstr ""
 
 #: inc/pinboard-bookmarks-widget.php:222
+msgid "Maximum 400 items."
+msgstr ""
+
+#: inc/pinboard-bookmarks-widget.php:227
 msgid "Display items in random order"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:230
+#: inc/pinboard-bookmarks-widget.php:235
 msgid "Minimum time between two fetchings:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:235
+#: inc/pinboard-bookmarks-widget.php:240
 msgid "In seconds. Minimum 1800 seconds (30 minutes)."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:238
+#: inc/pinboard-bookmarks-widget.php:243
 msgid "Bookmark description"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:243
+#: inc/pinboard-bookmarks-widget.php:248
 msgid "Display the bookmark description"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:251
+#: inc/pinboard-bookmarks-widget.php:256
 msgid "Length of the description:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:256
+#: inc/pinboard-bookmarks-widget.php:261
 msgid "(In words. %s means full text)"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:259
+#: inc/pinboard-bookmarks-widget.php:264
 msgid "Date of the bookmark"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:264
+#: inc/pinboard-bookmarks-widget.php:269
 msgid "Display the date of the bookmark"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:272
+#: inc/pinboard-bookmarks-widget.php:277
 msgid "Text before the date:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:276
+#: inc/pinboard-bookmarks-widget.php:281
 msgid "Stored on"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:277 inc/pinboard-bookmarks-widget.php:298
+#: inc/pinboard-bookmarks-widget.php:282 inc/pinboard-bookmarks-widget.php:303
 msgid "A space will be added after the text."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:280
+#: inc/pinboard-bookmarks-widget.php:285
 msgid "Tags of the bookmark"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:285
+#: inc/pinboard-bookmarks-widget.php:290
 msgid "Display tags"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:293
+#: inc/pinboard-bookmarks-widget.php:298
 msgid "Text before tags list:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:303
+#: inc/pinboard-bookmarks-widget.php:308
 msgid "Display an hashtag %s before each tag"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:309
+#: inc/pinboard-bookmarks-widget.php:314
 msgid "Link to the archive"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:314
+#: inc/pinboard-bookmarks-widget.php:319
 msgid "Display the link to my bookmarks archive on Pinboard"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:322
+#: inc/pinboard-bookmarks-widget.php:327
 msgid "Text for the archive link:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:331
+#: inc/pinboard-bookmarks-widget.php:336
 msgid "Display an arrow after the link to the archive"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:337
+#: inc/pinboard-bookmarks-widget.php:342
 msgid "Other options"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:342
+#: inc/pinboard-bookmarks-widget.php:347
 msgid "Display an arrow after each title"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:350
+#: inc/pinboard-bookmarks-widget.php:355
 msgid "Open links in a new browser tab"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:358
+#: inc/pinboard-bookmarks-widget.php:363
 msgid "Add %s to links"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:362
+#: inc/pinboard-bookmarks-widget.php:367
 msgid "It will be added only to the link in titles, not in tag links too."
 msgstr ""
 
