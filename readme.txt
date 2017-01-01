@@ -94,7 +94,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 
 Make sure to properly use the opening and closing tags `<?php` and `?>` respectively.
 
-The only mandatory options are `username` and `tags`; you have to use one of them at least. The other options are the default options which you can change according your needs. It isn't necessary to insert all of them.
+The only mandatory options are `username` and `tags`; you have to use one of them at least. The other options are the default options which you can change according to your needs. It isn't necessary to insert all of them.
 
 == Installation ==
 
