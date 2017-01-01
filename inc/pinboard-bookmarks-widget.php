@@ -95,6 +95,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
         $instance['username'] = strip_tags( $new_instance['username'] );
         $instance['tags'] = strip_tags( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
+            $tags = explode( ' ', $instance['tags'] );
+            if ( 3 < count( $tags ) ) {
+                $tags = array_slice( $tags, 0, 3 );
+                $instance['tags'] = implode( ' ', $tags );
+            }
 		$instance['quantity'] = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
@@ -204,7 +209,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_name( 'tags' ),
                 esc_attr( $instance['tags'] ),
                 esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
-                esc_html__( 'Enter a space separated list of tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
+                esc_html__( 'Enter a space separated list of tags (maximum 3 tags). The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
             );
 
             // Number of items

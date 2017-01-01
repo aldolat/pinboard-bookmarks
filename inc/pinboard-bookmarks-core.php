@@ -62,6 +62,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // Build the tags list
     if ( $tags ) {
+        // Pinboard accepts maximum 3 tags for a query
+        if ( 3 < count( $tags ) ) {
+            $tags_slice = array_slice( $tags_slice, 0, 3 );
+            $tags = implode( ' ', $tags_slice );
+        }
         $tags_for_url = pinboard_bookmarks_get_tags_for_url( $tags );
     } else {
         $tags_for_url = '';
