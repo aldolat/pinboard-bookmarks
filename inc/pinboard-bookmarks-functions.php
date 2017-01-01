@@ -14,6 +14,12 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     // Replace all the occurrences of comma and space in any mix and quantity with a single space.
     $tags = trim( preg_replace( '([\s,]+)', ' ', $tags ) );
 
+    // Pinboard accepts maximum 3 tags for a query
+    if ( 3 < count( $tags ) ) {
+        $tags_slice = array_slice( $tags_slice, 0, 3 );
+        $tags = implode( ' ', $tags_slice );
+    }
+
     // If we have a space separated list of tags (i.e. if we have multiple tags)
     if ( strpos( $tags, ' ' ) ) {
         $tags = explode( ' ', $tags );
