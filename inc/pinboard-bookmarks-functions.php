@@ -15,6 +15,7 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     $tags = trim( preg_replace( '([\s,]+)', ' ', $tags ) );
 
     // Pinboard accepts maximum 3 tags for a query
+    $tags = explode( ' ', $instance['tags'] );
     if ( 3 < count( $tags ) ) {
         $tags_slice = array_slice( $tags_slice, 0, 3 );
         $tags = implode( ' ', $tags_slice );
