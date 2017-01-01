@@ -46,9 +46,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         return;
     }
 
-    if ( $display_arrow )    $arrow        = '&nbsp;&rarr;';             else $arrow        = '';
-    if ( isset( $new_tab ) ) $new_tab_link = ' target="_blank"';         else $new_tab_link = '';
-    if ( $nofollow )         $rel_txt      = ' rel="bookmark nofollow"'; else $rel_txt      = ' rel="bookmark"';
+    if ( $display_arrow )   $arrow         = '&nbsp;&rarr;';             else $arrow        = '';
+    if ( $new_tab )         $new_tab_link  = ' target="_blank"';         else $new_tab_link = '';
+    if ( $nofollow )        $rel_txt       = ' rel="bookmark nofollow"'; else $rel_txt      = ' rel="bookmark"';
     if ( 400 < $quantity )  $quantity      = 400;
     if ( '' == $quantity )  $quantity      = 5;
 
@@ -143,7 +143,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                     if ( $tags_list ) {
 						$output .= '<p class="pinboard-bookmarks-list-tags">';
 							if ( $tags_text ) $output .= $tags_text . ' ';
-							if ( $display_hashtag ) $hashtag = '#';
+							if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
 							foreach( $tags_list as $tag ) {
                                 $item_tags = $tag->get_label();
                                 $item_tags = (array) explode( ' ', $item_tags );
