@@ -31,6 +31,10 @@ The plugin may display for each tag (you choose what to display):
 
 After the plugin's activation, you will have a new widget in Appearance / Widgets.
 
+### Usage as widget ###
+
+The plugin provides a widget to be used in your sidebar. After activating the plugin, you will have a new widget in Appearance > Widgets. Simply drag & drop the "Pinboard Bookmarks" widget in the sidebar, adjust the options, and click Save.
+
 ### Usage as shortcode ###
 
 You can also use the plugin's shortcode to display your list on a static page or on a single post. Example usage:

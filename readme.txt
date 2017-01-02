@@ -31,7 +31,11 @@ The plugin may display for each tag (you choose what to display):
 
 After the plugin's activation, you will have a new widget in Appearance / Widgets.
 
-*Usage as shortcode*
+= Usage as widget =
+
+The plugin provides a widget to be used in your sidebar. After activating the plugin, you will have a new widget in Appearance > Widgets. Simply drag & drop the "Pinboard Bookmarks" widget in the sidebar, adjust the options, and click Save.
+
+= Usage as shortcode =
 
 You can also use the plugin's shortcode to display your list on a static page or on a single post. Example usage:
 
@@ -65,7 +69,7 @@ This is the list of the options for the shortcode:
 * `new_tab` (boolean, true/false) - If the links should be open in a new browser tab.
 * `nofollow` (boolean, true/false) - If a `nofollow` attribute should be added the the links of the bookmark title.
 
-*Usage as PHP function*
+= Usage as PHP function =
 
 You can also use the main PHP function directly in your theme. Add these lines where you want it be displayed (the function echoes the result):
 
