@@ -45,7 +45,7 @@ Change `username` as required.
 
 In the widget you can use the full set of options. So, for example, if you want to fetch the feed from bookmarks that have `books` and `comics` tags and display the tags, use:
 
-`[pbsc username="johndoe" tags="books comics" display_tags=true]`
+`[pbsc username="johndoe" tags="books comics" display_tags=1]`
 
 Note that the the plugin will fetch bookmarks that have both the tags `books` and `comics`.
 
@@ -54,23 +54,23 @@ This is the list of the options for the shortcode:
 * `username` (string) - A username on Pinboard.
 * `tags` (string) - A space separated list of tags or a single tag.
 * `quantity` (integer) - The number of bookmarks you want to display (Pinboard accepts 400 at most).
-* `random` (boolean, true/false) - If a random order should be used.
-* `display_desc` (boolean, true/false) - If the tag description should be displayed.
+* `random` (boolean, 1/0) - If a random order should be used.
+* `display_desc` (boolean, 1/0) - If the tag description should be displayed.
 * `truncate` (integer) - The maximum number of words the description should have.
-* `display_date` (boolean, true/false) - If the date of the bookmark (when it was archived on Pinboard) should be displayed.
+* `display_date` (boolean, 1/0) - If the date of the bookmark (when it was archived on Pinboard) should be displayed.
 * `date_text` (string) - The text to be prepended to the date of the bookmark.
-* `display_tags` (boolean, true/false) - If the tags should be displayed.
+* `display_tags` (boolean, 1/0) - If the tags should be displayed.
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
-* `display_hashtag` (boolean, true/false) - If the tags should be prefixed with an hashtag (`#`),
-* `use_comma` (boolean, true/false) - If a comma for separate tags should be used.
-* `display_arrow` (boolean, true/false) - If an HTML arrow shound be appended to the title of the bookmarks.
-* `display_archive` (boolean, true/false) - If the link to the archive on Pinboard should be displayed.
+* `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with an hashtag (`#`),
+* `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
+* `display_arrow` (boolean, 1/0) - If an HTML arrow shound be appended to the title of the bookmarks.
+* `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
-* `display_arch_arr` (boolean, true/false) - If an HTML arrow shound be appended to the archive text.
-* `new_tab` (boolean, true/false) - If the links should be open in a new browser tab.
-* `nofollow` (boolean, true/false) - If a `nofollow` attribute should be added the the links of the bookmark title.
-* `debug_options` (boolean, true/false) - If the complete set of options of the widget should be displayed.
-* `debug_urls` (boolean, true/false) - If the URLs and the single parts, used to build them, should be displayed.
+* `display_arch_arr` (boolean, 1/0) - If an HTML arrow shound be appended to the archive text.
+* `new_tab` (boolean, 1/0) - If the links should be open in a new browser tab.
+* `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added the the links of the bookmark title.
+* `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
+* `debug_urls` (boolean, 1/0) - If the URLs and the single parts, used to build them, should be displayed.
 
 ### Usage as PHP function ###
 
@@ -109,6 +109,14 @@ If you want to return the result, use `get_pinboard_bookmarks_fetch_feed( $args 
 Make sure to properly use the opening and closing tags `<?php` and `?>` respectively.
 
 The only mandatory options are `username` and `tags`; you have to use one of them at least. The other options are the default options which you can change according to your needs. It isn't necessary to insert all of them.
+
+### Help, Bugs, and Contributing ###
+
+If you need help, please use [WordPress forum](http://wordpress.org/support/plugin/pinboard-bookmarks). Do not send private email unless it is really necessary.
+
+If you have found a bug, please report it on [GitHub](https://github.com/aldolat/pinboard-bookmarks/issues).
+
+This plugin is developed using [GitHub](https://github.com/aldolat/pinboard-bookmarks). If you wrote an enhancement and would share it with the world, please send me a [Pull request](https://github.com/aldolat/pinboard-bookmarks/pulls).
 
 ## Installation ##
 
