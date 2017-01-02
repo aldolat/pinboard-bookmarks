@@ -62,6 +62,7 @@ This is the list of the options for the shortcode:
 * `display_tags` (boolean, true/false) - If the tags should be displayed.
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
 * `display_hashtag` (boolean, true/false) - If the tags should be prefixed with an hashtag (`#`),
+* `use_comma` (boolean, true/false) - If a comma for separate tags should be used.
 * `display_arrow` (boolean, true/false) - If an HTML arrow shound be appended to the title of the bookmarks.
 * `display_archive` (boolean, true/false) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
@@ -88,6 +89,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 	'display_tags'     => false,
 	'tags_text'        => 'Tags:'
 	'display_hashtag'  => true,
+	'use_comma'        => false,
 	'display_arrow'    => false,
 	'display_archive'  => true,
 	'archive_text'     => 'See the bookmarks on Pinboard'

@@ -29,6 +29,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_tags'     => false,
 		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 		'display_hashtag'  => true,
+        'use_comma'        => false,
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
@@ -154,8 +155,15 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                 } else {
                                     $url = $pinboard_tag_url;
                                 }
+                                if ( $use_comma ) $comma = ','; else $comma = '';
+                                // $count and $i are used to remove the trailing comma in the last tag.
+                                $count = count( $item_tags );
+                                $i = 0;
                                 foreach ( $item_tags as $item_tag ) {
-    								$output .= $hashtag . '<a rel="bookmark" href="' . $url . strtolower( $item_tag ) . '/" title="' . sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) . '"' . $new_tab_link . '>' .  $item_tag . '</a> ';
+                                    $i++;
+                                    // If this is the last tag, remove the comma.
+                                    if ( $i == $count ) $comma = '';
+    								$output .= $hashtag . '<a rel="bookmark" href="' . $url . strtolower( $item_tag ) . '/" title="' . sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) . '"' . $new_tab_link . '>' .  $item_tag . '</a>'. $comma . ' ';
                                 }
                                 // Removes the trailing space after the last tag.
                                 $output = trim( $output );
