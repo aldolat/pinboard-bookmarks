@@ -68,6 +68,8 @@ This is the list of the options for the shortcode:
 * `display_arch_arr` (boolean, true/false) - If an HTML arrow shound be appended to the archive text.
 * `new_tab` (boolean, true/false) - If the links should be open in a new browser tab.
 * `nofollow` (boolean, true/false) - If a `nofollow` attribute should be added the the links of the bookmark title.
+* `debug_options` (boolean, true/false) - If the complete set of options of the widget should be displayed.
+* `debug_urls` (boolean, true/false) - If the URLs and the single parts, used to build them, should be displayed.
 
 = Usage as PHP function =
 
@@ -92,9 +94,13 @@ You can also use the main PHP function directly in your theme. Add these lines w
 	'display_arch_arr' => true,
 	'new_tab'          => false,
 	'nofollow'         => true,
+	'debug_options'    => false,
+	'debug_urls'       => false
 	);
 	pinboard_bookmarks_fetch_feed( $args );
 }`
+
+If you want to return the result, use `get_pinboard_bookmarks_fetch_feed( $args )`.
 
 Make sure to properly use the opening and closing tags `<?php` and `?>` respectively.
 

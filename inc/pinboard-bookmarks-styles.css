@@ -25,3 +25,8 @@
 .pinboard-bookmarks-widget-content :-ms-input-placeholder {
 	color: #ccc;
 }
+
+.pinboard-bookmarks-alert {
+	background-color: #F7F2D2;
+	padding: 1em;
+}

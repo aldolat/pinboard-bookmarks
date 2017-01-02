@@ -93,3 +93,50 @@ function pinboard_bookmarks_add_links( $links, $file ) {
 	}
 	return $links;
 }
+
+function pinboard_bookmarks_debug( $args ) {
+    $defaults = array (
+        'debug_options' => false,
+        'debug_urls'    => false,
+		'options'       => '',
+        'urls'          => '',
+	);
+	$args = wp_parse_args( $args, $defaults );
+	extract( $args, EXTR_SKIP );
+
+    $output = '';
+
+    if ( $debug_options || $debug_urls ) {
+		global $wp_version;
+		$output .= '<h3>' . sprintf( __( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
+		$output .= '<p><strong>' . __( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong><br>';
+			$output .= '&bull;&ensp;' . sprintf( __( 'Site URL: %s', 'pinboard-bookmarks' ), site_url() . '<br>' );
+			$output .= '&bull;&ensp;' . sprintf( __( 'WP version: %s', 'pinboard-bookmarks' ), $wp_version . '<br>' );
+			$output .= '&bull;&ensp;' . sprintf( __( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '<br>' );
+		$output .= '</p>';
+	}
+
+    if ( $debug_options ) {
+        $output .= '<h4><strong>' . __( 'The options:', 'pinboard-bookmarks' ) . '</strong></h4>';
+        //$output .= '<pre>' . print_r( $debug_options, true ) . '</pre>';
+        $output .= '<p><ul>';
+        foreach ( $options as $key => $value ) {
+            if ( empty( $value ) ) $value = __( '(empty)', 'pinboard-bookmarks' );
+            $output .= '<li><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
+        }
+        $output .= '</ul></p>';
+    }
+
+    if ( $debug_urls ) {
+        $output .= '<h4><strong>' . __( 'URL and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
+        //$output .= '<pre>' . print_r( $debug_urls, true ) . '</pre>';
+        $output .= '<p><ul>';
+        foreach ( $urls as $key => $value ) {
+            if ( empty( $value ) ) $value = __( '(empty)', 'pinboard-bookmarks' );
+            $output .= '<li><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
+        }
+        $output .= '</ul></p>';
+    }
+
+    return $output;
+}

@@ -34,6 +34,8 @@ function pinboard_bookmarks_sc( $atts ) {
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+        'debug_options'    => false,
+        'debug_urls'       => false
 	), $atts ) );
 
 	return get_pinboard_bookmarks_fetch_feed( $atts );

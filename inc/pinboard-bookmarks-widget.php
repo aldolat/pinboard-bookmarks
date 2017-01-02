@@ -74,6 +74,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arch_arr' => $instance['display_arch_arr'],
 			'new_tab'          => $instance['new_tab'],
 			'nofollow'         => $instance['nofollow'],
+            'debug_options'    => $instance['debug_options'],
+            'debug_urls'       => $instance['debug_urls']
 		) );
 
 		echo $after_widget;
@@ -121,6 +123,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['display_arch_arr'] = $new_instance['display_arch_arr'];
         $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
 		$instance['nofollow'] = $new_instance['nofollow'];
+        $instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
+        $instance['debug_urls'] = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
 
 		return $instance;
 	}
@@ -152,7 +156,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
 			'display_arch_arr' => true,
 			'new_tab'          => false,
-			'nofollow'         => true
+			'nofollow'         => true,
+            'debug_options'    => false,
+            'debug_urls'       => false,
 		);
 		$instance         = wp_parse_args( (array) $instance, $defaults );
 		$random           = (bool) $instance['random'];
@@ -165,6 +171,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$display_arch_arr = (bool) $instance['display_arch_arr'];
 		$new_tab          = (bool) $instance['new_tab'];
 		$nofollow         = (bool) $instance['nofollow'];
+        $debug_options    = (bool) $instance['debug_options'];
+        $debug_urls       = (bool) $instance['debug_urls'];
 		?>
 
         <div class="pinboard-bookmarks-widget-content">
@@ -365,6 +373,28 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_name( 'nofollow' ),
                 checked( $nofollow, true, false ),
                 __( 'It will be added only to the link in titles, not in tag links too.', 'pinboard-bookmarks' )
+            ); ?>
+
+            <h4><?php esc_html_e( 'Debug options', 'pinboard-bookmarks' ); ?></h4>
+
+            <p><?php printf( __( 'You are using Pinboard Bookmarks version %s.', 'pinboard-bookmarks' ), '<strong>' . PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</strong>' ); ?></p>
+
+            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only. Please note that the informations will be displayed publicly on your site.', 'pinboard-bookmarks' ); ?></strong></p>
+
+            <?php // Debugging options
+            pinboard_bookmarks_form_checkbox(
+                sprintf( esc_html__( 'Display parameters', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                $this->get_field_id( 'debug_options' ),
+                $this->get_field_name( 'debug_options' ),
+                checked( $debug_options, true, false )
+            );
+
+            // Debugging URLs
+            pinboard_bookmarks_form_checkbox(
+                sprintf( esc_html__( 'Display URLs', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                $this->get_field_id( 'debug_urls' ),
+                $this->get_field_name( 'debug_urls' ),
+                checked( $debug_urls, true, false )
             ); ?>
 
         </div>
