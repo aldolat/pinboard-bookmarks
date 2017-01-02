@@ -391,7 +391,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             <p><?php printf( __( 'You are using Pinboard Bookmarks version %s.', 'pinboard-bookmarks' ), '<strong>' . PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</strong>' ); ?></p>
 
-            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only. Please note that the informations will be displayed publicly on your site.', 'pinboard-bookmarks' ); ?></strong></p>
+            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only. Only the Administrator can view the debugging informations.', 'pinboard-bookmarks' ); ?></strong></p>
 
             <?php // Debugging options
             pinboard_bookmarks_form_checkbox(

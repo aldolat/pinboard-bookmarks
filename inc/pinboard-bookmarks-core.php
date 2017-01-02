@@ -188,19 +188,21 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		$output .= '</p>';
 	}
 
-    if ( $debug_options || $debug_urls ) {
-        $params = array(
-            'debug_options' => $debug_options,
-            'debug_urls'    => $debug_urls,
-            'options'       => $args,
-            'urls'          => array(
-                'username_part'     => $username,
-                'tags_part'         => $tags_for_url,
-                'complete_feed_url' => $feed_url,
-                'archive_url'       => $archive_url
-            ),
-        );
-        $output .= pinboard_bookmarks_debug( $params );
+    if ( current_user_can( 'activate_plugins' ) ) { // This is the Administrator
+        if ( $debug_options || $debug_urls ) {
+            $params = array(
+                'debug_options' => $debug_options,
+                'debug_urls'    => $debug_urls,
+                'options'       => $args,
+                'urls'          => array(
+                    'username_part'     => $username,
+                    'tags_part'         => $tags_for_url,
+                    'complete_feed_url' => $feed_url,
+                    'archive_url'       => $archive_url
+                ),
+            );
+            $output .= pinboard_bookmarks_debug( $params );
+        }
     }
 
 	$output .= pinboard_bookmarks_get_generated_by();
