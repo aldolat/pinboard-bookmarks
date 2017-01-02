@@ -83,7 +83,7 @@ function pinboard_bookmarks_setup() {
     /*
 	 * Load the script.
 	 *
-	 * @since 1.00
+	 * @since 1.0
 	 */
 	add_action( 'admin_enqueue_scripts', 'pinboard_bookmarks_load_scripts' );
 

@@ -77,7 +77,7 @@ function pinboard_bookmarks_get_generated_by() {
  * Load the CSS file.
  * The file will be loaded only in the widgets admin page.
  *
- * @since 1.00
+ * @since 1.0
  */
 function pinboard_bookmarks_load_scripts( $hook ) {
  	if ( $hook != 'widgets.php' ) {
