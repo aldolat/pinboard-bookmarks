@@ -63,10 +63,10 @@ This is the list of the options for the shortcode:
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
 * `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with an hashtag (`#`),
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
-* `display_arrow` (boolean, 1/0) - If an HTML arrow shound be appended to the title of the bookmarks.
+* `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
-* `display_arch_arr` (boolean, 1/0) - If an HTML arrow shound be appended to the archive text.
+* `display_arch_arr` (boolean, 1/0) - If an HTML arrow should be appended to the archive text.
 * `new_tab` (boolean, 1/0) - If the links should be open in a new browser tab.
 * `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added the the links of the bookmark title.
 * `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
