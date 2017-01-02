@@ -15,6 +15,11 @@
  	exit( 'No script kiddies please!' );
  }
 
+/**
+ * The function to be used for the shortcode.
+ *
+ * @since 1.0
+ */
 function pinboard_bookmarks_sc( $atts ) {
 	extract( shortcode_atts( array(
         'username'         => '',

@@ -8,6 +8,14 @@ if ( ! defined( 'WPINC' ) ) {
    exit( 'No script kiddies please!' );
 }
 
+/**
+ * Build the tags string for RSS URL.
+ *
+ * @since 1.0
+ * @param string The comma separated list of tags.
+ * @return string The tags part to be used in RSS URL.
+ * @example /t:books/t:comics
+ */
 function pinboard_bookmarks_get_tags_for_url( $tags ) {
     $tags_for_url = '';
 
@@ -44,8 +52,8 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
  * Check for the cache lifetime in the database and set it to 1800 seconds minimum.
  *
  * @since 1.0
- * @param int $seconds The number of seconds of feed lifetime
- * @return int
+ * @param integer $seconds The number of seconds of feed lifetime.
+ * @return integer The number of seconds of feed lifetime.
  * @link http://codex.wordpress.org/Plugin_API/Filter_Reference/wp_feed_cache_transient_lifetime Codex Documentation
  */
 function pinboard_bookmarks_cache_handler( $seconds ) {
@@ -94,6 +102,20 @@ function pinboard_bookmarks_add_links( $links, $file ) {
 	return $links;
 }
 
+/**
+ * Return the debugging informations.
+ *
+ * @param array $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type boolean $debug_options If display the parameters of the widget.
+ *      @type boolean $debug_urls    If display the URLS and the parts used to build them.
+ *      @type array   $options       The parameters of the widget.
+ *      @type array   $urls          The set of URLS.
+ * }
+ * @since 1.0
+ * @return string The HTML for displaying the debugging informations.
+ */
 function pinboard_bookmarks_debug( $args ) {
     $defaults = array (
         'debug_options' => false,

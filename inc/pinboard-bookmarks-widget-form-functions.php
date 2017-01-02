@@ -2,13 +2,7 @@
 /**
  * This file contains the functions used in the widget's forms
  *
- * @since 1.12
- */
-
-/**
- * The forms for the widget panel
- *
- * @package PostsInSidebar
+ * @since 1.0
  */
 
 /**
@@ -20,7 +14,6 @@ if ( ! defined( 'WPINC' ) ) {
 	exit( 'No script kiddies please!' );
 }
 
-
 /**
  * Create a form label to be used in the widget panel.
  *
@@ -31,7 +24,6 @@ if ( ! defined( 'WPINC' ) ) {
 function pinboard_bookmarks_form_label( $label, $id ) {
 	echo '<label for="' . esc_attr( $id ) . '">' . $label . '</label>';
 }
-
 
 /**
  * Create a form text input to be used in the widget panel.
@@ -55,7 +47,6 @@ function pinboard_bookmarks_form_input_text( $label, $id, $name, $value, $placeh
 	echo '</p>';
 }
 
-
 /**
  * Create a form textarea to be used in the widget panel.
  *
@@ -77,7 +68,6 @@ function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placehold
 	echo '</p>';
 }
 
-
 /**
  * Create a form checkbox to be used in the widget panel.
  *
@@ -96,7 +86,6 @@ function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $commen
 	if ( $comment ) echo '<br /><em>' . $comment . '</em>';
 	echo '</p>';
 }
-
 
 /**
  * Create a form select to be used in the widget panel.

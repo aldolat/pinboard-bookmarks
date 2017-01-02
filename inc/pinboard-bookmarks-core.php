@@ -42,6 +42,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
+    // If a username or a tag has not been entered, stop the function and give an alert.
     if ( ! $username && ! $tags ) {
         echo '<p class="pinboard-bookmarks error">';
         esc_html_e( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
@@ -49,28 +50,31 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         return;
     }
 
+    // Set up some variables.
     if ( $display_arrow )   $arrow         = '&nbsp;&rarr;';             else $arrow        = '';
     if ( $new_tab )         $new_tab_link  = ' target="_blank"';         else $new_tab_link = '';
     if ( $nofollow )        $rel_txt       = ' rel="bookmark nofollow"'; else $rel_txt      = ' rel="bookmark"';
     if ( 400 < $quantity )  $quantity      = 400;
     if ( '' == $quantity )  $quantity      = 5;
 
+    // Set up the Pinboard URLs.
     $pinboard_url          = 'https://pinboard.in';
     $pinboard_rss_url      = 'https://feeds.pinboard.in/rss';
     $pinboard_tag_url      = $pinboard_url . '/t:';
 
+// Set up the user URLs on Pinboard.
     $pinboard_user_url     = $pinboard_url . '/u:' . $username;
     $pinboard_rss_user_url = $pinboard_rss_url . '/u:' . $username;
     $pinboard_user_tag_url = $pinboard_user_url . '/t:';
 
-    // Build the tags list
+    // Build the tags list.
     if ( $tags ) {
         $tags_for_url = pinboard_bookmarks_get_tags_for_url( $tags );
     } else {
         $tags_for_url = '';
     }
 
-    // Build the RSS url
+    // Build the RSS url.
     if ( $username ) {
         $feed_url = $pinboard_rss_user_url . $tags_for_url . '/?count=' . $quantity;
         $archive_url = $pinboard_user_url . $tags_for_url;
@@ -85,6 +89,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     $rss = fetch_feed( $feed_url );
 	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
 
+    // Start building the $output variable.
 	$output = '<ul class="pinboard-bookmarks-list">';
 
 	if ( is_wp_error( $rss ) ) {
@@ -179,6 +184,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	$output .= '</ul>';
 
+    // The archive link.
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
 		if ( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
 		$output .= '<p class="pinboard-bookmarks-list-more">';
@@ -188,6 +194,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		$output .= '</p>';
 	}
 
+    // The debugging informations.
     if ( current_user_can( 'activate_plugins' ) ) { // This is the Administrator
         if ( $debug_options || $debug_urls ) {
             $params = array(
@@ -205,6 +212,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         }
     }
 
+    // Add a HTML comment with plugin name and version.
 	$output .= pinboard_bookmarks_get_generated_by();
 
 	return $output;
