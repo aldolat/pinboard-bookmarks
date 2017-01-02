@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Pinboard Bookmarks
  * Description:  Publish Pinboard bookmarks on your WordPress blog.
- * Plugin URI: http://www.aldolat.it/wordpress/wordpress-plugins/pinboard-bookmarks/
+ * Plugin URI: http://dev.aldolat.it/projects/pinboard-bookmarks/
  * Author: Aldo Latino
  * Author URI: http://www.aldolat.it/
  * Version: 1.0
