@@ -1,6 +1,6 @@
 # Pinboard Bookmarks #
 **Contributors:** aldolat  
-**Donate link:**   http://dev.aldolat.it/projects/pinboard-bookmarks/  
+**Donate link:** http://dev.aldolat.it/projects/pinboard-bookmarks/  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 4.7  

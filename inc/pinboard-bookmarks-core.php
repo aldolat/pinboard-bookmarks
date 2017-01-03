@@ -62,7 +62,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     $pinboard_rss_url      = 'https://feeds.pinboard.in/rss';
     $pinboard_tag_url      = $pinboard_url . '/t:';
 
-// Set up the user URLs on Pinboard.
+    // Set up the user URLs on Pinboard.
     $pinboard_user_url     = $pinboard_url . '/u:' . $username;
     $pinboard_rss_user_url = $pinboard_rss_url . '/u:' . $username;
     $pinboard_user_tag_url = $pinboard_user_url . '/t:';
