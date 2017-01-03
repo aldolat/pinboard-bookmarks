@@ -86,14 +86,14 @@ if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 	'display_desc'     => false,
 	'truncate'         => 0,
 	'display_date'     => false,
-	'date_text'        => 'Stored on:'
+	'date_text'        => 'Stored on:',
 	'display_tags'     => false,
-	'tags_text'        => 'Tags:'
+	'tags_text'        => 'Tags:',
 	'display_hashtag'  => true,
 	'use_comma'        => false,
 	'display_arrow'    => false,
 	'display_archive'  => true,
-	'archive_text'     => 'See the bookmarks on Pinboard'
+	'archive_text'     => 'See the bookmarks on Pinboard',
 	'display_arch_arr' => true,
 	'new_tab'          => false,
 	'nofollow'         => true,
