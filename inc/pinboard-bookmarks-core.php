@@ -86,7 +86,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     // Grab the feed from Pinboard.
     add_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
 	include_once( ABSPATH . WPINC . '/feed.php' );
-    $rss = fetch_feed( $feed_url );
+    $rss = fetch_feed( esc_url( $feed_url ) );
 	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
 
     // Start building the $output variable.
@@ -113,10 +113,10 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			$output .= '<li class="pinboard-bookmarks-list-li">';
 
 				// Title
-				$title = sprintf( esc_html__( 'Read &laquo;%s&raquo;', 'pinboard-bookmarks' ), $item->get_title() );
+				$title_attr = sprintf( esc_html__( 'Read &laquo;%s&raquo;', 'pinboard-bookmarks' ), $item->get_title() );
 
 				$output .= '<p class="pinboard-bookmarks-list-title">';
-					$output .= '<a' . $rel_txt . ' href="' . $item->get_permalink() . '" title="' . $title . '"' . $new_tab_link . '>';
+					$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '" title="' . esc_attr( $title_attr ) . '"' . $new_tab_link . '>';
 						$output .= $item->get_title() . $arrow;
 					$output .= '</a>';
 				$output .= '</p>';
@@ -126,20 +126,20 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					if ( $item->get_description() ) {
 						if ( $truncate > 0 ) {
 							$output .= '<p  class="pinboard-bookmarks-list-desc">';
-								$output .= wp_trim_words( $item->get_description(), $truncate, '&hellip;' );
+								$output .= wp_trim_words( esc_html( $item->get_description() ), $truncate, '&hellip;' );
 							$output .= '</p>';
 						} else {
-							$output .= '<p  class="pinboard-bookmarks-list-desc">' . $item->get_description() . '</p>';
+							$output .= '<p  class="pinboard-bookmarks-list-desc">' . esc_html( $item->get_description() ) . '</p>';
 						}
 					}
 				}
 
 				// Date
 				if ( $display_date ) {
-					$bookmark_date = date_i18n( get_option( 'date_format' ), strtotime( $item->get_date() ), false );
+					$bookmark_date = date_i18n( get_option( 'date_format' ), strtotime( esc_html( $item->get_date() ) ), false );
 					$output .= '<p class="pinboard-bookmarks-list-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a rel="bookmark" href="' . $item->get_id() . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
+						$output .= '<a rel="bookmark" href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
 							$output .= $bookmark_date;
 						$output .= '</a>';
 					$output .= '</p>';
@@ -168,7 +168,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                     $i++;
                                     // If this is the last tag, remove the comma.
                                     if ( $i == $count ) $comma = '';
-    								$output .= $hashtag . '<a rel="bookmark" href="' . $url . strtolower( $item_tag ) . '/" title="' . sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) . '"' . $new_tab_link . '>' .  $item_tag . '</a>'. $comma . ' ';
+    								$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
                                 }
                                 // Removes the trailing space after the last tag.
                                 $output = trim( $output );
@@ -188,8 +188,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
 		if ( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
 		$output .= '<p class="pinboard-bookmarks-list-more">';
-			$output .= '<a href="' . $archive_url . '"' .  $new_tab_link . '>';
-				$output .= $archive_text . $arrow;
+			$output .= '<a href="' . esc_url( $archive_url ) . '"' .  $new_tab_link . '>';
+				$output .= esc_html( $archive_text . $arrow );
 			$output .= '</a>';
 		$output .= '</p>';
 	}
