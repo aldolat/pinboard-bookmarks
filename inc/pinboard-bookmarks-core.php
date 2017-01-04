@@ -165,7 +165,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                 foreach ( $item_tags as $item_tag ) {
     								$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
                                 }
-                                // Removes the trailing comma and space after the last tag.
+                                // Removes the trailing comma and space in any quantity and any order after the last tag.
                                 $output = rtrim( $output, ', ' );
 							}
 						$output .= '</p>';
