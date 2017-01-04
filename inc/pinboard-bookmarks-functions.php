@@ -133,31 +133,31 @@ function pinboard_bookmarks_debug( $args ) {
 
     if ( $debug_options || $debug_urls ) {
 		global $wp_version;
-		$output .= '<h3>' . sprintf( esc_html_( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
-		$output .= '<p><strong>' . esc_html_( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong><br>';
-			$output .= '&bull;&ensp;' . sprintf( esc_html_( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '<br>' );
-			$output .= '&bull;&ensp;' . sprintf( esc_html_( 'WP version: %s', 'pinboard-bookmarks' ), $wp_version . '<br>' );
-			$output .= '&bull;&ensp;' . sprintf( esc_html_( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '<br>' );
+		$output .= '<h3>' . sprintf( esc_html__( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
+		$output .= '<p><strong>' . esc_html__( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong><br>';
+			$output .= '&bull;&ensp;' . sprintf( esc_html__( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '<br>' );
+			$output .= '&bull;&ensp;' . sprintf( esc_html__( 'WP version: %s', 'pinboard-bookmarks' ), $wp_version . '<br>' );
+			$output .= '&bull;&ensp;' . sprintf( esc_html__( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '<br>' );
 		$output .= '</p>';
 	}
 
     if ( $debug_options ) {
-        $output .= '<h4><strong>' . esc_html_( 'The options:', 'pinboard-bookmarks' ) . '</strong></h4>';
+        $output .= '<h4><strong>' . esc_html__( 'The options:', 'pinboard-bookmarks' ) . '</strong></h4>';
         //$output .= '<pre>' . print_r( $debug_options, true ) . '</pre>';
         $output .= '<p><ul>';
         foreach ( $options as $key => $value ) {
-            if ( empty( $value ) ) $value = esc_html_( '(empty)', 'pinboard-bookmarks' );
+            if ( empty( $value ) ) $value = esc_html__( '(empty)', 'pinboard-bookmarks' );
             $output .= '<li><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
         }
         $output .= '</ul></p>';
     }
 
     if ( $debug_urls ) {
-        $output .= '<h4><strong>' . esc_html_( 'URL and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
+        $output .= '<h4><strong>' . esc_html__( 'URL and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
         //$output .= '<pre>' . print_r( $debug_urls, true ) . '</pre>';
         $output .= '<p><ul>';
         foreach ( $urls as $key => $value ) {
-            if ( empty( $value ) ) $value = esc_html_( '(empty)', 'pinboard-bookmarks' );
+            if ( empty( $value ) ) $value = esc_html__( '(empty)', 'pinboard-bookmarks' );
             $output .= '<li><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
         }
         $output .= '</ul></p>';
