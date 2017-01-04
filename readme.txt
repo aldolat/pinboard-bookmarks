@@ -3,8 +3,8 @@ Contributors: aldolat
 Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
-Tested up to: 4.7
-Stable tag: 1.0
+Tested up to: 4.8
+Stable tag: 1.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -131,8 +131,14 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
+= 1.1 =
+
+* Hardening security.
+* Various small improvements.
+
 = 1.0 =
-First release of the plugin.
+
+* First release of the plugin.
 
 == Upgrade Notice ==
 
