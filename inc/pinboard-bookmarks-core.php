@@ -161,17 +161,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                     $url = $pinboard_tag_url;
                                 }
                                 if ( $use_comma ) $comma = ','; else $comma = '';
-                                // $count and $i are used to remove the trailing comma in the last tag.
-                                $count = count( $item_tags );
-                                $i = 0;
+
                                 foreach ( $item_tags as $item_tag ) {
-                                    $i++;
-                                    // If this is the last tag, remove the comma.
-                                    if ( $i == $count ) $comma = '';
     								$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
                                 }
-                                // Removes the trailing space after the last tag.
-                                $output = trim( $output );
+                                // Removes the trailing comma and space after the last tag.
+                                $output = rtrim( $output, ', ' );
 							}
 						$output .= '</p>';
                     }
