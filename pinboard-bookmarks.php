@@ -96,12 +96,16 @@ function pinboard_bookmarks_setup() {
 }
 
 /**
- * Register the widget.
+ * Add links to plugins list line.
  *
  * @since 1.0
  */
-function pinboard_bookmarks_load_widget() {
-	register_widget( 'Pinboard_Bookmarks_Widget' );
+function pinboard_bookmarks_add_links( $links, $file ) {
+	if ( $file == plugin_basename( __FILE__ ) ) {
+		$rate_url = 'https://wordpress.org/support/plugin/' . basename( dirname( __FILE__ ) ) . '/reviews/#new-post';
+		$links[] = '<a target="_blank" href="' . $rate_url . '" title="' . esc_attr__( 'Click here to rate and review this plugin on WordPress.org', 'pinboard-bookmarks' ) . '">' . esc_html__( 'Rate this plugin', 'pinboard-bookmarks' ) . '</a>';
+	}
+	return $links;
 }
 
 /***********************************************************************

@@ -77,6 +77,15 @@ function pinboard_bookmarks_get_generated_by() {
 }
 
 /**
+ * Register the widget.
+ *
+ * @since 1.0
+ */
+function pinboard_bookmarks_load_widget() {
+	register_widget( 'Pinboard_Bookmarks_Widget' );
+}
+
+/**
  * Load the CSS file.
  * The file will be loaded only in the widgets admin page.
  *
@@ -90,19 +99,6 @@ function pinboard_bookmarks_load_scripts( $hook ) {
 	// Register and enqueue the CSS file
 	wp_register_style( 'pinboard_bookmarks_style', plugins_url( 'pinboard-bookmarks-styles.css', __FILE__ ), array(), PINBOARD_BOOKMARKS_PLUGIN_VERSION, 'all' );
 	wp_enqueue_style( 'pinboard_bookmarks_style' );
-}
-
-/**
- * Add links to plugins list line.
- *
- * @since 1.0
- */
-function pinboard_bookmarks_add_links( $links, $file ) {
-	if ( $file == plugin_basename( __FILE__ ) ) {
-		$rate_url = 'https://wordpress.org/support/plugin/' . basename( dirname( __FILE__ ) ) . '/reviews/#new-post';
-		$links[] = '<a target="_blank" href="' . $rate_url . '" title="' . esc_attr__( 'Click here to rate and review this plugin on WordPress.org', 'pinboard-bookmarks' ) . '">' . esc_html__( 'Rate this plugin', 'pinboard-bookmarks' ) . '</a>';
-	}
-	return $links;
 }
 
 /**
