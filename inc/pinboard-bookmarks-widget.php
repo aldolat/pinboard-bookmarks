@@ -53,7 +53,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		extract( $args );
 
 		$title = apply_filters( 'widget_title', $instance['title'] );
+
+        echo "\n" . '<!-- Start Pinboard Bookmarks - Widget ID: ' . $widget_id . ' -->' . "\n";
+
 		echo $before_widget;
+
 		if ( $title ) echo $before_title . $title . $after_title;
 
 		pinboard_bookmarks_fetch_feed( array(
@@ -80,6 +84,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		) );
 
 		echo $after_widget;
+
+        echo "\n" . '<!-- End Pinboard Bookmarks - Widget ID: ' . $widget_id . ' -->' . "\n\n";
 	}
 
     /**
