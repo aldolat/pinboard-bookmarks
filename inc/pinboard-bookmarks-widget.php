@@ -68,6 +68,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_desc'     => $instance['display_desc'],
 			'truncate'         => $instance['truncate'],
 			'display_date'     => $instance['display_date'],
+            'display_time'     => $instance['display_time'],
 			'date_text'        => $instance['date_text'],
 			'display_tags'     => $instance['display_tags'],
 			'tags_text'        => $instance['tags_text'],
@@ -117,6 +118,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['truncate'] = absint( strip_tags( $new_instance['truncate'] ) );
 			if ( '' == $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) $instance['truncate'] = 0;
         $instance['display_date'] = isset( $new_instance['display_date'] ) ? $new_instance['display_date'] : false;
+        $instance['display_time'] = isset( $new_instance['display_time'] ) ? $new_instance['display_time'] : false;
 		$instance['date_text'] = trim( strip_tags( $new_instance['date_text'] ) );
         $instance['display_tags'] = isset( $new_instance['display_tags'] ) ? $new_instance['display_tags'] : false;
 		$instance['tags_text'] = strip_tags( $new_instance['tags_text'] );
@@ -154,6 +156,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_desc'     => false,
 			'truncate'         => 0,
 			'display_date'     => false,
+            'display_time'     => false,
 			'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
 			'display_tags'     => false,
 			'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
@@ -173,6 +176,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$random           = (bool) $instance['random'];
 		$display_desc     = (bool) $instance['display_desc'];
 		$display_date     = (bool) $instance['display_date'];
+        $display_time     = (bool) $instance['display_time'];
 		$display_tags     = (bool) $instance['display_tags'];
 		$display_hashtag  = (bool) $instance['display_hashtag'];
         $use_comma        = (bool) $instance['use_comma'];
@@ -248,7 +252,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 checked( $random, true, false )
             );
 
-            // Time
+            // Fetching time
             pinboard_bookmarks_form_input_text(
                 esc_html__( 'Minimum time between two fetchings:', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'time' ),
@@ -288,6 +292,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_id( 'display_date' ),
                 $this->get_field_name( 'display_date' ),
                 checked( $display_date, true, false )
+            );
+
+            // Time
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Also display the time of the bookmark', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_time' ),
+                $this->get_field_name( 'display_time' ),
+                checked( $display_time, true, false )
             );
 
             // Text for the date

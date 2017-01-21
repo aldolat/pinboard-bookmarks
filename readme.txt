@@ -4,7 +4,7 @@ Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,7 @@ This is the list of the options for the shortcode:
 * `display_desc` (boolean, 1/0) - If the tag description should be displayed.
 * `truncate` (integer) - The maximum number of words the description should have.
 * `display_date` (boolean, 1/0) - If the date of the bookmark (when it was archived on Pinboard) should be displayed.
+* `display_time` (boolean, 1/0) - If the time of the bookmark (when it was archived on Pinboard) should be displayed.
 * `date_text` (string) - The text to be prepended to the date of the bookmark.
 * `display_tags` (boolean, 1/0) - If the tags should be displayed.
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
@@ -85,6 +86,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 	'display_desc'     => false,
 	'truncate'         => 0,
 	'display_date'     => false,
+	'display_time'     => false,
 	'date_text'        => 'Stored on:',
 	'display_tags'     => false,
 	'tags_text'        => 'Tags:',
@@ -130,6 +132,10 @@ This section describes how to install the plugin and get it working.
 2. An example of rendered widget
 
 == Changelog ==
+
+= 1.1 =
+
+* Added option to display the time of the bookmarks.
 
 = 1.1 =
 

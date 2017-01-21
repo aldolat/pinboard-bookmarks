@@ -25,6 +25,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_desc'     => false,
 		'truncate'         => 0,
 		'display_date'     => false,
+        'display_time'     => false,
 		'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
 		'display_tags'     => false,
 		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
@@ -136,7 +137,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 				// Date
 				if ( $display_date ) {
-					$bookmark_date = date_i18n( get_option( 'date_format' ), strtotime( esc_html( $item->get_date() ) ), false );
+                    $date = get_option( 'date_format' );
+                    if ( $display_time ) $time = ' ' . get_option( 'time_format' ); else $time = '';
+					$bookmark_date = date_i18n( $date . $time, strtotime( esc_html( $item->get_date() ) ), false );
 					$output .= '<p class="pinboard-bookmarks-list-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
 						$output .= '<a rel="bookmark" href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
