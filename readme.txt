@@ -47,7 +47,7 @@ In the widget you can use the full set of options. So, for example, if you want 
 
 `[pbsc username="johndoe" tags="books comics" display_tags=1]`
 
-Note that the the plugin will fetch bookmarks that have both the tags `books` and `comics`.
+Note that the plugin will fetch bookmarks that have both the tags `books` and `comics`.
 
 This is the list of the options for the shortcode:
 
@@ -62,20 +62,20 @@ This is the list of the options for the shortcode:
 * `date_text` (string) - The text to be prepended to the date of the bookmark.
 * `display_tags` (boolean, 1/0) - If the tags should be displayed.
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
-* `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with an hashtag (`#`),
+* `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with a hashtag (`#`),
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
 * `display_arch_arr` (boolean, 1/0) - If an HTML arrow should be appended to the archive text.
 * `new_tab` (boolean, 1/0) - If the links should be open in a new browser tab.
-* `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added the the links of the bookmark title.
+* `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added to the links of the bookmark title.
 * `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
 * `debug_urls` (boolean, 1/0) - If the URLs and the single parts, used to build them, should be displayed.
 
 = Usage as PHP function =
 
-You can also use the main PHP function directly in your theme. Add these lines where you want it be displayed (the function echoes the result):
+You can also use the main PHP function directly in your theme. Add these lines where you want it to be displayed (the function echoes the result):
 
 `if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 	$args = array(
