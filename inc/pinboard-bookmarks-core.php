@@ -81,7 +81,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         $feed_url = $pinboard_rss_user_url . $tags_for_url . '/?count=' . $quantity;
         $archive_url = $pinboard_user_url . $tags_for_url;
     } else {
-        $feed_url = $feed_url = $pinboard_rss_url . $tags_for_url . '/?count=' . $quantity;
+        $feed_url = $pinboard_rss_url . $tags_for_url . '/?count=' . $quantity;
         $archive_url = $pinboard_url . $tags_for_url;
     }
 
