@@ -4,7 +4,7 @@
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 4.8  
-**Stable tag:** 1.3  
+**Stable tag:** 1.2  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -138,15 +138,12 @@ This section describes how to install the plugin and get it working.
 
 ## Changelog ##
 
-### 1.3 ###
+### 1.2 ###
 
 * Added option to get bookmarks labeled with the source, like from:pocket
 * Added option to display debugging informations to admins only.
 * Hardening security.
-
-### 1.2 ###
-
-* Added option to display the time of the bookmarks.
+* Added option to display the time of the bookmarks.* Added option to display the time of the bookmarks.
 
 ### 1.1 ###
 
