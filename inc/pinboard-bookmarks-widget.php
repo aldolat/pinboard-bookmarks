@@ -417,7 +417,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             <?php // Admins only
             pinboard_bookmarks_form_checkbox(
-                sprintf( esc_html__( 'Display debugging informations to admins only', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                esc_html__( 'Display debugging informations to admins only', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'admin_only' ),
                 $this->get_field_name( 'admin_only' ),
                 checked( $admin_only, true, false )
@@ -425,7 +425,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             // Debugging options
             pinboard_bookmarks_form_checkbox(
-                sprintf( esc_html__( 'Display parameters', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                esc_html__( 'Display parameters', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'debug_options' ),
                 $this->get_field_name( 'debug_options' ),
                 checked( $debug_options, true, false )
@@ -433,7 +433,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             // Debugging URLs
             pinboard_bookmarks_form_checkbox(
-                sprintf( esc_html__( 'Display URLs', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                esc_html__( 'Display URLs', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'debug_urls' ),
                 $this->get_field_name( 'debug_urls' ),
                 checked( $debug_urls, true, false )
