@@ -34,18 +34,18 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
             // Pinboard accepts maximum 3 tags for a single query
             $tags_slice = array_slice( $tags, 0, 3 );
             foreach ( $tags_slice as $tag ) {
-                $tags_for_url .= '/t:' . $tag;
+                $tags_for_url .= 't:' . $tag;
             }
         } else {
             // We have 2 or 3 tags
             foreach ( $tags as $tag ) {
-                $tags_for_url .= '/t:' . $tag;
+                $tags_for_url .= 't:' . $tag;
             }
         }
     } else {
         // We have 1 tag only
         $tags = implode( ' ', $tags );
-        $tags_for_url = '/t:' . $tags;
+        $tags_for_url = 't:' . $tags;
     }
 
     return $tags_for_url;
