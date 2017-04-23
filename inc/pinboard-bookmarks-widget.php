@@ -80,6 +80,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arch_arr' => $instance['display_arch_arr'],
 			'new_tab'          => $instance['new_tab'],
 			'nofollow'         => $instance['nofollow'],
+            'admin_only'       => $instance['admin_only'],
             'debug_options'    => $instance['debug_options'],
             'debug_urls'       => $instance['debug_urls']
 		) );
@@ -133,6 +134,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['display_arch_arr'] = isset ( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
         $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
 		$instance['nofollow'] = isset ( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
+		$instance['admin_only'] = isset ( $new_instance['admin_only'] ) ? $new_instance['admin_only'] : false;
         $instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
         $instance['debug_urls'] = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
 
@@ -169,6 +171,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arch_arr' => true,
 			'new_tab'          => false,
 			'nofollow'         => true,
+			'admin_only'       => true,
             'debug_options'    => false,
             'debug_urls'       => false,
 		);
@@ -185,6 +188,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$display_arch_arr = (bool) $instance['display_arch_arr'];
 		$new_tab          = (bool) $instance['new_tab'];
 		$nofollow         = (bool) $instance['nofollow'];
+		$admin_only       = (bool) $instance['admin_only'];
         $debug_options    = (bool) $instance['debug_options'];
         $debug_urls       = (bool) $instance['debug_urls'];
 		?>
@@ -409,9 +413,17 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             <p><?php printf( __( 'You are using Pinboard Bookmarks version %s.', 'pinboard-bookmarks' ), '<strong>' . PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</strong>' ); ?></p>
 
-            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only. Only the Administrator can view the debugging informations.', 'pinboard-bookmarks' ); ?></strong></p>
+            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only.', 'pinboard-bookmarks' ); ?></strong></p>
 
-            <?php // Debugging options
+            <?php // Admins only
+            pinboard_bookmarks_form_checkbox(
+                sprintf( esc_html__( 'Display debugging informations to admins only', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                $this->get_field_id( 'admin_only' ),
+                $this->get_field_name( 'admin_only' ),
+                checked( $admin_only, true, false )
+            );
+
+            // Debugging options
             pinboard_bookmarks_form_checkbox(
                 sprintf( esc_html__( 'Display parameters', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
                 $this->get_field_id( 'debug_options' ),

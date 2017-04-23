@@ -37,6 +37,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+        'admin_only'       => true,
         'debug_options'    => false,
         'debug_urls'       => false
 	);
@@ -193,21 +194,19 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	}
 
     // The debugging informations.
-    if ( current_user_can( 'activate_plugins' ) ) { // This is the Administrator
-        if ( $debug_options || $debug_urls ) {
-            $params = array(
-                'debug_options' => $debug_options,
-                'debug_urls'    => $debug_urls,
-                'options'       => $args,
-                'urls'          => array(
-                    'username_part'     => $username,
-                    'tags_part'         => $tags_for_url,
-                    'complete_feed_url' => $feed_url,
-                    'archive_url'       => $archive_url
-                ),
-            );
-            $output .= pinboard_bookmarks_debug( $params );
-        }
+    if ( $debug_options || $debug_urls ) {
+        $params = array(
+            'debug_options' => $debug_options,
+            'debug_urls'    => $debug_urls,
+            'options'       => $args,
+            'urls'          => array(
+                'username_part'     => $username,
+                'tags_part'         => $tags_for_url,
+                'complete_feed_url' => $feed_url,
+                'archive_url'       => $archive_url
+            ),
+        );
+        $output .= pinboard_bookmarks_debug( $params );
     }
 
     // Add a HTML comment with plugin name and version.
