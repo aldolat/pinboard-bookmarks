@@ -61,18 +61,18 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     if ( '' == $quantity )  $quantity      = 5;
 
     // Set up the Pinboard URLs.
-    $pinboard_url                 = 'https://pinboard.in';
-    $pinboard_tag_url             = $pinboard_url . '/t:';
+    $pinboard_url                 = trailingslashit( 'https://pinboard.in' );
+    $pinboard_tag_url             = $pinboard_url . 't:';
 
     // Set up the user URLs on Pinboard.
-    $pinboard_user_url            = $pinboard_url . '/u:' . $username;
-    $pinboard_user_tag_url        = $pinboard_user_url . '/t:';
-    $pinboard_user_source_url     = $pinboard_user_url . '/from:';
+    $pinboard_user_url            = trailingslashit( $pinboard_url . 'u:' . $username );
+    $pinboard_user_tag_url        = $pinboard_user_url . 't:';
+    $pinboard_user_source_url     = $pinboard_user_url . 'from:';
 
     // Set up the Pinboard RSS URLs.
-    $pinboard_rss_url             = 'https://feeds.pinboard.in/rss';
-    $pinboard_rss_user_url        = $pinboard_rss_url . '/u:' . $username;
-    $pinboard_rss_user_source_url = $pinboard_rss_user_url . '/from:';
+    $pinboard_rss_url             = trailingslashit( 'https://feeds.pinboard.in/rss' );
+    $pinboard_rss_user_url        = trailingslashit( $pinboard_rss_url . 'u:' . $username );
+    $pinboard_rss_user_source_url = $pinboard_rss_user_url . 'from:';
 
     // Build the tags list.
     if ( $tags ) {
@@ -83,15 +83,15 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // Build the RSS and archive URLs.
     if ( $username ) {
-        $feed_url = $pinboard_rss_user_url . $tags_for_url . '/?count=' . $quantity;
-        $archive_url = $pinboard_user_url . $tags_for_url;
+        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+        $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
         if ( $source ) {
-            $feed_url = $pinboard_rss_user_source_url . $source . '/?count=' . $quantity;
-            $archive_url = $pinboard_user_source_url . $source;
+            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+            $archive_url = trailingslashit( $pinboard_user_source_url . $source );
         }
     } else {
-        $feed_url = $pinboard_rss_url . $tags_for_url . '/?count=' . $quantity;
-        $archive_url = $pinboard_url . $tags_for_url;
+        $feed_url = trailingslashit( $pinboard_rss_url . $tags_for_url ) . '?count=' . $quantity;
+        $archive_url = trailingslashit( $pinboard_url . $tags_for_url );
     }
 
     // Grab the feed from Pinboard.
@@ -172,7 +172,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                         // The tags are returned in a space-separated string format. Let's convert it into an array.
                         $item_tags = (array) explode( ' ', $item_tags );
                         foreach ( $item_tags as $item_tag ) {
-							$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
+							$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( trailingslashit( $url . strtolower( $item_tag ) ) ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
                         }
                         // Removes the trailing comma and space in any quantity and any order after the last tag.
                         $output = rtrim( $output, ', ' );
