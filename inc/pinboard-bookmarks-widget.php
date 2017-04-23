@@ -63,6 +63,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		pinboard_bookmarks_fetch_feed( array(
 			'username'         => $instance['username'],
             'tags'             => $instance['tags'],
+            'source'           => $instance['source'],
 			'quantity'         => $instance['quantity'],
 			'random'           => $instance['random'],
 			'display_desc'     => $instance['display_desc'],
@@ -111,6 +112,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $tags = array_slice( $tags, 0, 3 );
                 $instance['tags'] = implode( ' ', $tags );
             }
+		$instance['source'] = strip_tags( $new_instance['source'] );
 		$instance['quantity'] = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
@@ -153,6 +155,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
 			'username'         => '',
             'tags'             => '',
+            'source'           => '',
 			'quantity'         => 5,
 			'random'           => false,
 			'display_desc'     => false,
@@ -236,6 +239,34 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_attr( $instance['tags'] ),
                 esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
                 esc_html__( 'Enter a space separated list of tags, up to 3 tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
+            );
+
+            // Source
+            $options = array(
+                'none' => array(
+                    'value' => 'none',
+                    'desc'  => esc_html__( 'None', 'pinboard-bookmarks' )
+                ),
+                'pocket' => array(
+                    'value' => 'pocket',
+                    'desc'  => esc_html__( 'Pocket', 'pinboard-bookmarks' )
+                ),
+                'instapaper' => array(
+                    'value' => 'instapaper',
+                    'desc'  => esc_html__( 'Instapaper', 'pinboard-bookmarks' )
+                ),
+                'twitter' => array(
+                    'value' => 'twitter',
+                    'desc'  => esc_html__( 'Twitter', 'pinboard-bookmarks' )
+                ),
+            );
+            pinboard_bookmarks_form_select(
+                esc_html__( 'Set the source of the bookmarks', 'pinboard-bookmarks' ),
+                $this->get_field_id('source'),
+                $this->get_field_name('source'),
+                $options,
+                $instance['source'],
+                sprintf( esc_html__( 'Select the source of the bookmarks, like %s. Since Pinboard accepts tags or a source, the tags from the field above will be ignored if you activate this option.', 'pinboard-bookmarks' ), '<code>from:pocket</code>' )
             );
 
             // Number of items
