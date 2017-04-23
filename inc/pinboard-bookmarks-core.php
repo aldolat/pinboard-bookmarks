@@ -118,7 +118,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 				$output .= '<p class="pinboard-bookmarks-list-title">';
 					$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '" title="' . esc_attr( $title_attr ) . '"' . $new_tab_link . '>';
-						$output .= $item->get_title() . $arrow;
+						$output .= esc_html( $item->get_title() ) . $arrow;
 					$output .= '</a>';
 				$output .= '</p>';
 
@@ -156,7 +156,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 							if ( $tags_text ) $output .= $tags_text . ' ';
 							if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
 							foreach( $tags_list as $tag ) {
-                                $item_tags = $tag->get_label();
+                                $item_tags = esc_html( $tag->get_label() );
                                 $item_tags = (array) explode( ' ', $item_tags );
                                 if ( $username ) {
                                     $url = $pinboard_user_tag_url;

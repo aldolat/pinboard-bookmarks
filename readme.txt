@@ -135,7 +135,7 @@ This section describes how to install the plugin and get it working.
 
 = 1.3 =
 
-* 
+* Hardening security.
 
 = 1.2 =
 
