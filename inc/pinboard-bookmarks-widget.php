@@ -244,7 +244,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
             // Source
             $options = array(
                 'none' => array(
-                    'value' => 'none',
+                    'value' => '',
                     'desc'  => esc_html__( 'None', 'pinboard-bookmarks' )
                 ),
                 'pocket' => array(
@@ -261,7 +261,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 ),
             );
             pinboard_bookmarks_form_select(
-                esc_html__( 'Set the source of the bookmarks', 'pinboard-bookmarks' ),
+                esc_html__( 'Source of the bookmarks', 'pinboard-bookmarks' ),
                 $this->get_field_id('source'),
                 $this->get_field_name('source'),
                 $options,
@@ -347,7 +347,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'A space will be added after the text.', 'pinboard-bookmarks' )
             ); ?>
 
-            <h4><?php esc_html_e( 'Tags of the bookmark', 'pinboard-bookmarks' ); ?></h4>
+            <h4><?php esc_html_e( 'Tags and source of the bookmark', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Tags

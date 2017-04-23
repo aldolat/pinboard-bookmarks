@@ -20,7 +20,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
 		'username'         => '',
         'tags'             => '',
-        'source'           => '', // This is the source option in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
+        'source'           => '', // This is the source in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -158,24 +158,27 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					$output .= '</p>';
 				}
 
-				// Tags
+                // Tags
 				if ( $display_tags ) {
-					$tags_list = $item->get_category();
+					$tags_list = (array) $item->get_categories();
                     if ( $tags_list ) {
 						$output .= '<p class="pinboard-bookmarks-list-tags">';
+
 						if ( $tags_text ) $output .= $tags_text . ' ';
 						if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
                         if ( $username ) $url = $pinboard_user_tag_url; else $url = $pinboard_tag_url;
                         if ( $use_comma ) $comma = ','; else $comma = '';
-                        // Get the tags (terms) of the bookmarks
-                        $item_tags = esc_html( $tags_list->get_term() );
-                        // The tags are returned in a space-separated string format. Let's convert it into an array.
-                        $item_tags = (array) explode( ' ', $item_tags );
-                        foreach ( $item_tags as $item_tag ) {
-							$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( trailingslashit( $url . strtolower( $item_tag ) ) ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
-                        }
-                        // Removes the trailing comma and space in any quantity and any order after the last tag.
-                        $output = rtrim( $output, ', ' );
+
+						foreach( $tags_list as $tag ) {
+                            $item_tags = $tag->get_label();
+                            $item_tags = (array) explode( ' ', $item_tags );
+                            foreach ( $item_tags as $item_tag ) {
+								$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
+                            }
+                            // Removes the trailing comma and space in any quantity and any order after the last tag.
+                            $output = rtrim( $output, ', ' );
+						}
+
 						$output .= '</p>';
                     }
 				}
