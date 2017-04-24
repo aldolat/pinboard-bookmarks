@@ -224,7 +224,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                 'username_part'     => $username,
                 'tags_part'         => $tags_for_url,
                 'complete_feed_url' => $feed_url,
-                'archive_url'       => $archive_url
+                'archive_url'       => $archive_url,
+                'items_retrieved'   => $maxitems,
             ),
         );
         $output .= pinboard_bookmarks_debug( $params );
