@@ -78,6 +78,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arrow'    => $instance['display_arrow'],
 			'display_archive'  => $instance['display_archive'],
 			'archive_text'     => $instance['archive_text'],
+			'list_type'        => $instance['list_type'],
 			'display_arch_arr' => $instance['display_arch_arr'],
 			'new_tab'          => $instance['new_tab'],
 			'nofollow'         => $instance['nofollow'],
@@ -133,6 +134,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			if ( 1800 > $instance['time'] ) $instance['time'] = 1800;
 		$instance['display_archive'] = isset( $new_instance['display_archive'] ) ? $new_instance['display_archive'] : false;
 		$instance['archive_text'] = strip_tags( $new_instance['archive_text'] );
+		$instance['list_type'] = strip_tags( $new_instance['list_type'] );
 		$instance['display_arch_arr'] = isset ( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
         $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
 		$instance['nofollow'] = isset ( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
@@ -171,6 +173,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'time'             => 1800,
 			'display_archive'  => true,
 			'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
+            'list_type'        => 'bullet',
 			'display_arch_arr' => true,
 			'new_tab'          => false,
 			'nofollow'         => true,
@@ -415,6 +418,25 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
             <h4><?php esc_html_e( 'Other options', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
+            // Type of list
+            $options = array(
+                'bullet' => array(
+                    'value' => 'bullet',
+                    'desc'  => esc_html__( 'Unordered list', 'pinboard-bookmarks' )
+                ),
+                'number' => array(
+                    'value' => 'number',
+                    'desc'  => esc_html__( 'Ordered list', 'pinboard-bookmarks' )
+                ),
+            );
+            pinboard_bookmarks_form_select(
+                esc_html__( 'Use this type of list', 'pinboard-bookmarks' ),
+                $this->get_field_id('list_type'),
+                $this->get_field_name('list_type'),
+                $options,
+                $instance['list_type']
+            );
+
             // Arrow
             pinboard_bookmarks_form_checkbox(
                 esc_html__( 'Display an arrow after each title', 'pinboard-bookmarks' ),

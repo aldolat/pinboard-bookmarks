@@ -35,6 +35,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
+        'list_type'        => 'bullet',
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
@@ -101,7 +102,20 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
 
     // Start building the $output variable.
-	$output = '<ul class="pinboard-bookmarks-list">';
+    switch  ( $list_type ) {
+        case 'bullet' :
+            $list_element = 'ul';
+            break;
+
+        case 'number' :
+            $list_element = 'ol';
+            break;
+
+        default :
+            $list_element = 'ul';
+            break;
+    }
+	$output = '<' . $list_element . ' class="pinboard-bookmarks-list">';
 
 	if ( is_wp_error( $rss ) ) {
 		$output .= '<li class="pinboard-bookmarks-list-li error">';
@@ -188,7 +202,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		}
 	}
 
-	$output .= '</ul>';
+	$output .= '</' . $list_element . '>';
 
     // The archive link.
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
