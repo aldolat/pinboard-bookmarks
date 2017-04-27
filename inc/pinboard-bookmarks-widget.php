@@ -459,7 +459,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_id( 'nofollow' ),
                 $this->get_field_name( 'nofollow' ),
                 checked( $nofollow, true, false ),
-                __( 'It will be added only to the link in titles, not in tag links too.', 'pinboard-bookmarks' )
+                __( 'It will be added to all external links.', 'pinboard-bookmarks' )
             ); ?>
 
             <h4><?php esc_html_e( 'Debug options', 'pinboard-bookmarks' ); ?></h4>

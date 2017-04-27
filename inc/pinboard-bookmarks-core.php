@@ -168,7 +168,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					$bookmark_date = date_i18n( $date . $time, strtotime( esc_html( $item->get_date() ) ), false );
 					$output .= '<p class="pinboard-bookmarks-list-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a rel="bookmark" href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
+						$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
 							$output .= $bookmark_date;
 						$output .= '</a>';
 					$output .= '</p>';
@@ -189,7 +189,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                             $item_tags = $tag->get_label();
                             $item_tags = (array) explode( ' ', $item_tags );
                             foreach ( $item_tags as $item_tag ) {
-								$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
+								$output .= $hashtag . '<a' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
                             }
                             // Removes the trailing comma and space in any quantity and any order after the last tag.
                             $output = rtrim( $output, ', ' );
@@ -210,7 +210,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
 		if ( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
 		$output .= '<p class="pinboard-bookmarks-list-more">';
-			$output .= '<a href="' . esc_url( $archive_url ) . '"' .  $new_tab_link . '>';
+			$output .= '<a' . $rel_txt . ' href="' . esc_url( $archive_url ) . '"' .  $new_tab_link . '>';
 				$output .= esc_html( $archive_text . $arrow );
 			$output .= '</a>';
 		$output .= '</p>';
