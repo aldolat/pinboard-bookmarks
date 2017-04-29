@@ -133,16 +133,16 @@ This section describes how to install the plugin and get it working.
 
 == Changelog ==
 
-
 = 1.2 =
 
 * Added "no-follow" option to all external links.
 * Added the number of retrieved items in debug section.
 * Added option to select the type of list (bullet or numeric list).
-* Added option to get bookmarks labeled with the source, like from:pocket
+* Added option to get bookmarks labeled with the source, like `from:pocket`.
 * Added option to display debugging informations to admins only.
-* Hardening security.
 * Added option to display the time of the bookmarks.
+* Changed capabilities for viewing debug informations.
+* Hardening security.
 
 = 1.1 =
 
