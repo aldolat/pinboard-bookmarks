@@ -4,7 +4,7 @@ Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 1.3
+Stable tag: 1.4-dev
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -31,7 +31,7 @@ The plugin may display for each tag (you choose what to display):
 
 After the plugin's activation, you will have a new widget in Appearance / Widgets.
 
-= Usage as widget =Skip it_IT, translations below threshold (82%).
+= Usage as widget =
 
 The plugin provides a widget to be used in your sidebar. After activating the plugin, you will have a new widget in Appearance > Widgets. Simply drag & drop the "Pinboard Bookmarks" widget in the sidebar, adjust the options, and click Save.
 
@@ -63,7 +63,7 @@ This is the list of the options for the shortcode:
 * `date_text` (string) - The text to be prepended to the date of the bookmark.
 * `display_tags` (boolean, 1/0) - If the tags should be displayed.
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
-* `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with a hashtag (`#`),
+* `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with a hashtag (`#`).
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
@@ -71,14 +71,14 @@ This is the list of the options for the shortcode:
 * `list_type` (string) - The type of list to be used.
 * `display_arch_arr` (boolean, 1/0) - If an HTML arrow should be appended to the archive text.
 * `new_tab` (boolean, 1/0) - If the links should be open in a new browser tab.
-* `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added to the links of the bookmark title.
+* `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added to the external links.
 * `admin_only` (boolean, 1/0) - If the debug should be displayed to Administrators only.
 * `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
 * `debug_urls` (boolean, 1/0) - If the URLs and the single parts, used to build them, should be displayed.
 
 = Usage as PHP function =
 
-You can also use the main PHP function directly in your theme. Add these lines where you want it to be displayed (the function echoes the result):
+You can also use the main PHP function directly in your theme. Add these lines where you want them to be displayed (the function echoes the result):
 
 `if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 	$args = array(
@@ -138,6 +138,10 @@ This section describes how to install the plugin and get it working.
 2. An example of rendered widget
 
 == Changelog ==
+
+= 1.4-dev =
+
+*
 
 = 1.3 =
 
