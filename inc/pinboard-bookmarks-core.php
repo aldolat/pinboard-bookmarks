@@ -20,6 +20,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
 		'username'         => '',
         'tags'             => '',
+        'source'           => '', // This is the source in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -34,9 +35,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
+        'list_type'        => 'bullet',
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+        'admin_only'       => true,
         'debug_options'    => false,
         'debug_urls'       => false
 	);
@@ -59,14 +62,18 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     if ( '' == $quantity )  $quantity      = 5;
 
     // Set up the Pinboard URLs.
-    $pinboard_url          = 'https://pinboard.in';
-    $pinboard_rss_url      = 'https://feeds.pinboard.in/rss';
-    $pinboard_tag_url      = $pinboard_url . '/t:';
+    $pinboard_url                 = trailingslashit( 'https://pinboard.in' );
+    $pinboard_tag_url             = $pinboard_url . 't:';
 
     // Set up the user URLs on Pinboard.
-    $pinboard_user_url     = $pinboard_url . '/u:' . $username;
-    $pinboard_rss_user_url = $pinboard_rss_url . '/u:' . $username;
-    $pinboard_user_tag_url = $pinboard_user_url . '/t:';
+    $pinboard_user_url            = trailingslashit( $pinboard_url . 'u:' . $username );
+    $pinboard_user_tag_url        = $pinboard_user_url . 't:';
+    $pinboard_user_source_url     = $pinboard_user_url . 'from:';
+
+    // Set up the Pinboard RSS URLs.
+    $pinboard_rss_url             = trailingslashit( 'https://feeds.pinboard.in/rss' );
+    $pinboard_rss_user_url        = trailingslashit( $pinboard_rss_url . 'u:' . $username );
+    $pinboard_rss_user_source_url = $pinboard_rss_user_url . 'from:';
 
     // Build the tags list.
     if ( $tags ) {
@@ -75,13 +82,17 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         $tags_for_url = '';
     }
 
-    // Build the RSS url.
+    // Build the RSS and archive URLs.
     if ( $username ) {
-        $feed_url = $pinboard_rss_user_url . $tags_for_url . '/?count=' . $quantity;
-        $archive_url = $pinboard_user_url . $tags_for_url;
+        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+        $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
+        if ( $source ) {
+            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+            $archive_url = trailingslashit( $pinboard_user_source_url . $source );
+        }
     } else {
-        $feed_url = $feed_url = $pinboard_rss_url . $tags_for_url . '/?count=' . $quantity;
-        $archive_url = $pinboard_url . $tags_for_url;
+        $feed_url = trailingslashit( $pinboard_rss_url . $tags_for_url ) . '?count=' . $quantity;
+        $archive_url = trailingslashit( $pinboard_url . $tags_for_url );
     }
 
     // Grab the feed from Pinboard.
@@ -91,7 +102,20 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
 
     // Start building the $output variable.
-	$output = '<ul class="pinboard-bookmarks-list">';
+    switch  ( $list_type ) {
+        case 'bullet' :
+            $list_element = 'ul';
+            break;
+
+        case 'number' :
+            $list_element = 'ol';
+            break;
+
+        default :
+            $list_element = 'ul';
+            break;
+    }
+	$output = '<' . $list_element . ' class="pinboard-bookmarks-list">';
 
 	if ( is_wp_error( $rss ) ) {
 		$output .= '<li class="pinboard-bookmarks-list-li error">';
@@ -102,7 +126,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	}
 
 	if ( $quantity > 400 ) $quantity = 400;
+    // Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
 	$maxitems  = $rss->get_item_quantity( $quantity );
+    // Get the items from 0 to $maxitems.
 	$rss_items = $rss->get_items( 0, $maxitems );
 	if ( $maxitems == 0 ) {
 		$output .= '<li class="pinboard-bookmarks-list-li">';
@@ -118,7 +144,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 				$output .= '<p class="pinboard-bookmarks-list-title">';
 					$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '" title="' . esc_attr( $title_attr ) . '"' . $new_tab_link . '>';
-						$output .= $item->get_title() . $arrow;
+						$output .= esc_html( $item->get_title() ) . $arrow;
 					$output .= '</a>';
 				$output .= '</p>';
 
@@ -142,35 +168,33 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					$bookmark_date = date_i18n( $date . $time, strtotime( esc_html( $item->get_date() ) ), false );
 					$output .= '<p class="pinboard-bookmarks-list-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a rel="bookmark" href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
+						$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
 							$output .= $bookmark_date;
 						$output .= '</a>';
 					$output .= '</p>';
 				}
 
-				// Tags
+                // Tags
 				if ( $display_tags ) {
 					$tags_list = (array) $item->get_categories();
                     if ( $tags_list ) {
 						$output .= '<p class="pinboard-bookmarks-list-tags">';
-							if ( $tags_text ) $output .= $tags_text . ' ';
-							if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
-							foreach( $tags_list as $tag ) {
-                                $item_tags = $tag->get_label();
-                                $item_tags = (array) explode( ' ', $item_tags );
-                                if ( $username ) {
-                                    $url = $pinboard_user_tag_url;
-                                } else {
-                                    $url = $pinboard_tag_url;
-                                }
-                                if ( $use_comma ) $comma = ','; else $comma = '';
 
-                                foreach ( $item_tags as $item_tag ) {
-    								$output .= $hashtag . '<a rel="bookmark" href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
-                                }
-                                // Removes the trailing comma and space in any quantity and any order after the last tag.
-                                $output = rtrim( $output, ', ' );
-							}
+						if ( $tags_text ) $output .= $tags_text . ' ';
+						if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
+                        if ( $username ) $url = $pinboard_user_tag_url; else $url = $pinboard_tag_url;
+                        if ( $use_comma ) $comma = ','; else $comma = '';
+
+						foreach( $tags_list as $tag ) {
+                            $item_tags = $tag->get_label();
+                            $item_tags = (array) explode( ' ', $item_tags );
+                            foreach ( $item_tags as $item_tag ) {
+								$output .= $hashtag . '<a' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
+                            }
+                            // Removes the trailing comma and space in any quantity and any order after the last tag.
+                            $output = rtrim( $output, ', ' );
+						}
+
 						$output .= '</p>';
                     }
 				}
@@ -180,34 +204,33 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		}
 	}
 
-	$output .= '</ul>';
+	$output .= '</' . $list_element . '>';
 
     // The archive link.
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
 		if ( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
 		$output .= '<p class="pinboard-bookmarks-list-more">';
-			$output .= '<a href="' . esc_url( $archive_url ) . '"' .  $new_tab_link . '>';
+			$output .= '<a' . $rel_txt . ' href="' . esc_url( $archive_url ) . '"' .  $new_tab_link . '>';
 				$output .= esc_html( $archive_text . $arrow );
 			$output .= '</a>';
 		$output .= '</p>';
 	}
 
     // The debugging informations.
-    if ( current_user_can( 'activate_plugins' ) ) { // This is the Administrator
-        if ( $debug_options || $debug_urls ) {
-            $params = array(
-                'debug_options' => $debug_options,
-                'debug_urls'    => $debug_urls,
-                'options'       => $args,
-                'urls'          => array(
-                    'username_part'     => $username,
-                    'tags_part'         => $tags_for_url,
-                    'complete_feed_url' => $feed_url,
-                    'archive_url'       => $archive_url
-                ),
-            );
-            $output .= pinboard_bookmarks_debug( $params );
-        }
+    if ( $debug_options || $debug_urls ) {
+        $params = array(
+            'debug_options' => $debug_options,
+            'debug_urls'    => $debug_urls,
+            'options'       => $args,
+            'urls'          => array(
+                'username_part'     => $username,
+                'tags_part'         => $tags_for_url,
+                'complete_feed_url' => $feed_url,
+                'archive_url'       => $archive_url,
+                'items_retrieved'   => $maxitems,
+            ),
+        );
+        $output .= pinboard_bookmarks_debug( $params );
     }
 
     // Add a HTML comment with plugin name and version.

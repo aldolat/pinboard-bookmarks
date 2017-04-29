@@ -63,6 +63,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		pinboard_bookmarks_fetch_feed( array(
 			'username'         => $instance['username'],
             'tags'             => $instance['tags'],
+            'source'           => $instance['source'],
 			'quantity'         => $instance['quantity'],
 			'random'           => $instance['random'],
 			'display_desc'     => $instance['display_desc'],
@@ -77,9 +78,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arrow'    => $instance['display_arrow'],
 			'display_archive'  => $instance['display_archive'],
 			'archive_text'     => $instance['archive_text'],
+			'list_type'        => $instance['list_type'],
 			'display_arch_arr' => $instance['display_arch_arr'],
 			'new_tab'          => $instance['new_tab'],
 			'nofollow'         => $instance['nofollow'],
+            'admin_only'       => $instance['admin_only'],
             'debug_options'    => $instance['debug_options'],
             'debug_urls'       => $instance['debug_urls']
 		) );
@@ -110,6 +113,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $tags = array_slice( $tags, 0, 3 );
                 $instance['tags'] = implode( ' ', $tags );
             }
+		$instance['source'] = strip_tags( $new_instance['source'] );
 		$instance['quantity'] = absint( strip_tags( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
@@ -130,9 +134,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			if ( 1800 > $instance['time'] ) $instance['time'] = 1800;
 		$instance['display_archive'] = isset( $new_instance['display_archive'] ) ? $new_instance['display_archive'] : false;
 		$instance['archive_text'] = strip_tags( $new_instance['archive_text'] );
+		$instance['list_type'] = strip_tags( $new_instance['list_type'] );
 		$instance['display_arch_arr'] = isset ( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
         $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
 		$instance['nofollow'] = isset ( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
+		$instance['admin_only'] = isset ( $new_instance['admin_only'] ) ? $new_instance['admin_only'] : false;
         $instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
         $instance['debug_urls'] = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
 
@@ -151,6 +157,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
 			'username'         => '',
             'tags'             => '',
+            'source'           => '',
 			'quantity'         => 5,
 			'random'           => false,
 			'display_desc'     => false,
@@ -166,9 +173,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'time'             => 1800,
 			'display_archive'  => true,
 			'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
+            'list_type'        => 'bullet',
 			'display_arch_arr' => true,
 			'new_tab'          => false,
 			'nofollow'         => true,
+			'admin_only'       => true,
             'debug_options'    => false,
             'debug_urls'       => false,
 		);
@@ -185,6 +194,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$display_arch_arr = (bool) $instance['display_arch_arr'];
 		$new_tab          = (bool) $instance['new_tab'];
 		$nofollow         = (bool) $instance['nofollow'];
+		$admin_only       = (bool) $instance['admin_only'];
         $debug_options    = (bool) $instance['debug_options'];
         $debug_urls       = (bool) $instance['debug_urls'];
 		?>
@@ -232,6 +242,34 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_attr( $instance['tags'] ),
                 esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
                 esc_html__( 'Enter a space separated list of tags, up to 3 tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
+            );
+
+            // Source
+            $options = array(
+                'none' => array(
+                    'value' => '',
+                    'desc'  => esc_html__( 'None', 'pinboard-bookmarks' )
+                ),
+                'pocket' => array(
+                    'value' => 'pocket',
+                    'desc'  => esc_html__( 'Pocket', 'pinboard-bookmarks' )
+                ),
+                'instapaper' => array(
+                    'value' => 'instapaper',
+                    'desc'  => esc_html__( 'Instapaper', 'pinboard-bookmarks' )
+                ),
+                'twitter' => array(
+                    'value' => 'twitter',
+                    'desc'  => esc_html__( 'Twitter', 'pinboard-bookmarks' )
+                ),
+            );
+            pinboard_bookmarks_form_select(
+                esc_html__( 'Source of the bookmarks', 'pinboard-bookmarks' ),
+                $this->get_field_id('source'),
+                $this->get_field_name('source'),
+                $options,
+                $instance['source'],
+                sprintf( esc_html__( 'Select the source of the bookmarks, like %s. Since Pinboard accepts tags or a source, the tags from the field above will be ignored if you activate this option.', 'pinboard-bookmarks' ), '<code>from:pocket</code>' )
             );
 
             // Number of items
@@ -312,7 +350,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 esc_html__( 'A space will be added after the text.', 'pinboard-bookmarks' )
             ); ?>
 
-            <h4><?php esc_html_e( 'Tags of the bookmark', 'pinboard-bookmarks' ); ?></h4>
+            <h4><?php esc_html_e( 'Tags and source of the bookmark', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
             // Tags
@@ -380,6 +418,25 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
             <h4><?php esc_html_e( 'Other options', 'pinboard-bookmarks' ); ?></h4>
 
             <?php
+            // Type of list
+            $options = array(
+                'bullet' => array(
+                    'value' => 'bullet',
+                    'desc'  => esc_html__( 'Unordered list', 'pinboard-bookmarks' )
+                ),
+                'number' => array(
+                    'value' => 'number',
+                    'desc'  => esc_html__( 'Ordered list', 'pinboard-bookmarks' )
+                ),
+            );
+            pinboard_bookmarks_form_select(
+                esc_html__( 'Use this type of list', 'pinboard-bookmarks' ),
+                $this->get_field_id('list_type'),
+                $this->get_field_name('list_type'),
+                $options,
+                $instance['list_type']
+            );
+
             // Arrow
             pinboard_bookmarks_form_checkbox(
                 esc_html__( 'Display an arrow after each title', 'pinboard-bookmarks' ),
@@ -402,18 +459,26 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_id( 'nofollow' ),
                 $this->get_field_name( 'nofollow' ),
                 checked( $nofollow, true, false ),
-                __( 'It will be added only to the link in titles, not in tag links too.', 'pinboard-bookmarks' )
+                __( 'It will be added to all external links.', 'pinboard-bookmarks' )
             ); ?>
 
             <h4><?php esc_html_e( 'Debug options', 'pinboard-bookmarks' ); ?></h4>
 
             <p><?php printf( __( 'You are using Pinboard Bookmarks version %s.', 'pinboard-bookmarks' ), '<strong>' . PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</strong>' ); ?></p>
 
-            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only. Only the Administrator can view the debugging informations.', 'pinboard-bookmarks' ); ?></strong></p>
+            <p class="pinboard-bookmarks-alert"><strong><?php _e( 'Use this options for debugging purposes only.', 'pinboard-bookmarks' ); ?></strong></p>
 
-            <?php // Debugging options
+            <?php // Admins only
             pinboard_bookmarks_form_checkbox(
-                sprintf( esc_html__( 'Display parameters', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                esc_html__( 'Display debugging informations to admins only', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'admin_only' ),
+                $this->get_field_name( 'admin_only' ),
+                checked( $admin_only, true, false )
+            );
+
+            // Debugging options
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display parameters', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'debug_options' ),
                 $this->get_field_name( 'debug_options' ),
                 checked( $debug_options, true, false )
@@ -421,7 +486,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             // Debugging URLs
             pinboard_bookmarks_form_checkbox(
-                sprintf( esc_html__( 'Display URLs', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+                esc_html__( 'Display URLs', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'debug_urls' ),
                 $this->get_field_name( 'debug_urls' ),
                 checked( $debug_urls, true, false )

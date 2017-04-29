@@ -34,18 +34,18 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
             // Pinboard accepts maximum 3 tags for a single query
             $tags_slice = array_slice( $tags, 0, 3 );
             foreach ( $tags_slice as $tag ) {
-                $tags_for_url .= '/t:' . $tag;
+                $tags_for_url .= 't:' . $tag;
             }
         } else {
             // We have 2 or 3 tags
             foreach ( $tags as $tag ) {
-                $tags_for_url .= '/t:' . $tag;
+                $tags_for_url .= 't:' . $tag;
             }
         }
     } else {
         // We have 1 tag only
         $tags = implode( ' ', $tags );
-        $tags_for_url = '/t:' . $tags;
+        $tags_for_url = 't:' . $tags;
     }
 
     return $tags_for_url;
@@ -107,6 +107,7 @@ function pinboard_bookmarks_load_scripts( $hook ) {
  * @param array $args {
  *      The array containing the custom parameters.
  *
+ *      @type boolean $admin_only    If the administrators only can view the debugging informations.
  *      @type boolean $debug_options If display the parameters of the widget.
  *      @type boolean $debug_urls    If display the URLS and the parts used to build them.
  *      @type array   $options       The parameters of the widget.
@@ -117,6 +118,7 @@ function pinboard_bookmarks_load_scripts( $hook ) {
  */
 function pinboard_bookmarks_debug( $args ) {
     $defaults = array (
+        'admin_only'    => true,
         'debug_options' => false,
         'debug_urls'    => false,
 		'options'       => '',
@@ -159,5 +161,18 @@ function pinboard_bookmarks_debug( $args ) {
         $output .= '</ul></p>';
     }
 
-    return $output;
+    /**
+	 * If display debugging informations to admins only.
+	 *
+	 * @since 1.3
+	 */
+	if ( $admin_only ) {
+		if ( current_user_can( 'create_users' ) ) {
+			return $output;
+		} else {
+			return '';
+		}
+	} else {
+		return $output;
+	}
 }
