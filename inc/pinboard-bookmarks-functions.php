@@ -167,7 +167,7 @@ function pinboard_bookmarks_debug( $args ) {
 	 * @since 1.3
 	 */
 	if ( $admin_only ) {
-		if ( current_user_can( 'activate_plugins' ) ) {
+		if ( current_user_can( 'create_users' ) ) {
 			return $output;
 		} else {
 			return '';
