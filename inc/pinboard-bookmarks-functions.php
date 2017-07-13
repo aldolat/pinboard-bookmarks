@@ -25,6 +25,7 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     // Replace all the occurrences of comma and space in any mix and quantity with a single space.
     $tags = trim( preg_replace( '([\s,]+)', ' ', $tags ) );
 
+    $tags = strtolower( $tags );
     $tags = explode( ' ', $tags );
     $number_of_tags = count( $tags );
 
