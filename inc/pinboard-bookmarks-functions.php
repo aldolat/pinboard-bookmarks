@@ -29,10 +29,10 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     $number_of_tags = count( $tags );
 
     if ( 1 < $number_of_tags ) {
-        // We have more than 3 tags
-        if ( 3 < $number_of_tags ) {
-            // Pinboard accepts maximum 3 tags for a single query
-            $tags_slice = array_slice( $tags, 0, 3 );
+        // We have more than 4 tags
+        if ( 4 < $number_of_tags ) {
+            // Pinboard accepts maximum 4 tags for a single query
+            $tags_slice = array_slice( $tags, 0, 4 );
             foreach ( $tags_slice as $tag ) {
                 $tags_for_url .= 't:' . $tag . '/';
             }
