@@ -147,6 +147,7 @@ This section describes how to install the plugin and get it working.
 ### 1.4 ###
 
 * Display the source of the bookmarks, if activated.
+* Fix time display: now the plugin displays correctly the seconds.
 
 ### 1.3 ###
 
