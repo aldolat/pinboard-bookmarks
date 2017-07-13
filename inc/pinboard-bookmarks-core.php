@@ -32,6 +32,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 		'display_hashtag'  => true,
         'use_comma'        => false,
+        'display_source'   => false,
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
@@ -143,7 +144,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				$title_attr = sprintf( esc_html__( 'Read &laquo;%s&raquo;', 'pinboard-bookmarks' ), $item->get_title() );
 
 				$output .= '<p class="pinboard-bookmarks-list-title">';
-					$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '" title="' . esc_attr( $title_attr ) . '"' . $new_tab_link . '>';
+					$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
 						$output .= esc_html( $item->get_title() ) . $arrow;
 					$output .= '</a>';
 				$output .= '</p>';
@@ -168,7 +169,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					$bookmark_date = date_i18n( $date . $time, strtotime( esc_html( $item->get_date() ) ), false );
 					$output .= '<p class="pinboard-bookmarks-list-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '" title="' . esc_attr__( 'Go to the bookmark stored on Pinboard.', 'pinboard-bookmarks' ) . '"' . $new_tab_link . '>';
+						$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
 							$output .= $bookmark_date;
 						$output .= '</a>';
 					$output .= '</p>';
@@ -183,17 +184,26 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 						if ( $tags_text ) $output .= $tags_text . ' ';
 						if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
                         if ( $username ) $url = $pinboard_user_tag_url; else $url = $pinboard_tag_url;
-                        if ( $use_comma ) $comma = ','; else $comma = '';
+                        if ( $use_comma ) $comma = ', '; else $comma = ' ';
 
 						foreach( $tags_list as $tag ) {
                             $item_tags = $tag->get_label();
                             $item_tags = (array) explode( ' ', $item_tags );
                             foreach ( $item_tags as $item_tag ) {
-								$output .= $hashtag . '<a' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '" title="' . esc_attr( sprintf( esc_html__( 'View the tag %s on Pinboard', 'pinboard-bookmarks' ), $hashtag . $item_tag ) ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma . ' ';
+								$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma;
                             }
                             // Removes the trailing comma and space in any quantity and any order after the last tag.
                             $output = rtrim( $output, ', ' );
 						}
+
+                        /*
+                         * Append the source of the bookmark, like Pocket, Instapaper, Twitter.
+                         *
+                         * @since 1.4
+                         */
+                        if ( $display_source && ! empty( $source ) ) {
+                            $output .= $comma . '<a class="pinboard-bookmarks-source" href="' . $archive_url . '"> from ' . ucfirst( $source ) . '</a>';
+                        }
 
 						$output .= '</p>';
                     }

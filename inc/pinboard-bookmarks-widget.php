@@ -75,6 +75,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'tags_text'        => $instance['tags_text'],
 			'display_hashtag'  => $instance['display_hashtag'],
             'use_comma'        => $instance['use_comma'],
+            'display_source'   => $instance['display_source'],
 			'display_arrow'    => $instance['display_arrow'],
 			'display_archive'  => $instance['display_archive'],
 			'archive_text'     => $instance['archive_text'],
@@ -128,6 +129,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['tags_text'] = strip_tags( $new_instance['tags_text'] );
 		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? $new_instance['display_hashtag'] : false;
         $instance['use_comma'] = isset( $new_instance['use_comma'] ) ? $new_instance['use_comma'] : false;
+        $instance['display_source'] = isset( $new_instance['display_source'] ) ? $new_instance['display_source'] : false;
         $instance['display_arrow'] = isset( $new_instance['display_arrow'] ) ? $new_instance['display_arrow'] : false;
 		$instance['time'] = absint( strip_tags( $new_instance['time'] ) );
 			if ( '' == $instance['time'] || ! is_numeric( $instance['time'] ) ) $instance['time'] = 1800;
@@ -169,6 +171,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 			'display_hashtag'  => true,
             'use_comma'        => false,
+            'display_source'   => false,
 			'display_arrow'    => false,
 			'time'             => 1800,
 			'display_archive'  => true,
@@ -189,6 +192,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$display_tags     = (bool) $instance['display_tags'];
 		$display_hashtag  = (bool) $instance['display_hashtag'];
         $use_comma        = (bool) $instance['use_comma'];
+        $display_source   = (bool) $instance['display_source'];
 		$display_arrow    = (bool) $instance['display_arrow'];
 		$display_archive  = (bool) $instance['display_archive'];
 		$display_arch_arr = (bool) $instance['display_arch_arr'];
@@ -385,7 +389,16 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_id( 'use_comma' ),
                 $this->get_field_name( 'use_comma' ),
                 checked( $use_comma, true, false )
-            ); ?>
+            );
+
+            // Display source
+            pinboard_bookmarks_form_checkbox(
+                esc_html__( 'Display the source of the bookmark', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'display_source' ),
+                $this->get_field_name( 'display_source' ),
+                checked( $display_source, true, false )
+            );
+            ?>
 
             <h4><?php esc_html_e( 'Link to the archive', 'pinboard-bookmarks' ); ?></h4>
 
