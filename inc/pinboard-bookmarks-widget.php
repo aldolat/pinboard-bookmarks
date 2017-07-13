@@ -106,7 +106,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = (array) $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
-        $instance['username'] = strip_tags( $new_instance['username'] );
+        $instance['username'] = preg_replace( '([^a-zA-Z0-9\-_])', '', strip_tags( $new_instance['username'] ) );
         $instance['tags'] = strip_tags( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
             $tags = explode( ' ', $instance['tags'] );
