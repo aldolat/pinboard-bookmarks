@@ -233,7 +233,16 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
 		if ( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
 		$output .= '<p class="pinboard-bookmarks-list-more">';
-			$output .= '<a' . $rel_txt . ' href="' . esc_url( $archive_url ) . '"' .  $new_tab_link . '>';
+            if ( $maxitems == 0 ) {
+                if ( $username ) {
+                    $url_to_archive = $pinboard_user_url;
+                } else {
+                    $url_to_archive = $pinboard_url;
+                }
+            } else {
+                $url_to_archive = $archive_url;
+            }
+			$output .= '<a' . $rel_txt . ' href="' . esc_url( $url_to_archive ) . '"' .  $new_tab_link . '>';
 				$output .= esc_html( $archive_text . $arrow );
 			$output .= '</a>';
 		$output .= '</p>';
