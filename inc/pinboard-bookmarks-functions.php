@@ -29,24 +29,23 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     $tags = explode( ' ', $tags );
     $number_of_tags = count( $tags );
 
-    if ( 1 < $number_of_tags ) {
-        // We have more than 4 tags
-        if ( 4 < $number_of_tags ) {
-            // Pinboard accepts maximum 4 tags for a single query
-            $tags_slice = array_slice( $tags, 0, 4 );
-            foreach ( $tags_slice as $tag ) {
-                $tags_for_url .= 't:' . $tag . '/';
-            }
-        } else {
-            // We have 2 or 3 tags
-            foreach ( $tags as $tag ) {
-                $tags_for_url .= 't:' . $tag . '/';
-            }
-        }
-    } else {
-        // We have 1 tag only
+    // Figure out how many tags we have.
+    if ( 1 == $number_of_tags ) {
+        // We have 1 tag only.
         $tags = implode( ' ', $tags );
         $tags_for_url = 't:' . $tags;
+    } else if ( 4 >= $number_of_tags ) {
+        // We have 2, 3, or 4 tags.
+        foreach ( $tags as $tag ) {
+            $tags_for_url .= 't:' . $tag . '/';
+        }
+    } else {
+        // We have more than 4 tags.
+        // In this case we have to reduce them to 4, since Pinboard accepts maximum 4 tags for a single query.
+        $tags_slice = array_slice( $tags, 0, 4 );
+        foreach ( $tags_slice as $tag ) {
+            $tags_for_url .= 't:' . $tag . '/';
+        }
     }
 
     return $tags_for_url;

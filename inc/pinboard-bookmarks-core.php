@@ -128,7 +128,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	if ( $quantity > 400 ) $quantity = 400;
     // Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
-	$maxitems  = $rss->get_item_quantity( $quantity );
+	$maxitems = $rss->get_item_quantity( $quantity );
     // Get the items from 0 to $maxitems.
 	$rss_items = $rss->get_items( 0, $maxitems );
 	if ( $maxitems == 0 ) {
