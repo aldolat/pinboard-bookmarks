@@ -135,7 +135,7 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf( esc_html__( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
 		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '</li>' );
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'WP version: %s', 'pinboard-bookmarks' ), $wp_version . '</li>' );
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'WordPress version: %s', 'pinboard-bookmarks' ), $wp_version . '</li>' );
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>' );
 		$output .= '</ul>';
 	}
