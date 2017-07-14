@@ -36,6 +36,7 @@ function pinboard_bookmarks_sc( $atts ) {
 		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 		'display_hashtag'  => true,
         'use_comma'        => false,
+        'display_source'   => false,
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
