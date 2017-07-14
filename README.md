@@ -65,6 +65,7 @@ This is the list of the options for the shortcode:
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
 * `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with a hashtag (`#`).
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
+* `display_source` (boolean, 1/0) - If the source should be displayed.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
@@ -97,6 +98,7 @@ if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 		'tags_text'        => 'Tags:',
 		'display_hashtag'  => true,
 		'use_comma'        => false,
+		'display_source'   => false,
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => 'See the bookmarks on Pinboard',
