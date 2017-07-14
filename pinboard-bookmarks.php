@@ -5,7 +5,7 @@
  * Plugin URI: http://dev.aldolat.it/projects/pinboard-bookmarks/
  * Author: Aldo Latino
  * Author URI: http://www.aldolat.it/
- * Version: 1.4-dev
+ * Version: 1.4.0
  * License: GPLv3 or later
  * Text Domain: pinboard-bookmarks
  * Domain Path: /languages/
@@ -48,7 +48,7 @@ function pinboard_bookmarks_setup() {
 	/*
 	 * Define the version of the plugin.
 	 */
-	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.4-dev' );
+	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.4.0' );
 
 	/*
 	 * Load the translation.
@@ -103,7 +103,7 @@ function pinboard_bookmarks_setup() {
 function pinboard_bookmarks_add_links( $links, $file ) {
 	if ( $file == plugin_basename( __FILE__ ) ) {
 		$rate_url = 'https://wordpress.org/support/plugin/' . basename( dirname( __FILE__ ) ) . '/reviews/#new-post';
-		$links[] = '<a target="_blank" href="' . $rate_url . '" title="' . esc_attr__( 'Click here to rate and review this plugin on WordPress.org', 'pinboard-bookmarks' ) . '">' . esc_html__( 'Rate this plugin', 'pinboard-bookmarks' ) . '</a>';
+		$links[] = '<a target="_blank" href="' . $rate_url . '">' . esc_html__( 'Rate this plugin', 'pinboard-bookmarks' ) . '</a>';
 	}
 	return $links;
 }

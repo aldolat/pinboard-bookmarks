@@ -4,7 +4,7 @@
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 4.8  
-**Stable tag:** 1.4-dev  
+**Stable tag:** 1.4.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -15,7 +15,7 @@ Publish Pinboard bookmarks on your WordPress blog.
 Pinboard Bookmarks allows you to publish bookmarks from Pinboard on your blog. The plugin lets you:
 
 * retrieve the bookmarks from your account (or any account) on Pinboard;
-* retrieve the bookmarks from one or more tags of your account (ar any account);
+* retrieve the bookmarks from one or more tags of your account (or any account);
 * retrieve the latest bookmarks from Pinboard using one or more tags.
 
 This plugin has also a shortcode, so you can publish the bookmarks in a post or a page.
@@ -144,9 +144,15 @@ This section describes how to install the plugin and get it working.
 
 ## Changelog ##
 
-### 1.4-dev ###
+### 1.4.0 ###
 
-*
+* Display the source of the bookmarks, if activated.
+* Fix time display: now the plugin displays correctly the seconds.
+* Fix URL when using more than 1 tag.
+* Display a different URL to the archive in different cases.
+* Improve control for username.
+* Changed some class names.
+* Minor fixes.
 
 ### 1.3 ###
 
