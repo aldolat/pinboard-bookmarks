@@ -106,12 +106,12 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = (array) $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
-        $instance['username'] = strip_tags( $new_instance['username'] );
+        $instance['username'] = preg_replace( '([^a-zA-Z0-9\-_])', '', strip_tags( $new_instance['username'] ) );
         $instance['tags'] = strip_tags( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
             $tags = explode( ' ', $instance['tags'] );
-            if ( 3 < count( $tags ) ) {
-                $tags = array_slice( $tags, 0, 3 );
+            if ( 4 < count( $tags ) ) {
+                $tags = array_slice( $tags, 0, 4 );
                 $instance['tags'] = implode( ' ', $tags );
             }
 		$instance['source'] = strip_tags( $new_instance['source'] );
@@ -245,7 +245,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_name( 'tags' ),
                 esc_attr( $instance['tags'] ),
                 esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
-                esc_html__( 'Enter a space separated list of tags, up to 3 tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
+                esc_html__( 'Enter a space separated list of tags, up to 4 tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
             );
 
             // Source

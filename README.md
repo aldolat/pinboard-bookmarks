@@ -148,6 +148,11 @@ This section describes how to install the plugin and get it working.
 
 * Display the source of the bookmarks, if activated.
 * Fix time display: now the plugin displays correctly the seconds.
+* Fix URL when using more than 1 tag.
+* Display a different URL to the archive in different cases.
+* Improve control for username.
+* Changed some class names.
+* Minor fixes.
 
 ### 1.3 ###
 
