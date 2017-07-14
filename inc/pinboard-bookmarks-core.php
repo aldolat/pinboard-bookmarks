@@ -56,9 +56,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     }
 
     // Set up some variables.
-    if ( $display_arrow )   $arrow         = '&nbsp;&rarr;';             else $arrow        = '';
-    if ( $new_tab )         $new_tab_link  = ' target="_blank"';         else $new_tab_link = '';
-    if ( $nofollow )        $rel_txt       = ' rel="bookmark nofollow"'; else $rel_txt      = ' rel="bookmark"';
+    if ( $display_arrow )   $arrow         = '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'; else $arrow        = '';
+    if ( $new_tab )         $new_tab_link  = ' target="_blank"';                                           else $new_tab_link = '';
+    if ( $nofollow )        $rel_txt       = ' rel="bookmark nofollow"';                                   else $rel_txt      = ' rel="bookmark"';
     if ( 400 < $quantity )  $quantity      = 400;
     if ( '' == $quantity )  $quantity      = 5;
 
@@ -119,7 +119,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$output = '<' . $list_element . ' class="pinboard-bookmarks-list">';
 
 	if ( is_wp_error( $rss ) ) {
-		$output .= '<li class="pinboard-bookmarks-list-li error">';
+		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-error">';
 			$output .= sprintf( esc_html__( 'There was a problem with your feed! The error is %s', 'pinboard-bookmarks' ), '<code>' . $rss->get_error_message() . '</code>' );
 		$output .= '</li>';
         $output .= '</ul>';
@@ -132,19 +132,19 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     // Get the items from 0 to $maxitems.
 	$rss_items = $rss->get_items( 0, $maxitems );
 	if ( $maxitems == 0 ) {
-		$output .= '<li class="pinboard-bookmarks-list-li">';
+		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
 			$output .= esc_html__( 'No items.', 'pinboard-bookmarks' );
 		$output .= '</li>';
 	} else {
 		if ( $random ) shuffle( $rss_items );
 		foreach ( $rss_items as $item ) {
-			$output .= '<li class="pinboard-bookmarks-list-li">';
+			$output .= '<li class="pinboard-bookmarks-li">';
 
 				// Title
 				$title_attr = sprintf( esc_html__( 'Read &laquo;%s&raquo;', 'pinboard-bookmarks' ), $item->get_title() );
 
-				$output .= '<p class="pinboard-bookmarks-list-title">';
-					$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
+				$output .= '<p class="pinboard-bookmarks-title">';
+					$output .= '<a class="pinboard-bookmarks-title-link"' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
 						$output .= esc_html( $item->get_title() ) . $arrow;
 					$output .= '</a>';
 				$output .= '</p>';
@@ -153,11 +153,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				if ( $display_desc ) {
 					if ( $item->get_description() ) {
 						if ( $truncate > 0 ) {
-							$output .= '<p  class="pinboard-bookmarks-list-desc">';
+							$output .= '<p class="pinboard-bookmarks-desc">';
 								$output .= wp_trim_words( esc_html( $item->get_description() ), $truncate, '&hellip;' );
 							$output .= '</p>';
 						} else {
-							$output .= '<p  class="pinboard-bookmarks-list-desc">' . esc_html( $item->get_description() ) . '</p>';
+							$output .= '<p class="pinboard-bookmarks-desc">' . esc_html( $item->get_description() ) . '</p>';
 						}
 					}
 				}
@@ -180,9 +180,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                     // Get the final date and time of the item
 					$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
                     // Build the final HTML
-					$output .= '<p class="pinboard-bookmarks-list-date">';
+					$output .= '<p class="pinboard-bookmarks-date">';
 						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
+						$output .= '<a class="pinboard-bookmarks-date-link"' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
 							$output .= $bookmark_date;
 						$output .= '</a>';
 					$output .= '</p>';
@@ -192,10 +192,10 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				if ( $display_tags ) {
 					$tags_list = (array) $item->get_categories();
                     if ( $tags_list ) {
-						$output .= '<p class="pinboard-bookmarks-list-tags">';
+						$output .= '<p class="pinboard-bookmarks-tags">';
 
 						if ( $tags_text ) $output .= $tags_text . ' ';
-						if ( $display_hashtag ) $hashtag = '#'; else $hashtag = '';
+						if ( $display_hashtag ) $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>'; else $hashtag = '';
                         if ( $username ) $url = $pinboard_user_tag_url; else $url = $pinboard_tag_url;
                         if ( $use_comma ) $comma = ', '; else $comma = ' ';
 
@@ -203,7 +203,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                             $item_tags = $tag->get_label();
                             $item_tags = (array) explode( ' ', $item_tags );
                             foreach ( $item_tags as $item_tag ) {
-								$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>'. $comma;
+								$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>' . $comma;
                             }
                             // Removes the trailing comma and space in any quantity and any order after the last tag.
                             $output = rtrim( $output, ', ' );
@@ -231,8 +231,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // The archive link.
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
-		if ( $display_arch_arr ) $arrow = '&nbsp;&rarr;'; else $arrow = '';
-		$output .= '<p class="pinboard-bookmarks-list-more">';
+		if ( $display_arch_arr ) $arrow = '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'; else $arrow = '';
+		$output .= '<p class="pinboard-bookmarks-archive">';
             if ( $maxitems == 0 ) {
                 if ( $username ) {
                     $url_to_archive = $pinboard_user_url;
@@ -242,8 +242,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
             } else {
                 $url_to_archive = $archive_url;
             }
-			$output .= '<a' . $rel_txt . ' href="' . esc_url( $url_to_archive ) . '"' .  $new_tab_link . '>';
-				$output .= esc_html( $archive_text . $arrow );
+			$output .= '<a class="pinboard-bookmarks-archive-link"' . $rel_txt . ' href="' . esc_url( $url_to_archive ) . '"' .  $new_tab_link . '>';
+				$output .= esc_html( $archive_text ) . $arrow;
 			$output .= '</a>';
 		$output .= '</p>';
 	}
