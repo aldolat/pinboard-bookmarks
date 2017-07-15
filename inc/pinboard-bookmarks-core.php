@@ -212,8 +212,33 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                          *
                          * @since 1.4
                          */
-                        if ( $display_source && ! empty( $source ) ) {
-                            $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $archive_url . '">from ' . ucfirst( $source ) . '</a>';
+                        if ( $display_source ) {
+                            if ( $source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' ) ) {
+                                $source_service = $source_service[0]['data'];
+                                switch ( $source_service ) {
+                                    case 'http://readitlater.com/':
+                                        $source_name = 'Pocket';
+                                        $source_address = $pinboard_user_source_url . 'pocket';
+                                        break;
+                                    case 'http://instapaper.com/':
+                                        $source_name = 'Instapaper';
+                                        $source_address = $pinboard_user_source_url . 'instapaper';
+                                        break;
+                                    // Twitter has not been tested
+                                    case 'http://twitter.com/':
+                                        $source_name = 'Twitter';
+                                        $source_address = $pinboard_user_source_url . 'twitter';
+                                        break;
+                                    // In some cases the source is Pinboard itself, so do not display it (also see some line below).
+                                    case 'http://pinboard.in/':
+                                        $source_name = 'Pinboard';
+                                        $source_address = $pinboard_user_source_url . 'pinboard';
+                                        break;
+                                }
+                                if ( 'Pinboard' != $source_name ) {
+                                    $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '">from ' . $source_name . '</a>';
+                                }
+                            }
                         }
 
 						$output .= '</p>';
