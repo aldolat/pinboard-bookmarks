@@ -213,7 +213,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                          * @since 1.4
                          */
                         if ( $display_source && ! empty( $source ) ) {
-                            $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $archive_url . '"> from ' . ucfirst( $source ) . '</a>';
+                            $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $archive_url . '">from ' . ucfirst( $source ) . '</a>';
                         }
 
 						$output .= '</p>';
