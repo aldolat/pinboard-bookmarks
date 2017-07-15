@@ -141,8 +141,6 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			$output .= '<li class="pinboard-bookmarks-li">';
 
 				// Title
-				$title_attr = sprintf( esc_html__( 'Read &laquo;%s&raquo;', 'pinboard-bookmarks' ), $item->get_title() );
-
 				$output .= '<p class="pinboard-bookmarks-title">';
 					$output .= '<a class="pinboard-bookmarks-title-link"' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
 						$output .= esc_html( $item->get_title() ) . $arrow;
