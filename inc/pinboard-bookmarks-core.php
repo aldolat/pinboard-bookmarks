@@ -48,12 +48,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
-    // If a username or a tag has not been entered, stop the function and give an alert.
-    if ( ! $username && ! $tags ) {
-        echo '<p class="pinboard-bookmarks error">';
-        esc_html_e( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
-        echo '</p>';
-        return;
+    // If both $username and $tags are empty, stop the function and give an alert.
+    if ( empty( $username ) && empty( $tags ) ) {
+        $output_error  = '<p class="pinboard-bookmarks pinboard-bookmarks-error">';
+        $output_error .= esc_html__( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
+        $output_error .= '</p>';
+        return $output_error;
     }
 
     // Set up some variables.
