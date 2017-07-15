@@ -4,7 +4,7 @@ Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
 Tested up to: 4.8
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,7 @@ This is the list of the options for the shortcode:
 * `tags_text` (string) - The text to be prepended to the tags of the bookmark.
 * `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with a hashtag (`#`).
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
+* `display_source` (boolean, 1/0) - If the source should be displayed.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
@@ -96,6 +97,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 		'tags_text'        => 'Tags:',
 		'display_hashtag'  => true,
 		'use_comma'        => false,
+		'display_source'   => false,
 		'display_arrow'    => false,
 		'display_archive'  => true,
 		'archive_text'     => 'See the bookmarks on Pinboard',
@@ -138,6 +140,11 @@ This section describes how to install the plugin and get it working.
 2. An example of rendered widget
 
 == Changelog ==
+
+= 1.5.0 =
+
+* Display the source of the bookmark, even if a source has not been defined in the widget admin.
+* Minor fixes.
 
 = 1.4.0 =
 
