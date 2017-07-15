@@ -148,7 +148,8 @@ This section describes how to install the plugin and get it working.
 
 ### 1.5.0 ###
 
-* 
+* Display the source of the bookmark, even if a source has not been defined in the widget admin.
+* Minor fixes.
 
 ### 1.4.0 ###
 
