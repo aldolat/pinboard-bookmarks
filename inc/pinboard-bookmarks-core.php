@@ -237,12 +237,30 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                         $source_name = 'Instapaper';
                                         $source_address = $pinboard_user_source_url . 'instapaper';
                                         break;
-                                    // Twitter has not been tested
-                                    case 'http://twitter.com/':
-                                        $source_name = 'Twitter';
-                                        $source_address = $pinboard_user_source_url . 'twitter';
-                                        break;
-                                    // In some cases the source is Pinboard itself, so do not display it (also see some line below).
+                                    /**
+                                     * Remove support for Twitter.
+                                     * Pinboard lets you fetch your tweets that:
+                                     * - have a link inside;
+                                     * - you liked and have a link inside.
+                                     * Pinboard then adds a "tag" depending on the type of tweet:
+                                     * `from twitter` (the first case) or `from twitter_favs` (the second one).
+                                     * So in Pinboard you have two separate pages for these bookmarks:
+                                     * - https://pinboard.in/u:username/from:twitter
+                                     * - https://pinboard.in/u:username/from:twitter_favs
+                                     * The problem is that, when Pinboard creates the RSS feed,
+                                     * there is no way to distinguish the first tweets from the second ones.
+                                     * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
+                                     * In this situation we cannot link to the correct page.
+                                     *
+                                     * Code removed:
+                                     * case 'http://twitter.com/':
+                                     *    $source_name = 'Twitter';
+                                     *    $source_address = $pinboard_user_source_url . 'twitter';
+                                     *    break;
+                                     *
+                                     * @since 1.6.0
+                                     */
+                                    // In some cases the source is Pinboard itself, so do not display it (also see some lines below).
                                     case 'http://pinboard.in/':
                                         $source_name = 'Pinboard';
                                         $source_address = $pinboard_user_source_url . 'pinboard';

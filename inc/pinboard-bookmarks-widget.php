@@ -276,10 +276,17 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                     'value' => 'instapaper',
                     'desc'  => esc_html__( 'Instapaper', 'pinboard-bookmarks' )
                 ),
-                'twitter' => array(
-                    'value' => 'twitter',
-                    'desc'  => esc_html__( 'Twitter', 'pinboard-bookmarks' )
-                ),
+                /**
+                 * Remove support for Twitter.
+                 *
+                 * The code was:
+                 * 'twitter' => array(
+                 *     'value' => 'twitter',
+                 *     'desc'  => esc_html__( 'Twitter', 'pinboard-bookmarks' )
+                 * ),
+                 *
+                 * @since 1.6.0
+                 */
             );
             pinboard_bookmarks_form_select(
                 esc_html__( 'Source of the bookmarks', 'pinboard-bookmarks' ),
