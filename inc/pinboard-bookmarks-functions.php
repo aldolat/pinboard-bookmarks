@@ -131,6 +131,7 @@ function pinboard_bookmarks_debug( $args ) {
 
     if ( $debug_options || $debug_urls ) {
 		global $wp_version;
+        $output .= '<div class="pinboard-bookmarks-debug-group">';
 		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf( esc_html__( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
 		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '</li>' );
@@ -157,6 +158,10 @@ function pinboard_bookmarks_debug( $args ) {
             $output .= '<li class="pinboard-bookmarks-debug-li"><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
         }
         $output .= '</ul>';
+    }
+
+    if ( $debug_options || $debug_urls ) {
+        $output .= '</div>';
     }
 
     /**
