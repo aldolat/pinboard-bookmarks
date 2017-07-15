@@ -61,6 +61,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		if ( $title ) echo $before_title . $title . $after_title;
 
 		pinboard_bookmarks_fetch_feed( array(
+			'intro_text'       => $instance['intro_text'],
 			'username'         => $instance['username'],
             'tags'             => $instance['tags'],
             'source'           => $instance['source'],
@@ -106,6 +107,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = (array) $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['intro_text'] = wp_kses_post( $new_instance['intro_text'] );
         $instance['username'] = preg_replace( '([^a-zA-Z0-9\-_])', '', strip_tags( $new_instance['username'] ) );
         $instance['tags'] = strip_tags( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
@@ -157,6 +159,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	public function form( $instance ) {
 		$defaults = array(
 			'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
+			'intro_text'       => '',
 			'username'         => '',
             'tags'             => '',
             'source'           => '',
@@ -217,14 +220,25 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             <h4><?php esc_html_e( 'Title of the widget', 'pinboard-bookmarks' ); ?></h4>
 
-            <?php
-            // Title
+            <?php // Title
             pinboard_bookmarks_form_input_text(
                 esc_html__( 'Title:', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'title' ),
                 $this->get_field_name( 'title' ),
                 esc_attr( $instance['title'] ),
                 esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' )
+            ); ?>
+
+            <h4><?php esc_html_e( 'Introductory text', 'pinboard-bookmarks' ); ?></h4>
+
+            <?php // Introductory text
+            pinboard_bookmarks_form_textarea(
+                esc_html__( 'Place this text after the title', 'pinboard-bookmarks' ),
+                $this->get_field_id('intro_text'),
+                $this->get_field_name('intro_text'),
+                $instance['intro_text'],
+                esc_html__( 'These are my bookmarks on Pinboard about Italian recipes.', 'pinboard-bookmarks' ),
+                $style = 'resize: vertical; width: 100%; height: 80px;'
             ); ?>
 
             <h4><?php esc_html_e( 'Basic Setup', 'pinboard-bookmarks' ); ?></h4>
