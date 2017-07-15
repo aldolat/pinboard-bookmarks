@@ -18,6 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
+        'intro_text'       => '',
 		'username'         => '',
         'tags'             => '',
         'source'           => '', // This is the source in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
@@ -102,6 +103,18 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     $rss = fetch_feed( esc_url( $feed_url ) );
 	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
 
+    /*
+	 * Define the main variable that will concatenate all the output.
+	 *
+	 * @since 1.6.0
+	 */
+	$output = '';
+
+    // The introductory text
+    if ( $intro_text ) {
+        $output .= '<p class="pinboard-bookmarks-intro-text">' . $intro_text . '</p>';
+    }
+
     // Start building the $output variable.
     switch  ( $list_type ) {
         case 'bullet' :
@@ -116,7 +129,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
             $list_element = 'ul';
             break;
     }
-	$output = '<' . $list_element . ' class="pinboard-bookmarks-list">';
+	$output .= '<' . $list_element . ' class="pinboard-bookmarks-list">';
 
 	if ( is_wp_error( $rss ) ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-error">';
