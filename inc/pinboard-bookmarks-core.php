@@ -10,18 +10,49 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The core function.
- * It retrieves the feed and display the content.
+ * It retrieves the feed and displays the content.
  *
  * @since 1.0
- * @param mixed $args Variables to customize the output of the function
- * @return mixed
+ * @param  array  $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type string  $intro_text       The introductory text for the widget.
+ *      @type string  $username         The username on Pinboard.
+ *      @type string  $tags             The tags where to get bookmarks from.
+ *      @type boolean $source           The Pinboard 'source' where to get bookmarks from.
+ *                                      Default empty. Accepts 'pocket', 'instapaper'.
+ *      @type integer $quantity         The nmber of bookmarks to fetch.
+ *      @type boolean $random           If fetched bookmarks should be displayed in random order.
+ *      @type boolean $display_desc     If the description of the bookmark should be displayed.
+ *      @type integer $truncate         Truncate the description of the bookmark at this words number.
+ *      @type boolean $display_date     If the date of the bookmarks should be displayed.
+ *      @type boolean $display_time     If the time of the bookmarks should be displayed.
+ *      @type string  $date_text        The text to be prepended before the date/time.
+ *      @type boolean $display_tags     If the tags of the bookmarks should be displayed.
+ *      @type boolean $tags_text        The text to be prepended before the tags.
+ *      @type boolean $display_hashtag  If the hashtag `#` should be displayed.
+ *      @type boolean $use_comma        If a comma should be displayed between tags.
+ *      @type boolean $display_source   If the source of the bookrmark should be displayed.
+ *      @type boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
+ *      @type boolean $display_archive  If the link to the archive on Pinboard should be displayed.
+ *      @type boolean $archive_text     The text to be prepended before the archive link.
+ *      @type boolean $list_type        The HTML list type. Default 'bullet' (ul). Accepts 'numbered' (ol).
+ *      @type boolean $display_arch_arr If an HTML arrow should be displayed after the archive link.
+ *      @type boolean $new_tab          If links should be opened ina new browser tab.
+ *      @type boolean $nofollow         If a 'nofollow' attribute should be added in links.
+ *      @type boolean $admin_only       If administrators only can view the debug.
+ *      @type boolean $debug_options    If debug informations should be displayed.
+ *      @type boolean $debug_urls       If URLs used by the plugin should be displayed for debug.
+ * }
+ * @return string $output The HTML structure to be displayed on the page
  */
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
+        // 'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ), /* FOR WIDGET ONLY */
         'intro_text'       => '',
 		'username'         => '',
         'tags'             => '',
-        'source'           => '', // This is the source in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
+        'source'           => '', // This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -35,6 +66,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         'use_comma'        => false,
         'display_source'   => false,
 		'display_arrow'    => false,
+        // 'time'             => 1800, /* FOR WIDGET ONLY */
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
         'list_type'        => 'bullet',

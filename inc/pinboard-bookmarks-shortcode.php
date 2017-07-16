@@ -22,9 +22,11 @@
  */
 function pinboard_bookmarks_sc( $atts ) {
 	extract( shortcode_atts( array(
+        // 'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ), /* FOR WIDGET ONLY */
+        'intro_text'       => '',
         'username'         => '',
         'tags'             => '',
-        'source'           => '', // This is the source in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
+        'source'           => '', // This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -38,6 +40,7 @@ function pinboard_bookmarks_sc( $atts ) {
         'use_comma'        => false,
         'display_source'   => false,
 		'display_arrow'    => false,
+        // 'time'             => 1800, /* FOR WIDGET ONLY */
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
         'list_type'        => 'bullet',
