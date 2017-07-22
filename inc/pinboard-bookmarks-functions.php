@@ -20,7 +20,7 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     $tags_for_url = '';
 
     // Sanitize $tags
-    $tags = strip_tags( $tags );
+    $tags = sanitize_text_field( $tags );
 
     // Replace all the occurrences of comma and space in any mix and quantity with a single space.
     $tags = trim( preg_replace( '([\s,]+)', ' ', $tags ) );

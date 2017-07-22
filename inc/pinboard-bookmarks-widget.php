@@ -106,39 +106,39 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = (array) $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['intro_text'] = wp_kses_post( $new_instance['intro_text'] );
-        $instance['username'] = preg_replace( '([^a-zA-Z0-9\-_])', '', strip_tags( $new_instance['username'] ) );
-        $instance['tags'] = strip_tags( $new_instance['tags'] );
+        $instance['username'] = preg_replace( '([^a-zA-Z0-9\-_])', '', sanitize_text_field( $new_instance['username'] ) );
+        $instance['tags'] = sanitize_text_field( $new_instance['tags'] );
             $instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
             $tags = explode( ' ', $instance['tags'] );
             if ( 4 < count( $tags ) ) {
                 $tags = array_slice( $tags, 0, 4 );
                 $instance['tags'] = implode( ' ', $tags );
             }
-		$instance['source'] = strip_tags( $new_instance['source'] );
-		$instance['quantity'] = absint( strip_tags( $new_instance['quantity'] ) );
+		$instance['source'] = sanitize_text_field( $new_instance['source'] );
+		$instance['quantity'] = absint( sanitize_text_field( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
 			if ( 400 < $instance['quantity'] ) $instance['quantity'] = 400;
         $instance['random'] = isset( $new_instance['random'] ) ? $new_instance['random'] : false;
         $instance['display_desc'] = isset( $new_instance['display_desc'] ) ? $new_instance['display_desc'] : false;
-		$instance['truncate'] = absint( strip_tags( $new_instance['truncate'] ) );
+		$instance['truncate'] = absint( sanitize_text_field( $new_instance['truncate'] ) );
 			if ( '' == $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) $instance['truncate'] = 0;
         $instance['display_date'] = isset( $new_instance['display_date'] ) ? $new_instance['display_date'] : false;
         $instance['display_time'] = isset( $new_instance['display_time'] ) ? $new_instance['display_time'] : false;
-		$instance['date_text'] = trim( strip_tags( $new_instance['date_text'] ) );
+		$instance['date_text'] = trim( sanitize_text_field( $new_instance['date_text'] ) );
         $instance['display_tags'] = isset( $new_instance['display_tags'] ) ? $new_instance['display_tags'] : false;
-		$instance['tags_text'] = strip_tags( $new_instance['tags_text'] );
+		$instance['tags_text'] = sanitize_text_field( $new_instance['tags_text'] );
 		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? $new_instance['display_hashtag'] : false;
         $instance['use_comma'] = isset( $new_instance['use_comma'] ) ? $new_instance['use_comma'] : false;
         $instance['display_source'] = isset( $new_instance['display_source'] ) ? $new_instance['display_source'] : false;
         $instance['display_arrow'] = isset( $new_instance['display_arrow'] ) ? $new_instance['display_arrow'] : false;
-		$instance['time'] = absint( strip_tags( $new_instance['time'] ) );
+		$instance['time'] = absint( sanitize_text_field( $new_instance['time'] ) );
 			if ( '' == $instance['time'] || ! is_numeric( $instance['time'] ) ) $instance['time'] = 1800;
 			if ( 1800 > $instance['time'] ) $instance['time'] = 1800;
 		$instance['display_archive'] = isset( $new_instance['display_archive'] ) ? $new_instance['display_archive'] : false;
-		$instance['archive_text'] = strip_tags( $new_instance['archive_text'] );
-		$instance['list_type'] = strip_tags( $new_instance['list_type'] );
+		$instance['archive_text'] = sanitize_text_field( $new_instance['archive_text'] );
+		$instance['list_type'] = sanitize_text_field( $new_instance['list_type'] );
 		$instance['display_arch_arr'] = isset ( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
         $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
 		$instance['nofollow'] = isset ( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
