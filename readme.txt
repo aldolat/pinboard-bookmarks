@@ -143,7 +143,7 @@ This section describes how to install the plugin and get it working.
 
 = 1.6.0 =
 
-* 
+* Remove support for Twitter.
 
 = 1.5.0 =
 
