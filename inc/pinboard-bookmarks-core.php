@@ -168,14 +168,17 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if ( $quantity > 400 ) $quantity = 400;
     // Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
 	$maxitems = $rss->get_item_quantity( $quantity );
-    // Get the items from 0 to $maxitems.
-	$rss_items = $rss->get_items( 0, $maxitems );
+    // If the feed is empty
 	if ( $maxitems == 0 ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
 			$output .= esc_html__( 'No items.', 'pinboard-bookmarks' );
 		$output .= '</li>';
 	} else {
+        // Get the items from 0 to $maxitems.
+    	$rss_items = $rss->get_items( 0, $maxitems );
+        // Shuffle items if required.
 		if ( $random ) shuffle( $rss_items );
+        // Start the loop
 		foreach ( $rss_items as $item ) {
 			$output .= '<li class="pinboard-bookmarks-li">';
 
