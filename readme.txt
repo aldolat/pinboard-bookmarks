@@ -15,8 +15,7 @@ Publish Pinboard bookmarks on your WordPress blog.
 Pinboard Bookmarks allows you to publish bookmarks from Pinboard on your blog. The plugin lets you:
 
 * retrieve the bookmarks from your account (or any account) on Pinboard;
-* retrieve the bookmarks from one or more tags of your account (or any account);
-* retrieve the latest bookmarks from Pinboard using one or more tags.
+* retrieve the bookmarks from one or more tags of your account (or any account).
 
 This plugin has also a shortcode, so you can publish the bookmarks in a post or a page.
 
@@ -143,7 +142,8 @@ This section describes how to install the plugin and get it working.
 
 = 1.6.0 =
 
-* Remove support for Twitter.
+* Removed support for Twitter.
+* Removed option to get bookmarks from tags without setting a username.
 
 = 1.5.0 =
 
