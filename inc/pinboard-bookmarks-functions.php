@@ -151,7 +151,7 @@ function pinboard_bookmarks_debug( $args ) {
     }
 
     if ( $debug_urls ) {
-        $output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URL and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
+        $output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
         $output .= '<ul class="pinboard-bookmarks-debug-ul">';
         foreach ( $urls as $key => $value ) {
             if ( empty( $value ) ) $value = esc_html__( '(empty)', 'pinboard-bookmarks' );
