@@ -80,10 +80,10 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
-    // If both $username and $tags are empty, stop the function and give an alert.
-    if ( empty( $username ) && empty( $tags ) ) {
+    // If $username is empty, stop the function and give an alert.
+    if ( empty( $username ) ) {
         $output_error  = '<p class="pinboard-bookmarks pinboard-bookmarks-error">';
-        $output_error .= esc_html__( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
+        $output_error .= esc_html__( 'You have not properly configured the widget. Please, add a username.', 'pinboard-bookmarks' );
         $output_error .= '</p>';
         return $output_error;
     }
@@ -97,7 +97,6 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // Set up the Pinboard URLs.
     $pinboard_url                 = trailingslashit( 'https://pinboard.in' );
-    $pinboard_tag_url             = $pinboard_url . 't:';
 
     // Set up the user URLs on Pinboard.
     $pinboard_user_url            = trailingslashit( $pinboard_url . 'u:' . $username );
@@ -117,16 +116,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     }
 
     // Build the RSS and archive URLs.
-    if ( $username ) {
-        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
-        $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
-        if ( $source ) {
-            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
-            $archive_url = trailingslashit( $pinboard_user_source_url . $source );
-        }
-    } else {
-        $feed_url = trailingslashit( $pinboard_rss_url . $tags_for_url ) . '?count=' . $quantity;
-        $archive_url = trailingslashit( $pinboard_url . $tags_for_url );
+    $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+    $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
+    if ( $source ) {
+        $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+        $archive_url = trailingslashit( $pinboard_user_source_url . $source );
     }
 
     // Grab the feed from Pinboard.
@@ -239,7 +233,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 						if ( $tags_text ) $output .= $tags_text . ' ';
 						if ( $display_hashtag ) $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>'; else $hashtag = '';
-                        if ( $username ) $url = $pinboard_user_tag_url; else $url = $pinboard_tag_url;
+                        $url = $pinboard_user_tag_url;
                         if ( $use_comma ) $comma = ', '; else $comma = ' ';
 
 						foreach( $tags_list as $tag ) {

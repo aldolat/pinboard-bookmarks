@@ -249,7 +249,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_id( 'username' ),
                 $this->get_field_name( 'username' ),
                 esc_attr( $instance['username'] ),
-                esc_html__( 'username', 'pinboard-bookmarks' )
+                esc_html__( 'username', 'pinboard-bookmarks' ),
+                esc_html__( 'This is the only mandatory option.', 'pinboard-bookmarks' )
             );
 
             // Tags
