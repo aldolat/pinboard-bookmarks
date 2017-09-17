@@ -133,7 +133,7 @@ This section describes how to install the plugin and get it working.
 
 1. From your WordPress dashboard search the plugin Pinboard Bookmarks, install and activate it.
 1. Add the new widget on your sidebar.
-1. The only necessary thing to do is to add a username or one or more tags.
+1. The only necessary option is the username on Pinboard. Add it and save the widget.
 
 ## Screenshots ##
 
@@ -149,6 +149,7 @@ This section describes how to install the plugin and get it working.
 
 * Remove support for Twitter.
 * Removed option to get bookmarks from tags without setting a username.
+* Minor fixes.
 
 ### 1.5.0 ###
 
