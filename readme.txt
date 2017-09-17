@@ -50,6 +50,7 @@ Note that the plugin will fetch bookmarks that have both the tags `books` and `c
 
 This is the list of the options for the shortcode:
 
+* `intro_text` (string) - An introductory text for the shortcode.
 * `username` (string) - A username on Pinboard.
 * `tags` (string) - A space separated list of tags or a single tag.
 * `source` (string) - The source in Pinboard, like `from:pocket`, `from:instapaper`, or `from:twitter`.
