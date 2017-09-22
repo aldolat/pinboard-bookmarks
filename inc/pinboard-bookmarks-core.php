@@ -21,7 +21,7 @@ if ( ! defined( 'WPINC' ) ) {
  *      @type string  $tags             The tags where to get bookmarks from.
  *      @type boolean $source           The Pinboard 'source' where to get bookmarks from.
  *                                      Default empty. Accepts 'pocket', 'instapaper'.
- *      @type integer $quantity         The nmber of bookmarks to fetch.
+ *      @type integer $quantity         The number of bookmarks to fetch.
  *      @type boolean $random           If fetched bookmarks should be displayed in random order.
  *      @type boolean $display_desc     If the description of the bookmark should be displayed.
  *      @type integer $truncate         Truncate the description of the bookmark at this words number.
