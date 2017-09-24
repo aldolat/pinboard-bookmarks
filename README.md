@@ -3,7 +3,7 @@
 **Donate link:** http://dev.aldolat.it/projects/pinboard-bookmarks/  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
-**Tested up to:** 4.8  
+**Tested up to:** 4.9  
 **Stable tag:** 1.6.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
@@ -148,7 +148,7 @@ This section describes how to install the plugin and get it working.
 
 ### 1.6.0 ###
 
-* Remove support for Twitter.
+* Removed support for Twitter.
 * Removed option to get bookmarks from tags without setting a username.
 * Minor fixes.
 
