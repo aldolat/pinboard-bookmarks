@@ -150,6 +150,7 @@ This section describes how to install the plugin and get it working.
 
 * Removed support for Twitter.
 * Removed option to get bookmarks from tags without setting a username.
+* Added introductory text.
 * Minor fixes.
 
 ### 1.5.0 ###
