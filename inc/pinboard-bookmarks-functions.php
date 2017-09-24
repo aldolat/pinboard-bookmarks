@@ -20,7 +20,7 @@ function pinboard_bookmarks_get_tags_for_url( $tags ) {
     $tags_for_url = '';
 
     // Sanitize $tags
-    $tags = strip_tags( $tags );
+    $tags = sanitize_text_field( $tags );
 
     // Replace all the occurrences of comma and space in any mix and quantity with a single space.
     $tags = trim( preg_replace( '([\s,]+)', ' ', $tags ) );
@@ -131,6 +131,7 @@ function pinboard_bookmarks_debug( $args ) {
 
     if ( $debug_options || $debug_urls ) {
 		global $wp_version;
+        $output .= '<div class="pinboard-bookmarks-debug-group">';
 		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf( esc_html__( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
 		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '</li>' );
@@ -150,13 +151,17 @@ function pinboard_bookmarks_debug( $args ) {
     }
 
     if ( $debug_urls ) {
-        $output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URL and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
+        $output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
         $output .= '<ul class="pinboard-bookmarks-debug-ul">';
         foreach ( $urls as $key => $value ) {
             if ( empty( $value ) ) $value = esc_html__( '(empty)', 'pinboard-bookmarks' );
             $output .= '<li class="pinboard-bookmarks-debug-li"><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
         }
         $output .= '</ul>';
+    }
+
+    if ( $debug_options || $debug_urls ) {
+        $output .= '</div>';
     }
 
     /**

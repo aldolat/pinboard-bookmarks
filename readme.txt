@@ -3,8 +3,8 @@ Contributors: aldolat
 Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
-Tested up to: 4.8
-Stable tag: 1.5.0
+Tested up to: 4.9
+Stable tag: 1.6.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,8 +15,7 @@ Publish Pinboard bookmarks on your WordPress blog.
 Pinboard Bookmarks allows you to publish bookmarks from Pinboard on your blog. The plugin lets you:
 
 * retrieve the bookmarks from your account (or any account) on Pinboard;
-* retrieve the bookmarks from one or more tags of your account (or any account);
-* retrieve the latest bookmarks from Pinboard using one or more tags.
+* retrieve the bookmarks from one or more tags of your account (or any account).
 
 This plugin has also a shortcode, so you can publish the bookmarks in a post or a page.
 
@@ -51,6 +50,7 @@ Note that the plugin will fetch bookmarks that have both the tags `books` and `c
 
 This is the list of the options for the shortcode:
 
+* `intro_text` (string) - An introductory text for the shortcode.
 * `username` (string) - A username on Pinboard.
 * `tags` (string) - A space separated list of tags or a single tag.
 * `source` (string) - The source in Pinboard, like `from:pocket`, `from:instapaper`, or `from:twitter`.
@@ -132,7 +132,7 @@ This section describes how to install the plugin and get it working.
 
 1. From your WordPress dashboard search the plugin Pinboard Bookmarks, install and activate it.
 1. Add the new widget on your sidebar.
-1. The only necessary thing to do is to add a username or one or more tags.
+1. The only necessary option is the username on Pinboard. Add it and save the widget.
 
 == Screenshots ==
 
@@ -140,6 +140,14 @@ This section describes how to install the plugin and get it working.
 2. An example of rendered widget
 
 == Changelog ==
+
+= 1.6.0 =
+
+* Removed support for Twitter.
+* Removed option to get bookmarks from tags without setting a username.
+* Added introductory text.
+* Fixed option name for uninstall.php.
+* Minor fixes.
 
 = 1.5.0 =
 

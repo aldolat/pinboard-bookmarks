@@ -10,17 +10,49 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The core function.
- * It retrieves the feed and display the content.
+ * It retrieves the feed and displays the content.
  *
  * @since 1.0
- * @param mixed $args Variables to customize the output of the function
- * @return mixed
+ * @param  array  $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type string  $intro_text       The introductory text for the widget.
+ *      @type string  $username         The username on Pinboard.
+ *      @type string  $tags             The tags where to get bookmarks from.
+ *      @type boolean $source           The Pinboard 'source' where to get bookmarks from.
+ *                                      Default empty. Accepts 'pocket', 'instapaper'.
+ *      @type integer $quantity         The number of bookmarks to fetch.
+ *      @type boolean $random           If fetched bookmarks should be displayed in random order.
+ *      @type boolean $display_desc     If the description of the bookmark should be displayed.
+ *      @type integer $truncate         Truncate the description of the bookmark at this words number.
+ *      @type boolean $display_date     If the date of the bookmarks should be displayed.
+ *      @type boolean $display_time     If the time of the bookmarks should be displayed.
+ *      @type string  $date_text        The text to be prepended before the date/time.
+ *      @type boolean $display_tags     If the tags of the bookmarks should be displayed.
+ *      @type boolean $tags_text        The text to be prepended before the tags.
+ *      @type boolean $display_hashtag  If the hashtag `#` should be displayed.
+ *      @type boolean $use_comma        If a comma should be displayed between tags.
+ *      @type boolean $display_source   If the source of the bookrmark should be displayed.
+ *      @type boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
+ *      @type boolean $display_archive  If the link to the archive on Pinboard should be displayed.
+ *      @type boolean $archive_text     The text to be prepended before the archive link.
+ *      @type boolean $list_type        The HTML list type. Default 'bullet' (ul). Accepts 'numbered' (ol).
+ *      @type boolean $display_arch_arr If an HTML arrow should be displayed after the archive link.
+ *      @type boolean $new_tab          If links should be opened ina new browser tab.
+ *      @type boolean $nofollow         If a 'nofollow' attribute should be added in links.
+ *      @type boolean $admin_only       If administrators only can view the debug.
+ *      @type boolean $debug_options    If debug informations should be displayed.
+ *      @type boolean $debug_urls       If URLs used by the plugin should be displayed for debug.
+ * }
+ * @return string $output The HTML structure to be displayed on the page
  */
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
+        // 'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ), /* FOR WIDGET ONLY */
+        'intro_text'       => '',
 		'username'         => '',
         'tags'             => '',
-        'source'           => '', // This is the source in Pinboard, like 'from:pocket', 'from:instapaper', or 'from:twitter'.
+        'source'           => '', // This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
 		'quantity'         => 5,
 		'random'           => false,
 		'display_desc'     => false,
@@ -34,6 +66,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         'use_comma'        => false,
         'display_source'   => false,
 		'display_arrow'    => false,
+        // 'time'             => 1800, /* FOR WIDGET ONLY */
 		'display_archive'  => true,
 		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
         'list_type'        => 'bullet',
@@ -47,12 +80,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$args = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
 
-    // If a username or a tag has not been entered, stop the function and give an alert.
-    if ( ! $username && ! $tags ) {
-        echo '<p class="pinboard-bookmarks error">';
-        esc_html_e( 'You have not properly configured the widget. Please, add a username or a tag at least.', 'pinboard-bookmarks' );
-        echo '</p>';
-        return;
+    // If $username is empty, stop the function and give an alert.
+    if ( empty( $username ) ) {
+        $output_error  = '<p class="pinboard-bookmarks pinboard-bookmarks-error">';
+        $output_error .= esc_html__( 'You have not properly configured the widget. Please, add a username.', 'pinboard-bookmarks' );
+        $output_error .= '</p>';
+        return $output_error;
     }
 
     // Set up some variables.
@@ -64,7 +97,6 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // Set up the Pinboard URLs.
     $pinboard_url                 = trailingslashit( 'https://pinboard.in' );
-    $pinboard_tag_url             = $pinboard_url . 't:';
 
     // Set up the user URLs on Pinboard.
     $pinboard_user_url            = trailingslashit( $pinboard_url . 'u:' . $username );
@@ -84,16 +116,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     }
 
     // Build the RSS and archive URLs.
-    if ( $username ) {
-        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
-        $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
-        if ( $source ) {
-            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
-            $archive_url = trailingslashit( $pinboard_user_source_url . $source );
-        }
-    } else {
-        $feed_url = trailingslashit( $pinboard_rss_url . $tags_for_url ) . '?count=' . $quantity;
-        $archive_url = trailingslashit( $pinboard_url . $tags_for_url );
+    $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+    $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
+    if ( $source ) {
+        $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+        $archive_url = trailingslashit( $pinboard_user_source_url . $source );
     }
 
     // Grab the feed from Pinboard.
@@ -101,6 +128,18 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	include_once( ABSPATH . WPINC . '/feed.php' );
     $rss = fetch_feed( esc_url( $feed_url ) );
 	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
+
+    /*
+	 * Define the main variable that will concatenate all the output.
+	 *
+	 * @since 1.6.0
+	 */
+	$output = '';
+
+    // The introductory text
+    if ( $intro_text ) {
+        $output .= '<p class="pinboard-bookmarks-intro-text">' . $intro_text . '</p>';
+    }
 
     // Start building the $output variable.
     switch  ( $list_type ) {
@@ -116,7 +155,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
             $list_element = 'ul';
             break;
     }
-	$output = '<' . $list_element . ' class="pinboard-bookmarks-list">';
+	$output .= '<' . $list_element . ' class="pinboard-bookmarks-list">';
 
 	if ( is_wp_error( $rss ) ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-error">';
@@ -129,14 +168,17 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if ( $quantity > 400 ) $quantity = 400;
     // Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
 	$maxitems = $rss->get_item_quantity( $quantity );
-    // Get the items from 0 to $maxitems.
-	$rss_items = $rss->get_items( 0, $maxitems );
+    // If the feed is empty
 	if ( $maxitems == 0 ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
 			$output .= esc_html__( 'No items.', 'pinboard-bookmarks' );
 		$output .= '</li>';
 	} else {
+        // Get the items from 0 to $maxitems.
+    	$rss_items = $rss->get_items( 0, $maxitems );
+        // Shuffle items if required.
 		if ( $random ) shuffle( $rss_items );
+        // Start the loop
 		foreach ( $rss_items as $item ) {
 			$output .= '<li class="pinboard-bookmarks-li">';
 
@@ -194,7 +236,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 						if ( $tags_text ) $output .= $tags_text . ' ';
 						if ( $display_hashtag ) $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>'; else $hashtag = '';
-                        if ( $username ) $url = $pinboard_user_tag_url; else $url = $pinboard_tag_url;
+                        $url = $pinboard_user_tag_url;
                         if ( $use_comma ) $comma = ', '; else $comma = ' ';
 
 						foreach( $tags_list as $tag ) {
@@ -224,12 +266,30 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                         $source_name = 'Instapaper';
                                         $source_address = $pinboard_user_source_url . 'instapaper';
                                         break;
-                                    // Twitter has not been tested
-                                    case 'http://twitter.com/':
-                                        $source_name = 'Twitter';
-                                        $source_address = $pinboard_user_source_url . 'twitter';
-                                        break;
-                                    // In some cases the source is Pinboard itself, so do not display it (also see some line below).
+                                    /**
+                                     * Remove support for Twitter.
+                                     * Pinboard lets you fetch your tweets that:
+                                     * - have a link inside;
+                                     * - you liked and have a link inside.
+                                     * Pinboard then adds a "tag" depending on the type of tweet:
+                                     * `from twitter` (the first case) or `from twitter_favs` (the second one).
+                                     * So in Pinboard you have two separate pages for these bookmarks:
+                                     * - https://pinboard.in/u:username/from:twitter
+                                     * - https://pinboard.in/u:username/from:twitter_favs
+                                     * The problem is that, when Pinboard creates the RSS feed,
+                                     * there is no way to distinguish the first tweets from the second ones.
+                                     * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
+                                     * In this situation we cannot link to the correct page.
+                                     *
+                                     * Code removed:
+                                     * case 'http://twitter.com/':
+                                     *    $source_name = 'Twitter';
+                                     *    $source_address = $pinboard_user_source_url . 'twitter';
+                                     *    break;
+                                     *
+                                     * @since 1.6.0
+                                     */
+                                    // In some cases the source is Pinboard itself, so do not display it (also see some lines below).
                                     case 'http://pinboard.in/':
                                         $source_name = 'Pinboard';
                                         $source_address = $pinboard_user_source_url . 'pinboard';

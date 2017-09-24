@@ -10,4 +10,4 @@ if( !defined( 'ABSPATH' ) && !defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
 // Delete options from the database
-delete_option( 'widget_pinboard-bookmarks-widget' );
+delete_option( 'widget_pinboard_bookmarks_widget' );
