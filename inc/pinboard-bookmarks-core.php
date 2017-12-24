@@ -130,13 +130,13 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	// Set up item parts order
 	$item_parts_manual_ordering = false;
-	if ( strlen($item_parts_order) > 0 ) {
+	if ( strlen( $item_parts_order ) > 0 ) {
 		$item_parts_manual_ordering = true;
-		$item_parts_order = strtoupper( $item_parts_order );
+		$item_parts_order           = strtoupper( $item_parts_order );
 
-		$order  = array_unique(str_split( $item_parts_order ));
+		$order = array_unique( str_split( $item_parts_order ) );
 	} else {
-		$order = ["T", "D"];
+		$order = [ "T", "D", "A", "G" ];
 	}
 
 
@@ -231,127 +231,24 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 							$output .= get_description_output( $item, $truncate );
 						}
 						break;
+					case "A":
+						// Date
+						if ( $item_parts_manual_ordering || $display_date ) {
+							$output .= get_date_output( $display_time, $item, $date_text, $rel_txt, $new_tab_link );
+						}
+						break;
+					case "G":
+						// Tags
+						if ( $item_parts_manual_ordering || $display_tags ) {
+							$output .= get_tags_output( $item, $tags_text, $display_hashtag, $pinboard_user_tag_url, $use_comma, $rel_txt, $new_tab_link, $display_source, $pinboard_user_source_url );
+						}
+						break;
 					default:
-						// user supplied an undefined item part. Ignore
-						// should this be logged ?
+						// User supplied an undefined item part. Ignore.
+						// Log?
 				}
 			}
 
-
-			// Date
-			if ( $display_date ) {
-				// Get date format
-				$date_format = get_option( 'date_format' );
-				// Get time format, if requested
-				if ( $display_time ) {
-					$time_format = ' ' . get_option( 'time_format' );
-					$date_format .= $time_format;
-				}
-				// Convert date and time of the bookmark into a UNIX timestamp
-				$item_timestamp = strtotime( esc_html( $item->get_date( $date_format ) ) );
-				// Get local time offset
-				$local_offset = get_option( 'gmt_offset' ) * 3600;
-				// Since the bookmark on Pinboard is stored in UTC, convert item timestamp from UTC to local time
-				$item_local_timestamp = $item_timestamp + $local_offset;
-				// Get the final date and time of the item
-				$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
-				// Build the final HTML
-				$output .= '<p class="pinboard-bookmarks-date">';
-				if ( $date_text ) {
-					$output .= $date_text . ' ';
-				}
-				$output .= '<a class="pinboard-bookmarks-date-link"' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
-				$output .= $bookmark_date;
-				$output .= '</a>';
-				$output .= '</p>';
-			}
-
-			// Tags
-			if ( $display_tags ) {
-				$tags_list = (array) $item->get_categories();
-				if ( $tags_list ) {
-					$output .= '<p class="pinboard-bookmarks-tags">';
-
-					if ( $tags_text ) {
-						$output .= $tags_text . ' ';
-					}
-					if ( $display_hashtag ) {
-						$hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>';
-					} else {
-						$hashtag = '';
-					}
-					$url = $pinboard_user_tag_url;
-					if ( $use_comma ) {
-						$comma = ', ';
-					} else {
-						$comma = ' ';
-					}
-
-					foreach ( $tags_list as $tag ) {
-						$item_tags = $tag->get_label();
-						$item_tags = (array) explode( ' ', $item_tags );
-						foreach ( $item_tags as $item_tag ) {
-							$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
-						}
-						// Removes the trailing comma and space in any quantity and any order after the last tag.
-						$output = rtrim( $output, ', ' );
-					}
-
-					/*
-					 * Append the source of the bookmark, like Pocket, Instapaper, Twitter.
-					 *
-					 * @since 1.4
-					 */
-					if ( $display_source ) {
-						if ( $source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' ) ) {
-							$source_service = $source_service[0]['data'];
-							switch ( $source_service ) {
-								case 'http://readitlater.com/':
-									$source_name    = 'Pocket';
-									$source_address = $pinboard_user_source_url . 'pocket';
-									break;
-								case 'http://instapaper.com/':
-									$source_name    = 'Instapaper';
-									$source_address = $pinboard_user_source_url . 'instapaper';
-									break;
-								/**
-								 * Remove support for Twitter.
-								 * Pinboard lets you fetch your tweets that:
-								 * - have a link inside;
-								 * - you liked and have a link inside.
-								 * Pinboard then adds a "tag" depending on the type of tweet:
-								 * `from twitter` (the first case) or `from twitter_favs` (the second one).
-								 * So in Pinboard you have two separate pages for these bookmarks:
-								 * - https://pinboard.in/u:username/from:twitter
-								 * - https://pinboard.in/u:username/from:twitter_favs
-								 * The problem is that, when Pinboard creates the RSS feed,
-								 * there is no way to distinguish the first tweets from the second ones.
-								 * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
-								 * In this situation we cannot link to the correct page.
-								 *
-								 * Code removed:
-								 * case 'http://twitter.com/':
-								 *    $source_name = 'Twitter';
-								 *    $source_address = $pinboard_user_source_url . 'twitter';
-								 *    break;
-								 *
-								 * @since 1.6.0
-								 */
-								// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
-								case 'http://pinboard.in/':
-									$source_name    = 'Pinboard';
-									$source_address = $pinboard_user_source_url . 'pinboard';
-									break;
-							}
-							if ( 'Pinboard' != $source_name ) {
-								$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '">from ' . $source_name . '</a>';
-							}
-						}
-					}
-
-					$output .= '</p>';
-				}
-			}
 
 			$output .= '</li>';
 
@@ -402,6 +299,149 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	// Add a HTML comment with plugin name and version.
 	$output .= pinboard_bookmarks_get_generated_by();
+
+	return $output;
+}
+
+/**
+ * @param $item
+ * @param $tags_text
+ * @param $display_hashtag
+ * @param $pinboard_user_tag_url
+ * @param $use_comma
+ * @param $rel_txt
+ * @param $new_tab_link
+ * @param $display_source
+ * @param $pinboard_user_source_url
+ *
+ * @return string
+ */
+function get_tags_output( $item, $tags_text, $display_hashtag, $pinboard_user_tag_url, $use_comma, $rel_txt, $new_tab_link, $display_source, $pinboard_user_source_url ): string {
+	$tempoutput = '';
+	if ( true ) {
+		$tags_list = (array) $item->get_categories();
+		if ( $tags_list ) {
+			$tempoutput .= '<p class="pinboard-bookmarks-tags">';
+
+			if ( $tags_text ) {
+				$tempoutput .= $tags_text . ' ';
+			}
+			if ( $display_hashtag ) {
+				$hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>';
+			} else {
+				$hashtag = '';
+			}
+			$url = $pinboard_user_tag_url;
+			if ( $use_comma ) {
+				$comma = ', ';
+			} else {
+				$comma = ' ';
+			}
+
+			foreach ( $tags_list as $tag ) {
+				$item_tags = $tag->get_label();
+				$item_tags = (array) explode( ' ', $item_tags );
+				foreach ( $item_tags as $item_tag ) {
+					$tempoutput .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
+				}
+				// Removes the trailing comma and space in any quantity and any order after the last tag.
+				$tempoutput = rtrim( $tempoutput, ', ' );
+			}
+
+			/*
+			 * Append the source of the bookmark, like Pocket, Instapaper, Twitter.
+			 *
+			 * @since 1.4
+			 */
+			if ( $display_source ) {
+				if ( $source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' ) ) {
+					$source_service = $source_service[0]['data'];
+					switch ( $source_service ) {
+						case 'http://readitlater.com/':
+							$source_name    = 'Pocket';
+							$source_address = $pinboard_user_source_url . 'pocket';
+							break;
+						case 'http://instapaper.com/':
+							$source_name    = 'Instapaper';
+							$source_address = $pinboard_user_source_url . 'instapaper';
+							break;
+						/**
+						 * Remove support for Twitter.
+						 * Pinboard lets you fetch your tweets that:
+						 * - have a link inside;
+						 * - you liked and have a link inside.
+						 * Pinboard then adds a "tag" depending on the type of tweet:
+						 * `from twitter` (the first case) or `from twitter_favs` (the second one).
+						 * So in Pinboard you have two separate pages for these bookmarks:
+						 * - https://pinboard.in/u:username/from:twitter
+						 * - https://pinboard.in/u:username/from:twitter_favs
+						 * The problem is that, when Pinboard creates the RSS feed,
+						 * there is no way to distinguish the first tweets from the second ones.
+						 * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
+						 * In this situation we cannot link to the correct page.
+						 *
+						 * Code removed:
+						 * case 'http://twitter.com/':
+						 *    $source_name = 'Twitter';
+						 *    $source_address = $pinboard_user_source_url . 'twitter';
+						 *    break;
+						 *
+						 * @since 1.6.0
+						 */
+						// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
+						case 'http://pinboard.in/':
+							$source_name    = 'Pinboard';
+							$source_address = $pinboard_user_source_url . 'pinboard';
+							break;
+					}
+					if ( 'Pinboard' != $source_name ) {
+						$tempoutput .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '">from ' . $source_name . '</a>';
+					}
+				}
+			}
+
+			$tempoutput .= '</p>';
+		}
+	}
+
+	return $tempoutput;
+}
+
+/**
+ * @param $display_time
+ * @param $item
+ * @param $date_text
+ * @param $rel_txt
+ * @param $new_tab_link
+ *
+ * @return string
+ */
+function get_date_output( $display_time, $item, $date_text, $rel_txt, $new_tab_link ): string {
+	$output = "";
+	// Get date format
+	$date_format = get_option( 'date_format' );
+	// Get time format, if requested
+	if ( $display_time ) {
+		$time_format = ' ' . get_option( 'time_format' );
+		$date_format .= $time_format;
+	}
+	// Convert date and time of the bookmark into a UNIX timestamp
+	$item_timestamp = strtotime( esc_html( $item->get_date( $date_format ) ) );
+	// Get local time offset
+	$local_offset = get_option( 'gmt_offset' ) * 3600;
+	// Since the bookmark on Pinboard is stored in UTC, convert item timestamp from UTC to local time
+	$item_local_timestamp = $item_timestamp + $local_offset;
+	// Get the final date and time of the item
+	$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
+	// Build the final HTML
+	$output .= '<p class="pinboard-bookmarks-date">';
+	if ( $date_text ) {
+		$output .= $date_text . ' ';
+	}
+	$output .= '<a class="pinboard-bookmarks-date-link"' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
+	$output .= $bookmark_date;
+	$output .= '</a>';
+	$output .= '</p>';
 
 	return $output;
 }
