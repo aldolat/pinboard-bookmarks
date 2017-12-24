@@ -132,11 +132,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$item_parts_manual_ordering = false;
 	if ( strlen( $item_parts_order ) > 0 ) {
 		$item_parts_manual_ordering = true;
-		$item_parts_order           = strtoupper( $item_parts_order );
-
-		$order = array_unique( str_split( $item_parts_order ) );
+		$item_parts_order = strtoupper( $item_parts_order );
+		$item_parts_order = str_replace( " ", "", $item_parts_order );
+		$order = array_unique( explode( ",", $item_parts_order ) );
 	} else {
-		$order = [ "T", "D", "A", "G" ];
+		$order = [ "TITLE", "DESC", "DATE", "TAGS" ];
 	}
 
 
@@ -221,23 +221,23 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 			foreach ( $order as $next ) {
 				switch ( $next ) {
-					case "T":
+					case "TITLE":
 						// Title
 						$output .= get_title_output( $rel_txt, $item, $new_tab_link, $arrow );
 						break;
-					case "D":
+					case "DESC":
 						// Description
 						if ( $item_parts_manual_ordering || $display_desc ) {
 							$output .= get_description_output( $item, $truncate );
 						}
 						break;
-					case "A":
+					case "DATE":
 						// Date
 						if ( $item_parts_manual_ordering || $display_date ) {
 							$output .= get_date_output( $display_time, $item, $date_text, $rel_txt, $new_tab_link );
 						}
 						break;
-					case "G":
+					case "TAGS":
 						// Tags
 						if ( $item_parts_manual_ordering || $display_tags ) {
 							$output .= get_tags_output( $item, $tags_text, $display_hashtag, $pinboard_user_tag_url, $use_comma, $rel_txt, $new_tab_link, $display_source, $pinboard_user_source_url );
