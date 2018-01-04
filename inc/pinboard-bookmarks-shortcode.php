@@ -29,6 +29,7 @@ function pinboard_bookmarks_sc( $atts ) {
         'source'           => '', // This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
 		'quantity'         => 5,
 		'random'           => false,
+        'fetch_random_items' => false,
 		'display_desc'     => false,
 		'truncate'         => 0,
 		'display_date'     => false,

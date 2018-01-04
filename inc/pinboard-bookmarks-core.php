@@ -50,38 +50,40 @@ if ( ! defined( 'WPINC' ) ) {
 function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$defaults = array(
 		// 'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ), /* FOR WIDGET ONLY */
-		'intro_text'       => '',
-		'username'         => '',
-		'tags'             => '',
-		'source'           => '',
+		'intro_text'         => '',
+		'username'           => '',
+		'tags'               => '',
+		'source'             => '',
 		// This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
-		'quantity'         => 5,
-		'random'           => false,
-		'display_desc'     => false,
-		'truncate'         => 0,
-		'display_date'     => false,
-		'display_time'     => false,
-		'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
-		'display_tags'     => false,
-		'item_parts_order' => "",
-		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
-		'display_hashtag'  => true,
-		'use_comma'        => false,
-		'display_source'   => false,
-		'display_arrow'    => false,
+		'quantity'           => 5,
+		'random'             => false,
+		'fetch_random_items' => false,
+		'display_desc'       => false,
+		'truncate'           => 0,
+		'display_date'       => false,
+		'display_time'       => false,
+		'date_text'          => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
+		'display_tags'       => false,
+		'item_parts_order'   => "",
+		'tags_text'          => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
+		'display_hashtag'    => true,
+		'use_comma'          => false,
+		'display_source'     => false,
+		'display_arrow'      => false,
 		// 'time'             => 1800, /* FOR WIDGET ONLY */
-		'display_archive'  => true,
-		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
-		'list_type'        => 'bullet',
-		'display_arch_arr' => true,
-		'new_tab'          => false,
-		'nofollow'         => true,
-		'admin_only'       => true,
-		'debug_options'    => false,
-		'debug_urls'       => false
+		'display_archive'    => true,
+		'archive_text'       => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
+		'list_type'          => 'bullet',
+		'display_arch_arr'   => true,
+		'new_tab'            => false,
+		'nofollow'           => true,
+		'admin_only'         => true,
+		'debug_options'      => false,
+		'debug_urls'         => false
 	);
 	$args     = wp_parse_args( $args, $defaults );
 	extract( $args, EXTR_SKIP );
+
 
 	// If $username is empty, stop the function and give an alert.
 	if ( empty( $username ) ) {
@@ -148,7 +150,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	}
 
 	// Build the RSS and archive URLs.
-	$feed_url    = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+	$feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url );
+	// if we're fetching randomly the feed must contain all items
+	if ( ! $fetch_random_items ) {
+		$feed_url = $feed_url . '?count=' . $quantity;
+	}
 	$archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
 	if ( $source ) {
 		$feed_url    = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
@@ -201,16 +207,30 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	if ( $quantity > 400 ) {
 		$quantity = 400;
 	}
+
+	$feed_count = $rss->get_item_quantity( 0 );
 	// Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
-	$maxitems = $rss->get_item_quantity( $quantity );
+	$maxitems = min( $feed_count, $quantity );
+
 	// If the feed is empty
 	if ( $maxitems == 0 ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
 		$output .= esc_html__( 'No items.', 'pinboard-bookmarks' );
 		$output .= '</li>';
 	} else {
-		// Get the items from 0 to $maxitems.
-		$rss_items = $rss->get_items( 0, $maxitems );
+		if ( $fetch_random_items ) {
+			$rss_items = array();
+			do {
+				$item = $rss->get_item( random_int( 0, $feed_count - 1 ) );
+				if ( ! in_array( $item, $rss_items ) ) {
+					array_push( $rss_items, $item );
+				}
+			} while ( count( $rss_items ) < $quantity );
+		} else {
+			// Get the items from 0 to $maxitems.
+			$rss_items = $rss->get_items( 0, $maxitems );
+		}
+
 		// Shuffle items if required.
 		if ( $random ) {
 			shuffle( $rss_items );
