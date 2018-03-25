@@ -60,6 +60,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 		if ( $title ) echo $before_title . $title . $after_title;
 
+        // This check is necessary when upgrading from 1.6.0 to 1.7.0
+        if ( ! isset( $instance['items_order'] ) ) {
+            $instance['items_order'] = 'title description date tags';
+        }
+
 		pinboard_bookmarks_fetch_feed( array(
 			'intro_text'       => $instance['intro_text'],
 			'username'         => $instance['username'],
