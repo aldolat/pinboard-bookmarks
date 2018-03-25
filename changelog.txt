@@ -3,6 +3,7 @@
 = 1.7.0 =
 
 * Added an option to rearrange the elements of each items.
+* Fixed shuffling of items.
 * Fixed open link in new tabs for source.
 
 = 1.6.0 =
