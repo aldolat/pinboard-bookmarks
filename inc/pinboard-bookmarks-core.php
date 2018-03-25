@@ -296,7 +296,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                         break;
                                 }
                                 if ( 'Pinboard' != $source_name ) {
-                                    $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '">from ' . $source_name . '</a>';
+                                    $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
                                 }
                             }
                         }

@@ -5,7 +5,7 @@
  * Plugin URI: http://dev.aldolat.it/projects/pinboard-bookmarks/
  * Author: Aldo Latino
  * Author URI: http://www.aldolat.it/
- * Version: 1.6.0
+ * Version: 1.6.1
  * License: GPLv3 or later
  * Text Domain: pinboard-bookmarks
  * Domain Path: /languages/

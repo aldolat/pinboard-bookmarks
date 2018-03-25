@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.6.1 =
+
+* Fixed open link in new tabs for source.
+
 = 1.6.0 =
 
 * Removed support for Twitter.
