@@ -117,10 +117,19 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     }
 
     // Build the RSS and archive URLs.
-    $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+    if ( $quantity > 400 ) $quantity = 400;
+    if ( $random ) {
+        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=400';
+    } else {
+        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+    }
     $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
     if ( $source ) {
-        $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+        if ( $random ) {
+            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=400';
+        } else {
+            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+        }
         $archive_url = trailingslashit( $pinboard_user_source_url . $source );
     }
 
@@ -166,9 +175,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         return $output;
 	}
 
-	if ( $quantity > 400 ) $quantity = 400;
-    // Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
-	$maxitems = $rss->get_item_quantity( $quantity );
+	// Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
+    if ( $random ) {
+        $maxitems = $rss->get_item_quantity( 400 );
+    } else {
+        $maxitems = $rss->get_item_quantity( $quantity );
+    }
     // If the feed is empty
 	if ( $maxitems == 0 ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
@@ -177,8 +189,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	} else {
         // Get the items from 0 to $maxitems.
     	$rss_items = $rss->get_items( 0, $maxitems );
-        // Shuffle items if required.
-		if ( $random ) shuffle( $rss_items );
+        // Shuffle items if required and slice the array according to the quantity defined by the user.
+		if ( $random ) {
+            shuffle( $rss_items );
+            $rss_items = array_slice( $rss_items, 0, $quantity );
+        }
         // Start the loop
 		foreach ( $rss_items as $item ) {
 			$output .= '<li class="pinboard-bookmarks-li">';
