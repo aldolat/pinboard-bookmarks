@@ -155,7 +155,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
         $instance['items_order'] = trim( preg_replace( '([\s,]+)', ' ', $instance['items_order'] ) );
         // Create a copy of $instance['items_order'] and make it an array for some checks.
         $items_order_check = explode( ' ', $instance['items_order'] );
-        // Check if the user elements are correct .
+        // Check if the user entered elements that aren't in the four standard.
         $correct_items = array( 'title', 'description', 'date', 'tags' );
         foreach ( $items_order_check as $key => $value ) {
             if ( ! in_array( $value, $correct_items ) ) {
