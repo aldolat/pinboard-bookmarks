@@ -47,6 +47,7 @@ function pinboard_bookmarks_sc( $atts ) {
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+        'items_order'      => 'title description date tags',
         'admin_only'       => true,
         'debug_options'    => false,
         'debug_urls'       => false

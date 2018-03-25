@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.1 =
+
+* Updated shortcode.
+
 = 1.7.0 =
 
 * Added an option to rearrange the elements of each items.
