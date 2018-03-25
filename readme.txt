@@ -3,8 +3,8 @@ Contributors: aldolat
 Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
-Tested up to: 4.9
-Stable tag: 1.6.0
+Tested up to: 5.0
+Stable tag: 1.7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -73,6 +73,7 @@ This is the list of the options for the shortcode:
 * `display_arch_arr` (boolean, 1/0) - If an HTML arrow should be appended to the archive text.
 * `new_tab` (boolean, 1/0) - If the links should be open in a new browser tab.
 * `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added to the external links.
+* `items_order` (string) - The order in which the elements of each item should be displayed.
 * `admin_only` (boolean, 1/0) - If the debug should be displayed to Administrators only.
 * `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
 * `debug_urls` (boolean, 1/0) - If the URLs and the single parts, used to build them, should be displayed.
@@ -83,6 +84,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 
 `if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 	$args = array(
+		'intro_text'       => '',
 		'username'         => '',
 		'tags'             => '',
 		'source'           => '',
@@ -105,6 +107,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+		'items_order'      => 'title description date tags',
 		'admin_only'       => true,
 		'debug_options'    => false,
 		'debug_urls'       => false
@@ -138,55 +141,6 @@ This section describes how to install the plugin and get it working.
 
 1. The dashboard panel to set up the widget
 2. An example of rendered widget
-
-== Changelog ==
-
-= 1.6.0 =
-
-* Removed support for Twitter.
-* Removed option to get bookmarks from tags without setting a username.
-* Added introductory text.
-* Fixed option name for uninstall.php.
-* Minor fixes.
-
-= 1.5.0 =
-
-* Display the source of the bookmark, even if a source has not been defined in the widget admin.
-* Minor fixes.
-
-= 1.4.0 =
-
-* Display the source of the bookmarks, if activated.
-* Fix time display: now the plugin displays correctly the seconds.
-* Fix URL when using more than 1 tag.
-* Display a different URL to the archive in different cases.
-* Improve control for username.
-* Changed some class names.
-* Minor fixes.
-
-= 1.3 =
-
-* Updated shortcode options.
-
-= 1.2 =
-
-* Added "no-follow" option to all external links.
-* Added the number of retrieved items in debug section.
-* Added option to select the type of list (bullet or numeric list).
-* Added option to get bookmarks labeled with the source, like `from:pocket`.
-* Added option to display debugging informations to admins only.
-* Added option to display the time of the bookmarks.
-* Changed capabilities for viewing debug informations.
-* Hardening security.
-
-= 1.1 =
-
-* Hardening security.
-* Various small improvements.
-
-= 1.0 =
-
-* First release of the plugin.
 
 == Upgrade Notice ==
 

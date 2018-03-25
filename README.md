@@ -3,8 +3,8 @@
 **Donate link:** http://dev.aldolat.it/projects/pinboard-bookmarks/  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
-**Tested up to:** 4.9  
-**Stable tag:** 1.6.0  
+**Tested up to:** 5.0  
+**Stable tag:** 1.7.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -73,6 +73,7 @@ This is the list of the options for the shortcode:
 * `display_arch_arr` (boolean, 1/0) - If an HTML arrow should be appended to the archive text.
 * `new_tab` (boolean, 1/0) - If the links should be open in a new browser tab.
 * `nofollow` (boolean, 1/0) - If a `nofollow` attribute should be added to the external links.
+* `items_order` (string) - The order in which the elements of each item should be displayed.
 * `admin_only` (boolean, 1/0) - If the debug should be displayed to Administrators only.
 * `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
 * `debug_urls` (boolean, 1/0) - If the URLs and the single parts, used to build them, should be displayed.
@@ -84,6 +85,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 ````
 if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 	$args = array(
+		'intro_text'       => '',
 		'username'         => '',
 		'tags'             => '',
 		'source'           => '',
@@ -106,6 +108,7 @@ if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+		'items_order'      => 'title description date tags',
 		'admin_only'       => true,
 		'debug_options'    => false,
 		'debug_urls'       => false
@@ -145,6 +148,12 @@ This section describes how to install the plugin and get it working.
 ![2. An example of rendered widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
 
 ## Changelog ##
+
+### 1.7.0 ###
+
+* Added an option to rearrange the elements of each items.
+* Fixed shuffling of items.
+* Fixed open link in new tabs for source.
 
 ### 1.6.0 ###
 

@@ -60,6 +60,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 		if ( $title ) echo $before_title . $title . $after_title;
 
+        // This check is necessary when upgrading from 1.6.0 to 1.7.0
+        if ( ! isset( $instance['items_order'] ) ) {
+            $instance['items_order'] = 'title description date tags';
+        }
+
 		pinboard_bookmarks_fetch_feed( array(
 			'intro_text'       => $instance['intro_text'],
 			'username'         => $instance['username'],
@@ -84,6 +89,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arch_arr' => $instance['display_arch_arr'],
 			'new_tab'          => $instance['new_tab'],
 			'nofollow'         => $instance['nofollow'],
+            'items_order'      => $instance['items_order'],
             'admin_only'       => $instance['admin_only'],
             'debug_options'    => $instance['debug_options'],
             'debug_urls'       => $instance['debug_urls']
@@ -114,8 +120,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
             $tags = explode( ' ', $instance['tags'] );
             if ( 4 < count( $tags ) ) {
                 $tags = array_slice( $tags, 0, 4 );
-                $instance['tags'] = implode( ' ', $tags );
             }
+            $instance['tags'] = implode( ' ', $tags );
 		$instance['source'] = sanitize_text_field( $new_instance['source'] );
 		$instance['quantity'] = absint( sanitize_text_field( $new_instance['quantity'] ) );
 			if ( '' == $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) $instance['quantity'] = 5;
@@ -142,6 +148,38 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['display_arch_arr'] = isset ( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
         $instance['new_tab'] = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
 		$instance['nofollow'] = isset ( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
+
+        /**
+         * Order of the elements of each items.
+         *
+         * @since 1.7.0
+         */
+        // Sanitize unser input and make it lowercase.
+        $instance['items_order'] = strtolower( sanitize_text_field( $new_instance['items_order'] ) );
+        // Remove any space and comma from user input and remove leading/trailing spaces.
+        $instance['items_order'] = trim( preg_replace( '([\s,]+)', ' ', $instance['items_order'] ) );
+        // Create a copy of $instance['items_order'] and make it an array for some checks.
+        $items_order_check = explode( ' ', $instance['items_order'] );
+        // Check if the user entered elements that aren't in the four standard.
+        $correct_items = array( 'title', 'description', 'date', 'tags' );
+        foreach ( $items_order_check as $key => $value ) {
+            if ( ! in_array( $value, $correct_items ) ) {
+                unset( $items_order_check[$key] );
+            }
+        }
+        // Check for possible duplicates and remove them.
+        $items_order_check = array_unique( $items_order_check );
+        // Check for doubled elements and remove them.
+        if ( 4 < count( $items_order_check ) ) {
+            $items_order_check = array_slice( $items_order_check, 0, 4 );
+        }
+        // Return the checked elements into the main $instance['items_order'] variable.
+        $instance['items_order'] = implode( ' ', $items_order_check );
+        // If $instance['items_order'] is empty, fill it with standard values.
+        if ( empty( $instance['items_order'] ) ) {
+            $instance['items_order'] = 'title description date tags';
+        }
+
 		$instance['admin_only'] = isset ( $new_instance['admin_only'] ) ? $new_instance['admin_only'] : false;
         $instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
         $instance['debug_urls'] = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
@@ -183,6 +221,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'display_arch_arr' => true,
 			'new_tab'          => false,
 			'nofollow'         => true,
+            'items_order'      => 'title description date tags',
 			'admin_only'       => true,
             'debug_options'    => false,
             'debug_urls'       => false,
@@ -495,6 +534,20 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
                 $this->get_field_name( 'nofollow' ),
                 checked( $nofollow, true, false ),
                 __( 'It will be added to all external links.', 'pinboard-bookmarks' )
+            ); ?>
+
+            <h4><?php esc_html_e( 'Displaying order', 'pinboard-bookmarks' ); ?></h4>
+
+            <p><?php printf( __( 'Define the order in which the elements of each item will be displayed. The available elements are: %s', 'pinboard-bookmarks' ), '<br /><code>title</code> <code>description</code> <code>date</code> <code>tags</code>' ); ?></p>
+
+            <?php // Displaying order
+            pinboard_bookmarks_form_input_text(
+                esc_html__( 'Order of the elements of each item:', 'pinboard-bookmarks' ),
+                $this->get_field_id( 'items_order' ),
+                $this->get_field_name( 'items_order' ),
+                esc_attr( $instance['items_order'] ),
+                esc_html( 'title description date tags' ), // String NOT to be translated
+                esc_html__( 'Enter a space separated list of elements.', 'pinboard-bookmarks' )
             ); ?>
 
             <h4><?php esc_html_e( 'Debug options', 'pinboard-bookmarks' ); ?></h4>

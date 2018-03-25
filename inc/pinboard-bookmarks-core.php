@@ -73,6 +73,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+        'items_order'      => 'title description date tags',
         'admin_only'       => true,
         'debug_options'    => false,
         'debug_urls'       => false
@@ -116,10 +117,19 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
     }
 
     // Build the RSS and archive URLs.
-    $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+    if ( $quantity > 400 ) $quantity = 400;
+    if ( $random ) {
+        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=400';
+    } else {
+        $feed_url = trailingslashit( $pinboard_rss_user_url . $tags_for_url ) . '?count=' . $quantity;
+    }
     $archive_url = trailingslashit( $pinboard_user_url . $tags_for_url );
     if ( $source ) {
-        $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+        if ( $random ) {
+            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=400';
+        } else {
+            $feed_url = trailingslashit( $pinboard_rss_user_source_url . $source ) . '?count=' . $quantity;
+        }
         $archive_url = trailingslashit( $pinboard_user_source_url . $source );
     }
 
@@ -165,9 +175,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         return $output;
 	}
 
-	if ( $quantity > 400 ) $quantity = 400;
-    // Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
-	$maxitems = $rss->get_item_quantity( $quantity );
+	// Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
+    if ( $random ) {
+        $maxitems = $rss->get_item_quantity( 400 );
+    } else {
+        $maxitems = $rss->get_item_quantity( $quantity );
+    }
     // If the feed is empty
 	if ( $maxitems == 0 ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
@@ -176,33 +189,39 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	} else {
         // Get the items from 0 to $maxitems.
     	$rss_items = $rss->get_items( 0, $maxitems );
-        // Shuffle items if required.
-		if ( $random ) shuffle( $rss_items );
+        // Shuffle items if required and slice the array according to the quantity defined by the user.
+		if ( $random ) {
+            shuffle( $rss_items );
+            $rss_items = array_slice( $rss_items, 0, $quantity );
+        }
         // Start the loop
 		foreach ( $rss_items as $item ) {
 			$output .= '<li class="pinboard-bookmarks-li">';
 
 				// Title
-				$output .= '<p class="pinboard-bookmarks-title">';
-					$output .= '<a class="pinboard-bookmarks-title-link"' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
-						$output .= esc_html( $item->get_title() ) . $arrow;
-					$output .= '</a>';
-				$output .= '</p>';
+                $title_part = '';
+				$title_part .= '<p class="pinboard-bookmarks-title">';
+					$title_part .= '<a class="pinboard-bookmarks-title-link"' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
+						$title_part .= esc_html( $item->get_title() ) . $arrow;
+					$title_part .= '</a>';
+				$title_part .= '</p>';
 
 				// Description
+                $description_part = '';
 				if ( $display_desc ) {
 					if ( $item->get_description() ) {
 						if ( $truncate > 0 ) {
-							$output .= '<p class="pinboard-bookmarks-desc">';
-								$output .= wp_trim_words( esc_html( $item->get_description() ), $truncate, '&hellip;' );
-							$output .= '</p>';
+							$description_part .= '<p class="pinboard-bookmarks-desc">';
+								$description_part .= wp_trim_words( esc_html( $item->get_description() ), $truncate, '&hellip;' );
+							$description_part .= '</p>';
 						} else {
-							$output .= '<p class="pinboard-bookmarks-desc">' . esc_html( $item->get_description() ) . '</p>';
+							$description_part .= '<p class="pinboard-bookmarks-desc">' . esc_html( $item->get_description() ) . '</p>';
 						}
 					}
 				}
 
 				// Date
+                $date_part = '';
 				if ( $display_date ) {
                     // Get date format
                     $date_format = get_option( 'date_format' );
@@ -220,21 +239,22 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                     // Get the final date and time of the item
 					$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
                     // Build the final HTML
-					$output .= '<p class="pinboard-bookmarks-date">';
-						if ( $date_text ) $output .= $date_text . ' ';
-						$output .= '<a class="pinboard-bookmarks-date-link"' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
-							$output .= $bookmark_date;
-						$output .= '</a>';
-					$output .= '</p>';
+					$date_part .= '<p class="pinboard-bookmarks-date">';
+						if ( $date_text ) $date_part .= $date_text . ' ';
+						$date_part .= '<a class="pinboard-bookmarks-date-link"' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
+							$date_part .= $bookmark_date;
+						$date_part .= '</a>';
+					$date_part .= '</p>';
 				}
 
                 // Tags
+                $tags_part = '';
 				if ( $display_tags ) {
 					$tags_list = (array) $item->get_categories();
                     if ( $tags_list ) {
-						$output .= '<p class="pinboard-bookmarks-tags">';
+						$tags_part .= '<p class="pinboard-bookmarks-tags">';
 
-						if ( $tags_text ) $output .= $tags_text . ' ';
+						if ( $tags_text ) $tags_part .= $tags_text . ' ';
 						if ( $display_hashtag ) $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>'; else $hashtag = '';
                         $url = $pinboard_user_tag_url;
                         if ( $use_comma ) $comma = ', '; else $comma = ' ';
@@ -243,10 +263,10 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                             $item_tags = $tag->get_label();
                             $item_tags = (array) explode( ' ', $item_tags );
                             foreach ( $item_tags as $item_tag ) {
-								$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>' . $comma;
+								$tags_part .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>' . $comma;
                             }
                             // Removes the trailing comma and space in any quantity and any order after the last tag.
-                            $output = rtrim( $output, ', ' );
+                            $tags_part = rtrim( $tags_part, ', ' );
 						}
 
                         /*
@@ -296,7 +316,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                                         break;
                                 }
                                 if ( 'Pinboard' != $source_name ) {
-                                    $output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '">from ' . $source_name . '</a>';
+                                    $tags_part .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
                                 }
                             }
                         }
@@ -304,6 +324,27 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 						$output .= '</p>';
                     }
 				}
+
+                // Ordering item parts
+                if ( ! is_array( $items_order ) ) {
+                    $items_order = explode( ' ', $items_order );
+                }
+                foreach ( $items_order as $next ) {
+                    switch ( $next ) {
+                        case 'title' :
+                            $output .= $title_part;
+                            break;
+                        case 'description' :
+                            $output .= $description_part;
+                            break;
+                        case 'date':
+                            $output .= $date_part;
+                            break;
+                        case 'tags':
+                            $output .= $tags_part;
+                            break;
+                    }
+                }
 
 			$output .= '</li>';
 
