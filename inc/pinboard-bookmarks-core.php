@@ -311,7 +311,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				}
 
                 // Ordering item parts
-                if ( is_string( $items_order ) ) {
+                if ( ! is_array( $items_order ) ) {
                     $items_order = explode( ' ', $items_order );
                 }
                 foreach ( $items_order as $next ) {
