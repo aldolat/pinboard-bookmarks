@@ -129,6 +129,10 @@ If you have found a bug, please report it on [GitHub](https://github.com/aldolat
 
 This plugin is developed using [GitHub](https://github.com/aldolat/pinboard-bookmarks). If you wrote an enhancement and would share it with the world, please send me a [Pull request](https://github.com/aldolat/pinboard-bookmarks/pulls).
 
+= Privacy Policy =
+
+This plugin does not collect any user data.
+
 == Installation ==
 
 This section describes how to install the plugin and get it working.
