@@ -123,6 +123,10 @@ Make sure to properly use the opening and closing tags `<?php` and `?>` respecti
 
 The only mandatory options are `username` and `tags`; you have to use one of them at least. The other options are the default options which you can change according to your needs. It isn't necessary to insert all of them.
 
+### Privacy Policy ###
+
+This plugin does not collect any user data.
+
 ### Help, Bugs, and Contributing ###
 
 If you need help, please use [WordPress forum](http://wordpress.org/support/plugin/pinboard-bookmarks). Do not send private email unless it is really necessary.
