@@ -236,8 +236,7 @@ function pinboard_bookmarks_get_date( $args ) {
     $date_format = get_option( 'date_format' );
     // Get time format, if requested
     if ( $display_time ) {
-        $time_format = ' ' . get_option( 'time_format' );
-        $date_format .= $time_format;
+        $date_format .= ' ' . get_option( 'time_format' );
     }
     // Convert date and time of the bookmark into a UNIX timestamp
     $item_timestamp = strtotime( esc_html( $item->get_date( $date_format ) ) );
