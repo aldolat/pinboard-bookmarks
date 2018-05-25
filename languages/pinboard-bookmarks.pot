@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the Pinboard Bookmarks package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pinboard Bookmarks 1.7.1\n"
+"Project-Id-Version: Pinboard Bookmarks 1.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-"
 "bookmarks\n"
-"POT-Creation-Date: 2018-03-25 19:37:37+00:00\n"
+"POT-Creation-Date: 2018-05-25 10:36:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,18 +13,21 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: inc/pinboard-bookmarks-core.php:62 inc/pinboard-bookmarks-shortcode.php:36
+#: inc/pinboard-bookmarks-core.php:62 inc/pinboard-bookmarks-functions.php:228
+#: inc/pinboard-bookmarks-shortcode.php:36
 #: inc/pinboard-bookmarks-widget.php:210
 msgid "Stored on:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:64 inc/pinboard-bookmarks-shortcode.php:38
+#: inc/pinboard-bookmarks-core.php:64 inc/pinboard-bookmarks-functions.php:265
+#: inc/pinboard-bookmarks-shortcode.php:38
 #: inc/pinboard-bookmarks-widget.php:212 inc/pinboard-bookmarks-widget.php:297
 #: inc/pinboard-bookmarks-widget.php:435
 msgid "Tags:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:71 inc/pinboard-bookmarks-shortcode.php:45
+#: inc/pinboard-bookmarks-core.php:71 inc/pinboard-bookmarks-functions.php:365
+#: inc/pinboard-bookmarks-shortcode.php:45
 #: inc/pinboard-bookmarks-widget.php:219 inc/pinboard-bookmarks-widget.php:481
 msgid "See the bookmarks on Pinboard"
 msgstr ""
@@ -37,7 +40,7 @@ msgstr ""
 msgid "There was a problem with your feed! The error is %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:187
+#: inc/pinboard-bookmarks-core.php:190
 msgid "No items."
 msgstr ""
 
@@ -78,7 +81,7 @@ msgstr ""
 msgid "Publish a bookmarks list using your Pinboard bookmarks"
 msgstr ""
 
-#. #-#-#-#-#  pinboard-bookmarks.pot (Pinboard Bookmarks 1.7.1)  #-#-#-#-#
+#. #-#-#-#-#  pinboard-bookmarks.pot (Pinboard Bookmarks 1.7.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: inc/pinboard-bookmarks-widget.php:38
 msgid "Pinboard Bookmarks"
@@ -311,38 +314,38 @@ msgstr ""
 #: inc/pinboard-bookmarks-widget.php:541
 msgid ""
 "Define the order in which the elements of each item will be displayed. The "
-"available elements are: %s"
+"available elements are:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:545
+#: inc/pinboard-bookmarks-widget.php:547
 msgid "Order of the elements of each item:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:550
+#: inc/pinboard-bookmarks-widget.php:552
 msgid "Enter a space separated list of elements."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:553
+#: inc/pinboard-bookmarks-widget.php:555
 msgid "Debug options"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:555
+#: inc/pinboard-bookmarks-widget.php:557
 msgid "You are using Pinboard Bookmarks version %s."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:557
+#: inc/pinboard-bookmarks-widget.php:559
 msgid "Use these options for debugging purposes only."
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:561
+#: inc/pinboard-bookmarks-widget.php:563
 msgid "Display debugging informations to admins only"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:569
+#: inc/pinboard-bookmarks-widget.php:571
 msgid "Display parameters"
 msgstr ""
 
-#: inc/pinboard-bookmarks-widget.php:577
+#: inc/pinboard-bookmarks-widget.php:579
 msgid "Display URLs"
 msgstr ""
 

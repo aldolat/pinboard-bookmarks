@@ -538,7 +538,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             <h4><?php esc_html_e( 'Displaying order', 'pinboard-bookmarks' ); ?></h4>
 
-            <p><?php printf( __( 'Define the order in which the elements of each item will be displayed. The available elements are: %s', 'pinboard-bookmarks' ), '<br /><code>title</code> <code>description</code> <code>date</code> <code>tags</code>' ); ?></p>
+            <p><?php esc_html_e( 'Define the order in which the elements of each item will be displayed. The available elements are:', 'pinboard-bookmarks' ); ?></p>
+
+            <p><code>title</code> <code>description</code> <code>date</code> <code>tags</code></p>
 
             <?php // Displaying order
             pinboard_bookmarks_form_input_text(
