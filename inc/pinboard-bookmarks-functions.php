@@ -191,7 +191,7 @@ function pinboard_bookmarks_debug( $args ) {
  *      @type array  $item         The array containing the bookmark information.
  *      @type string $new_tab_link The HTML for open links ina new browser's tab.
  *      @type string $arrow        The HTML string for an arrow, for example:
- *                                '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'
+ *                                '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'.
  * }
  */
 function pinboard_bookmarks_get_title( $args ) {
@@ -213,6 +213,17 @@ function pinboard_bookmarks_get_title( $args ) {
     return $output;
 }
 
+/**
+ * Return the description of the bookmark.
+ *
+ * @param array $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type array   $item     The array containing the bookmark information.
+ *      @type integer $truncate The number of maximum words for the description.
+ *                              Default to 0 that means no truncation.
+ * }
+ */
 function pinboard_bookmarks_get_description( $args ) {
     $defaults = array (
         'item'         => array(),
@@ -235,6 +246,22 @@ function pinboard_bookmarks_get_description( $args ) {
     }
 }
 
+/**
+ * Return the date of the bookmark.
+ *
+ * @param array $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type boolean $display_time If the time of the bookmark should be displayed.
+ *                                  Default to false.
+ *      @type array   $item         The array containing the bookmark information.
+ *      @type string  $date_text    The leading text for the date.
+ *                                  Default to 'Stored on:'.
+ *      @type string $rel_txt       The rel attribute of the link.
+ *                                  Default to ' rel="bookmark"'.
+ *      @type string $new_tab_link  The HTML for open links ina new browser's tab.
+ * }
+ */
 function pinboard_bookmarks_get_date( $args ) {
     $defaults = array (
         'display_time' => false,
@@ -272,6 +299,28 @@ function pinboard_bookmarks_get_date( $args ) {
     return $output;
 }
 
+/**
+ * Return the tags of the bookmark.
+ *
+ * @param array $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type array   $item                     The array containing the bookmark information.
+ *      @type string  $tags_text                The leading text for the tags.
+ *                                              Default to 'Tags:'
+ *      @type boolean $display_hashtag          If an hashtag shoud be displayed before each tag.
+ *                                              Default to true.
+ *      @type string  $pinboard_user_tag_url    The URL structure to Pinboard tag for a user.
+ *                                              For example: https://pinboard.in/u:nickname/t:
+ *      @type boolean $use_comma                If a comma should be appended after each tag.
+ *      @type string  $rel_txt                  The rel attribute of the link.
+ *                                              Default to ' rel="bookmark"'.
+ *      @type string  $new_tab_link             The HTML for open links ina new browser's tab.
+ *      @type boolean $display_source           If the source of the bookmark should be displayed.
+ *      @type string  $pinboard_user_source_url The URL structure to Pinboard source for a user.
+ *                                              For example: https://pinboard.in/u:nickname/from:
+ * }
+ */
 function pinboard_bookmarks_get_tags( $args ) {
     $defaults = array (
         'item'                     => array(),
@@ -365,6 +414,29 @@ function pinboard_bookmarks_get_tags( $args ) {
     return $output;
 }
 
+/**
+ * Return the link to the archive of the bookmarks on Pinboard.
+ *
+ * @param array $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type boolean $display_arch_arr  If an HTML arrow should be displayed.
+ *                                       Default to true.
+ *      @type integer $maxitems          The number of items retrieved.
+ *      @type string  $username          The username on Pinboard.
+ *      @type string  $pinboard_user_url The URL structure to Pinboard page for a user.
+ *                                       For example: https://pinboard.in/u:nickname
+ *      @type string  $pinboard_url      The URL structure to Pinboard.
+ *                                       For example: https://pinboard.in
+ *      @type string  $archive_url       The URL structure to the archive on Pinboard.
+ *                                       For example: https://pinboard.in/u:nickname/t:tag
+ *      @type string  $rel_txt           The rel attribute of the link.
+ *                                       Default to ' rel="bookmark"'.
+ *      @type string  $new_tab_link      The HTML for open links ina new browser's tab.
+ *      @type string  $archive_text      The leading text for the archive link.
+ *                                       Default to 'See the bookmarks on Pinboard'.
+ * }
+ */
 function pinboard_bookmarks_get_archive_link( $args ) {
     $defaults = array (
         'display_arch_arr' => true,
