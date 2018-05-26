@@ -180,6 +180,20 @@ function pinboard_bookmarks_debug( $args ) {
 	}
 }
 
+/**
+ * Return the title of the bookmark.
+ *
+ * @param array $args {
+ *      The array containing the custom parameters.
+ *
+ *      @type string $rel_txt      The rel attribute of the link.
+ *                                 Default to ' rel="bookmark"'.
+ *      @type array  $item         The array containing the bookmark information.
+ *      @type string $new_tab_link The HTML for open links ina new browser's tab.
+ *      @type string $arrow        The HTML string for an arrow, for example:
+ *                                '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'
+ * }
+ */
 function pinboard_bookmarks_get_title( $args ) {
     $defaults = array (
         'rel_txt'      => ' rel="bookmark"',
