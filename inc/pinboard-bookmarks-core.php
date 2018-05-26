@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
  *      @type boolean $tags_text        The text to be prepended before the tags.
  *      @type boolean $display_hashtag  If the hashtag `#` should be displayed.
  *      @type boolean $use_comma        If a comma should be displayed between tags.
- *      @type boolean $display_source   If the source of the bookrmark should be displayed.
+ *      @type boolean $display_source   If the source of the bookmark should be displayed.
  *      @type boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
  *      @type boolean $display_archive  If the link to the archive on Pinboard should be displayed.
  *      @type boolean $archive_text     The text to be prepended before the archive link.

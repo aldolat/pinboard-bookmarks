@@ -193,6 +193,8 @@ function pinboard_bookmarks_debug( $args ) {
  *      @type string $arrow        The HTML string for an arrow, for example:
  *                                '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'.
  * }
+ * @since 1.7.2
+ * @return string The title of the bookmark, in an HTML paragraph linked to Pinboard.
  */
 function pinboard_bookmarks_get_title( $args ) {
     $defaults = array (
@@ -223,6 +225,8 @@ function pinboard_bookmarks_get_title( $args ) {
  *      @type integer $truncate The number of maximum words for the description.
  *                              Default to 0 that means no truncation.
  * }
+ * @since 1.7.2
+ * @return string The description of the bookmark, in an HTML paragraph.
  */
 function pinboard_bookmarks_get_description( $args ) {
     $defaults = array (
@@ -261,6 +265,8 @@ function pinboard_bookmarks_get_description( $args ) {
  *                                  Default to ' rel="bookmark"'.
  *      @type string $new_tab_link  The HTML for open links ina new browser's tab.
  * }
+ * @since 1.7.2
+ * @return string The date of the bookmark, in an HTML paragraph linked to Pinboard.
  */
 function pinboard_bookmarks_get_date( $args ) {
     $defaults = array (
@@ -320,6 +326,8 @@ function pinboard_bookmarks_get_date( $args ) {
  *      @type string  $pinboard_user_source_url The URL structure to Pinboard source for a user.
  *                                              For example: https://pinboard.in/u:nickname/from:
  * }
+ * @since 1.7.2
+ * @return string The tags of the bookmark, in an HTML paragraph, with each tag linked to Pinboard.
  */
 function pinboard_bookmarks_get_tags( $args ) {
     $defaults = array (
@@ -436,6 +444,8 @@ function pinboard_bookmarks_get_tags( $args ) {
  *      @type string  $archive_text      The leading text for the archive link.
  *                                       Default to 'See the bookmarks on Pinboard'.
  * }
+ * @since 1.7.2
+ * @return string The link to the archive on Pinboard.
  */
 function pinboard_bookmarks_get_archive_link( $args ) {
     $defaults = array (
