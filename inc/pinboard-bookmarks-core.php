@@ -148,7 +148,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // The introductory text
     if ( $intro_text ) {
-        $output .= '<p class="pinboard-bookmarks-intro-text">' . $intro_text . '</p>';
+        $output .= '<p class="pinboard-bookmarks-intro-text">' . wp_kses_post( $intro_text ) . '</p>';
     }
 
     // Start building the $output variable.
