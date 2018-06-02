@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
  *      @type boolean $tags_text        The text to be prepended before the tags.
  *      @type boolean $display_hashtag  If the hashtag `#` should be displayed.
  *      @type boolean $use_comma        If a comma should be displayed between tags.
- *      @type boolean $display_source   If the source of the bookrmark should be displayed.
+ *      @type boolean $display_source   If the source of the bookmark should be displayed.
  *      @type boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
  *      @type boolean $display_archive  If the link to the archive on Pinboard should be displayed.
  *      @type boolean $archive_text     The text to be prepended before the archive link.
@@ -148,7 +148,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // The introductory text
     if ( $intro_text ) {
-        $output .= '<p class="pinboard-bookmarks-intro-text">' . $intro_text . '</p>';
+        $output .= '<p class="pinboard-bookmarks-intro-text">' . wp_kses_post( $intro_text ) . '</p>';
     }
 
     // Start building the $output variable.
@@ -175,7 +175,10 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
         return $output;
 	}
 
-	// Define the maximum number of retrievable items (for example, I want 100 items but only 20 are available, so $maxitems will be 20).
+	/* Define the maximum number of retrievable items.
+     * For example, I want 100 items but only 20 are available,
+     * so $maxitems will be 20).
+     */
     if ( $random ) {
         $maxitems = $rss->get_item_quantity( 400 );
     } else {
@@ -194,136 +197,61 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
             shuffle( $rss_items );
             $rss_items = array_slice( $rss_items, 0, $quantity );
         }
+        // The number of finally displayed items
+        $displayed_items = count( $rss_items );
         // Start the loop
 		foreach ( $rss_items as $item ) {
 			$output .= '<li class="pinboard-bookmarks-li">';
 
-				// Title
+				// Title part
                 $title_part = '';
-				$title_part .= '<p class="pinboard-bookmarks-title">';
-					$title_part .= '<a class="pinboard-bookmarks-title-link"' . $rel_txt . ' href="' . esc_url( $item->get_permalink() ) . '"' . $new_tab_link . '>';
-						$title_part .= esc_html( $item->get_title() ) . $arrow;
-					$title_part .= '</a>';
-				$title_part .= '</p>';
+                $params = array(
+                    'rel_txt'      => $rel_txt,
+                    'item'         => $item,
+                    'new_tab_link' => $new_tab_link,
+                    'arrow'        => $arrow,
+                );
+                $title_part .= pinboard_bookmarks_get_title( $params );
 
-				// Description
+				// Description part
                 $description_part = '';
-				if ( $display_desc ) {
-					if ( $item->get_description() ) {
-						if ( $truncate > 0 ) {
-							$description_part .= '<p class="pinboard-bookmarks-desc">';
-								$description_part .= wp_trim_words( esc_html( $item->get_description() ), $truncate, '&hellip;' );
-							$description_part .= '</p>';
-						} else {
-							$description_part .= '<p class="pinboard-bookmarks-desc">' . esc_html( $item->get_description() ) . '</p>';
-						}
-					}
-				}
+                if ( $display_desc ) {
+                    $params = array(
+                        'item'         => $item,
+                        'truncate'     => $truncate,
+                    );
+                    $description_part .= pinboard_bookmarks_get_description( $params );
+                }
 
-				// Date
+				// Date part
                 $date_part = '';
-				if ( $display_date ) {
-                    // Get date format
-                    $date_format = get_option( 'date_format' );
-                    // Get time format, if requested
-                    if ( $display_time ) {
-                        $time_format = ' ' . get_option( 'time_format' );
-                        $date_format .= $time_format;
-                    }
-                    // Convert date and time of the bookmark into a UNIX timestamp
-                    $item_timestamp = strtotime( esc_html( $item->get_date( $date_format ) ) );
-                    // Get local time offset
-                    $local_offset = get_option( 'gmt_offset' ) * 3600;
-                    // Since the bookmark on Pinboard is stored in UTC, convert item timestamp from UTC to local time
-                    $item_local_timestamp = $item_timestamp + $local_offset;
-                    // Get the final date and time of the item
-					$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
-                    // Build the final HTML
-					$date_part .= '<p class="pinboard-bookmarks-date">';
-						if ( $date_text ) $date_part .= $date_text . ' ';
-						$date_part .= '<a class="pinboard-bookmarks-date-link"' . $rel_txt . ' href="' . esc_url( $item->get_id() ) . '"' . $new_tab_link . '>';
-							$date_part .= $bookmark_date;
-						$date_part .= '</a>';
-					$date_part .= '</p>';
-				}
+                if ( $display_date ) {
+                    $params = array(
+                        'display_time' => $display_time,
+                        'item'         => $item,
+                        'date_text'    => $date_text,
+                        'rel_txt'      => $rel_txt,
+                        'new_tab_link' => $new_tab_link
+                    );
+                    $date_part .= pinboard_bookmarks_get_date( $params );
+                }
 
-                // Tags
+                // Tags part
                 $tags_part = '';
-				if ( $display_tags ) {
-					$tags_list = (array) $item->get_categories();
-                    if ( $tags_list ) {
-						$tags_part .= '<p class="pinboard-bookmarks-tags">';
-
-						if ( $tags_text ) $tags_part .= $tags_text . ' ';
-						if ( $display_hashtag ) $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>'; else $hashtag = '';
-                        $url = $pinboard_user_tag_url;
-                        if ( $use_comma ) $comma = ', '; else $comma = ' ';
-
-						foreach( $tags_list as $tag ) {
-                            $item_tags = $tag->get_label();
-                            $item_tags = (array) explode( ' ', $item_tags );
-                            foreach ( $item_tags as $item_tag ) {
-								$tags_part .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' .  esc_attr( $item_tag ) . '</a>' . $comma;
-                            }
-                            // Removes the trailing comma and space in any quantity and any order after the last tag.
-                            $tags_part = rtrim( $tags_part, ', ' );
-						}
-
-                        /*
-                         * Append the source of the bookmark, like Pocket, Instapaper, Twitter.
-                         *
-                         * @since 1.4
-                         */
-                        if ( $display_source ) {
-                            if ( $source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' ) ) {
-                                $source_service = $source_service[0]['data'];
-                                switch ( $source_service ) {
-                                    case 'http://readitlater.com/':
-                                        $source_name = 'Pocket';
-                                        $source_address = $pinboard_user_source_url . 'pocket';
-                                        break;
-                                    case 'http://instapaper.com/':
-                                        $source_name = 'Instapaper';
-                                        $source_address = $pinboard_user_source_url . 'instapaper';
-                                        break;
-                                    /**
-                                     * Remove support for Twitter.
-                                     * Pinboard lets you fetch your tweets that:
-                                     * - have a link inside;
-                                     * - you liked and have a link inside.
-                                     * Pinboard then adds a "tag" depending on the type of tweet:
-                                     * `from twitter` (the first case) or `from twitter_favs` (the second one).
-                                     * So in Pinboard you have two separate pages for these bookmarks:
-                                     * - https://pinboard.in/u:username/from:twitter
-                                     * - https://pinboard.in/u:username/from:twitter_favs
-                                     * The problem is that, when Pinboard creates the RSS feed,
-                                     * there is no way to distinguish the first tweets from the second ones.
-                                     * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
-                                     * In this situation we cannot link to the correct page.
-                                     *
-                                     * Code removed:
-                                     * case 'http://twitter.com/':
-                                     *    $source_name = 'Twitter';
-                                     *    $source_address = $pinboard_user_source_url . 'twitter';
-                                     *    break;
-                                     *
-                                     * @since 1.6.0
-                                     */
-                                    // In some cases the source is Pinboard itself, so do not display it (also see some lines below).
-                                    case 'http://pinboard.in/':
-                                        $source_name = 'Pinboard';
-                                        $source_address = $pinboard_user_source_url . 'pinboard';
-                                        break;
-                                }
-                                if ( 'Pinboard' != $source_name ) {
-                                    $tags_part .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
-                                }
-                            }
-                        }
-
-						$output .= '</p>';
-                    }
-				}
+                if ( $display_tags ) {
+                    $params = array(
+                        'item'                     => $item,
+                        'tags_text'                => $tags_text,
+                        'display_hashtag'          => $display_hashtag,
+                        'pinboard_user_tag_url'    => $pinboard_user_tag_url,
+                        'use_comma'                => $use_comma,
+                        'rel_txt'                  => $rel_txt,
+                        'new_tab_link'             => $new_tab_link,
+                        'display_source'           => $display_source,
+                        'pinboard_user_source_url' => $pinboard_user_source_url,
+                    );
+                    $tags_part .= pinboard_bookmarks_get_tags( $params );
+                }
 
                 // Ordering item parts
                 if ( ! is_array( $items_order ) ) {
@@ -347,7 +275,6 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                 }
 
 			$output .= '</li>';
-
 		}
 	}
 
@@ -355,26 +282,24 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
     // The archive link.
 	if ( ! is_wp_error( $rss ) && $display_archive ) {
-		if ( $display_arch_arr ) $arrow = '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>'; else $arrow = '';
-		$output .= '<p class="pinboard-bookmarks-archive">';
-            if ( $maxitems == 0 ) {
-                if ( $username ) {
-                    $url_to_archive = $pinboard_user_url;
-                } else {
-                    $url_to_archive = $pinboard_url;
-                }
-            } else {
-                $url_to_archive = $archive_url;
-            }
-			$output .= '<a class="pinboard-bookmarks-archive-link"' . $rel_txt . ' href="' . esc_url( $url_to_archive ) . '"' .  $new_tab_link . '>';
-				$output .= esc_html( $archive_text ) . $arrow;
-			$output .= '</a>';
-		$output .= '</p>';
+        $params = array(
+            'display_arch_arr' => $display_arch_arr,
+            'maxitems' => $maxitems,
+            'username' => $username,
+            'pinboard_user_url' => $pinboard_user_url,
+            'pinboard_url' => $pinboard_url,
+            'archive_url' => $archive_url,
+            'rel_txt' => $rel_txt,
+            'new_tab_link' => $new_tab_link,
+            'archive_text' => $archive_text,
+        );
+        $output .= pinboard_bookmarks_get_archive_link( $params );
 	}
 
     // The debugging informations.
     if ( $debug_options || $debug_urls ) {
         $params = array(
+            'admin_only'    => $admin_only,
             'debug_options' => $debug_options,
             'debug_urls'    => $debug_urls,
             'options'       => $args,
@@ -384,6 +309,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
                 'complete_feed_url' => $feed_url,
                 'archive_url'       => $archive_url,
                 'items_retrieved'   => $maxitems,
+                'items_displayed'   => $displayed_items,
             ),
         );
         $output .= pinboard_bookmarks_debug( $params );

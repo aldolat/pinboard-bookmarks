@@ -4,7 +4,7 @@
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 5.0  
-**Stable tag:** 1.7.1  
+**Stable tag:** 1.7.2  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -121,11 +121,7 @@ If you want to return the result, use `get_pinboard_bookmarks_fetch_feed( $args 
 
 Make sure to properly use the opening and closing tags `<?php` and `?>` respectively.
 
-The only mandatory options are `username` and `tags`; you have to use one of them at least. The other options are the default options which you can change according to your needs. It isn't necessary to insert all of them.
-
-### Privacy Policy ###
-
-This plugin does not collect any user data.
+The only mandatory option is `username`. The other options are the default options which you can change according to your needs. It isn't necessary to insert all of them.
 
 ### Help, Bugs, and Contributing ###
 
@@ -134,6 +130,10 @@ If you need help, please use [WordPress forum](http://wordpress.org/support/plug
 If you have found a bug, please report it on [GitHub](https://github.com/aldolat/pinboard-bookmarks/issues).
 
 This plugin is developed using [GitHub](https://github.com/aldolat/pinboard-bookmarks). If you wrote an enhancement and would share it with the world, please send me a [Pull request](https://github.com/aldolat/pinboard-bookmarks/pulls).
+
+### Privacy Policy ###
+
+This plugin does not collect any user data.
 
 ## Installation ##
 
@@ -152,6 +152,11 @@ This section describes how to install the plugin and get it working.
 ![2. An example of rendered widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
 
 ## Changelog ##
+
+### 1.7.2 ###
+
+* Created some functions in a separate file.
+* Minor bug fix and enhancements.
 
 ### 1.7.1 ###
 
