@@ -156,7 +156,7 @@ This section describes how to install the plugin and get it working.
 ### 1.7.2 ###
 
 * Created some functions in a separate file.
-* Minor bug fix.
+* Minor bug fix and enhancements.
 
 ### 1.7.1 ###
 
