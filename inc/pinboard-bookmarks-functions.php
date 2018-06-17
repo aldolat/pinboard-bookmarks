@@ -145,7 +145,7 @@ function pinboard_bookmarks_debug( $args ) {
         $output .= '<ul class="pinboard-bookmarks-debug-ul">';
         foreach ( $options as $key => $value ) {
             if ( empty( $value ) ) $value = esc_html__( '(empty)', 'pinboard-bookmarks' );
-            $output .= '<li class="pinboard-bookmarks-debug-li"><strong>'. $key . ':</strong> <code>' . esc_html( $value ) . '</code></li>';
+            $output .= '<li class="pinboard-bookmarks-debug-li">'. $key . ': <code>' . esc_html( $value ) . '</code></li>';
         }
         $output .= '</ul>';
     }
@@ -155,7 +155,7 @@ function pinboard_bookmarks_debug( $args ) {
         $output .= '<ul class="pinboard-bookmarks-debug-ul">';
         foreach ( $urls as $key => $value ) {
             if ( empty( $value ) ) $value = esc_html__( '(empty)', 'pinboard-bookmarks' );
-            $output .= '<li class="pinboard-bookmarks-debug-li"><strong>'. $key . ':</strong> <code>' . $value . '</code></li>';
+            $output .= '<li class="pinboard-bookmarks-debug-li">'. $key . ': <code>' . $value . '</code></li>';
         }
         $output .= '</ul>';
     }
