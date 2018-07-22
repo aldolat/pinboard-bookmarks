@@ -247,7 +247,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
         <div class="pinboard-bookmarks-widget-content">
 
-            <h4 class="no-border"><?php esc_html_e( 'Informations', 'pinboard-bookmarks' ); ?></h4>
+            <h4 class="no-border"><?php esc_html_e( 'Introduction', 'pinboard-bookmarks' ); ?></h4>
 
     		<p>
     			<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter a username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
@@ -560,7 +560,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
             <?php // Admins only
             pinboard_bookmarks_form_checkbox(
-                esc_html__( 'Display debugging informations to admins only', 'pinboard-bookmarks' ),
+                esc_html__( 'Display debugging information to admins only', 'pinboard-bookmarks' ),
                 $this->get_field_id( 'admin_only' ),
                 $this->get_field_name( 'admin_only' ),
                 checked( $admin_only, true, false )
