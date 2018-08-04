@@ -1,4 +1,4 @@
-# <img src="https://ps.w.org/posts-in-sidebar/assets/banner-772x250.png" height=250 alt="Posts in Sidebar" />
+# <img src="https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png" height=250 alt="Pinboard Bookmarks" />
 [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 
 # Pinboard Bookmarks #
