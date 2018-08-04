@@ -157,3 +157,8 @@ This section describes how to install the plugin and get it working.
 ## Upgrade Notice ##
 
 No upgrade notice.
+
+[CHANGELOG]: ./CHANGELOG.md
+[LICENSE]: ./gpl-3.0.txt
+[version-badge]: https://img.shields.io/badge/version-1.7.2-blue.svg
+[license-badge]: https://img.shields.io/badge/license-GPL-blue.svg
