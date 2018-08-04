@@ -1,4 +1,5 @@
-# <img src="https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png" height=250 alt="Pinboard Bookmarks" />
+![banner](https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png)
+
 [![version][version-badge]][CHANGELOG]
 [![requires][requires-badge]][README]
 [![tested][tested-badge]][README]
