@@ -161,4 +161,4 @@ No upgrade notice.
 [CHANGELOG]: ./CHANGELOG.md
 [LICENSE]: ./gpl-3.0.txt
 [version-badge]: https://img.shields.io/badge/version-1.7.2-blue.svg
-[license-badge]: https://img.shields.io/badge/license-GPL-blue.svg
+[license-badge]: https://img.shields.io/badge/license-GPLv3-blue.svg
