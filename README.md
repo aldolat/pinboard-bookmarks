@@ -1,7 +1,7 @@
 # <img src="https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png" height=250 alt="Pinboard Bookmarks" />
 [![version][version-badge]][CHANGELOG]
-[![requires][requires-badge]][README]
-[![tested][tested-badge]][README]
+[![requires_WordPress][requires_WordPress-badge]][README]
+[![tested_up_to][tested_up_to-badge]][README]
 [![license][license-badge]][LICENSE]
 
 # Pinboard Bookmarks #
@@ -165,6 +165,6 @@ No upgrade notice.
 [LICENSE]: ./gpl-3.0.txt
 [README]: ./README.md
 [version-badge]: https://img.shields.io/badge/version-1.7.2-blue.svg
-[requires-badge]: https://img.shields.io/badge/requires-3.0.0-green.svg
-[tested-badge]: https://img.shields.io/badge/tested-5.0.0-green.svg
+[requires_WordPress-badge]: https://img.shields.io/badge/requires-3.0.0-green.svg
+[tested_up_to-badge]: https://img.shields.io/badge/tested-5.0.0-green.svg
 [license-badge]: https://img.shields.io/badge/license-GPLv3-ff69b4.svg
