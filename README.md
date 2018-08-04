@@ -167,4 +167,4 @@ No upgrade notice.
 [version-badge]: https://img.shields.io/badge/version-1.7.2-blue.svg
 [requires-badge]: https://img.shields.io/badge/requires-3.0.0-green.svg
 [tested-badge]: https://img.shields.io/badge/tested-5.0.0-green.svg
-[license-badge]: https://img.shields.io/badge/license-GPLv3-lightgrey.svg
+[license-badge]: https://img.shields.io/badge/license-GPLv3-ff69b4.svg
