@@ -1,3 +1,6 @@
+# <img src="https://ps.w.org/posts-in-sidebar/assets/banner-772x250.png" height=250 alt="Posts in Sidebar" />
+[![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
+
 # Pinboard Bookmarks #
 **Contributors:** aldolat  
 **Donate link:** http://dev.aldolat.it/projects/pinboard-bookmarks/  
