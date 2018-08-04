@@ -1,5 +1,10 @@
 == Changelog ==
 
+= Unreleased =
+
+* Added CHANGELOG.md
+* Added badges in README.md
+
 = 1.7.2 =
 
 * Created some functions in a separate file.
