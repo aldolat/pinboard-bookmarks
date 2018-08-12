@@ -77,7 +77,7 @@ function pinboard_bookmarks_setup() {
 	// Load the widget's form functions.
 	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-widget-form-functions.php';
 	// Load the widget's PHP file.
-	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-widget.php';
+	require_once plugin_dir_path( __FILE__ ) . 'inc/class-pinboard-bookmarks-widget.php';
 
 	/*
 	 * Load Pinboard Bookmarks' widgets.
