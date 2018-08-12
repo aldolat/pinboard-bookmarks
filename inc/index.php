@@ -1,2 +1,9 @@
 <?php
-// Silence is golden.
+/**
+ * Pinboard Bookmarks plugin.
+ *
+ * @package WordPress
+ * @subpackage Pinboard Bookmarks
+ */
+
+/* Silence is golden */

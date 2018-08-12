@@ -4,6 +4,7 @@
 
 * Added CHANGELOG.md
 * Added badges in README.md
+* Checked all files with PHPCS.
 
 = 1.7.2 =
 
