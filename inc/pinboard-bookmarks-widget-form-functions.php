@@ -88,18 +88,17 @@ function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placehold
  * @since 1.12
  */
 function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $comment = '', $class = '' ) {
-	echo '<p>';
-	if ( $class ) {
-		$class = 'checkbox ' . $class;
-	} else {
-		$class = 'checkbox';
-	}
-	echo '<input class="' . esc_attr( $class ) . '" type="checkbox" ' . $checked . ' id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" />&nbsp;';
-	pinboard_bookmarks_form_label( $label, $id );
+	$class = rtrim( 'checkbox ' . $class );
+	?>
+<p>
+	<input class="<?php echo esc_attr( $class ); ?>" type="checkbox" <?php checked( $checked ); ?> id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" />&nbsp;<?php pinboard_bookmarks_form_label( $label, $id ); ?>
+	<?php
 	if ( $comment ) {
-		echo '<br /><em>' . wp_kses_post( $comment ) . '</em>';
-	}
-	echo '</p>';
+		?>
+		<br /><em><?php wp_kses_post( $comment ); ?></em>
+	<?php } ?>
+</p>
+	<?php
 }
 
 /**
@@ -115,21 +114,21 @@ function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $commen
  * @since 1.12
  */
 function pinboard_bookmarks_form_select( $label, $id, $name, $options, $value, $comment = '', $class = '' ) {
-	echo '<p>';
-	pinboard_bookmarks_form_label( $label, $id );
-	if ( $class ) {
-		$class = 'widefat ' . $class;
-	} else {
-		$class = 'widefat';
-	}
-	echo '&nbsp;<select name="' . esc_attr( $name ) . '" class="' . esc_attr( $class ) . '">';
-	foreach ( $options as $option ) {
-		$selected = selected( $option['value'], $value, false );
-		echo '<option ' . $selected . ' value="' . esc_attr( $option['value'] ) . '">' . esc_html( $option['desc'] ) . '</option>';
-	}
-	echo '</select>';
-	if ( $comment ) {
-		echo '<br /><em>' . wp_kses_post( $comment ) . '</em>';
-	}
-	echo '</p>';
+	$class = rtrim( 'widefat ' . $class );
+	?>
+<p>
+	<?php pinboard_bookmarks_form_label( $label, $id ); ?>
+	&nbsp;
+	<select name="<?php esc_attr( $name ); ?>" class="<?php esc_attr( $class ); ?>">
+		<?php foreach ( $options as $option ) : ?>
+		<option <?php selected( $option['value'], $value, true ); ?> value="<?php echo esc_attr( $option['value'] ); ?>">
+			<?php echo esc_html( $option['desc'] ); ?>
+		</option>
+		<?php endforeach; ?>
+	</select>
+	<?php if ( $comment ) : ?>
+	<br /><em><?php echo wp_kses_post( $comment ); ?></em>
+	<?php endif; ?>
+</p>
+	<?php
 }
