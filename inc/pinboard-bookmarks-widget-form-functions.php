@@ -91,9 +91,7 @@ function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placehold
 	rows="2" cols="10"
 	placeholder="<?php echo esc_html( $placeholder ); ?>"
 	class="widefat"
-	style="<?php echo esc_attr( $style ); ?>">
-		<?php echo esc_textarea( $text ); ?>
-	</textarea>
+	style="<?php echo esc_attr( $style ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
 	<?php
 
 	if ( $comment ) {
