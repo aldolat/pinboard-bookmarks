@@ -38,19 +38,33 @@ function pinboard_bookmarks_form_label( $label, $id ) {
  * @param string $placeholder The HTML placeholder for the input form.
  * @param string $comment An optional comment to display. It is displayed below the input form.
  * @param string $style An optional inline style.
+ * @param string $class An optional CSS class.
  * @uses pinboard_bookmarks_form_label
  */
-function pinboard_bookmarks_form_input_text( $label, $id, $name, $value, $placeholder = '', $comment = '', $style = '' ) {
+function pinboard_bookmarks_form_input_text( $label, $id, $name, $value, $placeholder = '', $comment = '', $style = '', $class = '' ) {
+	$class = rtrim( 'widefat pinboard-bookmarks-checkbox ' . $class );
+
 	if ( $style ) {
 		echo '<p style="' . esc_attr( $style ) . '">';
 	} else {
 		echo '<p>';
 	}
+
 	pinboard_bookmarks_form_label( $label, $id );
-	echo '<input type="text" id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '" placeholder="' . esc_html( $placeholder ) . '" class="widefat" />';
+
+	?>
+	<input type="text"
+		id="<?php echo esc_attr( $id ); ?>"
+		name="<?php echo esc_attr( $name ); ?>"
+		value="<?php echo esc_attr( $value ); ?>"
+		placeholder="<?php echo esc_html( $placeholder ); ?>"
+		class="<?php echo esc_attr( $class ); ?>" />
+	<?php
+
 	if ( $comment ) {
 		echo '<br /><em>' . wp_kses_post( $comment ) . '</em>';
 	}
+
 	echo '</p>';
 }
 
@@ -62,14 +76,26 @@ function pinboard_bookmarks_form_input_text( $label, $id, $name, $value, $placeh
  * @param string $name The name of the textarea form.
  * @param string $text The text to display.
  * @param string $placeholder The HTML placeholder for the input form.
- * @param string $style An optional inline style.
  * @param string $comment An optional comment to display. It is displayed below the textarea form.
+ * @param string $style An optional inline style.
  * @since 1.12
  */
-function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placeholder = '', $style = '', $comment = '' ) {
+function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placeholder = '', $comment = '', $style = '' ) {
 	echo '<p>';
 	pinboard_bookmarks_form_label( $label, $id );
-	echo '<textarea id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" rows="2" cols="10" placeholder="' . esc_html( $placeholder ) . '" class="widefat" style="' . esc_attr( $style ) . '">' . esc_textarea( $text ) . '</textarea>';
+
+	?>
+	<textarea
+	id="<?php echo esc_attr( $id ); ?>"
+	name="<?php echo esc_attr( $name ); ?>"
+	rows="2" cols="10"
+	placeholder="<?php echo esc_html( $placeholder ); ?>"
+	class="widefat"
+	style="<?php echo esc_attr( $style ); ?>">
+		<?php echo esc_textarea( $text ); ?>
+	</textarea>
+	<?php
+
 	if ( $comment ) {
 		echo '<br /><em>' . wp_kses_post( $comment ) . '</em>';
 	}
@@ -88,16 +114,16 @@ function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placehold
  * @since 1.12
  */
 function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $comment = '', $class = '' ) {
-	$class = rtrim( 'checkbox ' . $class );
+	$class = rtrim( 'checkbox pinboard-bookmarks-select ' . $class );
 	?>
-<p>
-	<input class="<?php echo esc_attr( $class ); ?>" type="checkbox" <?php checked( $checked ); ?> id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" />&nbsp;<?php pinboard_bookmarks_form_label( $label, $id ); ?>
-	<?php
-	if ( $comment ) {
-		?>
-		<br /><em><?php wp_kses_post( $comment ); ?></em>
-	<?php } ?>
-</p>
+	<p>
+		<input class="<?php echo esc_attr( $class ); ?>" type="checkbox" <?php checked( $checked ); ?> id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" />&nbsp;<?php pinboard_bookmarks_form_label( $label, $id ); ?>
+		<?php
+		if ( $comment ) {
+			?>
+			<br /><em><?php wp_kses_post( $comment ); ?></em>
+		<?php } ?>
+	</p>
 	<?php
 }
 
@@ -114,21 +140,21 @@ function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $commen
  * @since 1.12
  */
 function pinboard_bookmarks_form_select( $label, $id, $name, $options, $value, $comment = '', $class = '' ) {
-	$class = rtrim( 'widefat ' . $class );
+	$class = rtrim( 'pinboard-bookmarks-select ' . $class );
 	?>
-<p>
-	<?php pinboard_bookmarks_form_label( $label, $id ); ?>
-	&nbsp;
-	<select name="<?php esc_attr( $name ); ?>" class="<?php esc_attr( $class ); ?>">
-		<?php foreach ( $options as $option ) : ?>
-		<option <?php selected( $option['value'], $value, true ); ?> value="<?php echo esc_attr( $option['value'] ); ?>">
-			<?php echo esc_html( $option['desc'] ); ?>
-		</option>
-		<?php endforeach; ?>
-	</select>
-	<?php if ( $comment ) : ?>
-	<br /><em><?php echo wp_kses_post( $comment ); ?></em>
-	<?php endif; ?>
-</p>
+	<p>
+		<?php pinboard_bookmarks_form_label( $label, $id ); ?>
+		&nbsp;
+		<select name="<?php echo esc_attr( $name ); ?>" class="<?php echo esc_attr( $class ); ?>">
+			<?php foreach ( $options as $option ) : ?>
+			<option <?php selected( $option['value'], $value, true ); ?> value="<?php echo esc_attr( $option['value'] ); ?>">
+				<?php echo esc_html( $option['desc'] ); ?>
+			</option>
+			<?php endforeach; ?>
+		</select>
+		<?php if ( $comment ) : ?>
+		<br /><em><?php echo wp_kses_post( $comment ); ?></em>
+		<?php endif; ?>
+	</p>
 	<?php
 }

@@ -299,8 +299,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$this->get_field_name( 'intro_text' ),
 				$instance['intro_text'],
 				esc_html__( 'These are my bookmarks on Pinboard about Italian recipes.', 'pinboard-bookmarks' ),
-				$style = 'resize: vertical; width: 100%; height: 80px;',
-				esc_html__( 'You can use some HTML, as you would do when writing a post.', 'pinboard-bookmarks' )
+				esc_html__( 'You can use some HTML, as you would do when writing a post.', 'pinboard-bookmarks' ),
+				$style = 'resize: vertical; height: 80px;'
 			);
 			?>
 
