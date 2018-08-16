@@ -129,6 +129,7 @@ function pinboard_bookmarks_debug( $args ) {
 		'admin_only'    => true,
 		'debug_options' => false,
 		'debug_urls'    => false,
+		'widget_id'     => '',
 		'options'       => '',
 		'urls'          => array(),
 	);
@@ -138,6 +139,7 @@ function pinboard_bookmarks_debug( $args ) {
 	$admin_only    = $args['admin_only'];
 	$debug_options = $args['debug_options'];
 	$debug_urls    = $args['debug_urls'];
+	$widget_id     = $args['widget_id'];
 	$options       = $args['options'];
 	$urls          = $args['urls'];
 
@@ -155,6 +157,8 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'WordPress version: %s', 'pinboard-bookmarks' ), $wp_version . '</li>' );
 		// translators: %s is the plugin version.
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>' );
+		// translators: %s is the ID of the widget.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'ID of this widget: %s', 'pinboard-bookmarks' ), $widget_id . '</li>' );
 		$output .= '</ul>';
 	}
 

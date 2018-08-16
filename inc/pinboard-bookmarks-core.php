@@ -84,6 +84,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		'admin_only'       => true,
 		'debug_options'    => false,
 		'debug_urls'       => false,
+		'widget_id'        => '',
 	);
 
 	$args             = wp_parse_args( $args, $defaults );
@@ -114,6 +115,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$admin_only       = $args['admin_only'];
 	$debug_options    = $args['debug_options'];
 	$debug_urls       = $args['debug_urls'];
+	$widget_id        = $args['widget_id'];
 
 	// If $username is empty, stop the function and give an alert.
 	if ( empty( $username ) ) {
@@ -347,6 +349,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			'admin_only'    => $admin_only,
 			'debug_options' => $debug_options,
 			'debug_urls'    => $debug_urls,
+			'widget_id'     => $widget_id,
 			'options'       => $args,
 			'urls'          => array(
 				'username_part'     => $username,
