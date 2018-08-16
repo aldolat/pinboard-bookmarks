@@ -52,7 +52,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-		echo "\n" . '<!-- Start Pinboard Bookmarks - ' . esc_attr( $args['widget_id'] ) . ' -->' . "\n";
+		echo "\n" . '<!-- Start Pinboard Bookmarks - ' . $args['widget_id'] . ' -->' . "\n";
 
 		echo $args['before_widget'];
 
@@ -116,13 +116,13 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['intro_text'] = wp_kses_post( $new_instance['intro_text'] );
 		$instance['username']   = preg_replace( '([^a-zA-Z0-9\-_])', '', sanitize_text_field( $new_instance['username'] ) );
 
-		$instance['tags']     = sanitize_text_field( $new_instance['tags'] );
-			$instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
-			$tags             = explode( ' ', $instance['tags'] );
+		$instance['tags'] = sanitize_text_field( $new_instance['tags'] );
+		$instance['tags'] = trim( preg_replace( '([\s,]+)', ' ', $instance['tags'] ) );
+		$tags             = explode( ' ', $instance['tags'] );
 		if ( 4 < count( $tags ) ) {
 			$tags = array_slice( $tags, 0, 4 );
 		}
-			$instance['tags'] = implode( ' ', $tags );
+		$instance['tags'] = implode( ' ', $tags );
 
 		$instance['source'] = sanitize_text_field( $new_instance['source'] );
 
