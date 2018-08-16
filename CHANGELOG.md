@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-* Added CHANGELOG.md
-* Added badges in README.md
+* Added CHANGELOG.md.
+* Added badges in README.md.
+* Added widget ID in debug display.
 * Checked all files with [WordPress Coding Standard for PHPCS](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards).
 
 ## [1.7.2] - 2018-06-02

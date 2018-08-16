@@ -2,8 +2,9 @@
 
 = Unreleased =
 
-* Added CHANGELOG.md
-* Added badges in README.md
+* Added CHANGELOG.md.
+* Added badges in README.md.
+* Added widget ID in debug display.
 * Checked all files with Checked all files with WordPress Coding Standard for PHPCS.
 
 = 1.7.2 =
