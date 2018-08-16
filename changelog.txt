@@ -4,7 +4,7 @@
 
 * Added CHANGELOG.md
 * Added badges in README.md
-* Checked all files with PHPCS.
+* Checked all files with Checked all files with WordPress Coding Standard for PHPCS.
 
 = 1.7.2 =
 
