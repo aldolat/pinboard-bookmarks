@@ -93,6 +93,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			'admin_only'       => $instance['admin_only'],
 			'debug_options'    => $instance['debug_options'],
 			'debug_urls'       => $instance['debug_urls'],
+			'widget_id'        => $instance['widget_id'],
 		) );
 
 		echo $args['after_widget'];
@@ -201,6 +202,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? $new_instance['admin_only'] : false;
 		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
 		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
+
+		// This option is stored only for debug purposes.
+		$instance['widget_id'] = $this->id;
 
 		return $instance;
 	}
