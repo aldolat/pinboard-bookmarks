@@ -42,7 +42,7 @@ function pinboard_bookmarks_form_label( $label, $id ) {
  * @uses pinboard_bookmarks_form_label
  */
 function pinboard_bookmarks_form_input_text( $label, $id, $name, $value, $placeholder = '', $comment = '', $style = '', $class = '' ) {
-	$class = rtrim( 'widefat pinboard-bookmarks-checkbox ' . $class );
+	$class = rtrim( 'widefat pinboard-bookmarks-input ' . $class );
 
 	if ( $style ) {
 		echo '<p style="' . esc_attr( $style ) . '">';
@@ -112,7 +112,7 @@ function pinboard_bookmarks_form_textarea( $label, $id, $name, $text, $placehold
  * @since 1.12
  */
 function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $comment = '', $class = '' ) {
-	$class = rtrim( 'checkbox pinboard-bookmarks-select ' . $class );
+	$class = rtrim( 'checkbox pinboard-bookmarks-checkbox ' . $class );
 	?>
 	<p>
 		<input class="<?php echo esc_attr( $class ); ?>" type="checkbox" <?php checked( $checked ); ?> id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" />&nbsp;<?php pinboard_bookmarks_form_label( $label, $id ); ?>
