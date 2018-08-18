@@ -2,8 +2,7 @@
 /**
  * The shortcode of Pinboard Bookmarks plugin.
  *
- * @package WordPress
- * @subpackage Pinboard Bookmarks
+ * @package PinboardBookmarks
  * @since 1.0
  */
 

@@ -2,8 +2,7 @@
 /**
  * This file contains the functions used in the widget's forms
  *
- * @package WordPress
- * @subpackage Pinboard Bookmarks
+ * @package PinboardBookmarks
  * @since 1.0
  */
 

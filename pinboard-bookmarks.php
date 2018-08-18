@@ -10,8 +10,7 @@
  * Text Domain: pinboard-bookmarks
  * Domain Path: /languages/
  *
- * @package WordPress
- * @subpackage Pinboard Bookmarks
+ * @package PinboardBookmarks
  */
 
 /*

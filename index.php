@@ -4,8 +4,7 @@
  *
  * This file is intended to be empty.
  *
- * @package WordPress
- * @subpackage Pinboard Bookmarks
+ * @package PinboardBookmarks
  */
 
 /* Silence is golden */

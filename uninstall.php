@@ -2,8 +2,7 @@
 /**
  * Pinboard Bookmarks Uninstall
  *
- * @package WordPress
- * @subpackage Pinboard Bookmarks
+ * @package PinboardBookmarks
  * @since 1.0
  */
 
