@@ -165,7 +165,7 @@ No upgrade notice.
 [CHANGELOG]: ./CHANGELOG.md
 [LICENSE]: ./gpl-3.0.txt
 [README]: ./README.md
-[version-badge]: https://img.shields.io/badge/version-1.7.2-blue.svg
-[requires-badge]: https://img.shields.io/badge/requires__WP-3.0.0-green.svg
-[tested-badge]: https://img.shields.io/badge/tested__WP-5.0.0-green.svg
-[license-badge]: https://img.shields.io/badge/license-GPLv3-ff69b4.svg
+[version-badge]: https://img.shields.io/badge/Version-1.7.2-blue.svg
+[requires-badge]: https://img.shields.io/badge/Requires_WordPress-3.0.0-green.svg
+[tested-badge]: https://img.shields.io/badge/Tested_up_to_WordPress-5.0.0-green.svg
+[license-badge]: https://img.shields.io/badge/License-GPLv3-ff69b4.svg
