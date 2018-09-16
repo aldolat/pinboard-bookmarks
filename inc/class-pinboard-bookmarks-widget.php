@@ -56,7 +56,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		echo $args['before_widget'];
 
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 		}
 
 		// This check is necessary when upgrading from 1.6.0 to 1.7.0.
