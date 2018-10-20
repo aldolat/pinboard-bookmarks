@@ -64,36 +64,38 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['items_order'] = 'title description date tags';
 		}
 
-		pinboard_bookmarks_fetch_feed( array(
-			'intro_text'       => $instance['intro_text'],
-			'username'         => $instance['username'],
-			'tags'             => $instance['tags'],
-			'source'           => $instance['source'],
-			'quantity'         => $instance['quantity'],
-			'random'           => $instance['random'],
-			'display_desc'     => $instance['display_desc'],
-			'truncate'         => $instance['truncate'],
-			'display_date'     => $instance['display_date'],
-			'display_time'     => $instance['display_time'],
-			'date_text'        => $instance['date_text'],
-			'display_tags'     => $instance['display_tags'],
-			'tags_text'        => $instance['tags_text'],
-			'display_hashtag'  => $instance['display_hashtag'],
-			'use_comma'        => $instance['use_comma'],
-			'display_source'   => $instance['display_source'],
-			'display_arrow'    => $instance['display_arrow'],
-			'display_archive'  => $instance['display_archive'],
-			'archive_text'     => $instance['archive_text'],
-			'list_type'        => $instance['list_type'],
-			'display_arch_arr' => $instance['display_arch_arr'],
-			'new_tab'          => $instance['new_tab'],
-			'nofollow'         => $instance['nofollow'],
-			'items_order'      => $instance['items_order'],
-			'admin_only'       => $instance['admin_only'],
-			'debug_options'    => $instance['debug_options'],
-			'debug_urls'       => $instance['debug_urls'],
-			'widget_id'        => $instance['widget_id'],
-		) );
+		pinboard_bookmarks_fetch_feed(
+			array(
+				'intro_text'       => $instance['intro_text'],
+				'username'         => $instance['username'],
+				'tags'             => $instance['tags'],
+				'source'           => $instance['source'],
+				'quantity'         => $instance['quantity'],
+				'random'           => $instance['random'],
+				'display_desc'     => $instance['display_desc'],
+				'truncate'         => $instance['truncate'],
+				'display_date'     => $instance['display_date'],
+				'display_time'     => $instance['display_time'],
+				'date_text'        => $instance['date_text'],
+				'display_tags'     => $instance['display_tags'],
+				'tags_text'        => $instance['tags_text'],
+				'display_hashtag'  => $instance['display_hashtag'],
+				'use_comma'        => $instance['use_comma'],
+				'display_source'   => $instance['display_source'],
+				'display_arrow'    => $instance['display_arrow'],
+				'display_archive'  => $instance['display_archive'],
+				'archive_text'     => $instance['archive_text'],
+				'list_type'        => $instance['list_type'],
+				'display_arch_arr' => $instance['display_arch_arr'],
+				'new_tab'          => $instance['new_tab'],
+				'nofollow'         => $instance['nofollow'],
+				'items_order'      => $instance['items_order'],
+				'admin_only'       => $instance['admin_only'],
+				'debug_options'    => $instance['debug_options'],
+				'debug_urls'       => $instance['debug_urls'],
+				'widget_id'        => $instance['widget_id'],
+			)
+		);
 
 		echo $args['after_widget'];
 
@@ -598,7 +600,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				<?php
 				printf(
 					// translators: %s is version of the plugin.
-					esc_html__( 'You are using Pinboard Bookmarks version %s.', 'pinboard-bookmarks' ), '<strong>' . esc_attr( PINBOARD_BOOKMARKS_PLUGIN_VERSION ) . '</strong>'
+					esc_html__( 'You are using Pinboard Bookmarks version %s.', 'pinboard-bookmarks' ),
+					'<strong>' . esc_attr( PINBOARD_BOOKMARKS_PLUGIN_VERSION ) . '</strong>'
 				);
 				?>
 			</p>
