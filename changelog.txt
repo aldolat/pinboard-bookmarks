@@ -1,6 +1,6 @@
 == Changelog ==
 
-= Unreleased =
+= 1.7.3 =
 
 * Added CHANGELOG.md.
 * Added badges in README.md.
