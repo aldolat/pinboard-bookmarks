@@ -2,8 +2,6 @@
 
 = 1.7.3 =
 
-* Added CHANGELOG.md.
-* Added badges in README.md.
 * Added widget ID in debug display.
 * Checked all files with Checked all files with WordPress Coding Standard for PHPCS.
 * Fixed filtering the widget title using widget id base.

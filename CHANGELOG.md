@@ -9,8 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.7.3] - 2018-10-21
 ### Added
-* Added CHANGELOG.md.
-* Added badges in README.md.
 * Added widget ID in debug display.
 * Checked all files with [WordPress Coding Standard for PHPCS](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards).
 ### Fixed
