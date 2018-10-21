@@ -1,10 +1,17 @@
+![banner](https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png)
+
+[![version][version-badge]][CHANGELOG]
+[![requires][requires-badge]][README]
+[![tested][tested-badge]][README]
+[![license][license-badge]][LICENSE]
+
 # Pinboard Bookmarks #
 **Contributors:** aldolat  
 **Donate link:** http://dev.aldolat.it/projects/pinboard-bookmarks/  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 5.0  
-**Stable tag:** 1.7.2  
+**Stable tag:** 1.7.3  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -151,70 +158,14 @@ This section describes how to install the plugin and get it working.
 ### 2. An example of rendered widget ###
 ![2. An example of rendered widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
 
-## Changelog ##
-
-### 1.7.2 ###
-
-* Created some functions in a separate file.
-* Minor bug fix and enhancements.
-
-### 1.7.1 ###
-
-* Updated shortcode.
-
-### 1.7.0 ###
-
-* Added an option to rearrange the elements of each items.
-* Fixed shuffling of items.
-* Fixed open link in new tabs for source.
-
-### 1.6.0 ###
-
-* Removed support for Twitter.
-* Removed option to get bookmarks from tags without setting a username.
-* Added introductory text.
-* Fixed option name for uninstall.php.
-* Minor fixes.
-
-### 1.5.0 ###
-
-* Display the source of the bookmark, even if a source has not been defined in the widget admin.
-* Minor fixes.
-
-### 1.4.0 ###
-
-* Display the source of the bookmarks, if activated.
-* Fix time display: now the plugin displays correctly the seconds.
-* Fix URL when using more than 1 tag.
-* Display a different URL to the archive in different cases.
-* Improve control for username.
-* Changed some class names.
-* Minor fixes.
-
-### 1.3 ###
-
-* Updated shortcode options.
-
-### 1.2 ###
-
-* Added "no-follow" option to all external links.
-* Added the number of retrieved items in debug section.
-* Added option to select the type of list (bullet or numeric list).
-* Added option to get bookmarks labeled with the source, like `from:pocket`.
-* Added option to display debugging informations to admins only.
-* Added option to display the time of the bookmarks.
-* Changed capabilities for viewing debug informations.
-* Hardening security.
-
-### 1.1 ###
-
-* Hardening security.
-* Various small improvements.
-
-### 1.0 ###
-
-* First release of the plugin.
-
 ## Upgrade Notice ##
 
 No upgrade notice.
+
+[CHANGELOG]: ./CHANGELOG.md
+[LICENSE]: ./gpl-3.0.txt
+[README]: ./README.md
+[version-badge]: https://img.shields.io/badge/Version-1.7.3-blue.svg
+[requires-badge]: https://img.shields.io/badge/Requires_WordPress-3.0.0-green.svg
+[tested-badge]: https://img.shields.io/badge/Tested_up_to_WordPress-5.0.0-green.svg
+[license-badge]: https://img.shields.io/badge/License-GPLv3-ff69b4.svg
