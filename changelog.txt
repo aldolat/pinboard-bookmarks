@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.4 =
+
+* Make sure that item timestamp and local offset are an integer.
+
 = 1.7.3 =
 
 * Added widget ID in debug display.
