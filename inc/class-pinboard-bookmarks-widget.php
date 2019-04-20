@@ -51,6 +51,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
+		$instance = wp_parse_args( $instance, pinboard_bookmarks_get_defaults() );
+
 		echo "\n" . '<!-- Start Pinboard Bookmarks - ' . $args['widget_id'] . ' -->' . "\n";
 
 		echo $args['before_widget'];
@@ -64,38 +66,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['items_order'] = 'title description date tags';
 		}
 
-		pinboard_bookmarks_fetch_feed(
-			array(
-				'intro_text'       => $instance['intro_text'],
-				'username'         => $instance['username'],
-				'tags'             => $instance['tags'],
-				'source'           => $instance['source'],
-				'quantity'         => $instance['quantity'],
-				'random'           => $instance['random'],
-				'display_desc'     => $instance['display_desc'],
-				'truncate'         => $instance['truncate'],
-				'display_date'     => $instance['display_date'],
-				'display_time'     => $instance['display_time'],
-				'date_text'        => $instance['date_text'],
-				'display_tags'     => $instance['display_tags'],
-				'tags_text'        => $instance['tags_text'],
-				'display_hashtag'  => $instance['display_hashtag'],
-				'use_comma'        => $instance['use_comma'],
-				'display_source'   => $instance['display_source'],
-				'display_arrow'    => $instance['display_arrow'],
-				'display_archive'  => $instance['display_archive'],
-				'archive_text'     => $instance['archive_text'],
-				'list_type'        => $instance['list_type'],
-				'display_arch_arr' => $instance['display_arch_arr'],
-				'new_tab'          => $instance['new_tab'],
-				'nofollow'         => $instance['nofollow'],
-				'items_order'      => $instance['items_order'],
-				'admin_only'       => $instance['admin_only'],
-				'debug_options'    => $instance['debug_options'],
-				'debug_urls'       => $instance['debug_urls'],
-				'widget_id'        => $instance['widget_id'],
-			)
-		);
+		pinboard_bookmarks_fetch_feed( $instance );
 
 		echo $args['after_widget'];
 
@@ -113,7 +84,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance               = (array) $old_instance;
+		$instance = (array) $old_instance;
+
 		$instance['title']      = sanitize_text_field( $new_instance['title'] );
 		$instance['intro_text'] = wp_kses_post( $new_instance['intro_text'] );
 		$instance['username']   = preg_replace( '([^a-zA-Z0-9\-_])', '', sanitize_text_field( $new_instance['username'] ) );
@@ -218,39 +190,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$defaults = array(
-			'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
-			'intro_text'       => '',
-			'username'         => '',
-			'tags'             => '',
-			'source'           => '',
-			'quantity'         => 5,
-			'random'           => false,
-			'display_desc'     => false,
-			'truncate'         => 0,
-			'display_date'     => false,
-			'display_time'     => false,
-			'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
-			'display_tags'     => false,
-			'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
-			'display_hashtag'  => true,
-			'use_comma'        => false,
-			'display_source'   => false,
-			'display_arrow'    => false,
-			'time'             => 1800,
-			'display_archive'  => true,
-			'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
-			'list_type'        => 'bullet',
-			'display_arch_arr' => true,
-			'new_tab'          => false,
-			'nofollow'         => true,
-			'items_order'      => 'title description date tags',
-			'admin_only'       => true,
-			'debug_options'    => false,
-			'debug_urls'       => false,
-		);
+		$instance = wp_parse_args( (array) $instance, pinboard_bookmarks_get_defaults() );
 
-		$instance         = wp_parse_args( (array) $instance, $defaults );
 		$random           = (bool) $instance['random'];
 		$display_desc     = (bool) $instance['display_desc'];
 		$display_date     = (bool) $instance['display_date'];

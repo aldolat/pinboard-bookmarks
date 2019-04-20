@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.7.5 =
+
+* The default options are in a separate function now to simplify the plugin.
+
 = 1.7.4 =
 
 * Make sure that item timestamp and local offset are an integer.
