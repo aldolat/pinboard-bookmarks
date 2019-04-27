@@ -2,8 +2,8 @@
 /**
  * Pinboard Bookmarks Uninstall
  *
+ * @since 1.0.0
  * @package PinboardBookmarks
- * @since 1.0
  */
 
 // Check for the 'WP_UNINSTALL_PLUGIN' constant, before executing.

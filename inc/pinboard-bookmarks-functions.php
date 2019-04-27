@@ -2,6 +2,7 @@
 /**
  * Pinboard Bookmarks plugin.
  *
+ * @since 1.0.0
  * @package PinboardBookmarks
  */
 

@@ -1,7 +1,8 @@
 <?php
 /**
- * Pinboard Bookmarks plugin.
+ * Pinboard Bookmarks plugin's core file
  *
+ * @since 1.0.0
  * @package PinboardBookmarks
  */
 

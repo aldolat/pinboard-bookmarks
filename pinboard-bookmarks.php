@@ -1,16 +1,27 @@
 <?php
 /**
+ * The plugin bootstrap file
+ *
+ * This file is read by WordPress to generate the plugin information in the plugin
+ * admin area. This file also includes all of the dependencies used by the plugin,
+ * registers the activation and deactivation functions, and defines a function
+ * that starts the plugin.
+ *
+ * @link    https://dev.aldolat.it/projects/pinboard-bookmarks/
+ * @since   1.0.0
+ * @package PinboardBookmarks
+ * @license GPLv3 or later
+ *
+ * @wordpress-plugin
  * Plugin Name: Pinboard Bookmarks
  * Description:  Publish Pinboard bookmarks on your WordPress blog.
- * Plugin URI: http://dev.aldolat.it/projects/pinboard-bookmarks/
+ * Plugin URI: https://dev.aldolat.it/projects/pinboard-bookmarks/
  * Author: Aldo Latino
- * Author URI: http://www.aldolat.it/
+ * Author URI: https://www.aldolat.it/
  * Version: 1.7.5
  * License: GPLv3 or later
  * Text Domain: pinboard-bookmarks
  * Domain Path: /languages/
- *
- * @package PinboardBookmarks
  */
 
 /*
