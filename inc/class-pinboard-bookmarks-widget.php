@@ -151,41 +151,10 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? true : false;
 		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? true : false;
 		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? true : false;
-
-		/**
-		 * Order of the elements of each items.
-		 *
-		 * @since 1.7.0
-		 */
-		// Sanitize unser input and make it lowercase.
-		$instance['items_order'] = strtolower( sanitize_text_field( $new_instance['items_order'] ) );
-		// Remove any space and comma from user input and remove leading/trailing spaces.
-		$instance['items_order'] = trim( preg_replace( '([\s,]+)', ' ', $instance['items_order'] ) );
-		// Create a copy of $instance['items_order'] and make it an array for some checks.
-		$items_order_check = explode( ' ', $instance['items_order'] );
-		// Check if the user entered elements that aren't in the four standard.
-		$correct_items = array( 'title', 'description', 'date', 'tags' );
-		foreach ( $items_order_check as $key => $value ) {
-			if ( ! in_array( $value, $correct_items, true ) ) {
-				unset( $items_order_check[ $key ] );
-			}
-		}
-		// Check for possible duplicates and remove them.
-		$items_order_check = array_unique( $items_order_check );
-		// Check for doubled elements and remove them.
-		if ( 4 < count( $items_order_check ) ) {
-			$items_order_check = array_slice( $items_order_check, 0, 4 );
-		}
-		// Return the checked elements into the main $instance['items_order'] variable.
-		$instance['items_order'] = implode( ' ', $items_order_check );
-		// If $instance['items_order'] is empty, fill it with standard values.
-		if ( empty( $instance['items_order'] ) ) {
-			$instance['items_order'] = 'title description date tags';
-		}
-
-		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? true : false;
-		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? true : false;
-		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? true : false;
+		$instance['items_order']      = pinboard_bookmarks_check_items( $new_instance['items_order'] );
+		$instance['admin_only']       = isset( $new_instance['admin_only'] ) ? true : false;
+		$instance['debug_options']    = isset( $new_instance['debug_options'] ) ? true : false;
+		$instance['debug_urls']       = isset( $new_instance['debug_urls'] ) ? true : false;
 
 		// This option is stored only for debug purposes.
 		$instance['widget_id'] = $this->id;

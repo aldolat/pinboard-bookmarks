@@ -626,3 +626,58 @@ function pinboard_bookmarks_get_archive_link( $args ) {
 
 	return $output;
 }
+
+/**
+ * Check if the items entered by the user are according to the standard.
+ *
+ * The function sanitizes the user input, removes any non-standard item,
+ * makes sure that all the standard items are present, removes any duplicate,
+ * and makes sure that the items are 4.
+ * If the final string is empty, it is filled with the standard value.
+ *
+ * @param string $items The string containing the items to be checked.
+ * @return string The items in the order to be displayed.
+ *
+ * @since 1.7.0 As a series of commands.
+ * @since 1.8.0 As a standalone function.
+ */
+function pinboard_bookmarks_check_items( string $items = '' ) {
+	// Define the standard items.
+	$standard_values = array( 'title', 'description', 'date', 'tags' );
+
+	// Sanitize user input and make it lowercase.
+	$items = strtolower( sanitize_text_field( $items ) );
+	// Remove any space and comma from user input and remove leading/trailing spaces.
+	$items = trim( preg_replace( '([\s,]+)', ' ', $items ) );
+
+	// Make the user input an array for some checks.
+	$items = explode( ' ', $items );
+
+	// Check if the user entered items that aren't in the four standard values.
+	foreach ( $items as $key => $value ) {
+		if ( ! in_array( $value, $standard_values, true ) ) {
+			unset( $items[ $key ] );
+		}
+	}
+
+	// Make sure that all the standard items are present in the array.
+	$items = array_merge( $items, $standard_values );
+
+	// Check for possible duplicates and remove them.
+	$items = array_unique( $items );
+
+	// Make sure that the items are only four.
+	if ( 4 < count( $items ) ) {
+		$items = array_slice( $items, 0, 4 );
+	}
+
+	// Restore the $items array into a string.
+	$items = implode( ' ', $items );
+
+	// If the input is empty, fill it with standard values.
+	if ( empty( $items ) ) {
+		$items = implode( ' ', $standard_values );
+	}
+
+	return $items;
+}
