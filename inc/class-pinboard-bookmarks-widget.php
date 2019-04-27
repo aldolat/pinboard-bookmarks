@@ -119,23 +119,23 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['quantity'] = 400;
 		}
 
-		$instance['random']       = isset( $new_instance['random'] ) ? 1 : 0;
-		$instance['display_desc'] = isset( $new_instance['display_desc'] ) ? 1 : 0;
+		$instance['random']       = isset( $new_instance['random'] ) ? true : false;
+		$instance['display_desc'] = isset( $new_instance['display_desc'] ) ? true : false;
 
 		$instance['truncate'] = absint( sanitize_text_field( $new_instance['truncate'] ) );
 		if ( '' === $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) {
 			$instance['truncate'] = 0;
 		}
 
-		$instance['display_date']    = isset( $new_instance['display_date'] ) ? 1 : 0;
-		$instance['display_time']    = isset( $new_instance['display_time'] ) ? 1 : 0;
+		$instance['display_date']    = isset( $new_instance['display_date'] ) ? true : false;
+		$instance['display_time']    = isset( $new_instance['display_time'] ) ? true : false;
 		$instance['date_text']       = trim( sanitize_text_field( $new_instance['date_text'] ) );
-		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? 1 : 0;
+		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? true : false;
 		$instance['tags_text']       = sanitize_text_field( $new_instance['tags_text'] );
-		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? 1 : 0;
-		$instance['use_comma']       = isset( $new_instance['use_comma'] ) ? 1 : 0;
-		$instance['display_source']  = isset( $new_instance['display_source'] ) ? 1 : 0;
-		$instance['display_arrow']   = isset( $new_instance['display_arrow'] ) ? 1 : 0;
+		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? true : false;
+		$instance['use_comma']       = isset( $new_instance['use_comma'] ) ? true : false;
+		$instance['display_source']  = isset( $new_instance['display_source'] ) ? true : false;
+		$instance['display_arrow']   = isset( $new_instance['display_arrow'] ) ? true : false;
 
 		$instance['time'] = absint( sanitize_text_field( $new_instance['time'] ) );
 		if ( '' === $instance['time'] || ! is_numeric( $instance['time'] ) ) {
@@ -145,12 +145,12 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['time'] = 1800;
 		}
 
-		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? 1 : 0;
+		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? true : false;
 		$instance['archive_text']     = sanitize_text_field( $new_instance['archive_text'] );
 		$instance['list_type']        = sanitize_text_field( $new_instance['list_type'] );
-		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? 1 : 0;
-		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? 1 : 0;
-		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? 1 : 0;
+		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? true : false;
+		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? true : false;
+		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? true : false;
 
 		/**
 		 * Order of the elements of each items.
@@ -183,9 +183,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['items_order'] = 'title description date tags';
 		}
 
-		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? 1 : 0;
-		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? 1 : 0;
-		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? 1 : 0;
+		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? true : false;
+		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? true : false;
+		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? true : false;
 
 		// This option is stored only for debug purposes.
 		$instance['widget_id'] = $this->id;
@@ -202,6 +202,25 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, pinboard_bookmarks_get_defaults() );
+
+		// *** STARTS PART TO BE REMOVED IN 1.8.1.
+		'on' === $instance['random'] ? $instance['random']                     = true : false;
+		'on' === $instance['display_desc'] ? $instance['display_desc']         = true : false;
+		'on' === $instance['display_date'] ? $instance['display_date']         = true : false;
+		'on' === $instance['display_time'] ? $instance['display_time']         = true : false;
+		'on' === $instance['display_tags'] ? $instance['display_tags']         = true : false;
+		'on' === $instance['display_hashtag'] ? $instance['display_hashtag']   = true : false;
+		'on' === $instance['use_comma'] ? $instance['use_comma']               = true : false;
+		'on' === $instance['display_source'] ? $instance['display_source']     = true : false;
+		'on' === $instance['display_arrow'] ? $instance['display_arrow']       = true : false;
+		'on' === $instance['display_archive'] ? $instance['display_archive']   = true : false;
+		'on' === $instance['display_arch_arr'] ? $instance['display_arch_arr'] = true : false;
+		'on' === $instance['new_tab'] ? $instance['new_tab']                   = true : false;
+		'on' === $instance['nofollow'] ? $instance['nofollow']                 = true : false;
+		'on' === $instance['admin_only'] ? $instance['admin_only']             = true : false;
+		'on' === $instance['debug_options'] ? $instance['debug_options']       = true : false;
+		'on' === $instance['debug_urls'] ? $instance['debug_urls']             = true : false;
+		// *** ENDS PART TO BE REMOVED IN 1.8.1.
 		?>
 
 		<div class="pinboard-bookmarks-widget-content">
