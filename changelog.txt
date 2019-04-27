@@ -3,6 +3,7 @@
 = 1.7.5 =
 
 * The default options are in a separate function now to simplify the plugin.
+* Code optimization.
 
 = 1.7.4 =
 

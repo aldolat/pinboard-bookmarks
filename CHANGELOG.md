@@ -7,9 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.7.5] - 2019-04-20
+## [1.7.5] - 2019-04-27
 ### Changed
 * The default options are in a separate function now to simplify the plugin.
+* Code optimization.
 
 ## [1.7.4] - 2019-02-24
 ### Fixed
