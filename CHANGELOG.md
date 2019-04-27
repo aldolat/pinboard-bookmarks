@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.7.5] - 2019-04-27
+## [1.8.0] - 2019-04-28
 ### Changed
 * The default options are in a separate function now to simplify the plugin.
 * Code optimization.
@@ -96,7 +96,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
-[1.7.5]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.4...1.7.5
+[1.8.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.4...1.8.0
 [1.7.4]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.3...1.7.4
 [1.7.3]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.2...1.7.3
 [1.7.2]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.1...1.7.2

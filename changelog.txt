@@ -1,6 +1,6 @@
 == Changelog ==
 
-= 1.7.5 =
+= 1.8.0 =
 
 * The default options are in a separate function now to simplify the plugin.
 * Code optimization.
