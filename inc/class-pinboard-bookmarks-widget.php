@@ -47,7 +47,18 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::widget()
 	 *
-	 * @param array $args     Widget arguments.
+	 * @param array $args Widget arguments.
+	 *                    $args contains:
+	 *                        $args['name'];
+	 *                        $args['id'];
+	 *                        $args['description'];
+	 *                        $args['class'];
+	 *                        $args['before_widget'];
+	 *                        $args['after_widget'];
+	 *                        $args['before_title'];
+	 *                        $args['after_title'];
+	 *                        $args['widget_id'];
+	 *                        $args['widget_name'].
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
@@ -191,23 +202,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, pinboard_bookmarks_get_defaults() );
-
-		$random           = (bool) $instance['random'];
-		$display_desc     = (bool) $instance['display_desc'];
-		$display_date     = (bool) $instance['display_date'];
-		$display_time     = (bool) $instance['display_time'];
-		$display_tags     = (bool) $instance['display_tags'];
-		$display_hashtag  = (bool) $instance['display_hashtag'];
-		$use_comma        = (bool) $instance['use_comma'];
-		$display_source   = (bool) $instance['display_source'];
-		$display_arrow    = (bool) $instance['display_arrow'];
-		$display_archive  = (bool) $instance['display_archive'];
-		$display_arch_arr = (bool) $instance['display_arch_arr'];
-		$new_tab          = (bool) $instance['new_tab'];
-		$nofollow         = (bool) $instance['nofollow'];
-		$admin_only       = (bool) $instance['admin_only'];
-		$debug_options    = (bool) $instance['debug_options'];
-		$debug_urls       = (bool) $instance['debug_urls'];
 		?>
 
 		<div class="pinboard-bookmarks-widget-content">
@@ -324,7 +318,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display items in random order', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'random' ),
 				$this->get_field_name( 'random' ),
-				$random
+				$instance['random']
 			);
 
 			// Fetching time.
@@ -346,7 +340,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the bookmark description', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_desc' ),
 				$this->get_field_name( 'display_desc' ),
-				$display_desc
+				$instance['display_desc']
 			);
 
 			// Description length.
@@ -369,7 +363,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the date of the bookmark', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_date' ),
 				$this->get_field_name( 'display_date' ),
-				$display_date
+				$instance['display_date']
 			);
 
 			// Time.
@@ -377,7 +371,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Also display the time of the bookmark', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_time' ),
 				$this->get_field_name( 'display_time' ),
-				$display_time
+				$instance['display_time']
 			);
 
 			// Text for the date.
@@ -399,7 +393,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display tags', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_tags' ),
 				$this->get_field_name( 'display_tags' ),
-				$display_tags
+				$instance['display_tags']
 			);
 
 			// Text for tags.
@@ -418,7 +412,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf( esc_html__( 'Display an hashtag %s before each tag', 'pinboard-bookmarks' ), '(<code>#</code>)' ),
 				$this->get_field_id( 'display_hashtag' ),
 				$this->get_field_name( 'display_hashtag' ),
-				$display_hashtag
+				$instance['display_hashtag']
 			);
 
 			// Comma.
@@ -427,7 +421,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf( esc_html__( 'Use a comma %s after each tag', 'pinboard-bookmarks' ), '(<code>,</code>)' ),
 				$this->get_field_id( 'use_comma' ),
 				$this->get_field_name( 'use_comma' ),
-				$use_comma
+				$instance['use_comma']
 			);
 
 			// Display source.
@@ -435,7 +429,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the source of the bookmark', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_source' ),
 				$this->get_field_name( 'display_source' ),
-				$display_source
+				$instance['display_source']
 			);
 			?>
 
@@ -447,7 +441,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the link to my bookmarks archive on Pinboard', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_archive' ),
 				$this->get_field_name( 'display_archive' ),
-				$display_archive
+				$instance['display_archive']
 			);
 
 			// Text for archive.
@@ -464,7 +458,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display an arrow after the link to the archive', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_arch_arr' ),
 				$this->get_field_name( 'display_arch_arr' ),
-				$display_arch_arr
+				$instance['display_arch_arr']
 			);
 			?>
 
@@ -495,7 +489,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display an arrow after each title', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_arrow' ),
 				$this->get_field_name( 'display_arrow' ),
-				$display_arrow
+				$instance['display_arrow']
 			);
 
 			// Open links in new tab.
@@ -503,7 +497,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Open links in a new browser tab', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'new_tab' ),
 				$this->get_field_name( 'new_tab' ),
-				$new_tab
+				$instance['new_tab']
 			);
 
 			// No follow.
@@ -512,7 +506,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
 				$this->get_field_id( 'nofollow' ),
 				$this->get_field_name( 'nofollow' ),
-				$nofollow,
+				$instance['nofollow'],
 				__( 'It will be added to all external links.', 'pinboard-bookmarks' )
 			);
 			?>
@@ -555,7 +549,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display debugging information to admins only', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'admin_only' ),
 				$this->get_field_name( 'admin_only' ),
-				$admin_only
+				$instance['admin_only']
 			);
 
 			// Debugging options.
@@ -563,7 +557,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display parameters', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'debug_options' ),
 				$this->get_field_name( 'debug_options' ),
-				$debug_options
+				$instance['debug_options']
 			);
 
 			// Debugging URLs.
@@ -571,7 +565,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display URLs', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'debug_urls' ),
 				$this->get_field_name( 'debug_urls' ),
-				$debug_urls
+				$instance['debug_urls']
 			);
 			?>
 
