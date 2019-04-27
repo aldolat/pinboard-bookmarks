@@ -119,23 +119,23 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['quantity'] = 400;
 		}
 
-		$instance['random']       = isset( $new_instance['random'] ) ? $new_instance['random'] : false;
-		$instance['display_desc'] = isset( $new_instance['display_desc'] ) ? $new_instance['display_desc'] : false;
+		$instance['random']       = isset( $new_instance['random'] ) ? 1 : 0;
+		$instance['display_desc'] = isset( $new_instance['display_desc'] ) ? 1 : 0;
 
 		$instance['truncate'] = absint( sanitize_text_field( $new_instance['truncate'] ) );
 		if ( '' === $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) {
 			$instance['truncate'] = 0;
 		}
 
-		$instance['display_date']    = isset( $new_instance['display_date'] ) ? $new_instance['display_date'] : false;
-		$instance['display_time']    = isset( $new_instance['display_time'] ) ? $new_instance['display_time'] : false;
+		$instance['display_date']    = isset( $new_instance['display_date'] ) ? 1 : 0;
+		$instance['display_time']    = isset( $new_instance['display_time'] ) ? 1 : 0;
 		$instance['date_text']       = trim( sanitize_text_field( $new_instance['date_text'] ) );
-		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? $new_instance['display_tags'] : false;
+		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? 1 : 0;
 		$instance['tags_text']       = sanitize_text_field( $new_instance['tags_text'] );
-		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? $new_instance['display_hashtag'] : false;
-		$instance['use_comma']       = isset( $new_instance['use_comma'] ) ? $new_instance['use_comma'] : false;
-		$instance['display_source']  = isset( $new_instance['display_source'] ) ? $new_instance['display_source'] : false;
-		$instance['display_arrow']   = isset( $new_instance['display_arrow'] ) ? $new_instance['display_arrow'] : false;
+		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? 1 : 0;
+		$instance['use_comma']       = isset( $new_instance['use_comma'] ) ? 1 : 0;
+		$instance['display_source']  = isset( $new_instance['display_source'] ) ? 1 : 0;
+		$instance['display_arrow']   = isset( $new_instance['display_arrow'] ) ? 1 : 0;
 
 		$instance['time'] = absint( sanitize_text_field( $new_instance['time'] ) );
 		if ( '' === $instance['time'] || ! is_numeric( $instance['time'] ) ) {
@@ -145,12 +145,12 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['time'] = 1800;
 		}
 
-		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? $new_instance['display_archive'] : false;
+		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? 1 : 0;
 		$instance['archive_text']     = sanitize_text_field( $new_instance['archive_text'] );
 		$instance['list_type']        = sanitize_text_field( $new_instance['list_type'] );
-		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
-		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
-		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
+		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? 1 : 0;
+		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? 1 : 0;
+		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? 1 : 0;
 
 		/**
 		 * Order of the elements of each items.
@@ -183,9 +183,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['items_order'] = 'title description date tags';
 		}
 
-		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? $new_instance['admin_only'] : false;
-		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
-		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
+		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? 1 : 0;
+		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? 1 : 0;
+		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? 1 : 0;
 
 		// This option is stored only for debug purposes.
 		$instance['widget_id'] = $this->id;
