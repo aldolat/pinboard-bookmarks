@@ -1,7 +1,8 @@
 <?php
 /**
- * Pinboard Bookmarks plugin.
+ * Pinboard Bookmarks plugin's core file
  *
+ * @since 1.0.0
  * @package PinboardBookmarks
  */
 
@@ -53,40 +54,8 @@ if ( ! defined( 'WPINC' ) ) {
  * @return string $output The HTML structure to be displayed on the page
  */
 function get_pinboard_bookmarks_fetch_feed( $args ) {
-	$defaults = array(
-		// 'title' is for widget only.
-		'intro_text'       => '',
-		'username'         => '',
-		'tags'             => '',
-		'source'           => '', // This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
-		'quantity'         => 5,
-		'random'           => false,
-		'display_desc'     => false,
-		'truncate'         => 0,
-		'display_date'     => false,
-		'display_time'     => false,
-		'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
-		'display_tags'     => false,
-		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
-		'display_hashtag'  => true,
-		'use_comma'        => false,
-		'display_source'   => false,
-		'display_arrow'    => false,
-		// 'time' is for widget only.
-		'display_archive'  => true,
-		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
-		'list_type'        => 'bullet',
-		'display_arch_arr' => true,
-		'new_tab'          => false,
-		'nofollow'         => true,
-		'items_order'      => 'title description date tags',
-		'admin_only'       => true,
-		'debug_options'    => false,
-		'debug_urls'       => false,
-		'widget_id'        => '',
-	);
+	$args = wp_parse_args( $args, pinboard_bookmarks_get_defaults() );
 
-	$args             = wp_parse_args( $args, $defaults );
 	$intro_text       = $args['intro_text'];
 	$username         = $args['username'];
 	$tags             = $args['tags'];

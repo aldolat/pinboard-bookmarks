@@ -4,6 +4,7 @@
  *
  * This file is intended to be empty.
  *
+ * @since 1.6.0
  * @package PinboardBookmarks
  */
 

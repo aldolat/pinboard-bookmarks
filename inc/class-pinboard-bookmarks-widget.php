@@ -47,10 +47,23 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::widget()
 	 *
-	 * @param array $args     Widget arguments.
+	 * @param array $args Widget arguments.
+	 *                    $args contains:
+	 *                        $args['name'];
+	 *                        $args['id'];
+	 *                        $args['description'];
+	 *                        $args['class'];
+	 *                        $args['before_widget'];
+	 *                        $args['after_widget'];
+	 *                        $args['before_title'];
+	 *                        $args['after_title'];
+	 *                        $args['widget_id'];
+	 *                        $args['widget_name'].
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
+		$instance = wp_parse_args( $instance, pinboard_bookmarks_get_defaults() );
+
 		echo "\n" . '<!-- Start Pinboard Bookmarks - ' . $args['widget_id'] . ' -->' . "\n";
 
 		echo $args['before_widget'];
@@ -64,38 +77,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['items_order'] = 'title description date tags';
 		}
 
-		pinboard_bookmarks_fetch_feed(
-			array(
-				'intro_text'       => $instance['intro_text'],
-				'username'         => $instance['username'],
-				'tags'             => $instance['tags'],
-				'source'           => $instance['source'],
-				'quantity'         => $instance['quantity'],
-				'random'           => $instance['random'],
-				'display_desc'     => $instance['display_desc'],
-				'truncate'         => $instance['truncate'],
-				'display_date'     => $instance['display_date'],
-				'display_time'     => $instance['display_time'],
-				'date_text'        => $instance['date_text'],
-				'display_tags'     => $instance['display_tags'],
-				'tags_text'        => $instance['tags_text'],
-				'display_hashtag'  => $instance['display_hashtag'],
-				'use_comma'        => $instance['use_comma'],
-				'display_source'   => $instance['display_source'],
-				'display_arrow'    => $instance['display_arrow'],
-				'display_archive'  => $instance['display_archive'],
-				'archive_text'     => $instance['archive_text'],
-				'list_type'        => $instance['list_type'],
-				'display_arch_arr' => $instance['display_arch_arr'],
-				'new_tab'          => $instance['new_tab'],
-				'nofollow'         => $instance['nofollow'],
-				'items_order'      => $instance['items_order'],
-				'admin_only'       => $instance['admin_only'],
-				'debug_options'    => $instance['debug_options'],
-				'debug_urls'       => $instance['debug_urls'],
-				'widget_id'        => $instance['widget_id'],
-			)
-		);
+		pinboard_bookmarks_fetch_feed( $instance );
 
 		echo $args['after_widget'];
 
@@ -113,7 +95,8 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance               = (array) $old_instance;
+		$instance = (array) $old_instance;
+
 		$instance['title']      = sanitize_text_field( $new_instance['title'] );
 		$instance['intro_text'] = wp_kses_post( $new_instance['intro_text'] );
 		$instance['username']   = preg_replace( '([^a-zA-Z0-9\-_])', '', sanitize_text_field( $new_instance['username'] ) );
@@ -136,23 +119,23 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['quantity'] = 400;
 		}
 
-		$instance['random']       = isset( $new_instance['random'] ) ? $new_instance['random'] : false;
-		$instance['display_desc'] = isset( $new_instance['display_desc'] ) ? $new_instance['display_desc'] : false;
+		$instance['random']       = isset( $new_instance['random'] ) ? true : false;
+		$instance['display_desc'] = isset( $new_instance['display_desc'] ) ? true : false;
 
 		$instance['truncate'] = absint( sanitize_text_field( $new_instance['truncate'] ) );
 		if ( '' === $instance['truncate'] || ! is_numeric( $instance['truncate'] ) ) {
 			$instance['truncate'] = 0;
 		}
 
-		$instance['display_date']    = isset( $new_instance['display_date'] ) ? $new_instance['display_date'] : false;
-		$instance['display_time']    = isset( $new_instance['display_time'] ) ? $new_instance['display_time'] : false;
+		$instance['display_date']    = isset( $new_instance['display_date'] ) ? true : false;
+		$instance['display_time']    = isset( $new_instance['display_time'] ) ? true : false;
 		$instance['date_text']       = trim( sanitize_text_field( $new_instance['date_text'] ) );
-		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? $new_instance['display_tags'] : false;
+		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? true : false;
 		$instance['tags_text']       = sanitize_text_field( $new_instance['tags_text'] );
-		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? $new_instance['display_hashtag'] : false;
-		$instance['use_comma']       = isset( $new_instance['use_comma'] ) ? $new_instance['use_comma'] : false;
-		$instance['display_source']  = isset( $new_instance['display_source'] ) ? $new_instance['display_source'] : false;
-		$instance['display_arrow']   = isset( $new_instance['display_arrow'] ) ? $new_instance['display_arrow'] : false;
+		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? true : false;
+		$instance['use_comma']       = isset( $new_instance['use_comma'] ) ? true : false;
+		$instance['display_source']  = isset( $new_instance['display_source'] ) ? true : false;
+		$instance['display_arrow']   = isset( $new_instance['display_arrow'] ) ? true : false;
 
 		$instance['time'] = absint( sanitize_text_field( $new_instance['time'] ) );
 		if ( '' === $instance['time'] || ! is_numeric( $instance['time'] ) ) {
@@ -162,47 +145,16 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['time'] = 1800;
 		}
 
-		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? $new_instance['display_archive'] : false;
+		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? true : false;
 		$instance['archive_text']     = sanitize_text_field( $new_instance['archive_text'] );
 		$instance['list_type']        = sanitize_text_field( $new_instance['list_type'] );
-		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? $new_instance['display_arch_arr'] : false;
-		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? $new_instance['new_tab'] : false;
-		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? $new_instance['nofollow'] : false;
-
-		/**
-		 * Order of the elements of each items.
-		 *
-		 * @since 1.7.0
-		 */
-		// Sanitize unser input and make it lowercase.
-		$instance['items_order'] = strtolower( sanitize_text_field( $new_instance['items_order'] ) );
-		// Remove any space and comma from user input and remove leading/trailing spaces.
-		$instance['items_order'] = trim( preg_replace( '([\s,]+)', ' ', $instance['items_order'] ) );
-		// Create a copy of $instance['items_order'] and make it an array for some checks.
-		$items_order_check = explode( ' ', $instance['items_order'] );
-		// Check if the user entered elements that aren't in the four standard.
-		$correct_items = array( 'title', 'description', 'date', 'tags' );
-		foreach ( $items_order_check as $key => $value ) {
-			if ( ! in_array( $value, $correct_items, true ) ) {
-				unset( $items_order_check[ $key ] );
-			}
-		}
-		// Check for possible duplicates and remove them.
-		$items_order_check = array_unique( $items_order_check );
-		// Check for doubled elements and remove them.
-		if ( 4 < count( $items_order_check ) ) {
-			$items_order_check = array_slice( $items_order_check, 0, 4 );
-		}
-		// Return the checked elements into the main $instance['items_order'] variable.
-		$instance['items_order'] = implode( ' ', $items_order_check );
-		// If $instance['items_order'] is empty, fill it with standard values.
-		if ( empty( $instance['items_order'] ) ) {
-			$instance['items_order'] = 'title description date tags';
-		}
-
-		$instance['admin_only']    = isset( $new_instance['admin_only'] ) ? $new_instance['admin_only'] : false;
-		$instance['debug_options'] = isset( $new_instance['debug_options'] ) ? $new_instance['debug_options'] : false;
-		$instance['debug_urls']    = isset( $new_instance['debug_urls'] ) ? $new_instance['debug_urls'] : false;
+		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? true : false;
+		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? true : false;
+		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? true : false;
+		$instance['items_order']      = pinboard_bookmarks_check_items( $new_instance['items_order'] );
+		$instance['admin_only']       = isset( $new_instance['admin_only'] ) ? true : false;
+		$instance['debug_options']    = isset( $new_instance['debug_options'] ) ? true : false;
+		$instance['debug_urls']       = isset( $new_instance['debug_urls'] ) ? true : false;
 
 		// This option is stored only for debug purposes.
 		$instance['widget_id'] = $this->id;
@@ -218,55 +170,26 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$defaults = array(
-			'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
-			'intro_text'       => '',
-			'username'         => '',
-			'tags'             => '',
-			'source'           => '',
-			'quantity'         => 5,
-			'random'           => false,
-			'display_desc'     => false,
-			'truncate'         => 0,
-			'display_date'     => false,
-			'display_time'     => false,
-			'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
-			'display_tags'     => false,
-			'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
-			'display_hashtag'  => true,
-			'use_comma'        => false,
-			'display_source'   => false,
-			'display_arrow'    => false,
-			'time'             => 1800,
-			'display_archive'  => true,
-			'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
-			'list_type'        => 'bullet',
-			'display_arch_arr' => true,
-			'new_tab'          => false,
-			'nofollow'         => true,
-			'items_order'      => 'title description date tags',
-			'admin_only'       => true,
-			'debug_options'    => false,
-			'debug_urls'       => false,
-		);
+		$instance = wp_parse_args( (array) $instance, pinboard_bookmarks_get_defaults() );
 
-		$instance         = wp_parse_args( (array) $instance, $defaults );
-		$random           = (bool) $instance['random'];
-		$display_desc     = (bool) $instance['display_desc'];
-		$display_date     = (bool) $instance['display_date'];
-		$display_time     = (bool) $instance['display_time'];
-		$display_tags     = (bool) $instance['display_tags'];
-		$display_hashtag  = (bool) $instance['display_hashtag'];
-		$use_comma        = (bool) $instance['use_comma'];
-		$display_source   = (bool) $instance['display_source'];
-		$display_arrow    = (bool) $instance['display_arrow'];
-		$display_archive  = (bool) $instance['display_archive'];
-		$display_arch_arr = (bool) $instance['display_arch_arr'];
-		$new_tab          = (bool) $instance['new_tab'];
-		$nofollow         = (bool) $instance['nofollow'];
-		$admin_only       = (bool) $instance['admin_only'];
-		$debug_options    = (bool) $instance['debug_options'];
-		$debug_urls       = (bool) $instance['debug_urls'];
+		// *** STARTS PART TO BE REMOVED IN 1.8.1.
+		'on' === $instance['random'] ? $instance['random']                     = true : false;
+		'on' === $instance['display_desc'] ? $instance['display_desc']         = true : false;
+		'on' === $instance['display_date'] ? $instance['display_date']         = true : false;
+		'on' === $instance['display_time'] ? $instance['display_time']         = true : false;
+		'on' === $instance['display_tags'] ? $instance['display_tags']         = true : false;
+		'on' === $instance['display_hashtag'] ? $instance['display_hashtag']   = true : false;
+		'on' === $instance['use_comma'] ? $instance['use_comma']               = true : false;
+		'on' === $instance['display_source'] ? $instance['display_source']     = true : false;
+		'on' === $instance['display_arrow'] ? $instance['display_arrow']       = true : false;
+		'on' === $instance['display_archive'] ? $instance['display_archive']   = true : false;
+		'on' === $instance['display_arch_arr'] ? $instance['display_arch_arr'] = true : false;
+		'on' === $instance['new_tab'] ? $instance['new_tab']                   = true : false;
+		'on' === $instance['nofollow'] ? $instance['nofollow']                 = true : false;
+		'on' === $instance['admin_only'] ? $instance['admin_only']             = true : false;
+		'on' === $instance['debug_options'] ? $instance['debug_options']       = true : false;
+		'on' === $instance['debug_urls'] ? $instance['debug_urls']             = true : false;
+		// *** ENDS PART TO BE REMOVED IN 1.8.1.
 		?>
 
 		<div class="pinboard-bookmarks-widget-content">
@@ -383,7 +306,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display items in random order', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'random' ),
 				$this->get_field_name( 'random' ),
-				$random
+				$instance['random']
 			);
 
 			// Fetching time.
@@ -405,7 +328,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the bookmark description', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_desc' ),
 				$this->get_field_name( 'display_desc' ),
-				$display_desc
+				$instance['display_desc']
 			);
 
 			// Description length.
@@ -428,7 +351,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the date of the bookmark', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_date' ),
 				$this->get_field_name( 'display_date' ),
-				$display_date
+				$instance['display_date']
 			);
 
 			// Time.
@@ -436,7 +359,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Also display the time of the bookmark', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_time' ),
 				$this->get_field_name( 'display_time' ),
-				$display_time
+				$instance['display_time']
 			);
 
 			// Text for the date.
@@ -458,7 +381,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display tags', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_tags' ),
 				$this->get_field_name( 'display_tags' ),
-				$display_tags
+				$instance['display_tags']
 			);
 
 			// Text for tags.
@@ -477,7 +400,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf( esc_html__( 'Display an hashtag %s before each tag', 'pinboard-bookmarks' ), '(<code>#</code>)' ),
 				$this->get_field_id( 'display_hashtag' ),
 				$this->get_field_name( 'display_hashtag' ),
-				$display_hashtag
+				$instance['display_hashtag']
 			);
 
 			// Comma.
@@ -486,7 +409,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf( esc_html__( 'Use a comma %s after each tag', 'pinboard-bookmarks' ), '(<code>,</code>)' ),
 				$this->get_field_id( 'use_comma' ),
 				$this->get_field_name( 'use_comma' ),
-				$use_comma
+				$instance['use_comma']
 			);
 
 			// Display source.
@@ -494,7 +417,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the source of the bookmark', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_source' ),
 				$this->get_field_name( 'display_source' ),
-				$display_source
+				$instance['display_source']
 			);
 			?>
 
@@ -506,7 +429,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display the link to my bookmarks archive on Pinboard', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_archive' ),
 				$this->get_field_name( 'display_archive' ),
-				$display_archive
+				$instance['display_archive']
 			);
 
 			// Text for archive.
@@ -523,7 +446,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display an arrow after the link to the archive', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_arch_arr' ),
 				$this->get_field_name( 'display_arch_arr' ),
-				$display_arch_arr
+				$instance['display_arch_arr']
 			);
 			?>
 
@@ -554,7 +477,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display an arrow after each title', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_arrow' ),
 				$this->get_field_name( 'display_arrow' ),
-				$display_arrow
+				$instance['display_arrow']
 			);
 
 			// Open links in new tab.
@@ -562,7 +485,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Open links in a new browser tab', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'new_tab' ),
 				$this->get_field_name( 'new_tab' ),
-				$new_tab
+				$instance['new_tab']
 			);
 
 			// No follow.
@@ -571,7 +494,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
 				$this->get_field_id( 'nofollow' ),
 				$this->get_field_name( 'nofollow' ),
-				$nofollow,
+				$instance['nofollow'],
 				__( 'It will be added to all external links.', 'pinboard-bookmarks' )
 			);
 			?>
@@ -614,7 +537,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display debugging information to admins only', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'admin_only' ),
 				$this->get_field_name( 'admin_only' ),
-				$admin_only
+				$instance['admin_only']
 			);
 
 			// Debugging options.
@@ -622,7 +545,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display parameters', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'debug_options' ),
 				$this->get_field_name( 'debug_options' ),
-				$debug_options
+				$instance['debug_options']
 			);
 
 			// Debugging URLs.
@@ -630,7 +553,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				esc_html__( 'Display URLs', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'debug_urls' ),
 				$this->get_field_name( 'debug_urls' ),
-				$debug_urls
+				$instance['debug_urls']
 			);
 			?>
 

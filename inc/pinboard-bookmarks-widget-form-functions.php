@@ -2,8 +2,8 @@
 /**
  * This file contains the functions used in the widget's forms
  *
- * @package PinboardBookmarks
  * @since 1.0
+ * @package PinboardBookmarks
  */
 
 /**
