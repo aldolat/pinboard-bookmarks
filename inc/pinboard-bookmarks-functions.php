@@ -640,8 +640,14 @@ function pinboard_bookmarks_get_archive_link( $args ) {
  *
  * @since 1.7.0 As a series of commands.
  * @since 1.8.0 As a standalone function.
+ * @since 1.8.1 Added check if $items is a string.
  */
-function pinboard_bookmarks_check_items( string $items = '' ) {
+function pinboard_bookmarks_check_items( $items = '' ) {
+	// Check if $items is a string.
+	if ( ! is_string( $items ) ) {
+		return;
+	}
+
 	// Define the standard items.
 	$standard_values = array( 'title', 'description', 'date', 'tags' );
 
