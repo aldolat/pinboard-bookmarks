@@ -648,9 +648,6 @@ function pinboard_bookmarks_check_items( $items = '' ) {
 		return;
 	}
 
-	// Define the standard items.
-	$standard_values = array( 'title', 'description', 'date', 'tags' );
-
 	// Sanitize user input and make it lowercase.
 	$items = strtolower( sanitize_text_field( $items ) );
 	// Remove any space and comma from user input and remove leading/trailing spaces.
@@ -658,6 +655,9 @@ function pinboard_bookmarks_check_items( $items = '' ) {
 
 	// Make the user input an array for some checks.
 	$items = explode( ' ', $items );
+
+	// Define the standard items.
+	$standard_values = array( 'title', 'description', 'date', 'tags' );
 
 	// Check if the user entered items that aren't in the four standard values.
 	foreach ( $items as $key => $value ) {
