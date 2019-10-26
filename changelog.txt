@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.8.1 =
+
+* Removed typehint for argument in pinboard_bookmarks_check_items().
+
 = 1.8.0 =
 
 * The default options are in a separate function now to simplify the plugin.

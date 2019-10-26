@@ -640,10 +640,13 @@ function pinboard_bookmarks_get_archive_link( $args ) {
  *
  * @since 1.7.0 As a series of commands.
  * @since 1.8.0 As a standalone function.
+ * @since 1.8.1 Added check if $items is a string.
  */
-function pinboard_bookmarks_check_items( string $items = '' ) {
-	// Define the standard items.
-	$standard_values = array( 'title', 'description', 'date', 'tags' );
+function pinboard_bookmarks_check_items( $items = '' ) {
+	// Check if $items is a string.
+	if ( ! is_string( $items ) ) {
+		return;
+	}
 
 	// Sanitize user input and make it lowercase.
 	$items = strtolower( sanitize_text_field( $items ) );
@@ -652,6 +655,9 @@ function pinboard_bookmarks_check_items( string $items = '' ) {
 
 	// Make the user input an array for some checks.
 	$items = explode( ' ', $items );
+
+	// Define the standard items.
+	$standard_values = array( 'title', 'description', 'date', 'tags' );
 
 	// Check if the user entered items that aren't in the four standard values.
 	foreach ( $items as $key => $value ) {
