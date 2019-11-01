@@ -236,6 +236,8 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>' );
 		// translators: %s is the ID of the widget.
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'ID of this widget: %s', 'pinboard-bookmarks' ), $widget_id . '</li>' );
+		// translators: %s is the time when the cache will expire.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Cache will expire on: %s', 'pinboard-bookmarks' ), pinboard_bookmarks_get_feed_timeout( $urls['complete_feed_url'] ) . '</li>' );
 		$output .= '</ul>';
 	}
 
@@ -281,6 +283,41 @@ function pinboard_bookmarks_debug( $args ) {
 	} else {
 		return $output;
 	}
+}
+
+/**
+ * Return the date and time when the feed cache will expire.
+ *
+ * This function receives a feed URL in input
+ * and gets the human readable date and time of the transient expiration.
+ *
+ * @param string $feed_url The complete feed URL.
+ * @return string $output The formatted date and time when the cache will expire.
+ *
+ * @since 1.8.2
+ */
+function pinboard_bookmarks_get_feed_timeout( $feed_url = '' ) {
+	$output = '';
+
+	// Figure out the transient name.
+	$transient_name = 'timeout_feed_mod_' . md5( $feed_url );
+
+	// Get the transient.
+	$timestamp = get_transient( $transient_name );
+
+	// Get the local offset.
+	$local_offset = (int) get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
+
+	// Convert transient timestamp to local time.
+	$local_timestamp = $timestamp + $local_offset;
+
+	// Get date and time format.
+	$datetime_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+
+	// Convert transient local timestamp to human readable date and time.
+	$output = date( $datetime_format, $local_timestamp );
+
+	return $output;
 }
 
 /**
