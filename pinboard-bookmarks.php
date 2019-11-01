@@ -89,7 +89,11 @@ function pinboard_bookmarks_setup() {
 	// Load the core functions.
 	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-core.php';
 	// Load the functions.
-	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-functions.php';
+	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-functions-init.php';
+	// Load the functions.
+	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-functions-items.php';
+	// Load the functions.
+	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-functions-tools.php';
 	// Load the shortcode.
 	require_once plugin_dir_path( __FILE__ ) . 'inc/pinboard-bookmarks-shortcode.php';
 	// Load the widget's form functions.
