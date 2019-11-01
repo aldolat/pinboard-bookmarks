@@ -402,14 +402,16 @@ function pinboard_bookmarks_get_date( $args ) {
 	if ( $display_time ) {
 		$date_format .= ' ' . get_option( 'time_format' );
 	}
+
 	// Convert date and time of the bookmark into a UNIX timestamp.
 	$item_timestamp = strtotime( esc_html( $item->get_date( $date_format ) ) );
 	// Get local time offset.
-	$local_offset = (int) get_option( 'gmt_offset' ) * 3600;
+	$local_offset = (int) get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
 	// Since the bookmark on Pinboard is stored in UTC, convert item timestamp from UTC to local time.
 	$item_local_timestamp = $item_timestamp + $local_offset;
+
 	// Get the final date and time of the item.
-	$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
+	$bookmark_date = date( $date_format, $item_local_timestamp );
 
 	// Build the final HTML.
 	$output = '<p class="pinboard-bookmarks-date">';
