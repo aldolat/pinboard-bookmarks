@@ -102,7 +102,7 @@ function pinboard_bookmarks_get_feed_timeout( $feed_url = '' ) {
 
 	$duration = sprintf(
 		// translators: It is something like "30 minutes", "1 hour", and so on.
-		esc_html__( '(cache time is %1$s and will update in %2$s)', 'pinboard-bookmarks' ),
+		esc_html__( '(cache time is %1$s and will be updated in %2$s)', 'pinboard-bookmarks' ),
 		human_time_diff( $transient_creation, $transient_timeout ),
 		human_time_diff( $transient_timeout, time() )
 	);
