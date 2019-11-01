@@ -153,12 +153,14 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	);
 	include_once ABSPATH . WPINC . '/feed.php';
 	$rss = fetch_feed( esc_url( $feed_url ) );
-	remove_filter(
-		'wp_feed_cache_transient_lifetime',
-		function() use ( $time ) {
-			return $time;
-		}
-	);
+
+	/*
+	 * Since we used an anonymous functon (see above add_filter),
+	 * we cannot remove the filter.
+	 * remove_filter( 'wp_feed_cache_transient_lifetime', function() use ( $time ) { return $time; } );
+	 *
+	 * See: https://github.com/WordPress/WordPress-Coding-Standards/issues/1486
+	 */
 
 	/*
 	 * Define the main variable that will concatenate all the output.
