@@ -73,6 +73,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$use_comma        = $args['use_comma'];
 	$display_source   = $args['display_source'];
 	$display_arrow    = $args['display_arrow'];
+	$time             = $args['time'];
 	$display_archive  = $args['display_archive'];
 	$archive_text     = $args['archive_text'];
 	$list_type        = $args['list_type'];
@@ -144,10 +145,20 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	}
 
 	// Grab the feed from Pinboard.
-	add_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
+	add_filter(
+		'wp_feed_cache_transient_lifetime',
+		function() use ( $time ) {
+			return $time;
+		}
+	);
 	include_once ABSPATH . WPINC . '/feed.php';
 	$rss = fetch_feed( esc_url( $feed_url ) );
-	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
+	remove_filter(
+		'wp_feed_cache_transient_lifetime',
+		function() use ( $time ) {
+			return $time;
+		}
+	);
 
 	/*
 	 * Define the main variable that will concatenate all the output.
