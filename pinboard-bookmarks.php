@@ -18,7 +18,7 @@
  * Plugin URI: https://dev.aldolat.it/projects/pinboard-bookmarks/
  * Author: Aldo Latino
  * Author URI: https://www.aldolat.it/
- * Version: 1.8.1
+ * Version: 1.8.2
  * License: GPLv3 or later
  * Text Domain: pinboard-bookmarks
  * Domain Path: /languages/
@@ -44,6 +44,9 @@
 /*
  * TODO: When all users have updated the plugin to version 1.8.0,
  * remove the part "PART TO BE REMOVED" in inc/class-pinboard-bookmarks-widget.php.
+ *
+ * TODO: When all users have updated the plugin to version 1.7.0,
+ * remove the part "PART TO BE REMOVED" in inc/class-pinboard-bokmarks-widget.php.
  */
 
 /**
@@ -69,7 +72,7 @@ function pinboard_bookmarks_setup() {
 	/*
 	 * Define the version of the plugin.
 	 */
-	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.8.1' );
+	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.8.2' );
 
 	/*
 	 * Load the translation.
