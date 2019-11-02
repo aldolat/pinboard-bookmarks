@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.8.2] - 2019-11-02
 ### Added
-* Now debug section prints the current duration of cache and the time needed for the next update.
+* Totally revamped cache section in debug.
 * Added an ID when the shortcode is used.
 ### Fixed
 * Fixed cache time duration.
