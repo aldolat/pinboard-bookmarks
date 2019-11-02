@@ -144,7 +144,13 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		$archive_url = trailingslashit( $pinboard_user_source_url . $source );
 	}
 
-	// Grab the feed from Pinboard.
+	/*
+	 * Grab the feed from Pinboard.
+	 *
+	 * We are using an anonymous function because we are unable to pass
+	 * the $time parameter to the following custom function:
+	 * add_filter( 'wp_feed_cache_transient_lifetime', 'custom_function_to_change_lifetime' );
+	 */
 	add_filter(
 		'wp_feed_cache_transient_lifetime',
 		function() use ( $time ) {
