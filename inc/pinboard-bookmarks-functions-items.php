@@ -401,24 +401,74 @@ function pinboard_bookmarks_debug( $args ) {
 	if ( $debug_options || $debug_urls ) {
 		global $wp_version;
 		$output .= '<div class="pinboard-bookmarks-debug-group">';
-		// translators: %s is the name of the plugin.
-		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf( esc_html__( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
-		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong></h4>';
-		// translators: %s is the URL of the site.
-		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '</li>' );
-		// translators: %s is the WordPress version.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'WordPress version: %s', 'pinboard-bookmarks' ), $wp_version . '</li>' );
-		// translators: %s is the plugin version.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>' );
-		// translators: %s is the ID of the widget.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'ID of this widget: %s', 'pinboard-bookmarks' ), $widget_id . '</li>' );
-		// translators: %s is the time when the cache will expire.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Cache will expire on: %s', 'pinboard-bookmarks' ), pinboard_bookmarks_get_feed_timeout( $urls['complete_feed_url'] ) . '</li>' );
+		// Title.
+		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf(
+			// translators: %s is the name of the plugin.
+			esc_html__( '%s Debug', 'pinboard-bookmarks' ),
+			'Pinboard Bookmarks'
+		) . '</h3>';
+		// Subtitle.
+		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__(
+			'Environment informations:',
+			'pinboard-bookmarks'
+		) . '</strong></h4>';
+		// Site URL.
+		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the URL of the site.
+			esc_html__(
+				'Site URL: %s',
+				'pinboard-bookmarks'
+			),
+			esc_url(
+				site_url()
+			) . '</li>'
+		);
+		// WordPress version.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the WordPress version.
+			esc_html__(
+				'WordPress version: %s',
+				'pinboard-bookmarks'
+			),
+			$wp_version . '</li>'
+		);
+		// Pinboard Bookmarks version.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the plugin version.
+			esc_html__(
+				'Plugin version: %s',
+				'pinboard-bookmarks'
+			),
+			PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>'
+		);
+		// ID of the widget/shortcode.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the ID of the widget.
+			esc_html__(
+				'ID of this widget: %s',
+				'pinboard-bookmarks'
+			),
+			$widget_id . '</li>'
+		);
+		// Cache expiration.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Cache will expire on: %s',
+				'pinboard-bookmarks'
+			),
+			pinboard_bookmarks_get_feed_timeout(
+				$urls['complete_feed_url']
+			) . '</li>'
+		);
 		$output .= '</ul>';
 	}
 
 	if ( $debug_options ) {
-		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__( 'The options:', 'pinboard-bookmarks' ) . '</strong></h4>';
+		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__(
+			'The options:',
+			'pinboard-bookmarks'
+		) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
 		foreach ( $options as $key => $value ) {
 			if ( empty( $value ) ) {
