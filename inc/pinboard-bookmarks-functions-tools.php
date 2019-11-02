@@ -81,6 +81,10 @@ function pinboard_bookmarks_get_generated_by() {
  * @since 1.8.2
  */
 function pinboard_bookmarks_get_feed_timeout( $feed_url = '' ) {
+	if ( empty( $feed_url ) ) {
+		return;
+	}
+
 	// Calculate MD5 of the feed URL, as stored by WordPress in the database.
 	$md5 = md5( $feed_url );
 
