@@ -175,6 +175,19 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	 */
 	$output = '';
 
+	/*
+	 * If we are in a shortcode (in a shortcode, $widget_id will be always empty),
+	 * create a <section> HTML tag with a unique ID.
+	 * The ID is the md5-hashed complete feed url, for example:
+	 * https://feeds.pinboard.in/rss/u:username/?count=5 = 04f827a1b0bd455d3c848f322c5fcd95
+	 * as WordPress does when creates the transient name for a feed.
+	 */
+	if ( empty( $widget_id ) ) {
+		$md5_feed_url = md5( $feed_url );
+		$output      .= "\n" . '<!-- Start Pinboard Bookmarks - ' . $md5_feed_url . ' -->' . "\n";
+		$output      .= '<section id="pinboard-bookmarks-' . $md5_feed_url . '" class="pinboard-bookmarks-shortcode">';
+	}
+
 	// The introductory text.
 	if ( $intro_text ) {
 		$output .= '<p class="pinboard-bookmarks-intro-text">' . wp_kses_post( $intro_text ) . '</p>';
@@ -332,11 +345,14 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	// The debugging informations.
 	if ( $debug_options || $debug_urls ) {
+		// If we're in a shortcode, use $md5_feed_url as $widget_id.
+		$id_for_widget = empty( $widget_id ) ? $md5_feed_url : $widget_id;
+
 		$params = array(
 			'admin_only'    => $admin_only,
 			'debug_options' => $debug_options,
 			'debug_urls'    => $debug_urls,
-			'widget_id'     => $widget_id,
+			'widget_id'     => $id_for_widget,
 			'options'       => $args,
 			'urls'          => array(
 				'username_part'     => $username,
@@ -353,6 +369,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	// Add a HTML comment with plugin name and version.
 	$output .= pinboard_bookmarks_get_generated_by();
+
+	// If we are in a shortcode, close the section HTML tag.
+	if ( empty( $widget_id ) ) {
+		$output .= '</section>';
+		$output .= "\n" . '<!-- End Pinboard Bookmarks - ' . $md5_feed_url . ' -->' . "\n\n";
+	}
 
 	return $output;
 }
