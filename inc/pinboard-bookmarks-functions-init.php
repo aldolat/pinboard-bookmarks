@@ -114,6 +114,12 @@ function pinboard_bookmarks_load_scripts( $hook ) {
 	}
 
 	// Register and enqueue the CSS file.
-	wp_register_style( 'pinboard_bookmarks_style', plugins_url( 'pinboard-bookmarks-styles.css', __FILE__ ), array(), PINBOARD_BOOKMARKS_PLUGIN_VERSION, 'all' );
+	wp_register_style(
+		'pinboard_bookmarks_style',
+		plugins_url( '../assets/pinboard-bookmarks-styles.css', __FILE__ ),
+		array(),
+		PINBOARD_BOOKMARKS_PLUGIN_VERSION,
+		'all'
+	);
 	wp_enqueue_style( 'pinboard_bookmarks_style' );
 }
