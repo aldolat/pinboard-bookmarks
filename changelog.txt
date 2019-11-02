@@ -3,6 +3,7 @@
 = 1.8.2 =
 
 * Now debug section prints the current duration of cache and the time needed for the next update.
+* Added an ID when the shortcode is used.
 * Fixed cache time duration.
 * Used PHP `date()` instead of WordPress `date_i18n()`.
 * Required PHP 5.3 for use of anonymous functions.
