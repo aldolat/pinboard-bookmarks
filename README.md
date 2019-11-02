@@ -170,5 +170,5 @@ No upgrade notice.
 [version-badge]: https://img.shields.io/badge/Version-1.8.2-blue.svg
 [requires-badge]: https://img.shields.io/badge/Requires_WordPress-3.0.0-green.svg
 [tested-badge]: https://img.shields.io/badge/Tested_up_to_WordPress-5.3.0-green.svg
-[requires-php]: https://img.shields.io/badge/Tested_up_to_WordPress-5.3-purple.svg
+[requires-php]: https://img.shields.io/badge/Requires_PHP-5.3-purple.svg
 [license-badge]: https://img.shields.io/badge/License-GPLv3-ff69b4.svg
