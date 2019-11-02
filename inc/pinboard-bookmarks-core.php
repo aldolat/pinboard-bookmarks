@@ -150,6 +150,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	 * We are using an anonymous function because we are unable to pass
 	 * the $time parameter to the following custom function:
 	 * add_filter( 'wp_feed_cache_transient_lifetime', 'custom_function_to_change_lifetime' );
+	 *
+	 * @since 1.8.2
 	 */
 	add_filter(
 		'wp_feed_cache_transient_lifetime',
@@ -181,6 +183,8 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	 * The ID is the md5-hashed complete feed url, for example:
 	 * https://feeds.pinboard.in/rss/u:username/?count=5 = 04f827a1b0bd455d3c848f322c5fcd95
 	 * as WordPress does when creates the transient name for a feed.
+	 *
+	 * @since 1.8.2
 	 */
 	if ( empty( $widget_id ) ) {
 		$md5_feed_url = md5( $feed_url );
@@ -370,7 +374,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	// Add a HTML comment with plugin name and version.
 	$output .= pinboard_bookmarks_get_generated_by();
 
-	// If we are in a shortcode, close the section HTML tag.
+	/*
+	 * If we are in a shortcode, close the section HTML tag.
+	 *
+	 * @since 1.8.2
+	 */
 	if ( empty( $widget_id ) ) {
 		$output .= '</section>';
 		$output .= "\n" . '<!-- End Pinboard Bookmarks - ' . $md5_feed_url . ' -->' . "\n\n";
