@@ -72,13 +72,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
 		}
 
-		// Starts PART TO BE REMOVED in 1.8.0.
-		// This check is necessary when upgrading from 1.6.0 to 1.7.0.
-		if ( ! isset( $instance['items_order'] ) ) {
-			$instance['items_order'] = 'title description date tags';
-		}
-		// Ends PART TO BE REMOVED in 1.8.0.
-
 		pinboard_bookmarks_fetch_feed( $instance );
 
 		echo $args['after_widget'];

@@ -44,9 +44,6 @@
 /*
  * TODO: When all users have updated the plugin to version 1.8.0,
  * remove the part "PART TO BE REMOVED" in inc/class-pinboard-bookmarks-widget.php.
- *
- * TODO: When all users have updated the plugin to version 1.7.0,
- * remove the part "PART TO BE REMOVED" in inc/class-pinboard-bokmarks-widget.php.
  */
 
 /**
