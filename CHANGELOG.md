@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.2] - 2019-11-02
+### Added
+* Totally revamped cache section in debug.
+* Added an ID when the shortcode is used.
+### Fixed
+* Fixed cache time duration.
+### Changed
+* Used PHP `date()` instead of WordPress `date_i18n()`.
+* Required PHP 5.3 for use of anonymous functions.
+
 ## [1.8.1] - 2019-10-26
 ### Fixed
 * Removed typehint for argument in pinboard_bookmarks_check_items().
@@ -100,6 +110,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
+[1.8.2]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.1...1.8.2
 [1.8.1]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.0...1.8.1
 [1.8.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.4...1.8.0
 [1.7.4]: https://github.com/aldolat/pinboard-bookmarks/compare/1.7.3...1.7.4

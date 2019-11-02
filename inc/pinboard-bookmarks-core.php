@@ -73,6 +73,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$use_comma        = $args['use_comma'];
 	$display_source   = $args['display_source'];
 	$display_arrow    = $args['display_arrow'];
+	$time             = $args['time'];
 	$display_archive  = $args['display_archive'];
 	$archive_text     = $args['archive_text'];
 	$list_type        = $args['list_type'];
@@ -143,11 +144,31 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		$archive_url = trailingslashit( $pinboard_user_source_url . $source );
 	}
 
-	// Grab the feed from Pinboard.
-	add_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
+	/*
+	 * Grab the feed from Pinboard.
+	 *
+	 * We are using an anonymous function because we are unable to pass
+	 * the $time parameter to the following custom function:
+	 * add_filter( 'wp_feed_cache_transient_lifetime', 'custom_function_to_change_lifetime' );
+	 *
+	 * @since 1.8.2
+	 */
+	add_filter(
+		'wp_feed_cache_transient_lifetime',
+		function() use ( $time ) {
+			return $time;
+		}
+	);
 	include_once ABSPATH . WPINC . '/feed.php';
 	$rss = fetch_feed( esc_url( $feed_url ) );
-	remove_filter( 'wp_feed_cache_transient_lifetime', 'pinboard_bookmarks_cache_handler' );
+
+	/*
+	 * Since we used an anonymous functon (see above add_filter),
+	 * we cannot remove the filter.
+	 * remove_filter( 'wp_feed_cache_transient_lifetime', function() use ( $time ) { return $time; } );
+	 *
+	 * See: https://github.com/WordPress/WordPress-Coding-Standards/issues/1486
+	 */
 
 	/*
 	 * Define the main variable that will concatenate all the output.
@@ -155,6 +176,21 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	 * @since 1.6.0
 	 */
 	$output = '';
+
+	/*
+	 * If we are in a shortcode (in a shortcode, $widget_id will be always empty),
+	 * create a <section> HTML tag with a unique ID.
+	 * The ID is the md5-hashed complete feed url, for example:
+	 * https://feeds.pinboard.in/rss/u:username/?count=5 = 04f827a1b0bd455d3c848f322c5fcd95
+	 * as WordPress does when creates the transient name for a feed.
+	 *
+	 * @since 1.8.2
+	 */
+	if ( empty( $widget_id ) ) {
+		$md5_feed_url = md5( $feed_url );
+		$output      .= "\n" . '<!-- Start Pinboard Bookmarks - ' . $md5_feed_url . ' -->' . "\n";
+		$output      .= '<section id="pinboard-bookmarks-' . $md5_feed_url . '" class="pinboard-bookmarks-shortcode">';
+	}
 
 	// The introductory text.
 	if ( $intro_text ) {
@@ -313,11 +349,14 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	// The debugging informations.
 	if ( $debug_options || $debug_urls ) {
+		// If we're in a shortcode, use $md5_feed_url as $widget_id.
+		$id_for_widget = empty( $widget_id ) ? $md5_feed_url : $widget_id;
+
 		$params = array(
 			'admin_only'    => $admin_only,
 			'debug_options' => $debug_options,
 			'debug_urls'    => $debug_urls,
-			'widget_id'     => $widget_id,
+			'widget_id'     => $id_for_widget,
 			'options'       => $args,
 			'urls'          => array(
 				'username_part'     => $username,
@@ -334,6 +373,16 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	// Add a HTML comment with plugin name and version.
 	$output .= pinboard_bookmarks_get_generated_by();
+
+	/*
+	 * If we are in a shortcode, close the section HTML tag.
+	 *
+	 * @since 1.8.2
+	 */
+	if ( empty( $widget_id ) ) {
+		$output .= '</section>';
+		$output .= "\n" . '<!-- End Pinboard Bookmarks - ' . $md5_feed_url . ' -->' . "\n\n";
+	}
 
 	return $output;
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Pinboard Bookmarks plugin.
+ * Pinboard Bookmarks items functions.
  *
  * @since 1.0.0
  * @package PinboardBookmarks
@@ -13,274 +13,6 @@
  */
 if ( ! defined( 'WPINC' ) ) {
 	exit( 'No script kiddies please!' );
-}
-
-/**
- * Returns the default options.
- *
- * $defaults contains the default parameters:
- *    string  $title            The title of the widget.
- *    string  $intro_text       The introductory text for the widget.
- *    string  $username         The username on Pinboard.
- *    string  $tags             The tags where to get bookmarks from.
- *    boolean $source           The Pinboard 'source' where to get bookmarks from.
- *                              Default empty. Accepts 'pocket', 'instapaper'.
- *    integer $quantity         The number of bookmarks to fetch.
- *    boolean $random           If fetched bookmarks should be displayed in random order.
- *    boolean $display_desc     If the description of the bookmark should be displayed.
- *    integer $truncate         Truncate the description of the bookmark at this words number.
- *    boolean $display_date     If the date of the bookmarks should be displayed.
- *    boolean $display_time     If the time of the bookmarks should be displayed.
- *    string  $date_text        The text to be prepended before the date/time.
- *    boolean $display_tags     If the tags of the bookmarks should be displayed.
- *    boolean $tags_text        The text to be prepended before the tags.
- *    boolean $display_hashtag  If the hashtag `#` should be displayed.
- *    boolean $use_comma        If a comma should be displayed between tags.
- *    boolean $display_source   If the source of the bookmark should be displayed.
- *    boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
- *    integer $time             How much seconds between two fetchings.
- *    boolean $display_archive  If the link to the archive on Pinboard should be displayed.
- *    boolean $archive_text     The text to be prepended before the archive link.
- *    boolean $list_type        The HTML list type. Default 'bullet' (ul). Accepts 'numbered' (ol).
- *    boolean $display_arch_arr If an HTML arrow should be displayed after the archive link.
- *    boolean $new_tab          If links should be opened ina new browser tab.
- *    boolean $nofollow         If a 'nofollow' attribute should be added in links.
- *    string  $items_order      The order in which to display the items.
- *    boolean $admin_only       If administrators only can view the debug.
- *    boolean $debug_options    If debug informations should be displayed.
- *    boolean $debug_urls       If URLs used by the plugin should be displayed for debug.
- *    string  $widget_id        The ID of the widget.
- * }
- *
- * @since 1.7.5
- * @return array $defaults The default options.
- */
-function pinboard_bookmarks_get_defaults() {
-	$defaults = array(
-		'title'            => esc_html__( 'My bookmarks on Pinboard', 'pinboard-bookmarks' ),
-		'intro_text'       => '',
-		'username'         => '',
-		'tags'             => '',
-		'source'           => '', // This is the source in Pinboard. Can be 'from:pocket' or 'from:instapaper'.
-		'quantity'         => 5,
-		'random'           => false,
-		'display_desc'     => false,
-		'truncate'         => 0,
-		'display_date'     => false,
-		'display_time'     => false,
-		'date_text'        => esc_html__( 'Stored on:', 'pinboard-bookmarks' ),
-		'display_tags'     => false,
-		'tags_text'        => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
-		'display_hashtag'  => true,
-		'use_comma'        => false,
-		'display_source'   => false,
-		'display_arrow'    => false,
-		'time'             => 1800,
-		'display_archive'  => true,
-		'archive_text'     => esc_html__( 'See the bookmarks on Pinboard', 'pinboard-bookmarks' ),
-		'list_type'        => 'bullet',
-		'display_arch_arr' => true,
-		'new_tab'          => false,
-		'nofollow'         => true,
-		'items_order'      => 'title description date tags',
-		'admin_only'       => true,
-		'debug_options'    => false,
-		'debug_urls'       => false,
-		'widget_id'        => '',
-	);
-
-	return $defaults;
-}
-
-/**
- * Build the tags string for RSS URL.
- *
- * @since 1.0
- * @param string $tags The comma separated list of tags.
- * @return string The tags part to be used in RSS URL.
- * @example /t:books/t:comics
- */
-function pinboard_bookmarks_get_tags_for_url( $tags ) {
-	$tags_for_url = '';
-
-	// Sanitize $tags.
-	$tags = sanitize_text_field( $tags );
-
-	// Replace all the occurrences of comma and space in any mix and quantity with a single space.
-	$tags = trim( preg_replace( '([\s,]+)', ' ', $tags ) );
-
-	$tags           = strtolower( $tags );
-	$tags           = explode( ' ', $tags );
-	$number_of_tags = count( $tags );
-
-	// Figure out how many tags we have.
-	if ( 1 === $number_of_tags ) {
-		// We have 1 tag only.
-		$tags         = implode( ' ', $tags );
-		$tags_for_url = 't:' . $tags;
-	} elseif ( 4 >= $number_of_tags ) {
-		// We have 2, 3, or 4 tags.
-		foreach ( $tags as $tag ) {
-			$tags_for_url .= 't:' . $tag . '/';
-		}
-	} else {
-		// We have more than 4 tags.
-		// In this case we have to reduce them to 4, since Pinboard accepts maximum 4 tags for a single query.
-		$tags_slice = array_slice( $tags, 0, 4 );
-		foreach ( $tags_slice as $tag ) {
-			$tags_for_url .= 't:' . $tag . '/';
-		}
-	}
-
-	return $tags_for_url;
-}
-
-/**
- * Check for the cache lifetime in the database and set it to 1800 seconds minimum.
- *
- * @since 1.0
- * @param integer $seconds The number of seconds of feed lifetime.
- * @return integer The number of seconds of feed lifetime.
- * @link http://codex.wordpress.org/Plugin_API/Filter_Reference/wp_feed_cache_transient_lifetime Codex Documentation
- */
-function pinboard_bookmarks_cache_handler( $seconds ) {
-	$options = (array) get_option( 'widget_pinboard-bookmarks-widget' );
-	$seconds = isset( $options['time'] ) ? $options['time'] : 1800;
-	return $seconds;
-}
-
-/**
- * Return an HTML comment with the version of the plugin.
- *
- * @since 1.0
- * @return string $output The HTML comment.
- */
-function pinboard_bookmarks_get_generated_by() {
-	$output = "\n" . '<!-- Generated by Pinboard Bookmarks ' . PINBOARD_BOOKMARKS_PLUGIN_VERSION . ' -->' . "\n";
-	return $output;
-}
-
-/**
- * Register the widget.
- *
- * @since 1.0
- */
-function pinboard_bookmarks_load_widget() {
-	register_widget( 'Pinboard_Bookmarks_Widget' );
-}
-
-/**
- * Load the CSS file.
- * The file will be loaded only in the widgets admin page.
- *
- * @param string $hook The hook where to load scripts.
- * @since 1.0
- */
-function pinboard_bookmarks_load_scripts( $hook ) {
-	if ( 'widgets.php' !== $hook ) {
-		return;
-	}
-
-	// Register and enqueue the CSS file.
-	wp_register_style( 'pinboard_bookmarks_style', plugins_url( 'pinboard-bookmarks-styles.css', __FILE__ ), array(), PINBOARD_BOOKMARKS_PLUGIN_VERSION, 'all' );
-	wp_enqueue_style( 'pinboard_bookmarks_style' );
-}
-
-/**
- * Return the debugging informations.
- *
- * @param array $args {
- *      The array containing the custom parameters.
- *
- *      @type boolean $admin_only    If the administrators only can view the debugging informations.
- *      @type boolean $debug_options If display the parameters of the widget.
- *      @type boolean $debug_urls    If display the URLS and the parts used to build them.
- *      @type array   $options       The parameters of the widget.
- *      @type array   $urls          The set of URLS.
- * }
- * @since 1.0
- * @return string The HTML for displaying the debugging informations.
- */
-function pinboard_bookmarks_debug( $args ) {
-	$defaults = array(
-		'admin_only'    => true,
-		'debug_options' => false,
-		'debug_urls'    => false,
-		'widget_id'     => '',
-		'options'       => '',
-		'urls'          => array(),
-	);
-
-	$args = wp_parse_args( $args, $defaults );
-
-	$admin_only    = $args['admin_only'];
-	$debug_options = $args['debug_options'];
-	$debug_urls    = $args['debug_urls'];
-	$widget_id     = $args['widget_id'];
-	$options       = $args['options'];
-	$urls          = $args['urls'];
-
-	$output = '';
-
-	if ( $debug_options || $debug_urls ) {
-		global $wp_version;
-		$output .= '<div class="pinboard-bookmarks-debug-group">';
-		// translators: %s is the name of the plugin.
-		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf( esc_html__( '%s Debug', 'pinboard-bookmarks' ), 'Pinboard Bookmarks' ) . '</h3>';
-		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__( 'Environment informations:', 'pinboard-bookmarks' ) . '</strong></h4>';
-		// translators: %s is the URL of the site.
-		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Site URL: %s', 'pinboard-bookmarks' ), esc_url( site_url() ) . '</li>' );
-		// translators: %s is the WordPress version.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'WordPress version: %s', 'pinboard-bookmarks' ), $wp_version . '</li>' );
-		// translators: %s is the plugin version.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'Plugin version: %s', 'pinboard-bookmarks' ), PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>' );
-		// translators: %s is the ID of the widget.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf( esc_html__( 'ID of this widget: %s', 'pinboard-bookmarks' ), $widget_id . '</li>' );
-		$output .= '</ul>';
-	}
-
-	if ( $debug_options ) {
-		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__( 'The options:', 'pinboard-bookmarks' ) . '</strong></h4>';
-		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
-		foreach ( $options as $key => $value ) {
-			if ( empty( $value ) ) {
-				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
-			}
-			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . esc_html( $value ) . '</code></li>';
-		}
-		$output .= '</ul>';
-	}
-
-	if ( $debug_urls ) {
-		$output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
-		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
-		foreach ( $urls as $key => $value ) {
-			if ( empty( $value ) ) {
-				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
-			}
-			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . $value . '</code></li>';
-		}
-		$output .= '</ul>';
-	}
-
-	if ( $debug_options || $debug_urls ) {
-		$output .= '</div>';
-	}
-
-	/**
-	 * If display debugging informations to admins only.
-	 *
-	 * @since 1.3
-	 */
-	if ( $admin_only ) {
-		if ( current_user_can( 'create_users' ) ) {
-			return $output;
-		} else {
-			return '';
-		}
-	} else {
-		return $output;
-	}
 }
 
 /**
@@ -402,14 +134,16 @@ function pinboard_bookmarks_get_date( $args ) {
 	if ( $display_time ) {
 		$date_format .= ' ' . get_option( 'time_format' );
 	}
+
 	// Convert date and time of the bookmark into a UNIX timestamp.
 	$item_timestamp = strtotime( esc_html( $item->get_date( $date_format ) ) );
 	// Get local time offset.
-	$local_offset = (int) get_option( 'gmt_offset' ) * 3600;
+	$local_offset = (int) get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
 	// Since the bookmark on Pinboard is stored in UTC, convert item timestamp from UTC to local time.
 	$item_local_timestamp = $item_timestamp + $local_offset;
+
 	// Get the final date and time of the item.
-	$bookmark_date = date_i18n( $date_format, $item_local_timestamp );
+	$bookmark_date = date( $date_format, $item_local_timestamp );
 
 	// Build the final HTML.
 	$output = '<p class="pinboard-bookmarks-date">';
@@ -628,62 +362,183 @@ function pinboard_bookmarks_get_archive_link( $args ) {
 }
 
 /**
- * Check if the items entered by the user are according to the standard.
+ * Return the debugging informations.
  *
- * The function sanitizes the user input, removes any non-standard item,
- * makes sure that all the standard items are present, removes any duplicate,
- * and makes sure that the items are 4.
- * If the final string is empty, it is filled with the standard value.
+ * @param array $args {
+ *      The array containing the custom parameters.
  *
- * @param string $items The string containing the items to be checked.
- * @return string The items in the order to be displayed.
- *
- * @since 1.7.0 As a series of commands.
- * @since 1.8.0 As a standalone function.
- * @since 1.8.1 Added check if $items is a string.
+ *      @type boolean $admin_only    If the administrators only can view the debugging informations.
+ *      @type boolean $debug_options If display the parameters of the widget.
+ *      @type boolean $debug_urls    If display the URLS and the parts used to build them.
+ *      @type string  $widget_id     The ID of the widget.
+ *      @type array   $options       The parameters of the widget.
+ *      @type array   $urls          The set of URLS.
+ * }
+ * @since 1.0
+ * @return string The HTML for displaying the debugging informations.
  */
-function pinboard_bookmarks_check_items( $items = '' ) {
-	// Check if $items is a string.
-	if ( ! is_string( $items ) ) {
-		return;
+function pinboard_bookmarks_debug( $args ) {
+	$defaults = array(
+		'admin_only'    => true,
+		'debug_options' => false,
+		'debug_urls'    => false,
+		'widget_id'     => '',
+		'options'       => '',
+		'urls'          => array(),
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$admin_only    = $args['admin_only'];
+	$debug_options = $args['debug_options'];
+	$debug_urls    = $args['debug_urls'];
+	$widget_id     = $args['widget_id'];
+	$options       = $args['options'];
+	$urls          = $args['urls'];
+
+	$output = '';
+
+	if ( $debug_options || $debug_urls ) {
+		global $wp_version;
+		$output .= '<div class="pinboard-bookmarks-debug-group">';
+		// Title.
+		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf(
+			// translators: %s is the name of the plugin.
+			esc_html__( '%s Debug', 'pinboard-bookmarks' ),
+			'Pinboard Bookmarks'
+		) . '</h3>';
+		// Subtitle.
+		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__(
+			'Environment informations:',
+			'pinboard-bookmarks'
+		) . '</strong></h4>';
+		// Site URL.
+		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the URL of the site.
+			esc_html__(
+				'Site URL: %s',
+				'pinboard-bookmarks'
+			),
+			esc_url(
+				site_url()
+			) . '</li>'
+		);
+		// WordPress version.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the WordPress version.
+			esc_html__(
+				'WordPress version: %s',
+				'pinboard-bookmarks'
+			),
+			$wp_version . '</li>'
+		);
+		// Pinboard Bookmarks version.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the plugin version.
+			esc_html__(
+				'Plugin version: %s',
+				'pinboard-bookmarks'
+			),
+			PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>'
+		);
+		// ID of the widget/shortcode.
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the ID of the widget.
+			esc_html__(
+				'ID of this widget: %s',
+				'pinboard-bookmarks'
+			),
+			$widget_id . '</li>'
+		);
+
+		// Cache information.
+		$cache_info = pinboard_bookmarks_get_cache_info( $urls['complete_feed_url'] );
+
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . esc_html__(
+			'Cache information:',
+			'pinboard-bookmarks'
+		);
+
+		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Created on: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_created'] . '</li>'
+		);
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Duration: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_duration'] . '</li>'
+		);
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Will expire on: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_expires'] . '</li>'
+		);
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Remaining time: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_remaining_time'] . '</li>'
+		);
+		$output .= '</ul></li></ul>';
 	}
 
-	// Sanitize user input and make it lowercase.
-	$items = strtolower( sanitize_text_field( $items ) );
-	// Remove any space and comma from user input and remove leading/trailing spaces.
-	$items = trim( preg_replace( '([\s,]+)', ' ', $items ) );
-
-	// Make the user input an array for some checks.
-	$items = explode( ' ', $items );
-
-	// Define the standard items.
-	$standard_values = array( 'title', 'description', 'date', 'tags' );
-
-	// Check if the user entered items that aren't in the four standard values.
-	foreach ( $items as $key => $value ) {
-		if ( ! in_array( $value, $standard_values, true ) ) {
-			unset( $items[ $key ] );
+	if ( $debug_options ) {
+		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__(
+			'The options:',
+			'pinboard-bookmarks'
+		) . '</strong></h4>';
+		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+		foreach ( $options as $key => $value ) {
+			if ( empty( $value ) ) {
+				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
+			}
+			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . esc_html( $value ) . '</code></li>';
 		}
+		$output .= '</ul>';
 	}
 
-	// Make sure that all the standard items are present in the array.
-	$items = array_merge( $items, $standard_values );
-
-	// Check for possible duplicates and remove them.
-	$items = array_unique( $items );
-
-	// Make sure that the items are only four.
-	if ( 4 < count( $items ) ) {
-		$items = array_slice( $items, 0, 4 );
+	if ( $debug_urls ) {
+		$output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
+		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+		foreach ( $urls as $key => $value ) {
+			if ( empty( $value ) ) {
+				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
+			}
+			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . $value . '</code></li>';
+		}
+		$output .= '</ul>';
 	}
 
-	// Restore the $items array into a string.
-	$items = implode( ' ', $items );
-
-	// If the input is empty, fill it with standard values.
-	if ( empty( $items ) ) {
-		$items = implode( ' ', $standard_values );
+	if ( $debug_options || $debug_urls ) {
+		$output .= '</div>';
 	}
 
-	return $items;
+	/**
+	 * If display debugging informations to admins only.
+	 *
+	 * @since 1.3
+	 */
+	if ( $admin_only ) {
+		if ( current_user_can( 'create_users' ) ) {
+			return $output;
+		} else {
+			return '';
+		}
+	} else {
+		return $output;
+	}
 }
