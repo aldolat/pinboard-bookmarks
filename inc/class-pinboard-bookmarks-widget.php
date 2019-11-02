@@ -166,25 +166,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, pinboard_bookmarks_get_defaults() );
-
-		// *** STARTS PART TO BE REMOVED IN 1.8.1.
-		'on' === $instance['random'] ? $instance['random']                     = true : false;
-		'on' === $instance['display_desc'] ? $instance['display_desc']         = true : false;
-		'on' === $instance['display_date'] ? $instance['display_date']         = true : false;
-		'on' === $instance['display_time'] ? $instance['display_time']         = true : false;
-		'on' === $instance['display_tags'] ? $instance['display_tags']         = true : false;
-		'on' === $instance['display_hashtag'] ? $instance['display_hashtag']   = true : false;
-		'on' === $instance['use_comma'] ? $instance['use_comma']               = true : false;
-		'on' === $instance['display_source'] ? $instance['display_source']     = true : false;
-		'on' === $instance['display_arrow'] ? $instance['display_arrow']       = true : false;
-		'on' === $instance['display_archive'] ? $instance['display_archive']   = true : false;
-		'on' === $instance['display_arch_arr'] ? $instance['display_arch_arr'] = true : false;
-		'on' === $instance['new_tab'] ? $instance['new_tab']                   = true : false;
-		'on' === $instance['nofollow'] ? $instance['nofollow']                 = true : false;
-		'on' === $instance['admin_only'] ? $instance['admin_only']             = true : false;
-		'on' === $instance['debug_options'] ? $instance['debug_options']       = true : false;
-		'on' === $instance['debug_urls'] ? $instance['debug_urls']             = true : false;
-		// *** ENDS PART TO BE REMOVED IN 1.8.1.
 		?>
 
 		<div class="pinboard-bookmarks-widget-content">

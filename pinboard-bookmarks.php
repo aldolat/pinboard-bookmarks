@@ -41,11 +41,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
- * TODO: When all users have updated the plugin to version 1.8.0,
- * remove the part "PART TO BE REMOVED" in inc/class-pinboard-bookmarks-widget.php.
- */
-
 /**
  * Prevent direct access to this file.
  *
