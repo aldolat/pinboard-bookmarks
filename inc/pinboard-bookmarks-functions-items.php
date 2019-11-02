@@ -398,6 +398,7 @@ function pinboard_bookmarks_debug( $args ) {
 
 	$output = '';
 
+	// Environment information.
 	if ( $debug_options || $debug_urls ) {
 		global $wp_version;
 		$output .= '<div class="pinboard-bookmarks-debug-group">';
@@ -409,7 +410,7 @@ function pinboard_bookmarks_debug( $args ) {
 		) . '</h3>';
 		// Subtitle.
 		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__(
-			'Environment informations:',
+			'Environment information:',
 			'pinboard-bookmarks'
 		) . '</strong></h4>';
 		// Site URL.
@@ -496,21 +497,38 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '</ul></li></ul>';
 	}
 
+	// Debug section.
 	if ( $debug_options ) {
 		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__(
 			'The options:',
 			'pinboard-bookmarks'
 		) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+
 		foreach ( $options as $key => $value ) {
-			if ( empty( $value ) ) {
-				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
+			/*
+			 * If $value is boolean, echo "true" or "false", instead of boolean "1" or "0".
+			 *
+			 * If $value is empty, echo "(empty)".
+			 * Here we don't use `if ( empty( $value ) )`
+			 * because, if $value is a string and contains "0" (a string with 0 as content),
+			 * PHP's `empty()` function returns "true", instead of "false".
+			 */
+			if ( is_bool( $value ) ) {
+				$value = ( true === $value ) ? 'true' : 'false';
+			} else {
+				if ( '' === $value ) {
+					$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
+				}
 			}
+
 			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . esc_html( $value ) . '</code></li>';
 		}
+
 		$output .= '</ul>';
 	}
 
+	// URLs section.
 	if ( $debug_urls ) {
 		$output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
