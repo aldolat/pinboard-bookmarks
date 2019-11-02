@@ -450,18 +450,50 @@ function pinboard_bookmarks_debug( $args ) {
 			),
 			$widget_id . '</li>'
 		);
-		// Cache expiration.
+
+		// Cache information.
+		$cache_info = pinboard_bookmarks_get_cache_info( $urls['complete_feed_url'] );
+
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . esc_html__(
+			'Cache information:',
+			'pinboard-bookmarks'
+		);
+
+		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the time when the cache will expire.
 			esc_html__(
-				'Cache will expire on: %s',
+				'Created on: %s',
 				'pinboard-bookmarks'
 			),
-			pinboard_bookmarks_get_feed_timeout(
-				$urls['complete_feed_url']
-			) . '</li>'
+			$cache_info['cache_created'] . '</li>'
 		);
-		$output .= '</ul>';
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Duration: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_duration'] . '</li>'
+		);
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Will expire on: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_expires'] . '</li>'
+		);
+		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+			// translators: %s is the time when the cache will expire.
+			esc_html__(
+				'Remaining time: %s',
+				'pinboard-bookmarks'
+			),
+			$cache_info['cache_remaining_time'] . '</li>'
+		);
+		$output .= '</ul></li></ul>';
 	}
 
 	if ( $debug_options ) {

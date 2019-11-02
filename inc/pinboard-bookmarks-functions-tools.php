@@ -75,43 +75,53 @@ function pinboard_bookmarks_get_generated_by() {
  * This function receives a feed URL in input
  * and gets the human readable date and time of the transient expiration.
  *
- * @param string $feed_url The complete feed URL.
- * @return string The formatted date and time when the cache will expire.
+ * @param string $feed_url   The complete feed URL.
+ * @return array $cache_info An associative array containing cache information.
  *
  * @since 1.8.2
  */
-function pinboard_bookmarks_get_feed_timeout( $feed_url = '' ) {
+function pinboard_bookmarks_get_cache_info( $feed_url = '' ) {
 	if ( empty( $feed_url ) ) {
 		return;
 	}
+
+	$cache_info = array();
 
 	// Calculate MD5 of the feed URL, as stored by WordPress in the database.
 	$md5 = md5( $feed_url );
 
 	// Get transient values.
-	$transient_creation = get_transient( 'feed_mod_' . $md5 );
-	$transient_timeout  = get_transient( 'timeout_feed_mod_' . $md5 );
+	$cache_created_timestamp = get_transient( 'feed_mod_' . $md5 );
+	$cache_expires_timestamp = get_transient( 'timeout_feed_mod_' . $md5 );
 
-	// Get the local offset.
-	$local_offset = (int) get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
-
-	// Add local offset to transient timeout.
-	$local_timestamp = $transient_timeout + $local_offset;
-
-	// Get date and time format.
+	// Get the local GMT offset and date/time formats.
+	$local_offset    = (int) get_option( 'gmt_offset' ) * HOUR_IN_SECONDS;
 	$datetime_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
 
-	// Convert transient local timestamp to human readable date and time.
-	$expiry_date = date( $datetime_format, $local_timestamp );
+	// Add local GMT offset to transients timeout.
+	$cache_created_timestamp_localized = $cache_created_timestamp + $local_offset;
+	$cache_expires_timestamp_localized = $cache_expires_timestamp + $local_offset;
 
-	$duration = sprintf(
-		// translators: It is something like "30 minutes", "1 hour", and so on.
-		esc_html__( '(cache time is %1$s and will be updated in %2$s)', 'pinboard-bookmarks' ),
-		human_time_diff( $transient_creation, $transient_timeout ),
-		human_time_diff( $transient_timeout, time() )
+	// Get date and time of cache creation.
+	$cache_created = date( $datetime_format, $cache_created_timestamp_localized );
+
+	// Get cache duration time.
+	$cache_duration = human_time_diff( $cache_created_timestamp, $cache_expires_timestamp );
+
+	// Get date and time of cache expiration.
+	$cache_expires = date( $datetime_format, $cache_expires_timestamp_localized );
+
+	// Get remaining time to next cache update.
+	$cache_remaining_time = human_time_diff( $cache_expires_timestamp, time() );
+
+	$cache_info = array(
+		'cache_created'        => $cache_created,
+		'cache_duration'       => $cache_duration,
+		'cache_expires'        => $cache_expires,
+		'cache_remaining_time' => $cache_remaining_time,
 	);
 
-	return $expiry_date . ' ' . $duration;
+	return $cache_info;
 }
 
 /**
