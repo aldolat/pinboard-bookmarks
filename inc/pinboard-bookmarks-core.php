@@ -41,15 +41,18 @@ if ( ! defined( 'WPINC' ) ) {
  *      @type boolean $use_comma        If a comma should be displayed between tags.
  *      @type boolean $display_source   If the source of the bookmark should be displayed.
  *      @type boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
+ *      @type string  $time             The minimum time between two requests to Pinboard server.
  *      @type boolean $display_archive  If the link to the archive on Pinboard should be displayed.
  *      @type boolean $archive_text     The text to be prepended before the archive link.
  *      @type boolean $list_type        The HTML list type. Default 'bullet' (ul). Accepts 'numbered' (ol).
  *      @type boolean $display_arch_arr If an HTML arrow should be displayed after the archive link.
  *      @type boolean $new_tab          If links should be opened ina new browser tab.
  *      @type boolean $nofollow         If a 'nofollow' attribute should be added in links.
+ *      @type string  $items_order      The order in which to display the items.
  *      @type boolean $admin_only       If administrators only can view the debug.
  *      @type boolean $debug_options    If debug informations should be displayed.
  *      @type boolean $debug_urls       If URLs used by the plugin should be displayed for debug.
+ *      @type string  $widget_id        The ID of the widget.
  * }
  * @return string $output The HTML structure to be displayed on the page
  */
