@@ -496,7 +496,7 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
 
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
-			// translators: %s is the time when the cache will expire.
+			// translators: %s is the time when the cache was created.
 			esc_html__(
 				'Created on: %s',
 				'pinboard-bookmarks'
@@ -504,7 +504,7 @@ function pinboard_bookmarks_debug( $args ) {
 			$cache_info['cache_created'] . '</li>'
 		);
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
-			// translators: %s is the time when the cache will expire.
+			// translators: %s is the duration of the cache.
 			esc_html__(
 				'Duration: %s',
 				'pinboard-bookmarks'
@@ -520,7 +520,7 @@ function pinboard_bookmarks_debug( $args ) {
 			$cache_info['cache_expires'] . '</li>'
 		);
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
-			// translators: %s is the time when the cache will expire.
+			// translators: %s is the remaining time.
 			esc_html__(
 				'Remaining time: %s',
 				'pinboard-bookmarks'
