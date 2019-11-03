@@ -38,7 +38,7 @@ if ( ! defined( 'WPINC' ) ) {
  *    boolean $use_comma        If a comma should be displayed between tags.
  *    boolean $display_source   If the source of the bookmark should be displayed.
  *    boolean $display_arrow    If an HTML arrow should be displayed after the bookmark.
- *    integer $time             How much seconds between two fetchings.
+ *    integer $time             Minimum time in seconds between two requests to Pinboard server.
  *    boolean $display_archive  If the link to the archive on Pinboard should be displayed.
  *    boolean $archive_text     The text to be prepended before the archive link.
  *    boolean $list_type        The HTML list type. Default 'bullet' (ul). Accepts 'numbered' (ol).

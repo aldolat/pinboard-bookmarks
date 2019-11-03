@@ -297,9 +297,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$instance['random']
 			);
 
-			// Fetching time.
+			// Time between two requests.
 			pinboard_bookmarks_form_input_text(
-				esc_html__( 'Minimum time between two fetchings:', 'pinboard-bookmarks' ),
+				esc_html__( 'Minimum time between two requests to Pinboard server:', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'time' ),
 				$this->get_field_name( 'time' ),
 				esc_attr( $instance['time'] ),

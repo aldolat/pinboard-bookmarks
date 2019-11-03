@@ -68,6 +68,7 @@ This is the list of the options for the shortcode:
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
 * `display_source` (boolean, 1/0) - If the source should be displayed.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
+* `time` (string) - The minimum time between two requests to Pinboard server.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
 * `list_type` (string) - The type of list to be used.
@@ -102,6 +103,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 		'use_comma'        => false,
 		'display_source'   => false,
 		'display_arrow'    => false,
+		'time'             => 1800,
 		'display_archive'  => true,
 		'archive_text'     => 'See the bookmarks on Pinboard',
 		'list_type'        => 'bullet',
