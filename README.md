@@ -1,3 +1,5 @@
+# Pinboard Bookmarks #
+
 ![banner](https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png)
 
 [![version][version-badge]][CHANGELOG]
@@ -6,16 +8,15 @@
 [![requiresphp][requires-php]][README]
 [![license][license-badge]][LICENSE]
 
-# Pinboard Bookmarks #
 **Contributors:** aldolat  
-**Donate link:** http://dev.aldolat.it/projects/pinboard-bookmarks/  
+**Donate link:** <http://dev.aldolat.it/projects/pinboard-bookmarks/>  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 5.3.0  
 **Requires PHP:** 5.3  
 **Stable tag:** 1.9.0  
 **License:** GPLv3 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
+**License URI:** <http://www.gnu.org/licenses/gpl-3.0.html>  
 
 Publish Pinboard bookmarks on your WordPress blog.
 
@@ -92,39 +93,39 @@ This is the list of the options for the shortcode:
 
 You can also use the main PHP function directly in your theme. Add these lines where you want them to be displayed (the function echoes the result):
 
-````
+````php
 if ( function_exists( 'pinboard_bookmarks_fetch_feed' ) ) {
-	$args = array(
-		'intro_text'       => '',
-		'username'         => '',
-		'tags'             => '',
-		'source'           => '',
-		'quantity'         => 5,
-		'random'           => false,
-		'display_desc'     => false,
-		'truncate'         => 0,
-		'display_date'     => false,
-		'display_time'     => false,
-		'date_text'        => 'Stored on:',
-		'display_tags'     => false,
-		'tags_text'        => 'Tags:',
-		'display_hashtag'  => true,
-		'use_comma'        => false,
-		'display_source'   => false,
-		'display_arrow'    => false,
-		'time'             => 1800,
-		'display_archive'  => true,
-		'archive_text'     => 'See the bookmarks on Pinboard',
-		'list_type'        => 'bullet',
-		'display_arch_arr' => true,
-		'new_tab'          => false,
-		'nofollow'         => true,
-		'items_order'      => 'title description date tags',
-		'admin_only'       => true,
-		'debug_options'    => false,
-		'debug_urls'       => false
-	);
-	pinboard_bookmarks_fetch_feed( $args );
+    $args = array(
+        'intro_text'       => '',
+        'username'         => '',
+        'tags'             => '',
+        'source'           => '',
+        'quantity'         => 5,
+        'random'           => false,
+        'display_desc'     => false,
+        'truncate'         => 0,
+        'display_date'     => false,
+        'display_time'     => false,
+        'date_text'        => 'Stored on:',
+        'display_tags'     => false,
+        'tags_text'        => 'Tags:',
+        'display_hashtag'  => true,
+        'use_comma'        => false,
+        'display_source'   => false,
+        'display_arrow'    => false,
+        'time'             => 1800,
+        'display_archive'  => true,
+        'archive_text'     => 'See the bookmarks on Pinboard',
+        'list_type'        => 'bullet',
+        'display_arch_arr' => true,
+        'new_tab'          => false,
+        'nofollow'         => true,
+        'items_order'      => 'title description date tags',
+        'admin_only'       => true,
+        'debug_options'    => false,
+        'debug_urls'       => false
+    );
+    pinboard_bookmarks_fetch_feed( $args );
 }
 ````
 
@@ -157,9 +158,11 @@ This section describes how to install the plugin and get it working.
 ## Screenshots ##
 
 ### 1. The dashboard panel to set up the widget ###
+
 ![1. The dashboard panel to set up the widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-1.png)
 
 ### 2. An example of rendered widget ###
+
 ![2. An example of rendered widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
 
 ## Upgrade Notice ##
