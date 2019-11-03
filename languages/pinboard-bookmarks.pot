@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-11-03T11:13:52+01:00\n"
+"POT-Creation-Date: 2019-11-03T12:53:38+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: pinboard-bookmarks\n"
@@ -237,7 +237,7 @@ msgstr ""
 
 #: inc/class-pinboard-bookmarks-widget.php:429
 #: inc/pinboard-bookmarks-functions-init.php:80
-#: inc/pinboard-bookmarks-functions-items.php:347
+#: inc/pinboard-bookmarks-functions-items.php:360
 msgid "See the bookmarks on Pinboard"
 msgstr ""
 
@@ -319,16 +319,16 @@ msgstr ""
 msgid "Display URLs"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:92
+#: inc/pinboard-bookmarks-core.php:95
 msgid "You have not properly configured the widget. Please, add a username."
 msgstr ""
 
 #. translators: %s is the feed error.
-#: inc/pinboard-bookmarks-core.php:218
+#: inc/pinboard-bookmarks-core.php:221
 msgid "There was a problem with your feed! The error is %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:237
+#: inc/pinboard-bookmarks-core.php:240
 msgid "No items."
 msgstr ""
 
@@ -338,68 +338,68 @@ msgid "Stored on:"
 msgstr ""
 
 #. translators: %s is the name of the plugin.
-#: inc/pinboard-bookmarks-functions-items.php:428
+#: inc/pinboard-bookmarks-functions-items.php:441
 msgid "%s Debug"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:432
+#: inc/pinboard-bookmarks-functions-items.php:445
 msgid "Environment information:"
 msgstr ""
 
 #. translators: %s is the URL of the site.
-#: inc/pinboard-bookmarks-functions-items.php:439
+#: inc/pinboard-bookmarks-functions-items.php:452
 msgid "Site URL: %s"
 msgstr ""
 
 #. translators: %s is the WordPress version.
-#: inc/pinboard-bookmarks-functions-items.php:450
+#: inc/pinboard-bookmarks-functions-items.php:463
 msgid "WordPress version: %s"
 msgstr ""
 
 #. translators: %s is the plugin version.
-#: inc/pinboard-bookmarks-functions-items.php:459
+#: inc/pinboard-bookmarks-functions-items.php:472
 msgid "Plugin version: %s"
 msgstr ""
 
 #. translators: %s is the ID of the widget.
-#: inc/pinboard-bookmarks-functions-items.php:468
+#: inc/pinboard-bookmarks-functions-items.php:481
 msgid "ID of this widget: %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:478
+#: inc/pinboard-bookmarks-functions-items.php:491
 msgid "Cache information:"
 msgstr ""
 
 #. translators: %s is the time when the cache will expire.
-#: inc/pinboard-bookmarks-functions-items.php:487
+#: inc/pinboard-bookmarks-functions-items.php:500
 msgid "Created on: %s"
 msgstr ""
 
 #. translators: %s is the time when the cache will expire.
-#: inc/pinboard-bookmarks-functions-items.php:495
+#: inc/pinboard-bookmarks-functions-items.php:508
 msgid "Duration: %s"
 msgstr ""
 
 #. translators: %s is the time when the cache will expire.
-#: inc/pinboard-bookmarks-functions-items.php:503
+#: inc/pinboard-bookmarks-functions-items.php:516
 msgid "Will expire on: %s"
 msgstr ""
 
 #. translators: %s is the time when the cache will expire.
-#: inc/pinboard-bookmarks-functions-items.php:511
+#: inc/pinboard-bookmarks-functions-items.php:524
 msgid "Remaining time: %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:522
+#: inc/pinboard-bookmarks-functions-items.php:535
 msgid "The options:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:541
-#: inc/pinboard-bookmarks-functions-items.php:557
+#: inc/pinboard-bookmarks-functions-items.php:554
+#: inc/pinboard-bookmarks-functions-items.php:570
 msgid "(empty)"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:553
+#: inc/pinboard-bookmarks-functions-items.php:566
 msgid "URLs and components:"
 msgstr ""
 
