@@ -184,6 +184,7 @@ function pinboard_bookmarks_get_date( $args ) {
  */
 function pinboard_bookmarks_get_tags( $args ) {
 	$defaults = array(
+		'display_tags'             => false,
 		'item'                     => array(),
 		'tags_text'                => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 		'display_hashtag'          => true,
@@ -197,6 +198,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
+	$display_tags             = $args['display_tags'];
 	$item                     = $args['item'];
 	$tags_text                = $args['tags_text'];
 	$display_hashtag          = $args['display_hashtag'];
@@ -207,84 +209,115 @@ function pinboard_bookmarks_get_tags( $args ) {
 	$display_source           = $args['display_source'];
 	$pinboard_user_source_url = $args['pinboard_user_source_url'];
 
-	$tags_list = (array) $item->get_categories();
-	if ( ! $tags_list ) {
-		return;
-	}
-
-	$output = '<p class="pinboard-bookmarks-tags">';
-
-	$tags_text ? $output .= $tags_text . ' ' : $output .= '';
-
-	$display_hashtag ? $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>' : $hashtag = '';
-
-	$url = $pinboard_user_tag_url;
-
-	$use_comma ? $comma = ', ' : $comma = ' ';
-
-	foreach ( $tags_list as $tag ) {
-		$item_tags = $tag->get_label();
-		$item_tags = (array) explode( ' ', $item_tags );
-		foreach ( $item_tags as $item_tag ) {
-			$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
-		}
-		// Removes the trailing comma and space in any quantity and any order after the last tag.
-		$output = rtrim( $output, ', ' );
-	}
+	// Get list of tags and source of the bookmark.
+	$tags_list      = (array) $item->get_categories();
+	$source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' );
 
 	/*
-	 * Append the source of the bookmark, like Pocket, Instapaper, Twitter.
+	 * If the list of tags is empty AND (the source of the bookmark is empty OR is equal to 'http://pinboard.in/')
+	 * stop the function and return an empty string.
 	 *
-	 * @since 1.4
+	 * @since 1.9.0
 	 */
-	if ( $display_source ) {
-		$source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' );
-		if ( $source_service ) {
-			$source_service = $source_service[0]['data'];
-			switch ( $source_service ) {
-				case 'http://readitlater.com/':
-					$source_name    = 'Pocket';
-					$source_address = $pinboard_user_source_url . 'pocket';
-					break;
-				case 'http://instapaper.com/':
-					$source_name    = 'Instapaper';
-					$source_address = $pinboard_user_source_url . 'instapaper';
-					break;
-				/**
-				 * Remove support for Twitter.
-				 * Pinboard lets you fetch your tweets that:
-				 * - have a link inside;
-				 * - you liked and have a link inside.
-				 * Pinboard then adds a "tag" depending on the type of tweet:
-				 * `from twitter` (the first case) or `from twitter_favs` (the second one).
-				 * So in Pinboard you have two separate pages for these bookmarks:
-				 * - https://pinboard.in/u:username/from:twitter
-				 * - https://pinboard.in/u:username/from:twitter_favs
-				 * The problem is that, when Pinboard creates the RSS feed,
-				 * there is no way to distinguish the first tweets from the second ones.
-				 * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
-				 * In this situation we cannot link to the correct page.
-				 *
-				 * Code removed:
-				 * case 'http://twitter.com/':
-				 *    $source_name = 'Twitter';
-				 *    $source_address = $pinboard_user_source_url . 'twitter';
-				 *    break;
-				 *
-				 * @since 1.6.0
-				 */
-				// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
-				case 'http://pinboard.in/':
-					$source_name    = 'Pinboard';
-					$source_address = $pinboard_user_source_url . 'pinboard';
-					break;
-			}
-			if ( 'Pinboard' !== $source_name ) {
-				$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
+	if ( empty( $tags_list ) && ( empty( $source_service ) || 'http://pinboard.in/' === $source_service[0]['data'] ) ) {
+		return '';
+	}
+
+	// Open the $output variable that will contain the text.
+	$output = '';
+
+	/*
+	 * If we want to see tags AND there are tags
+	 * OR
+	 * I want to see the source AND (there is the source AND it's different from 'http://pinboard.in/')
+	 * continue executing the function.
+	 */
+	if (
+		( $display_tags && $tags_list ) || 
+		( $display_source && ( $source_service && 'http://pinboard.in/' !== $source_service[0]['data'] ) )
+	) :
+
+		$output .= '<p class="pinboard-bookmarks-tags">';
+
+		$tags_text ? $output .= $tags_text . ' ' : $output .= '';
+
+		$use_comma ? $comma = ', ' : $comma = ' ';
+
+		/*
+		* Display tags.
+		*/
+		if ( $display_tags ) {
+			if ( $tags_list ) {
+				foreach ( $tags_list as $tag ) {
+					$item_tags = $tag->get_label();
+					$item_tags = (array) explode( ' ', $item_tags );
+					foreach ( $item_tags as $item_tag ) {
+						$display_hashtag ? $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>' : $hashtag = '';
+						$url                        = $pinboard_user_tag_url;
+						$output                    .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
+					}
+					// Removes the trailing comma and space in any quantity and any order after the last tag.
+					$output = rtrim( $output, ', ' );
+				}
 			}
 		}
-	}
-	$output .= '</p>';
+
+		/*
+		* Display the source of the bookmark, like Pocket or Instapaper.
+		*
+		* @since 1.4
+		*/
+		if ( $display_source ) {
+			if ( $source_service ) {
+				$source_service = $source_service[0]['data'];
+				switch ( $source_service ) {
+					case 'http://readitlater.com/':
+						$source_name    = 'Pocket';
+						$source_address = $pinboard_user_source_url . 'pocket';
+						break;
+					case 'http://instapaper.com/':
+						$source_name    = 'Instapaper';
+						$source_address = $pinboard_user_source_url . 'instapaper';
+						break;
+
+					/*
+					* Remove support for Twitter.
+					* Pinboard lets you fetch your tweets that:
+					* - have a link inside;
+					* - you liked and have a link inside.
+					* Pinboard then adds a "tag" depending on the type of tweet:
+					* `from twitter` (the first case) or `from twitter_favs` (the second one).
+					* So in Pinboard you have two separate pages for these bookmarks:
+					* - https://pinboard.in/u:username/from:twitter
+					* - https://pinboard.in/u:username/from:twitter_favs
+					* The problem is that, when Pinboard creates the RSS feed,
+					* there is no way to distinguish the first tweets from the second ones.
+					* In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
+					* In this situation we cannot link to the correct page.
+					*
+					* Code removed:
+					* case 'http://twitter.com/':
+					*    $source_name = 'Twitter';
+					*    $source_address = $pinboard_user_source_url . 'twitter';
+					*    break;
+					*
+					* @since 1.6.0
+					*/
+					// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
+					case 'http://pinboard.in/':
+						$source_name    = 'Pinboard';
+						$source_address = $pinboard_user_source_url . 'pinboard';
+						break;
+				}
+				if ( 'Pinboard' !== $source_name ) {
+					$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
+				}
+			}
+		}
+
+		$output .= '</p>';
+
+	endif;
 
 	return $output;
 }
@@ -398,6 +431,7 @@ function pinboard_bookmarks_debug( $args ) {
 
 	$output = '';
 
+	// Environment information.
 	if ( $debug_options || $debug_urls ) {
 		global $wp_version;
 		$output .= '<div class="pinboard-bookmarks-debug-group">';
@@ -409,7 +443,7 @@ function pinboard_bookmarks_debug( $args ) {
 		) . '</h3>';
 		// Subtitle.
 		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__(
-			'Environment informations:',
+			'Environment information:',
 			'pinboard-bookmarks'
 		) . '</strong></h4>';
 		// Site URL.
@@ -496,21 +530,38 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '</ul></li></ul>';
 	}
 
+	// Debug section.
 	if ( $debug_options ) {
 		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__(
 			'The options:',
 			'pinboard-bookmarks'
 		) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+
 		foreach ( $options as $key => $value ) {
-			if ( empty( $value ) ) {
-				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
+			/*
+			 * If $value is boolean, echo "true" or "false", instead of boolean "1" or "0".
+			 *
+			 * If $value is empty, echo "(empty)".
+			 * Here we don't use `if ( empty( $value ) )`
+			 * because, if $value is a string and contains "0" (a string with 0 as content),
+			 * PHP's `empty()` function returns "true", instead of "false".
+			 */
+			if ( is_bool( $value ) ) {
+				$value = ( true === $value ) ? 'true' : 'false';
+			} else {
+				if ( '' === $value ) {
+					$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
+				}
 			}
+
 			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . esc_html( $value ) . '</code></li>';
 		}
+
 		$output .= '</ul>';
 	}
 
+	// URLs section.
 	if ( $debug_urls ) {
 		$output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';

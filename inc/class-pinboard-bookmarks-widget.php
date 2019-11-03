@@ -173,11 +173,23 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			<h4 class="no-border"><?php esc_html_e( 'Introduction', 'pinboard-bookmarks' ); ?></h4>
 
 			<p>
-				<?php esc_html_e( 'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter a username on Pinboard and/or one or more tags. Then click on Save button.', 'pinboard-bookmarks' ); ?>
+				<?php
+				esc_html_e(
+					'This widget allows you to publish a list of Pinboard bookmarks in your sidebar.
+					Simply enter a username on Pinboard.
+					Then click on Save button.',
+					'pinboard-bookmarks'
+				);
+				?>
 			</p>
 
 			<p>
-				<?php esc_html_e( 'Please note that a username or one tag is required, at least.', 'pinboard-bookmarks' ); ?>
+				<?php
+				esc_html_e(
+					'Please note that a username is required, at least.',
+					'pinboard-bookmarks'
+				);
+				?>
 			</p>
 
 			<h4><?php esc_html_e( 'Title of the widget', 'pinboard-bookmarks' ); ?></h4>
@@ -285,9 +297,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$instance['random']
 			);
 
-			// Fetching time.
+			// Time between two requests.
 			pinboard_bookmarks_form_input_text(
-				esc_html__( 'Minimum time between two fetchings:', 'pinboard-bookmarks' ),
+				esc_html__( 'Minimum time between two requests to Pinboard server:', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'time' ),
 				$this->get_field_name( 'time' ),
 				esc_attr( $instance['time'] ),

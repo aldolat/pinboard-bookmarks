@@ -5,7 +5,7 @@ Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
 Tested up to: 5.3.0
 Requires PHP: 5.3
-Stable tag: 1.8.2
+Stable tag: 1.9.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -49,6 +49,10 @@ In the widget you can use the full set of options. So, for example, if you want 
 
 Note that the plugin will fetch bookmarks that have both the tags `books` and `comics`.
 
+Another more complex example:
+
+`[pbsc username="johndoe" time=86400 display_desc=1 display_date=1 display_time=1 display_tags=1 display_hashtag=0 display_source=1 items_order="tags title description date" date_text="Stored on:" display_archive=1 admin_only=1 debug_options=1 debug_urls=1]`
+
 This is the list of the options for the shortcode:
 
 * `intro_text` (string) - An introductory text for the shortcode.
@@ -68,6 +72,7 @@ This is the list of the options for the shortcode:
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
 * `display_source` (boolean, 1/0) - If the source should be displayed.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
+* `time` (string) - The minimum time between two requests to Pinboard server.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
 * `list_type` (string) - The type of list to be used.
@@ -102,6 +107,7 @@ You can also use the main PHP function directly in your theme. Add these lines w
 		'use_comma'        => false,
 		'display_source'   => false,
 		'display_arrow'    => false,
+		'time'             => 1800,
 		'display_archive'  => true,
 		'archive_text'     => 'See the bookmarks on Pinboard',
 		'list_type'        => 'bullet',
