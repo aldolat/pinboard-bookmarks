@@ -287,8 +287,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 			// Tags part.
 			$tags_part = '';
-			if ( $display_tags ) {
+			if ( $display_tags || $display_source ) {
 				$params = array(
+					'display_tags'             => $display_tags,
 					'item'                     => $item,
 					'tags_text'                => $tags_text,
 					'display_hashtag'          => $display_hashtag,

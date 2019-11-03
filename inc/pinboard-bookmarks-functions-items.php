@@ -184,6 +184,7 @@ function pinboard_bookmarks_get_date( $args ) {
  */
 function pinboard_bookmarks_get_tags( $args ) {
 	$defaults = array(
+		'display_tags'             => false,
 		'item'                     => array(),
 		'tags_text'                => esc_html__( 'Tags:', 'pinboard-bookmarks' ),
 		'display_hashtag'          => true,
@@ -197,6 +198,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
+	$display_tags             = $args['display_tags'];
 	$item                     = $args['item'];
 	$tags_text                = $args['tags_text'];
 	$display_hashtag          = $args['display_hashtag'];
@@ -207,38 +209,54 @@ function pinboard_bookmarks_get_tags( $args ) {
 	$display_source           = $args['display_source'];
 	$pinboard_user_source_url = $args['pinboard_user_source_url'];
 
-	$tags_list = (array) $item->get_categories();
-	if ( ! $tags_list ) {
-		return;
+	// Get list of tags and source of the bookmark.
+	$tags_list      = (array) $item->get_categories();
+	$source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' );
+
+	/*
+	 * If the list of tags is empty AND (the source of the bookmark is empty OR is equal to 'http://pinboard.in/')
+	 * stop the function and return an empty string.
+	 *
+	 * @since 1.9.0
+	 */
+	if ( empty( $tags_list ) && ( empty( $source_service ) || 'http://pinboard.in/' === $source_service[0]['data'] ) ) {
+		return '';
 	}
 
+	/*
+	 * If we are here, we have at least one tag or a source that is different from Pinboard (see above).
+	 */
 	$output = '<p class="pinboard-bookmarks-tags">';
 
 	$tags_text ? $output .= $tags_text . ' ' : $output .= '';
 
-	$display_hashtag ? $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>' : $hashtag = '';
-
-	$url = $pinboard_user_tag_url;
-
 	$use_comma ? $comma = ', ' : $comma = ' ';
 
-	foreach ( $tags_list as $tag ) {
-		$item_tags = $tag->get_label();
-		$item_tags = (array) explode( ' ', $item_tags );
-		foreach ( $item_tags as $item_tag ) {
-			$output .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
+	/*
+	 * Display tags.
+	 */
+	if ( $display_tags ) {
+		if ( $tags_list ) {
+			foreach ( $tags_list as $tag ) {
+				$item_tags = $tag->get_label();
+				$item_tags = (array) explode( ' ', $item_tags );
+				foreach ( $item_tags as $item_tag ) {
+					$display_hashtag ? $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>' : $hashtag = '';
+					$url                        = $pinboard_user_tag_url;
+					$output                    .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
+				}
+				// Removes the trailing comma and space in any quantity and any order after the last tag.
+				$output = rtrim( $output, ', ' );
+			}
 		}
-		// Removes the trailing comma and space in any quantity and any order after the last tag.
-		$output = rtrim( $output, ', ' );
 	}
 
 	/*
-	 * Append the source of the bookmark, like Pocket, Instapaper, Twitter.
+	 * Display the source of the bookmark, like Pocket or Instapaper.
 	 *
 	 * @since 1.4
 	 */
 	if ( $display_source ) {
-		$source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' );
 		if ( $source_service ) {
 			$source_service = $source_service[0]['data'];
 			switch ( $source_service ) {
@@ -250,7 +268,8 @@ function pinboard_bookmarks_get_tags( $args ) {
 					$source_name    = 'Instapaper';
 					$source_address = $pinboard_user_source_url . 'instapaper';
 					break;
-				/**
+
+				/*
 				 * Remove support for Twitter.
 				 * Pinboard lets you fetch your tweets that:
 				 * - have a link inside;
@@ -284,6 +303,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 			}
 		}
 	}
+
 	$output .= '</p>';
 
 	return $output;
