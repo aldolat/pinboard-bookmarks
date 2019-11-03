@@ -20,6 +20,19 @@
 
 Publish Pinboard bookmarks on your WordPress blog.
 
+* [Pinboard Bookmarks](#pinboard-bookmarks)
+  * [Description](#description)
+    * [Usage as widget](#usage-as-widget)
+    * [Usage as shortcode](#usage-as-shortcode)
+    * [Usage as PHP function](#usage-as-php-function)
+    * [Help, Bugs, and Contributing](#help-bugs-and-contributing)
+    * [Privacy Policy](#privacy-policy)
+  * [Installation](#installation)
+  * [Screenshots](#screenshots)
+    * [1. The dashboard panel to set up the widget](#1-the-dashboard-panel-to-set-up-the-widget)
+    * [2. An example of rendered widget](#2-an-example-of-rendered-widget)
+  * [Upgrade Notice](#upgrade-notice)
+
 ## Description ##
 
 Pinboard Bookmarks allows you to publish bookmarks from Pinboard on your blog. The plugin lets you:
