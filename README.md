@@ -58,6 +58,10 @@ In the widget you can use the full set of options. So, for example, if you want 
 
 Note that the plugin will fetch bookmarks that have both the tags `books` and `comics`.
 
+Another more complex example:
+
+`[pbsc username="johndoe" time=86400 display_desc=1 display_date=1 display_time=1 display_tags=1 display_hashtag=0 display_source=1 items_order="tags title description date" date_text="Stored on:" display_archive=1 admin_only=1 debug_options=1 debug_urls=1]`
+
 This is the list of the options for the shortcode:
 
 * `intro_text` (string) - An introductory text for the shortcode.
