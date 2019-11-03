@@ -223,88 +223,101 @@ function pinboard_bookmarks_get_tags( $args ) {
 		return '';
 	}
 
-	/*
-	 * If we are here, we have at least one tag or a source that is different from Pinboard (see above).
-	 */
-	$output = '<p class="pinboard-bookmarks-tags">';
-
-	$tags_text ? $output .= $tags_text . ' ' : $output .= '';
-
-	$use_comma ? $comma = ', ' : $comma = ' ';
+	// Open the $output variable that will contain the text.
+	$output = '';
 
 	/*
-	 * Display tags.
+	 * If we want to see tags AND there are tags
+	 * OR
+	 * I want to see the source AND (there is the source AND it's different from 'http://pinboard.in/')
+	 * continue executing the function.
 	 */
-	if ( $display_tags ) {
-		if ( $tags_list ) {
-			foreach ( $tags_list as $tag ) {
-				$item_tags = $tag->get_label();
-				$item_tags = (array) explode( ' ', $item_tags );
-				foreach ( $item_tags as $item_tag ) {
-					$display_hashtag ? $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>' : $hashtag = '';
-					$url                        = $pinboard_user_tag_url;
-					$output                    .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
+	if (
+		( $display_tags && $tags_list ) || 
+		( $display_source && ( $source_service && 'http://pinboard.in/' !== $source_service[0]['data'] ) )
+	) :
+
+		$output .= '<p class="pinboard-bookmarks-tags">';
+
+		$tags_text ? $output .= $tags_text . ' ' : $output .= '';
+
+		$use_comma ? $comma = ', ' : $comma = ' ';
+
+		/*
+		* Display tags.
+		*/
+		if ( $display_tags ) {
+			if ( $tags_list ) {
+				foreach ( $tags_list as $tag ) {
+					$item_tags = $tag->get_label();
+					$item_tags = (array) explode( ' ', $item_tags );
+					foreach ( $item_tags as $item_tag ) {
+						$display_hashtag ? $hashtag = '<span class="pinboard-bookmarks-hashtag">#</span>' : $hashtag = '';
+						$url                        = $pinboard_user_tag_url;
+						$output                    .= $hashtag . '<a class="pinboard-bookmarks-tag"' . $rel_txt . ' href="' . esc_url( $url . strtolower( $item_tag ) . '/' ) . '"' . $new_tab_link . '>' . esc_attr( $item_tag ) . '</a>' . $comma;
+					}
+					// Removes the trailing comma and space in any quantity and any order after the last tag.
+					$output = rtrim( $output, ', ' );
 				}
-				// Removes the trailing comma and space in any quantity and any order after the last tag.
-				$output = rtrim( $output, ', ' );
 			}
 		}
-	}
 
-	/*
-	 * Display the source of the bookmark, like Pocket or Instapaper.
-	 *
-	 * @since 1.4
-	 */
-	if ( $display_source ) {
-		if ( $source_service ) {
-			$source_service = $source_service[0]['data'];
-			switch ( $source_service ) {
-				case 'http://readitlater.com/':
-					$source_name    = 'Pocket';
-					$source_address = $pinboard_user_source_url . 'pocket';
-					break;
-				case 'http://instapaper.com/':
-					$source_name    = 'Instapaper';
-					$source_address = $pinboard_user_source_url . 'instapaper';
-					break;
+		/*
+		* Display the source of the bookmark, like Pocket or Instapaper.
+		*
+		* @since 1.4
+		*/
+		if ( $display_source ) {
+			if ( $source_service ) {
+				$source_service = $source_service[0]['data'];
+				switch ( $source_service ) {
+					case 'http://readitlater.com/':
+						$source_name    = 'Pocket';
+						$source_address = $pinboard_user_source_url . 'pocket';
+						break;
+					case 'http://instapaper.com/':
+						$source_name    = 'Instapaper';
+						$source_address = $pinboard_user_source_url . 'instapaper';
+						break;
 
-				/*
-				 * Remove support for Twitter.
-				 * Pinboard lets you fetch your tweets that:
-				 * - have a link inside;
-				 * - you liked and have a link inside.
-				 * Pinboard then adds a "tag" depending on the type of tweet:
-				 * `from twitter` (the first case) or `from twitter_favs` (the second one).
-				 * So in Pinboard you have two separate pages for these bookmarks:
-				 * - https://pinboard.in/u:username/from:twitter
-				 * - https://pinboard.in/u:username/from:twitter_favs
-				 * The problem is that, when Pinboard creates the RSS feed,
-				 * there is no way to distinguish the first tweets from the second ones.
-				 * In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
-				 * In this situation we cannot link to the correct page.
-				 *
-				 * Code removed:
-				 * case 'http://twitter.com/':
-				 *    $source_name = 'Twitter';
-				 *    $source_address = $pinboard_user_source_url . 'twitter';
-				 *    break;
-				 *
-				 * @since 1.6.0
-				 */
-				// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
-				case 'http://pinboard.in/':
-					$source_name    = 'Pinboard';
-					$source_address = $pinboard_user_source_url . 'pinboard';
-					break;
-			}
-			if ( 'Pinboard' !== $source_name ) {
-				$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
+					/*
+					* Remove support for Twitter.
+					* Pinboard lets you fetch your tweets that:
+					* - have a link inside;
+					* - you liked and have a link inside.
+					* Pinboard then adds a "tag" depending on the type of tweet:
+					* `from twitter` (the first case) or `from twitter_favs` (the second one).
+					* So in Pinboard you have two separate pages for these bookmarks:
+					* - https://pinboard.in/u:username/from:twitter
+					* - https://pinboard.in/u:username/from:twitter_favs
+					* The problem is that, when Pinboard creates the RSS feed,
+					* there is no way to distinguish the first tweets from the second ones.
+					* In the feed you have only `<dc:source>http://twitter.com/</dc:source>`.
+					* In this situation we cannot link to the correct page.
+					*
+					* Code removed:
+					* case 'http://twitter.com/':
+					*    $source_name = 'Twitter';
+					*    $source_address = $pinboard_user_source_url . 'twitter';
+					*    break;
+					*
+					* @since 1.6.0
+					*/
+					// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
+					case 'http://pinboard.in/':
+						$source_name    = 'Pinboard';
+						$source_address = $pinboard_user_source_url . 'pinboard';
+						break;
+				}
+				if ( 'Pinboard' !== $source_name ) {
+					$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
+				}
 			}
 		}
-	}
 
-	$output .= '</p>';
+		$output .= '</p>';
+
+	endif;
 
 	return $output;
 }
