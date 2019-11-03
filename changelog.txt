@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 1.9.0 =
+
+* Display real true/false in debug section. Now the debug section displays real true/false if an option is a boolean value, instead of displaying respectively 1 or (empty). Also, if the value is a string with 0 as content, displays the real content 0, not (empty).
+* Now the source can be displayed independently from tags.
+* Corrected the text of widget introduction.
+* Moved CSS into assets directory.
+
 = 1.8.2 =
 
 * Totally revamped cache section in debug.

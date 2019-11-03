@@ -13,7 +13,7 @@
 **Requires at least:** 3.0  
 **Tested up to:** 5.3.0  
 **Requires PHP:** 5.3  
-**Stable tag:** 1.8.2  
+**Stable tag:** 1.9.0  
 **License:** GPLv3 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -167,7 +167,7 @@ No upgrade notice.
 [CHANGELOG]: ./CHANGELOG.md
 [LICENSE]: ./gpl-3.0.txt
 [README]: ./README.md
-[version-badge]: https://img.shields.io/badge/Version-1.8.2-blue.svg
+[version-badge]: https://img.shields.io/badge/Version-1.9.0-blue.svg
 [requires-badge]: https://img.shields.io/badge/Requires_WordPress-3.0.0-green.svg
 [tested-badge]: https://img.shields.io/badge/Tested_up_to_WordPress-5.3.0-green.svg
 [requires-php]: https://img.shields.io/badge/Requires_PHP-5.3-purple.svg
