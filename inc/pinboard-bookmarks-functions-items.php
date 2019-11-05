@@ -593,3 +593,43 @@ function pinboard_bookmarks_debug( $args ) {
 		return $output;
 	}
 }
+
+/**
+ * Get site URL from a complete address.
+ *
+ * Given an address like https://www.example.com/address/of/the/article
+ * the function return the site address part, i.e. https://www.example.com.
+ *
+ * @param array $args {
+ *     The array containing the various URL options.
+ * }
+ * @return string $url The site address.
+ * @since 1.10.0
+ */
+function pinboard_bookmarks_get_site( $args ) {
+	$defaults = array(
+		'url'           => '',
+		'leave_domain'  => false,
+		'site_url_text' => esc_html__( 'From:', 'pinboard-bookmarks' ),
+	);
+
+	wp_parse_args( $args, $defaults );
+
+	if ( '' === $args['url'] || ! is_string( $args['url'] )  ) {
+		return;
+	}
+
+	$args['url'] = esc_url( $args['url'] );
+
+	$url = wp_parse_url( $args['url'] );
+
+	if ( $args['leave_domain'] ) {
+		$site_url = preg_replace( '/www./', '', $url['host'] );
+	} else {
+		$site_url = $url['scheme'] . '://' . $url['host'];
+	}
+
+	$output = '<p class="pinboard-bookmarks-site-url"><span class="pinboard-bookmarks-site-url-text">' . $args['site_url_text'] . '</span> ' . $site_url . '</p>';
+
+	return $output;
+}
