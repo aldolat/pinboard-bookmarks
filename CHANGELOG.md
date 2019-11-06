@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.10.0] - 2019-11-06
+* Added option to display original site base URL.
+* Fixed displaying comments under checkboxes.
+
 ## [1.9.0] - 2019-11-03
 ### Fixed
 * Display real true/false in debug section. Now the debug section displays real true/false if an option is a boolean value, instead of displaying respectively 1 or (empty). Also, if the value is a string with 0 as content, displays the real content 0, not (empty).
@@ -118,6 +122,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
+[1.10.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.9.0...1.10.0
 [1.9.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.2...1.9.0
 [1.8.2]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.1...1.8.2
 [1.8.1]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.0...1.8.1

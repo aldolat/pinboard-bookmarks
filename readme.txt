@@ -5,7 +5,7 @@ Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
 Tested up to: 5.3.0
 Requires PHP: 5.3
-Stable tag: 1.9.0
+Stable tag: 1.10.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,12 +22,18 @@ This plugin has also a shortcode, so you can publish the bookmarks in a post or 
 
 The plugin may display for each tag (you choose what to display):
 
-* The title with link;
-* The description if any;
-* The date of the bookmark;
-* The tags assigned to the bookmark;
-* The link to the entire archive of that tag on Pinboard;
-* Display items in random order.
+* the title with link;
+* the description if any;
+* the date of the bookmark;
+* the tags assigned to the bookmark;
+* the base URL of the original site.
+
+Other options are available, such as:
+
+* display items in random order;
+* display the link to the entire archive of that tag on Pinboard;
+* display the various elements of each bookmark in a certain order;
+* and others.
 
 After the plugin's activation, you will have a new widget in Appearance / Widgets.
 
@@ -65,14 +71,17 @@ This is the list of the options for the shortcode:
 * `truncate` (integer) - The maximum number of words the description should have.
 * `display_date` (boolean, 1/0) - If the date of the bookmark (when it was archived on Pinboard) should be displayed.
 * `display_time` (boolean, 1/0) - If the time of the bookmark (when it was archived on Pinboard) should be displayed.
-* `date_text` (string) - The text to be prepended to the date of the bookmark.
+* `date_text` (string) - The text to be displayed before the date of the bookmark.
 * `display_tags` (boolean, 1/0) - If the tags should be displayed.
-* `tags_text` (string) - The text to be prepended to the tags of the bookmark.
+* `tags_text` (string) - The text to be displayed before the tags of the bookmark.
 * `display_hashtag` (boolean, 1/0) - If the tags should be prefixed with a hashtag (`#`).
 * `use_comma` (boolean, 1/0) - If a comma for separate tags should be used.
 * `display_source` (boolean, 1/0) - If the source should be displayed.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `time` (string) - The minimum time between two requests to Pinboard server.
+* `display_site_url` (booleean, 1/0) - If the original site base URL should be displayed.
+* `leave_domain` (boolean, 1/0) - If the base URL of the original should be diaplayed only.
+* `site_url_text` (string) - The text to be displayed before the original site URL.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.
 * `list_type` (string) - The type of list to be used.
@@ -108,6 +117,9 @@ You can also use the main PHP function directly in your theme. Add these lines w
 		'display_source'   => false,
 		'display_arrow'    => false,
 		'time'             => 1800,
+		'display_site_url' => false,
+        'leave_domain'     => false,
+        'site_url_text'    => 'From:',
 		'display_archive'  => true,
 		'archive_text'     => 'See the bookmarks on Pinboard',
 		'list_type'        => 'bullet',
