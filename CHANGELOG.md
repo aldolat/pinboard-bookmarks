@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.10.0] - 2019-11-06
+## [1.10.0] - 2019-11-09
 * Added option to display original site base URL.
 * Fixed displaying comments under checkboxes.
 
