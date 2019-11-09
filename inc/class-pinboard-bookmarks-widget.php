@@ -107,7 +107,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['source'] = sanitize_text_field( $new_instance['source'] );
 
 		$instance['quantity'] = absint( sanitize_text_field( $new_instance['quantity'] ) );
-		if ( '' === $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) {
+
+		/*
+		 * Check for entered value.
+		 *
+		 * @since 1.0
+		 * @since 1.10.0 Added control if quantity is 0.
+		 */
+		if ( 0 === $instance['quantity'] || '' === $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) {
 			$instance['quantity'] = 5;
 		}
 		if ( 400 < $instance['quantity'] ) {

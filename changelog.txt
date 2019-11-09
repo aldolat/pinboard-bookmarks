@@ -3,6 +3,7 @@
 = 1.10.0 =
 
 * Added option to display original site base URL.
+* Added control if user entered 0 as items quantity.
 * Fixed displaying comments under checkboxes.
 
 = 1.9.0 =
