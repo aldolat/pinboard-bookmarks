@@ -233,7 +233,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 	 * continue executing the function.
 	 */
 	if (
-		( $display_tags && $tags_list ) || 
+		( $display_tags && $tags_list ) ||
 		( $display_source && ( $source_service && 'http://pinboard.in/' !== $source_service[0]['data'] ) )
 	) :
 
@@ -601,7 +601,11 @@ function pinboard_bookmarks_debug( $args ) {
  * the function return the site address part, i.e. https://www.example.com.
  *
  * @param array $args {
- *     The array containing the various URL options.
+ *      The array containing the various URL options.
+ *
+ *      @type string  $url           The complete URL where to extract the base URL.
+ *      @type boolean $leave_domain  Whether to leave the domain only.
+ *      @type string  $site_url_text The text to used before the base URL.
  * }
  * @return string $url The site address.
  * @since 1.10.0
@@ -615,7 +619,7 @@ function pinboard_bookmarks_get_site( $args ) {
 
 	wp_parse_args( $args, $defaults );
 
-	if ( '' === $args['url'] || ! is_string( $args['url'] )  ) {
+	if ( '' === $args['url'] || ! is_string( $args['url'] ) ) {
 		return;
 	}
 

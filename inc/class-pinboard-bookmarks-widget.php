@@ -416,7 +416,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			<?php
 			// Name of the original site.
 			pinboard_bookmarks_form_checkbox(
-				esc_html__( 'Display clearly the base URL of the original site', 'pinboard-bookmarks' ),
+				esc_html__( 'Display the base URL of the original site', 'pinboard-bookmarks' ),
 				$this->get_field_id( 'display_site_url' ),
 				$this->get_field_name( 'display_site_url' ),
 				$instance['display_site_url'],
