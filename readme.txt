@@ -79,8 +79,8 @@ This is the list of the options for the shortcode:
 * `display_source` (boolean, 1/0) - If the source should be displayed.
 * `display_arrow` (boolean, 1/0) - If an HTML arrow should be appended to the title of the bookmarks.
 * `time` (string) - The minimum time between two requests to Pinboard server.
-* `display_site_url` (booleean, 1/0) - If the original site base URL should be displayed.
-* `leave_domain` (boolean, 1/0) - If the base URL of the original should be diaplayed only.
+* `display_site_url` (boolean, 1/0) - If the original site base URL should be displayed.
+* `leave_domain` (boolean, 1/0) - If the domain should be displayed only.
 * `site_url_text` (string) - The text to be displayed before the original site URL.
 * `display_archive` (boolean, 1/0) - If the link to the archive on Pinboard should be displayed.
 * `archive_text` (string) - The text to be used for the archive on Pinboard.

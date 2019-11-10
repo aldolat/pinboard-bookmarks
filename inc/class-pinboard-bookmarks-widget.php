@@ -430,7 +430,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				sprintf(
 					// translators: placeholder are two URL examples.
 					esc_html__(
-						'Remove the the path from the URL. For example, if the URL of the article is %1$s, the base URL %2$s will be displayed.',
+						'Remove the path from the URL. For example, if the URL of the article is %1$s, the base URL %2$s will be displayed.',
 						'pinboard-bookmarks'
 					),
 					'<code>https://www.example.com/path/to/news</code>',
