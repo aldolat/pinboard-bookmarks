@@ -77,6 +77,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$display_source   = $args['display_source'];
 	$display_arrow    = $args['display_arrow'];
 	$time             = $args['time'];
+	$display_site_url = $args['display_site_url'];
+	$leave_domain     = $args['leave_domain'];
+	$site_url_text    = $args['site_url_text'];
 	$display_archive  = $args['display_archive'];
 	$archive_text     = $args['archive_text'];
 	$list_type        = $args['list_type'];
@@ -263,6 +266,17 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			);
 			$title_part .= pinboard_bookmarks_get_title( $params );
 
+			// Original site URL.
+			$site_part = '';
+			if ( $display_site_url ) {
+				$params = array(
+					'url'           => $item->get_permalink(),
+					'leave_domain'  => $leave_domain,
+					'site_url_text' => $site_url_text,
+				);
+				$site_part = pinboard_bookmarks_get_site( $params );
+			}
+
 			// Description part.
 			$description_part = '';
 			if ( $display_desc ) {
@@ -307,14 +321,23 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				$tags_part .= pinboard_bookmarks_get_tags( $params );
 			}
 
-			// Ordering item parts.
-			if ( ! is_array( $items_order ) ) {
+			/*
+			 * Ordering item parts.
+			 * We have to pass $items_order to pinboard_bookmarks_check_items()
+			 * because we could get here from a shortcode, which is not processed
+			 * by the same function in class-pinboard-bookmarks-widget.php.
+			 */
+			$items_order = pinboard_bookmarks_check_items( $items_order );
+			if ( is_string( $items_order ) ) {
 				$items_order = explode( ' ', $items_order );
 			}
 			foreach ( $items_order as $next ) {
 				switch ( $next ) {
 					case 'title':
 						$output .= $title_part;
+						break;
+					case 'site':
+						$output .= $site_part;
 						break;
 					case 'description':
 						$output .= $description_part;
@@ -327,6 +350,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 						break;
 				}
 			}
+			$items_order = implode( ' ', $items_order );
 
 			$output .= '</li>';
 		}

@@ -114,11 +114,13 @@ function pinboard_bookmarks_form_checkbox( $label, $id, $name, $checked, $commen
 	$class = rtrim( 'checkbox pinboard-bookmarks-checkbox ' . $class );
 	?>
 	<p>
-		<input class="<?php echo esc_attr( $class ); ?>" type="checkbox" <?php checked( $checked ); ?> id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" />&nbsp;<?php pinboard_bookmarks_form_label( $label, $id ); ?>
+		<input class="<?php echo esc_attr( $class ); ?>" type="checkbox" <?php checked( $checked ); ?> id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>" />
+		&nbsp;
+		<?php pinboard_bookmarks_form_label( $label, $id ); ?>
 		<?php
 		if ( $comment ) {
 			?>
-			<br /><em><?php wp_kses_post( $comment ); ?></em>
+			<br /><em><?php echo wp_kses_post( $comment ); ?></em>
 		<?php } ?>
 	</p>
 	<?php

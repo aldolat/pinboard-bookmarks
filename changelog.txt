@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 1.10.0 =
+
+* Added option to display original site base URL.
+* Added control if user entered 0 as items quantity.
+* Fixed displaying comments under checkboxes.
+
 = 1.9.0 =
 
 * Display real true/false in debug section. Now the debug section displays real true/false if an option is a boolean value, instead of displaying respectively 1 or (empty). Also, if the value is a string with 0 as content, displays the real content 0, not (empty).

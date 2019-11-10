@@ -107,7 +107,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['source'] = sanitize_text_field( $new_instance['source'] );
 
 		$instance['quantity'] = absint( sanitize_text_field( $new_instance['quantity'] ) );
-		if ( '' === $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) {
+
+		/*
+		 * Check for entered value.
+		 *
+		 * @since 1.0
+		 * @since 1.10.0 Added control if quantity is 0.
+		 */
+		if ( 0 === $instance['quantity'] || '' === $instance['quantity'] || ! is_numeric( $instance['quantity'] ) ) {
 			$instance['quantity'] = 5;
 		}
 		if ( 400 < $instance['quantity'] ) {
@@ -124,7 +131,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 		$instance['display_date']    = isset( $new_instance['display_date'] ) ? true : false;
 		$instance['display_time']    = isset( $new_instance['display_time'] ) ? true : false;
-		$instance['date_text']       = trim( sanitize_text_field( $new_instance['date_text'] ) );
+		$instance['date_text']       = sanitize_text_field( $new_instance['date_text'] );
 		$instance['display_tags']    = isset( $new_instance['display_tags'] ) ? true : false;
 		$instance['tags_text']       = sanitize_text_field( $new_instance['tags_text'] );
 		$instance['display_hashtag'] = isset( $new_instance['display_hashtag'] ) ? true : false;
@@ -140,6 +147,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			$instance['time'] = 1800;
 		}
 
+		$instance['display_site_url'] = isset( $new_instance['display_site_url'] ) ? true : false;
+		$instance['leave_domain']     = isset( $new_instance['leave_domain'] ) ? true : false;
+		$instance['site_url_text']    = sanitize_text_field( $new_instance['site_url_text'] );
 		$instance['display_archive']  = isset( $new_instance['display_archive'] ) ? true : false;
 		$instance['archive_text']     = sanitize_text_field( $new_instance['archive_text'] );
 		$instance['list_type']        = sanitize_text_field( $new_instance['list_type'] );
@@ -408,6 +418,55 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$instance['display_source']
 			);
 			?>
+			<h4><?php esc_html_e( 'Display site URL', 'pinboard-bookmarks' ); ?></h4>
+
+			<?php
+			// Name of the original site.
+			pinboard_bookmarks_form_checkbox(
+				esc_html__( 'Display the base URL of the original site', 'pinboard-bookmarks' ),
+				$this->get_field_id( 'display_site_url' ),
+				$this->get_field_name( 'display_site_url' ),
+				$instance['display_site_url'],
+				sprintf(
+					// translators: placeholder are two URL examples.
+					esc_html__(
+						'Remove the the path from the URL. For example, if the URL of the article is %1$s, the base URL %2$s will be displayed.',
+						'pinboard-bookmarks'
+					),
+					'<code>https://www.example.com/path/to/news</code>',
+					'<code>https://www.example.com</code>'
+				)
+			);
+
+			// Leave only the domain.
+			pinboard_bookmarks_form_checkbox(
+				esc_html__( 'Leave the domain only', 'pinboard-bookmarks' ),
+				$this->get_field_id( 'leave_domain' ),
+				$this->get_field_name( 'leave_domain' ),
+				$instance['leave_domain'],
+				sprintf(
+					// translators: placeholders is http(s)://www.
+					esc_html__(
+						'Remove the %s part.',
+						'pinboard-bookmarks'
+					),
+					'<code>http(s)://www.</code>'
+				)
+			);
+
+			// Text for original site.
+			pinboard_bookmarks_form_input_text(
+				esc_html__( 'Text before the base URL of the original site:', 'pinboard-bookmarks' ),
+				$this->get_field_id( 'site_url_text' ),
+				$this->get_field_name( 'site_url_text' ),
+				esc_attr( $instance['site_url_text'] ),
+				esc_html__( 'From:', 'pinboard-bookmarks' ),
+				esc_html__(
+					'Put this text before the base URL of the original site. A space will be added after the text.',
+					'pinboard-bookmarks'
+				)
+			);
+			?>
 
 			<h4><?php esc_html_e( 'Link to the archive', 'pinboard-bookmarks' ); ?></h4>
 
@@ -483,7 +542,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$this->get_field_id( 'nofollow' ),
 				$this->get_field_name( 'nofollow' ),
 				$instance['nofollow'],
-				__( 'It will be added to all external links.', 'pinboard-bookmarks' )
+				esc_html__( 'It will be added to all external links.', 'pinboard-bookmarks' )
 			);
 			?>
 
@@ -491,7 +550,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 			<p><?php esc_html_e( 'Define the order in which the elements of each item will be displayed. The available elements are:', 'pinboard-bookmarks' ); ?></p>
 
-			<p><code>title</code> <code>description</code> <code>date</code> <code>tags</code></p>
+			<p><code>title</code> <code>site</code> <code>description</code> <code>date</code> <code>tags</code></p>
 
 			<?php
 			// Displaying order.
@@ -500,7 +559,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$this->get_field_id( 'items_order' ),
 				$this->get_field_name( 'items_order' ),
 				esc_attr( $instance['items_order'] ),
-				esc_html( 'title description date tags' ), // String NOT to be translated.
+				esc_html( 'title site description date tags' ), // String NOT to be translated.
 				esc_html__( 'Enter a space separated list of elements.', 'pinboard-bookmarks' )
 			);
 			?>

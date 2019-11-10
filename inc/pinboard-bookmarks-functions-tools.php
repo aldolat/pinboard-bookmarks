@@ -129,20 +129,24 @@ function pinboard_bookmarks_get_cache_info( $feed_url = '' ) {
  *
  * The function sanitizes the user input, removes any non-standard item,
  * makes sure that all the standard items are present, removes any duplicate,
- * and makes sure that the items are 4.
+ * and makes sure that the items are 5.
  * If the final string is empty, it is filled with the standard value.
  *
  * @param string $items The string containing the items to be checked.
- * @return string The items in the order to be displayed.
+ * @return string The items in the order to be displayed, space separated.
  *
- * @since 1.7.0 As a series of commands.
- * @since 1.8.0 As a standalone function.
- * @since 1.8.1 Added check if $items is a string.
+ * @since 1.7.0  As a series of commands.
+ * @since 1.8.0  As a standalone function.
+ * @since 1.8.1  Added check if $items is a string.
+ * @since 1.10.0 Added `site` as new standard values. Also, return the standard values, if $items is not a string.
  */
 function pinboard_bookmarks_check_items( $items = '' ) {
+	// Define the standard items.
+	$standard_values = array( 'title', 'site', 'description', 'date', 'tags' );
+
 	// Check if $items is a string.
 	if ( ! is_string( $items ) ) {
-		return;
+		return implode( ' ', $standard_values );
 	}
 
 	// Sanitize user input and make it lowercase.
@@ -153,10 +157,7 @@ function pinboard_bookmarks_check_items( $items = '' ) {
 	// Make the user input an array for some checks.
 	$items = explode( ' ', $items );
 
-	// Define the standard items.
-	$standard_values = array( 'title', 'description', 'date', 'tags' );
-
-	// Check if the user entered items that aren't in the four standard values.
+	// Check if the user entered items that aren't in the five standard values.
 	foreach ( $items as $key => $value ) {
 		if ( ! in_array( $value, $standard_values, true ) ) {
 			unset( $items[ $key ] );
@@ -170,8 +171,8 @@ function pinboard_bookmarks_check_items( $items = '' ) {
 	$items = array_unique( $items );
 
 	// Make sure that the items are only four.
-	if ( 4 < count( $items ) ) {
-		$items = array_slice( $items, 0, 4 );
+	if ( 5 < count( $items ) ) {
+		$items = array_slice( $items, 0, 5 );
 	}
 
 	// Restore the $items array into a string.

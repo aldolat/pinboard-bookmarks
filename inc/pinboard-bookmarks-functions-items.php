@@ -233,7 +233,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 	 * continue executing the function.
 	 */
 	if (
-		( $display_tags && $tags_list ) || 
+		( $display_tags && $tags_list ) ||
 		( $display_source && ( $source_service && 'http://pinboard.in/' !== $source_service[0]['data'] ) )
 	) :
 
@@ -496,7 +496,7 @@ function pinboard_bookmarks_debug( $args ) {
 		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
 
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
-			// translators: %s is the time when the cache will expire.
+			// translators: %s is the time when the cache was created.
 			esc_html__(
 				'Created on: %s',
 				'pinboard-bookmarks'
@@ -504,7 +504,7 @@ function pinboard_bookmarks_debug( $args ) {
 			$cache_info['cache_created'] . '</li>'
 		);
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
-			// translators: %s is the time when the cache will expire.
+			// translators: %s is the duration of the cache.
 			esc_html__(
 				'Duration: %s',
 				'pinboard-bookmarks'
@@ -520,7 +520,7 @@ function pinboard_bookmarks_debug( $args ) {
 			$cache_info['cache_expires'] . '</li>'
 		);
 		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
-			// translators: %s is the time when the cache will expire.
+			// translators: %s is the remaining time.
 			esc_html__(
 				'Remaining time: %s',
 				'pinboard-bookmarks'
@@ -592,4 +592,48 @@ function pinboard_bookmarks_debug( $args ) {
 	} else {
 		return $output;
 	}
+}
+
+/**
+ * Get site URL from a complete address.
+ *
+ * Given an address like https://www.example.com/address/of/the/article
+ * the function return the site address part, i.e. https://www.example.com.
+ *
+ * @param array $args {
+ *      The array containing the various URL options.
+ *
+ *      @type string  $url           The complete URL where to extract the base URL.
+ *      @type boolean $leave_domain  Whether to leave the domain only.
+ *      @type string  $site_url_text The text to used before the base URL.
+ * }
+ * @return string $url The site address.
+ * @since 1.10.0
+ */
+function pinboard_bookmarks_get_site( $args ) {
+	$defaults = array(
+		'url'           => '',
+		'leave_domain'  => false,
+		'site_url_text' => esc_html__( 'From:', 'pinboard-bookmarks' ),
+	);
+
+	wp_parse_args( $args, $defaults );
+
+	if ( '' === $args['url'] || ! is_string( $args['url'] ) ) {
+		return;
+	}
+
+	$args['url'] = esc_url( $args['url'] );
+
+	$url = wp_parse_url( $args['url'] );
+
+	if ( $args['leave_domain'] ) {
+		$site_url = preg_replace( '/www./', '', $url['host'] );
+	} else {
+		$site_url = $url['scheme'] . '://' . $url['host'];
+	}
+
+	$output = '<p class="pinboard-bookmarks-site-url"><span class="pinboard-bookmarks-site-url-text">' . $args['site_url_text'] . '</span> ' . $site_url . '</p>';
+
+	return $output;
 }
