@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.10.0] - 2019-11-09
+## [1.10.0] - 2019-11-10
 * Added option to display original site base URL.
 * Added control if user entered 0 as items quantity.
 * Fixed displaying comments under checkboxes.
