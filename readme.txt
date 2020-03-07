@@ -3,7 +3,7 @@ Contributors: aldolat
 Donate link: http://dev.aldolat.it/projects/pinboard-bookmarks/
 Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
-Tested up to: 5.3.0
+Tested up to: 5.4
 Requires PHP: 5.3
 Stable tag: 1.10.0
 License: GPLv3 or later
