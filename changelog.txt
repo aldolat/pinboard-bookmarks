@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.11.0 =
+
+* Display feed errors to Administrator only.
+
 = 1.10.0 =
 
 * Added option to display original site base URL.

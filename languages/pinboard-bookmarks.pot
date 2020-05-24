@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Aldo Latino
+# Copyright (C) 2020 Aldo Latino
 # This file is distributed under the same license as the Pinboard Bookmarks plugin.
 msgid ""
 msgstr ""
@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-11-10T09:27:54+01:00\n"
+"POT-Creation-Date: 2020-05-24T10:20:47+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.3.0\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: pinboard-bookmarks\n"
 
 #. Plugin Name of the plugin
@@ -360,11 +360,15 @@ msgid "You have not properly configured the widget. Please, add a username."
 msgstr ""
 
 #. translators: %s is the feed error.
-#: inc/pinboard-bookmarks-core.php:224
+#: inc/pinboard-bookmarks-core.php:225
 msgid "There was a problem with your feed! The error is %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:243
+#: inc/pinboard-bookmarks-core.php:227
+msgid "The feed is currently unavailable."
+msgstr ""
+
+#: inc/pinboard-bookmarks-core.php:247
 msgid "No items."
 msgstr ""
 
