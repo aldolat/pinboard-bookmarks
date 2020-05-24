@@ -220,8 +220,12 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 
 	if ( is_wp_error( $rss ) ) {
 		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-error">';
-		// translators: %s is the feed error.
-		$output .= sprintf( esc_html__( 'There was a problem with your feed! The error is %s', 'pinboard-bookmarks' ), '<code>' . $rss->get_error_message() . '</code>' );
+		if ( current_user_can( 'create_users' ) ) {
+			// translators: %s is the feed error.
+			$output .= sprintf( esc_html__( 'There was a problem with your feed! The error is %s', 'pinboard-bookmarks' ), '<code>' . $rss->get_error_message() . '</code>' );
+		} else {
+			$output .= esc_html__( 'The feed is currently unavailable.', 'pinboard-bookmarks' );
+		}
 		$output .= '</li>';
 		$output .= '</' . $list_element . '>';
 		return $output;
