@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.0] - 2020-05-24
+### Added
+* Display feed errors to Administrator only.
+
 ## [1.10.0] - 2019-11-10
+### Added
 * Added option to display original site base URL.
 * Added control if user entered 0 as items quantity.
+### Fixed
 * Fixed displaying comments under checkboxes.
 
 ## [1.9.0] - 2019-11-03
@@ -123,6 +129,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
+[1.11.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.10.0...1.11.0
 [1.10.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.9.0...1.10.0
 [1.9.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.2...1.9.0
 [1.8.2]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.1...1.8.2

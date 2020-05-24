@@ -18,14 +18,14 @@
  * Plugin URI: https://dev.aldolat.it/projects/pinboard-bookmarks/
  * Author: Aldo Latino
  * Author URI: https://www.aldolat.it/
- * Version: 1.10.0
+ * Version: 1.11.0
  * License: GPLv3 or later
  * Text Domain: pinboard-bookmarks
  * Domain Path: /languages/
  */
 
 /*
- * Copyright (C) 2016-2019  Aldo Latino  (email : aldolat@gmail.com)
+ * Copyright (C) 2016-2020  Aldo Latino  (email : aldolat@gmail.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ function pinboard_bookmarks_setup() {
 	/*
 	 * Define the version of the plugin.
 	 */
-	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.10.0' );
+	define( 'PINBOARD_BOOKMARKS_PLUGIN_VERSION', '1.11.0' );
 
 	/*
 	 * Load the translation.
