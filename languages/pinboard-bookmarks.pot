@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Pinboard Bookmarks plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pinboard Bookmarks 1.10.0\n"
+"Project-Id-Version: Pinboard Bookmarks 1.12.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-bookmarks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-24T10:20:47+02:00\n"
+"POT-Creation-Date: 2020-05-27T19:08:19+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: pinboard-bookmarks\n"
@@ -102,7 +102,7 @@ msgstr ""
 #: inc/class-pinboard-bookmarks-widget.php:248
 #: inc/class-pinboard-bookmarks-widget.php:391
 #: inc/pinboard-bookmarks-functions-init.php:77
-#: inc/pinboard-bookmarks-functions-items.php:189
+#: inc/pinboard-bookmarks-functions-items.php:190
 msgid "Tags:"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgstr ""
 
 #: inc/class-pinboard-bookmarks-widget.php:463
 #: inc/pinboard-bookmarks-functions-init.php:85
-#: inc/pinboard-bookmarks-functions-items.php:617
+#: inc/pinboard-bookmarks-functions-items.php:615
 msgid "From:"
 msgstr ""
 
@@ -273,7 +273,7 @@ msgstr ""
 
 #: inc/class-pinboard-bookmarks-widget.php:488
 #: inc/pinboard-bookmarks-functions-init.php:87
-#: inc/pinboard-bookmarks-functions-items.php:360
+#: inc/pinboard-bookmarks-functions-items.php:358
 msgid "See the bookmarks on Pinboard"
 msgstr ""
 
@@ -378,68 +378,68 @@ msgid "Stored on:"
 msgstr ""
 
 #. translators: %s is the name of the plugin.
-#: inc/pinboard-bookmarks-functions-items.php:441
+#: inc/pinboard-bookmarks-functions-items.php:439
 msgid "%s Debug"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:445
+#: inc/pinboard-bookmarks-functions-items.php:443
 msgid "Environment information:"
 msgstr ""
 
 #. translators: %s is the URL of the site.
-#: inc/pinboard-bookmarks-functions-items.php:452
+#: inc/pinboard-bookmarks-functions-items.php:450
 msgid "Site URL: %s"
 msgstr ""
 
 #. translators: %s is the WordPress version.
-#: inc/pinboard-bookmarks-functions-items.php:463
+#: inc/pinboard-bookmarks-functions-items.php:461
 msgid "WordPress version: %s"
 msgstr ""
 
 #. translators: %s is the plugin version.
-#: inc/pinboard-bookmarks-functions-items.php:472
+#: inc/pinboard-bookmarks-functions-items.php:470
 msgid "Plugin version: %s"
 msgstr ""
 
 #. translators: %s is the ID of the widget.
-#: inc/pinboard-bookmarks-functions-items.php:481
+#: inc/pinboard-bookmarks-functions-items.php:479
 msgid "ID of this widget: %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:491
+#: inc/pinboard-bookmarks-functions-items.php:489
 msgid "Cache information:"
 msgstr ""
 
 #. translators: %s is the time when the cache was created.
-#: inc/pinboard-bookmarks-functions-items.php:500
+#: inc/pinboard-bookmarks-functions-items.php:498
 msgid "Created on: %s"
 msgstr ""
 
 #. translators: %s is the duration of the cache.
-#: inc/pinboard-bookmarks-functions-items.php:508
+#: inc/pinboard-bookmarks-functions-items.php:506
 msgid "Duration: %s"
 msgstr ""
 
 #. translators: %s is the time when the cache will expire.
-#: inc/pinboard-bookmarks-functions-items.php:516
+#: inc/pinboard-bookmarks-functions-items.php:514
 msgid "Will expire on: %s"
 msgstr ""
 
 #. translators: %s is the remaining time.
-#: inc/pinboard-bookmarks-functions-items.php:524
+#: inc/pinboard-bookmarks-functions-items.php:522
 msgid "Remaining time: %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:535
+#: inc/pinboard-bookmarks-functions-items.php:533
 msgid "The options:"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:554
-#: inc/pinboard-bookmarks-functions-items.php:570
+#: inc/pinboard-bookmarks-functions-items.php:552
+#: inc/pinboard-bookmarks-functions-items.php:568
 msgid "(empty)"
 msgstr ""
 
-#: inc/pinboard-bookmarks-functions-items.php:566
+#: inc/pinboard-bookmarks-functions-items.php:564
 msgid "URLs and components:"
 msgstr ""
 

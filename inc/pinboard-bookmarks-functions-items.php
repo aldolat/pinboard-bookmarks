@@ -180,7 +180,7 @@ function pinboard_bookmarks_get_date( $args ) {
  *                                              For example: https://pinboard.in/u:nickname/from:
  * }
  * @since 1.7.2
- * @since 1.12.0 Added Pinboard as source.
+ * @since 1.12.0 Added Pinboard as source. Updated protocols.
  * @return string The tags of the bookmark, in an HTML paragraph, with each tag linked to Pinboard.
  */
 function pinboard_bookmarks_get_tags( $args ) {
