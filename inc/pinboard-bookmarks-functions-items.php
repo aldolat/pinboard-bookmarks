@@ -229,12 +229,12 @@ function pinboard_bookmarks_get_tags( $args ) {
 	/*
 	 * If we want to see tags AND there are tags
 	 * OR
-	 * I want to see the source AND (there is the source AND it's different from 'http://pinboard.in/')
+	 * I want to see the source AND (there is the source AND it's different from 'https://pinboard.in/')
 	 * continue executing the function.
 	 */
 	if (
 		( $display_tags && $tags_list ) ||
-		( $display_source && ( $source_service && 'http://pinboard.in/' !== $source_service[0]['data'] ) )
+		( $display_source && ( $source_service && 'https://pinboard.in/' !== $source_service[0]['data'] ) )
 	) :
 
 		$output .= '<p class="pinboard-bookmarks-tags">';
@@ -271,11 +271,11 @@ function pinboard_bookmarks_get_tags( $args ) {
 			if ( $source_service ) {
 				$source_service = $source_service[0]['data'];
 				switch ( $source_service ) {
-					case 'http://readitlater.com/':
+					case 'https://readitlater.com/':
 						$source_name    = 'Pocket';
 						$source_address = $pinboard_user_source_url . 'pocket';
 						break;
-					case 'http://instapaper.com/':
+					case 'https://instapaper.com/':
 						$source_name    = 'Instapaper';
 						$source_address = $pinboard_user_source_url . 'instapaper';
 						break;
@@ -304,7 +304,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 					* @since 1.6.0
 					*/
 					// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
-					case 'http://pinboard.in/':
+					case 'https://pinboard.in/':
 						$source_name    = 'Pinboard';
 						$source_address = $pinboard_user_source_url . 'pinboard';
 						break;
