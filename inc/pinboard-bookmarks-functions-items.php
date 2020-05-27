@@ -180,6 +180,7 @@ function pinboard_bookmarks_get_date( $args ) {
  *                                              For example: https://pinboard.in/u:nickname/from:
  * }
  * @since 1.7.2
+ * @since 1.12.0 Added Pinboard as source.
  * @return string The tags of the bookmark, in an HTML paragraph, with each tag linked to Pinboard.
  */
 function pinboard_bookmarks_get_tags( $args ) {
@@ -214,12 +215,12 @@ function pinboard_bookmarks_get_tags( $args ) {
 	$source_service = $item->get_item_tags( SIMPLEPIE_NAMESPACE_DC_11, 'source' );
 
 	/*
-	 * If the list of tags is empty AND (the source of the bookmark is empty OR is equal to 'http://pinboard.in/')
+	 * If the list of tags is empty AND the source of the bookmark is empty
 	 * stop the function and return an empty string.
 	 *
 	 * @since 1.9.0
 	 */
-	if ( empty( $tags_list ) && ( empty( $source_service ) || 'http://pinboard.in/' === $source_service[0]['data'] ) ) {
+	if ( empty( $tags_list ) && empty( $source_service ) ) {
 		return '';
 	}
 
@@ -229,12 +230,12 @@ function pinboard_bookmarks_get_tags( $args ) {
 	/*
 	 * If we want to see tags AND there are tags
 	 * OR
-	 * I want to see the source AND (there is the source AND it's different from 'https://pinboard.in/')
+	 * I want to see the source AND there is the source
 	 * continue executing the function.
 	 */
 	if (
 		( $display_tags && $tags_list ) ||
-		( $display_source && ( $source_service && 'https://pinboard.in/' !== $source_service[0]['data'] ) )
+		( $display_source && $source_service )
 	) :
 
 		$output .= '<p class="pinboard-bookmarks-tags">';
@@ -263,7 +264,7 @@ function pinboard_bookmarks_get_tags( $args ) {
 		}
 
 		/*
-		* Display the source of the bookmark, like Pocket or Instapaper.
+		* Display the source of the bookmark, like Pocket or Instapaper or Pinboard.
 		*
 		* @since 1.4
 		*/
@@ -303,15 +304,12 @@ function pinboard_bookmarks_get_tags( $args ) {
 					*
 					* @since 1.6.0
 					*/
-					// In some cases the source is Pinboard itself, so do not display it (also see some lines below).
 					case 'https://pinboard.in/':
 						$source_name    = 'Pinboard';
 						$source_address = $pinboard_user_source_url . 'pinboard';
 						break;
 				}
-				if ( 'Pinboard' !== $source_name ) {
-					$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
-				}
+				$output .= $comma . '<a class="pinboard-bookmarks-source"' . $rel_txt . ' href="' . $source_address . '"' . $new_tab_link . '>from ' . $source_name . '</a>';
 			}
 		}
 
