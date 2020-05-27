@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.12.0 =
+
+* Updated protocols from http to https
+* Added Pinboard as source
+
 = 1.11.0 =
 
 * Display feed errors to Administrator only.

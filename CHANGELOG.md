@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.12.0] - 2020-05-27
+### Changed
+* Updated protocols from http to https
+### Added
+* Added Pinboard as source
+
 ## [1.11.0] - 2020-05-24
 ### Added
 * Display feed errors to Administrator only.
@@ -129,6 +135,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
+[1.12.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.11.0...1.12.0
 [1.11.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.10.0...1.11.0
 [1.10.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.9.0...1.10.0
 [1.9.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.8.2...1.9.0
