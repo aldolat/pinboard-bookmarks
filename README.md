@@ -2,19 +2,13 @@
 
 ![banner](https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png)
 
-[![version][version-badge]][CHANGELOG]
-[![requires][requires-badge]][README]
-[![tested][tested-badge]][README]
-[![requiresphp][requires-php]][README]
-[![license][license-badge]][LICENSE]
-
 **Contributors:** aldolat  
 **Donate link:** <http://dev.aldolat.it/projects/pinboard-bookmarks/>  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
 **Tested up to:** 5.4  
 **Requires PHP:** 5.3  
-**Stable tag:** 1.12.0  
+**Stable tag:** 1.13.0  
 **License:** GPLv3 or later  
 **License URI:** <http://www.gnu.org/licenses/gpl-3.0.html>  
 
@@ -197,12 +191,3 @@ This section describes how to install the plugin and get it working.
 ## Upgrade Notice ##
 
 No upgrade notice.
-
-[CHANGELOG]: ./CHANGELOG.md
-[LICENSE]: ./gpl-3.0.txt
-[README]: ./README.md
-[version-badge]: https://img.shields.io/badge/Version-1.10.0-blue.svg
-[requires-badge]: https://img.shields.io/badge/Requires_WordPress-3.0.0-green.svg
-[tested-badge]: https://img.shields.io/badge/Tested_up_to_WordPress-5.3.0-green.svg
-[requires-php]: https://img.shields.io/badge/Requires_PHP-5.3-purple.svg
-[license-badge]: https://img.shields.io/badge/License-GPLv3-ff69b4.svg
