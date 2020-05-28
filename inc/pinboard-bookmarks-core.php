@@ -86,6 +86,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	$display_arch_arr = $args['display_arch_arr'];
 	$new_tab          = $args['new_tab'];
 	$nofollow         = $args['nofollow'];
+	$noreferrer       = $args['noreferrer'];
 	$items_order      = $args['items_order'];
 	$admin_only       = $args['admin_only'];
 	$debug_options    = $args['debug_options'];
@@ -103,7 +104,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	// Set up some variables.
 	$display_arrow ? $arrow  = '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>' : $arrow = '';
 	$new_tab ? $new_tab_link = ' target="_blank"' : $new_tab_link = '';
-	$nofollow ? $rel_txt     = ' rel="bookmark nofollow"' : $rel_txt = ' rel="bookmark"';
+	$rel_txt                 = pinboard_bookmarks_get_rel_link( $new_tab, $nofollow, $noreferrer );
 	if ( 400 < $quantity ) {
 		$quantity = 400;
 	}
@@ -273,7 +274,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			// Original site URL.
 			$site_part = '';
 			if ( $display_site_url ) {
-				$params = array(
+				$params    = array(
 					'url'           => $item->get_permalink(),
 					'leave_domain'  => $leave_domain,
 					'site_url_text' => $site_url_text,

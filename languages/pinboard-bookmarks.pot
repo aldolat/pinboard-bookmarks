@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Pinboard Bookmarks plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pinboard Bookmarks 1.12.0\n"
+"Project-Id-Version: Pinboard Bookmarks 1.13.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/pinboard-bookmarks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-27T19:21:41+02:00\n"
+"POT-Creation-Date: 2020-05-28T19:49:09+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: pinboard-bookmarks\n"
@@ -39,340 +39,351 @@ msgstr ""
 msgid "Publish a bookmarks list using your Pinboard bookmarks"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:183
+#: inc/class-pinboard-bookmarks-widget.php:184
 msgid "Introduction"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:187
+#: inc/class-pinboard-bookmarks-widget.php:188
 msgid ""
 "This widget allows you to publish a list of Pinboard bookmarks in your sidebar.\n"
 "\t\t\t\t\tSimply enter a username on Pinboard.\n"
 "\t\t\t\t\tThen click on Save button."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:198
+#: inc/class-pinboard-bookmarks-widget.php:199
 msgid "Please note that a username is required, at least."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:205
+#: inc/class-pinboard-bookmarks-widget.php:206
 msgid "Title of the widget"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:210
+#: inc/class-pinboard-bookmarks-widget.php:211
 msgid "Title:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:214
+#: inc/class-pinboard-bookmarks-widget.php:215
 #: inc/pinboard-bookmarks-functions-init.php:64
 msgid "My bookmarks on Pinboard"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:218
+#: inc/class-pinboard-bookmarks-widget.php:219
 msgid "Introductory text"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:223
+#: inc/class-pinboard-bookmarks-widget.php:224
 msgid "Place this text after the title"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:227
+#: inc/class-pinboard-bookmarks-widget.php:228
 msgid "These are my bookmarks on Pinboard about Italian recipes."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:228
+#: inc/class-pinboard-bookmarks-widget.php:229
 msgid "You can use some HTML, as you would do when writing a post."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:233
+#: inc/class-pinboard-bookmarks-widget.php:234
 msgid "Basic Setup"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:238
+#: inc/class-pinboard-bookmarks-widget.php:239
 msgid "Username on Pinboard:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:242
+#: inc/class-pinboard-bookmarks-widget.php:243
 msgid "username"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:243
+#: inc/class-pinboard-bookmarks-widget.php:244
 msgid "This is the only mandatory option."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:248
-#: inc/class-pinboard-bookmarks-widget.php:395
+#: inc/class-pinboard-bookmarks-widget.php:249
+#: inc/class-pinboard-bookmarks-widget.php:396
 #: inc/pinboard-bookmarks-functions-init.php:77
 #: inc/pinboard-bookmarks-functions-items.php:190
 msgid "Tags:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:252
+#: inc/class-pinboard-bookmarks-widget.php:253
 msgid "books reading comics"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:253
+#: inc/class-pinboard-bookmarks-widget.php:254
 msgid "Enter a space separated list of tags, up to 4 tags. The plugin will fetch bookmarks from this list of tags."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:260
+#: inc/class-pinboard-bookmarks-widget.php:261
 msgid "None"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:264
+#: inc/class-pinboard-bookmarks-widget.php:265
 msgid "Pocket"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:268
+#: inc/class-pinboard-bookmarks-widget.php:269
 msgid "Instapaper"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:272
+#: inc/class-pinboard-bookmarks-widget.php:273
 msgid "Pinboard"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:287
+#: inc/class-pinboard-bookmarks-widget.php:288
 msgid "Source of the bookmarks"
 msgstr ""
 
 #. translators: %s is the name of a bookmarking service like Instapaper.
-#: inc/class-pinboard-bookmarks-widget.php:293
+#: inc/class-pinboard-bookmarks-widget.php:294
 msgid "Select the source of the bookmarks, like %s. Since Pinboard accepts tags or a source, the tags from the field above will be ignored if you activate this option."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:298
+#: inc/class-pinboard-bookmarks-widget.php:299
 msgid "Maximum number of items:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:303
+#: inc/class-pinboard-bookmarks-widget.php:304
 msgid "Maximum 400 items."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:308
+#: inc/class-pinboard-bookmarks-widget.php:309
 msgid "Display items in random order"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:316
+#: inc/class-pinboard-bookmarks-widget.php:317
 msgid "Minimum time between two requests to Pinboard server:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:321
+#: inc/class-pinboard-bookmarks-widget.php:322
 msgid "In seconds. Minimum 1800 seconds (30 minutes)."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:325
+#: inc/class-pinboard-bookmarks-widget.php:326
 msgid "Bookmark description"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:330
+#: inc/class-pinboard-bookmarks-widget.php:331
 msgid "Display the bookmark description"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:338
+#: inc/class-pinboard-bookmarks-widget.php:339
 msgid "Length of the description:"
 msgstr ""
 
 #. translators: the number of words for the bookmark description.
-#: inc/class-pinboard-bookmarks-widget.php:344
+#: inc/class-pinboard-bookmarks-widget.php:345
 msgid "(In words. %s means full text)"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:348
+#: inc/class-pinboard-bookmarks-widget.php:349
 msgid "Date of the bookmark"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:353
+#: inc/class-pinboard-bookmarks-widget.php:354
 msgid "Display the date of the bookmark"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:361
+#: inc/class-pinboard-bookmarks-widget.php:362
 msgid "Also display the time of the bookmark"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:369
+#: inc/class-pinboard-bookmarks-widget.php:370
 msgid "Text before the date:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:373
+#: inc/class-pinboard-bookmarks-widget.php:374
 msgid "Stored on"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:374
-#: inc/class-pinboard-bookmarks-widget.php:396
+#: inc/class-pinboard-bookmarks-widget.php:375
+#: inc/class-pinboard-bookmarks-widget.php:397
 msgid "A space will be added after the text."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:378
+#: inc/class-pinboard-bookmarks-widget.php:379
 msgid "Tags and source of the bookmark"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:383
+#: inc/class-pinboard-bookmarks-widget.php:384
 msgid "Display tags"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:391
+#: inc/class-pinboard-bookmarks-widget.php:392
 msgid "Text before tags list:"
 msgstr ""
 
 #. translators: %s is an hashtag.
-#: inc/class-pinboard-bookmarks-widget.php:402
+#: inc/class-pinboard-bookmarks-widget.php:403
 msgid "Display an hashtag %s before each tag"
 msgstr ""
 
 #. translators: %s is a comma.
-#: inc/class-pinboard-bookmarks-widget.php:411
+#: inc/class-pinboard-bookmarks-widget.php:412
 msgid "Use a comma %s after each tag"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:419
+#: inc/class-pinboard-bookmarks-widget.php:420
 msgid "Display the source of the bookmark"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:425
+#: inc/class-pinboard-bookmarks-widget.php:427
 msgid "Display site URL"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:430
+#: inc/class-pinboard-bookmarks-widget.php:432
 msgid "Display the base URL of the original site"
 msgstr ""
 
 #. translators: placeholder are two URL examples.
-#: inc/class-pinboard-bookmarks-widget.php:436
+#: inc/class-pinboard-bookmarks-widget.php:438
 msgid "Remove the path from the URL. For example, if the URL of the article is %1$s, the base URL %2$s will be displayed."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:447
+#: inc/class-pinboard-bookmarks-widget.php:449
 msgid "Leave the domain only"
 msgstr ""
 
 #. translators: placeholders is http(s)://www.
-#: inc/class-pinboard-bookmarks-widget.php:453
+#: inc/class-pinboard-bookmarks-widget.php:455
 msgid "Remove the %s part."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:463
+#: inc/class-pinboard-bookmarks-widget.php:465
 msgid "Text before the base URL of the original site:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:467
+#: inc/class-pinboard-bookmarks-widget.php:469
 #: inc/pinboard-bookmarks-functions-init.php:85
 #: inc/pinboard-bookmarks-functions-items.php:615
 msgid "From:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:468
+#: inc/class-pinboard-bookmarks-widget.php:470
 msgid "Put this text before the base URL of the original site. A space will be added after the text."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:475
+#: inc/class-pinboard-bookmarks-widget.php:477
 msgid "Link to the archive"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:480
+#: inc/class-pinboard-bookmarks-widget.php:482
 msgid "Display the link to my bookmarks archive on Pinboard"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:488
+#: inc/class-pinboard-bookmarks-widget.php:490
 msgid "Text for the archive link:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:492
+#: inc/class-pinboard-bookmarks-widget.php:494
 #: inc/pinboard-bookmarks-functions-init.php:87
 #: inc/pinboard-bookmarks-functions-items.php:358
 msgid "See the bookmarks on Pinboard"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:497
+#: inc/class-pinboard-bookmarks-widget.php:499
 msgid "Display an arrow after the link to the archive"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:504
-msgid "Other options"
+#: inc/class-pinboard-bookmarks-widget.php:506
+msgid "Links relationship"
 msgstr ""
 
 #: inc/class-pinboard-bookmarks-widget.php:511
-msgid "Unordered list"
-msgstr ""
-
-#: inc/class-pinboard-bookmarks-widget.php:515
-msgid "Ordered list"
-msgstr ""
-
-#: inc/class-pinboard-bookmarks-widget.php:519
-msgid "Use this type of list"
-msgstr ""
-
-#: inc/class-pinboard-bookmarks-widget.php:528
-msgid "Display an arrow after each title"
-msgstr ""
-
-#: inc/class-pinboard-bookmarks-widget.php:536
 msgid "Open links in a new browser tab"
 msgstr ""
 
-#. translators: %s is the nofollow.
-#: inc/class-pinboard-bookmarks-widget.php:545
+#. translators: the placeholder is the "noopener rel attribute.
+#: inc/class-pinboard-bookmarks-widget.php:517
+msgid "If activated, the rel attribute %s will be added."
+msgstr ""
+
+#. translators: %s is a rel attribute for links.
+#: inc/class-pinboard-bookmarks-widget.php:525
+#: inc/class-pinboard-bookmarks-widget.php:535
 msgid "Add %s to links"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:549
+#: inc/class-pinboard-bookmarks-widget.php:529
+#: inc/class-pinboard-bookmarks-widget.php:539
 msgid "It will be added to all external links."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:553
+#: inc/class-pinboard-bookmarks-widget.php:549
+msgid "Other options"
+msgstr ""
+
+#: inc/class-pinboard-bookmarks-widget.php:556
+msgid "Unordered list"
+msgstr ""
+
+#: inc/class-pinboard-bookmarks-widget.php:560
+msgid "Ordered list"
+msgstr ""
+
+#: inc/class-pinboard-bookmarks-widget.php:564
+msgid "Use this type of list"
+msgstr ""
+
+#: inc/class-pinboard-bookmarks-widget.php:573
+msgid "Display an arrow after each title"
+msgstr ""
+
+#: inc/class-pinboard-bookmarks-widget.php:580
 msgid "Displaying order"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:555
+#: inc/class-pinboard-bookmarks-widget.php:582
 msgid "Define the order in which the elements of each item will be displayed. The available elements are:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:562
+#: inc/class-pinboard-bookmarks-widget.php:589
 msgid "Order of the elements of each item:"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:567
+#: inc/class-pinboard-bookmarks-widget.php:594
 msgid "Enter a space separated list of elements."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:571
+#: inc/class-pinboard-bookmarks-widget.php:598
 msgid "Debug options"
 msgstr ""
 
 #. translators: %s is version of the plugin.
-#: inc/class-pinboard-bookmarks-widget.php:577
+#: inc/class-pinboard-bookmarks-widget.php:604
 msgid "You are using Pinboard Bookmarks version %s."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:583
+#: inc/class-pinboard-bookmarks-widget.php:610
 msgid "Use these options for debugging purposes only."
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:588
+#: inc/class-pinboard-bookmarks-widget.php:615
 msgid "Display debugging information to admins only"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:596
+#: inc/class-pinboard-bookmarks-widget.php:623
 msgid "Display parameters"
 msgstr ""
 
-#: inc/class-pinboard-bookmarks-widget.php:604
+#: inc/class-pinboard-bookmarks-widget.php:631
 msgid "Display URLs"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:98
+#: inc/pinboard-bookmarks-core.php:99
 msgid "You have not properly configured the widget. Please, add a username."
 msgstr ""
 
 #. translators: %s is the feed error.
-#: inc/pinboard-bookmarks-core.php:225
+#: inc/pinboard-bookmarks-core.php:226
 msgid "There was a problem with your feed! The error is %s"
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:227
+#: inc/pinboard-bookmarks-core.php:228
 msgid "The feed is currently unavailable."
 msgstr ""
 
-#: inc/pinboard-bookmarks-core.php:247
+#: inc/pinboard-bookmarks-core.php:248
 msgid "No items."
 msgstr ""
 
