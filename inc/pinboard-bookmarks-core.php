@@ -103,7 +103,19 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	// Set up some variables.
 	$display_arrow ? $arrow  = '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>' : $arrow = '';
 	$new_tab ? $new_tab_link = ' target="_blank"' : $new_tab_link = '';
-	$nofollow ? $rel_txt     = ' rel="bookmark nofollow"' : $rel_txt = ' rel="bookmark"';
+	if ( $nofollow ) {
+		if ( $new_tab_link ) {
+			$rel_txt = ' rel="bookmark external nofollow noreferrer noopener"';
+		} else {
+			$rel_txt = ' rel="bookmark external nofollow"';
+		}
+	} else {
+		if ( $new_tab_link ) {
+			$rel_txt = ' rel="bookmark external noreferrer noopener"';
+		} else {
+			$rel_txt = ' rel="bookmark external"';
+		}
+	}
 	if ( 400 < $quantity ) {
 		$quantity = 400;
 	}
