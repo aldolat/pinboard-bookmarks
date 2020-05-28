@@ -156,6 +156,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 		$instance['display_arch_arr'] = isset( $new_instance['display_arch_arr'] ) ? true : false;
 		$instance['new_tab']          = isset( $new_instance['new_tab'] ) ? true : false;
 		$instance['nofollow']         = isset( $new_instance['nofollow'] ) ? true : false;
+		$instance['noreferrer']       = isset( $new_instance['noreferrer'] ) ? true : false;
 		$instance['items_order']      = pinboard_bookmarks_check_items( $new_instance['items_order'] );
 		$instance['admin_only']       = isset( $new_instance['admin_only'] ) ? true : false;
 		$instance['debug_options']    = isset( $new_instance['debug_options'] ) ? true : false;
@@ -422,6 +423,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$instance['display_source']
 			);
 			?>
+
 			<h4><?php esc_html_e( 'Display site URL', 'pinboard-bookmarks' ); ?></h4>
 
 			<?php
@@ -501,6 +503,49 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			);
 			?>
 
+			<h4><?php esc_html_e( 'Links relationship', 'pinboard-bookmarks' ); ?></h4>
+
+			<?php
+			// Open links in new tab.
+			pinboard_bookmarks_form_checkbox(
+				esc_html__( 'Open links in a new browser tab', 'pinboard-bookmarks' ),
+				$this->get_field_id( 'new_tab' ),
+				$this->get_field_name( 'new_tab' ),
+				$instance['new_tab'],
+				sprintf(
+					// translators: the placeholder is the "noopener rel attribute.
+					esc_html__( 'If activated, the rel attribute %s will be added.', 'pinboard-bookmarks' ),
+					'<code>noopener</code>'
+				)
+			);
+
+			// No follow.
+			pinboard_bookmarks_form_checkbox(
+				// translators: %s is the nofollow.
+				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
+				$this->get_field_id( 'nofollow' ),
+				$this->get_field_name( 'nofollow' ),
+				$instance['nofollow'],
+				esc_html__( 'It will be added to all external links.', 'pinboard-bookmarks' )
+			);
+
+			// No referrer.
+			pinboard_bookmarks_form_checkbox(
+				// translators: %s is the noreferrer.
+				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>noreferrer</code>' ),
+				$this->get_field_id( 'noreferrer' ),
+				$this->get_field_name( 'noreferrer' ),
+				$instance['noreferrer'],
+				esc_html__( 'It will be added to all external links.', 'pinboard-bookmarks' )
+			);
+
+			printf(
+				// translators: the placeholder is a link.
+				esc_html__( 'For more information about links attributes, please visit %s.', 'pinbard-bookmarks' ),
+				'<a rel="external noopener noreferrer nofollow" href="https://www.w3schools.com/tags/att_a_rel.asp" target="_blank">w3schools.com</a>'
+			);
+			?>
+
 			<h4><?php esc_html_e( 'Other options', 'pinboard-bookmarks' ); ?></h4>
 
 			<?php
@@ -529,24 +574,6 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				$this->get_field_id( 'display_arrow' ),
 				$this->get_field_name( 'display_arrow' ),
 				$instance['display_arrow']
-			);
-
-			// Open links in new tab.
-			pinboard_bookmarks_form_checkbox(
-				esc_html__( 'Open links in a new browser tab', 'pinboard-bookmarks' ),
-				$this->get_field_id( 'new_tab' ),
-				$this->get_field_name( 'new_tab' ),
-				$instance['new_tab']
-			);
-
-			// No follow.
-			pinboard_bookmarks_form_checkbox(
-				// translators: %s is the nofollow.
-				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
-				$this->get_field_id( 'nofollow' ),
-				$this->get_field_name( 'nofollow' ),
-				$instance['nofollow'],
-				esc_html__( 'It will be added to all external links.', 'pinboard-bookmarks' )
 			);
 			?>
 
