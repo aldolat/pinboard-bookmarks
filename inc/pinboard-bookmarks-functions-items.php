@@ -635,3 +635,23 @@ function pinboard_bookmarks_get_site( $args ) {
 
 	return $output;
 }
+
+/**
+ * Get the rel HTML attribute for links.
+ *
+ * @param  bool    $new_tab    Whether to open links in a new browser tab.
+ * @param  bool    $nofollow   Whether to use nofollow in rel attribute.
+ * @param  bool    $noreferrer Whether to use noreferrer in rel attribute.
+ * @return string  $output     The HTML rel attribute.
+ *
+ * @since 1.13.0
+ */
+function pinboard_bookmarks_get_rel_link( $new_tab, $nofollow, $noreferrer ) {
+	$new_tab ? $noopener_attr      = ' noopener' : $noopener_attr = '';
+	$nofollow ? $nofollow_attr     = ' nofollow' : $nofollow_attr = '';
+	$noreferrer ? $noreferrer_attr = ' noreferrer' : $noreferrer_attr = '';
+
+	$output = ' rel="bookmark external' . $noopener_attr . $nofollow_attr . $noreferrer_attr . '"';
+
+	return $output;
+}

@@ -89,6 +89,7 @@ function pinboard_bookmarks_get_defaults() {
 		'display_arch_arr' => true,
 		'new_tab'          => false,
 		'nofollow'         => true,
+		'noreferrer'       => true,
 		'items_order'      => 'title site description date tags',
 		'admin_only'       => true,
 		'debug_options'    => false,
