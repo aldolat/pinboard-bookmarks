@@ -268,7 +268,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 					'value' => 'instapaper',
 					'desc'  => esc_html__( 'Instapaper', 'pinboard-bookmarks' ),
 				),
-				'pinboard' => array(
+				'pinboard'   => array(
 					'value' => 'pinboard',
 					'desc'  => esc_html__( 'Pinboard', 'pinboard-bookmarks' ),
 				),
@@ -521,7 +521,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 			// No follow.
 			pinboard_bookmarks_form_checkbox(
-				// translators: %s is the nofollow.
+				// translators: %s is a rel attribute for links.
 				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
 				$this->get_field_id( 'nofollow' ),
 				$this->get_field_name( 'nofollow' ),
@@ -531,7 +531,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 			// No referrer.
 			pinboard_bookmarks_form_checkbox(
-				// translators: %s is the noreferrer.
+				// translators: %s is a rel attribute for links.
 				sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>noreferrer</code>' ),
 				$this->get_field_id( 'noreferrer' ),
 				$this->get_field_name( 'noreferrer' ),

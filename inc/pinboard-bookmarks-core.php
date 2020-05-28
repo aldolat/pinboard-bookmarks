@@ -274,7 +274,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			// Original site URL.
 			$site_part = '';
 			if ( $display_site_url ) {
-				$params = array(
+				$params    = array(
 					'url'           => $item->get_permalink(),
 					'leave_domain'  => $leave_domain,
 					'site_url_text' => $site_url_text,
