@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.13.1 =
+
+* Fixed domain for a string in the widget admin panel.
+
 = 1.13.0 =
 
 * Added options for links relationship.

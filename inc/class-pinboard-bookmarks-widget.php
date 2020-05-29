@@ -541,7 +541,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 			printf(
 				// translators: the placeholder is a link.
-				esc_html__( 'For more information about links attributes, please visit %s.', 'pinbard-bookmarks' ),
+				esc_html__( 'For more information about links attributes, please visit %s.', 'pinboard-bookmarks' ),
 				'<a rel="external noopener noreferrer nofollow" href="https://www.w3schools.com/tags/att_a_rel.asp" target="_blank">w3schools.com</a>'
 			);
 			?>
