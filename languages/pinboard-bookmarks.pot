@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-28T19:49:09+02:00\n"
+"POT-Creation-Date: 2020-05-29T18:26:33+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: pinboard-bookmarks\n"
@@ -307,6 +307,11 @@ msgstr ""
 #: inc/class-pinboard-bookmarks-widget.php:529
 #: inc/class-pinboard-bookmarks-widget.php:539
 msgid "It will be added to all external links."
+msgstr ""
+
+#. translators: the placeholder is a link.
+#: inc/class-pinboard-bookmarks-widget.php:544
+msgid "For more information about links attributes, please visit %s."
 msgstr ""
 
 #: inc/class-pinboard-bookmarks-widget.php:549
