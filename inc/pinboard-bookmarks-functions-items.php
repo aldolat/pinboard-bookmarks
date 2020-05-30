@@ -631,7 +631,13 @@ function pinboard_bookmarks_get_site( $args ) {
 		$site_url = $url['scheme'] . '://' . $url['host'];
 	}
 
-	$output = '<p class="pinboard-bookmarks-site-url"><span class="pinboard-bookmarks-site-url-text">' . $args['site_url_text'] . '</span> ' . $site_url . '</p>';
+	if ( $args['site_url_text'] ) {
+		$text_site_url = '<span class="pinboard-bookmarks-site-url-text">' . $args['site_url_text'] . '</span> ';
+	} else {
+		$text_site_url = '';
+	}
+
+	$output = '<p class="pinboard-bookmarks-site-url">' . $text_site_url . $site_url . '</p>';
 
 	return $output;
 }
