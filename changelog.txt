@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 1.14.0 =
+
+* Avoid printing the HTML tag when the text before the base URL of the original site is empty.
+
 = 1.13.1 =
 
 * Fixed domain for a string in the widget admin panel.

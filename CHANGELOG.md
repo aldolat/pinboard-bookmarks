@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.14.0] - 2020-05-30
+### Fixed
+* Avoid printing the HTML tag when the text before the base URL of the original site is empty.
+
 ## [1.13.1] - 2020-05-29
 ### Fixed
 * Fixed domain for a string in the widget admin panel.
@@ -143,6 +147,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
+[1.14.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.13.1...1.14.0
 [1.13.1]: https://github.com/aldolat/pinboard-bookmarks/compare/1.13.0...1.13.1
 [1.13.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.12.0...1.13.0
 [1.12.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.11.0...1.12.0
