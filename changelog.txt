@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.14.1 =
+
+* Added new link to plugin line in the WordPress plugins management page.
+* Updated compatibility to WordPress 5.6.
+
 = 1.14.0 =
 
 * Avoid printing the HTML tag when the text before the base URL of the original site is empty.
