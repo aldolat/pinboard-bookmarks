@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.14.1] - 2020-11-21
+### Added
+* Added new link to plugin line in the WordPress plugins management page.
+### Changed
+* Updated compatibility to WordPress 5.6.
+
 ## [1.14.0] - 2020-05-30
 ### Fixed
 * Avoid printing the HTML tag when the text before the base URL of the original site is empty.
