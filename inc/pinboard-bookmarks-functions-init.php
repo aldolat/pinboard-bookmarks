@@ -115,6 +115,7 @@ function pinboard_bookmarks_load_widget() {
  *
  * @param string $hook The hook where to load scripts.
  * @since 1.0
+ * @since 1.15.0 Registered new javascript for sliding panels.
  */
 function pinboard_bookmarks_load_scripts( $hook ) {
 	if ( 'widgets.php' !== $hook ) {
@@ -133,11 +134,11 @@ function pinboard_bookmarks_load_scripts( $hook ) {
 
 	// Register and enqueue the JS file.
 	wp_register_script(
-		'pinboard_bookmarks_js',
+		'pinboard_bookmarks_slide_panels_js',
 		plugins_url( '../assets/pinboard-bookmarks-slide-panels.js', __FILE__ ),
 		array( 'jquery' ),
 		PINBOARD_BOOKMARKS_PLUGIN_VERSION,
 		false
 	);
-	wp_enqueue_script( 'pinboard_bookmarks_js' );
+	wp_enqueue_script( 'pinboard_bookmarks_slide_panels_js' );
 }

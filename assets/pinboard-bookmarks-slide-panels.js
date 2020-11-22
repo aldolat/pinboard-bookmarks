@@ -1,5 +1,5 @@
 /**
- * Pinboard Bookmarks javascript for admin UI.
+ * Pinboard Bookmarks javascript for sliding panels in the admin UI.
  * This file is a modified version of Category Posts Widget's js file from @kometschuh
  * released under GPLv2 or later.
  *
