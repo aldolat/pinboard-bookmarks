@@ -256,10 +256,12 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 			</div>
 
-			<!-- Retrieving bookmarks -->
+			<!-- Getting bookmarks -->
 			<div class="pinboard-bookmarks-section">
 
-				<h4 data-panel="pinboard-bookmarks-retrieving" class="pinboard-bookmarks-widget-title"><?php esc_html_e( 'Retrieving bookmarks', 'pinboard-bookmarks' ); ?></h4>
+				<h4 data-panel="pinboard-bookmarks-getting" class="pinboard-bookmarks-widget-title">
+					<?php esc_html_e( 'Getting bookmarks', 'pinboard-bookmarks' ); ?>
+				</h4>
 
 				<div class="pinboard-bookmarks-container">
 
@@ -365,7 +367,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			<!-- Displaying bookmarks -->
 			<div class="pinboard-bookmarks-section">
 
-				<h4 data-panel="pinboard-bookmarks-displaying" class="pinboard-bookmarks-widget-title"><?php esc_html_e( 'Displaying bookmarks', 'pinboard-bookmarks' ); ?></h4>
+				<h4 data-panel="pinboard-bookmarks-displaying" class="pinboard-bookmarks-widget-title">
+					<?php esc_html_e( 'Displaying bookmarks', 'pinboard-bookmarks' ); ?>
+				</h4>
 
 				<div class="pinboard-bookmarks-container">
 
@@ -621,7 +625,9 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			<!-- Styling -->
 			<div class="pinboard-bookmarks-section">
 
-				<h4 data-panel="pinboard-bookmarks-styling" class="pinboard-bookmarks-widget-title"><?php esc_html_e( 'Styling', 'pinboard-bookmarks' ); ?></h4>
+				<h4 data-panel="pinboard-bookmarks-styling" class="pinboard-bookmarks-widget-title">
+					<?php esc_html_e( 'Styling', 'pinboard-bookmarks' ); ?>
+				</h4>
 
 				<div class="pinboard-bookmarks-container">
 
@@ -696,10 +702,12 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 			</div>
 
-			<!-- Debug -->
+			<!-- Debugging -->
 			<div class="pinboard-bookmarks-section">
 
-				<h4 data-panel="pinboard-bookmarks-debug" class="pinboard-bookmarks-widget-title"><?php esc_html_e( 'Debug options', 'pinboard-bookmarks' ); ?></h4>
+				<h4 data-panel="pinboard-bookmarks-debug" class="pinboard-bookmarks-widget-title">
+					<?php esc_html_e( 'Debugging', 'pinboard-bookmarks' ); ?>
+				</h4>
 
 				<div class="pinboard-bookmarks-container">
 
