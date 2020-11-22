@@ -130,4 +130,14 @@ function pinboard_bookmarks_load_scripts( $hook ) {
 		'all'
 	);
 	wp_enqueue_style( 'pinboard_bookmarks_style' );
+
+	// Register and enqueue the JS file.
+	wp_register_script(
+		'pinboard_bookmarks_js',
+		plugins_url( '../assets/pinboard-bookmarks-slide-panels.js', __FILE__ ),
+		array( 'jquery' ),
+		PINBOARD_BOOKMARKS_PLUGIN_VERSION,
+		false
+	);
+	wp_enqueue_script( 'pinboard_bookmarks_js' );
 }
