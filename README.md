@@ -197,6 +197,8 @@ This section describes how to install the plugin and get it working.
 * Added collapsible panels.
 * Minimum height for text fields is 80 pixels now.
 
+For the complete changelog see [here](https://github.com/aldolat/pinboard-bookmarks/blob/master/CHANGELOG.md).
+
 ## Upgrade Notice
 
 No upgrade notice.
