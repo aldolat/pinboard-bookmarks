@@ -3,6 +3,7 @@
 = 1.15.0 =
 
 * Added collapsible panels.
+* Minimum height for text fields is 80 pixels now.
 
 = 1.14.1 =
 

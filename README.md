@@ -1,4 +1,4 @@
-# Pinboard Bookmarks #
+# Pinboard Bookmarks
 
 ![banner](https://ps.w.org/pinboard-bookmarks/assets/banner-772x250.png)
 
@@ -25,9 +25,11 @@ Publish Pinboard bookmarks on your WordPress blog.
   * [Screenshots](#screenshots)
     * [1. The dashboard panel to set up the widget](#1-the-dashboard-panel-to-set-up-the-widget)
     * [2. An example of rendered widget](#2-an-example-of-rendered-widget)
+  * [Changelog](#changelog)
+    * [1.15.0](#1150)
   * [Upgrade Notice](#upgrade-notice)
 
-## Description ##
+## Description
 
 Pinboard Bookmarks allows you to publish bookmarks from Pinboard on your blog. The plugin lets you:
 
@@ -53,11 +55,11 @@ Other options are available, such as:
 
 After the plugin's activation, you will have a new widget in Appearance / Widgets.
 
-### Usage as widget ###
+### Usage as widget
 
 The plugin provides a widget to be used in your sidebar. After activating the plugin, you will have a new widget in Appearance > Widgets. Simply drag & drop the "Pinboard Bookmarks" widget in the sidebar, adjust the options, and click Save.
 
-### Usage as shortcode ###
+### Usage as shortcode
 
 You can also use the plugin's shortcode to display your list on a static page or on a single post. Example usage:
 
@@ -109,7 +111,7 @@ This is the list of the options for the shortcode:
 * `debug_options` (boolean, 1/0) - If the complete set of options of the widget should be displayed.
 * `debug_urls` (boolean, 1/0) - If the URLs and the single parts, used to build them, should be displayed.
 
-### Usage as PHP function ###
+### Usage as PHP function
 
 You can also use the main PHP function directly in your theme. Add these lines where you want them to be displayed (the function echoes the result):
 
@@ -158,7 +160,7 @@ Make sure to properly use the opening and closing tags `<?php` and `?>` respecti
 
 The only mandatory option is `username`. The other options are the default options which you can change according to your needs. It isn't necessary to insert all of them.
 
-### Help, Bugs, and Contributing ###
+### Help, Bugs, and Contributing
 
 If you need help, please use [WordPress forum](http://wordpress.org/support/plugin/pinboard-bookmarks). Do not send private email unless it is really necessary.
 
@@ -166,11 +168,11 @@ If you have found a bug, please report it on [GitHub](https://github.com/aldolat
 
 This plugin is developed using [GitHub](https://github.com/aldolat/pinboard-bookmarks). If you wrote an enhancement and would share it with the world, please send me a [Pull request](https://github.com/aldolat/pinboard-bookmarks/pulls).
 
-### Privacy Policy ###
+### Privacy Policy
 
 This plugin does not collect any user data.
 
-## Installation ##
+## Installation
 
 This section describes how to install the plugin and get it working.
 
@@ -178,16 +180,23 @@ This section describes how to install the plugin and get it working.
 2. Add the new widget on your sidebar.
 3. The only necessary option is the username on Pinboard. Add it and save the widget.
 
-## Screenshots ##
+## Screenshots
 
-### 1. The dashboard panel to set up the widget ###
+### 1. The dashboard panel to set up the widget
 
 ![1. The dashboard panel to set up the widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-1.png)
 
-### 2. An example of rendered widget ###
+### 2. An example of rendered widget
 
 ![2. An example of rendered widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
 
-## Upgrade Notice ##
+## Changelog
+
+### 1.15.0
+
+* Added collapsible panels.
+* Minimum height for text fields is 80 pixels now.
+
+## Upgrade Notice
 
 No upgrade notice.
