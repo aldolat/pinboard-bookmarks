@@ -129,11 +129,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Fix URL when using more than 1 tag.
 * Minor fixes.
 
-## [1.3.0] - 2017-04-29
+## [1.3] - 2017-04-29
 ### Changed
 * Updated shortcode options.
 
-## [1.2.0] - 2017-04-29
+## [1.2] - 2017-04-29
 ### Added
 * Added "no-follow" option to all external links.
 * Added the number of retrieved items in debug section.
@@ -146,7 +146,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 * Hardening security.
 
-## [1.1.0] - 2017-01-04
+## [1.1] - 2017-01-04
 ### Changed
 * Various small improvements.
 ### Security
@@ -176,6 +176,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [1.6.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.3...1.4.0
-[1.3.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.2...1.3
-[1.2.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.1...1.2
-[1.1.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.0...1.1
+[1.3]: https://github.com/aldolat/pinboard-bookmarks/compare/1.2...1.3
+[1.2]: https://github.com/aldolat/pinboard-bookmarks/compare/1.1...1.2
+[1.1]: https://github.com/aldolat/pinboard-bookmarks/compare/1.0...1.1
