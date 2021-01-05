@@ -66,10 +66,12 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 		echo "\n" . '<!-- Start Pinboard Bookmarks - ' . $args['widget_id'] . ' -->' . "\n";
 
-		echo $args['before_widget'];
+		echo $args['before_widget'] . "\n";
 
 		if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base ) . $args['after_title'];
+			echo $args['before_title'];
+			echo apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
+			echo $args['after_title'] . "\n";
 		}
 
 		pinboard_bookmarks_fetch_feed( $instance );
