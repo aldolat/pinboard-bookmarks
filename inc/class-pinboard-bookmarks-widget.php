@@ -186,23 +186,23 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 			<!-- Basic setup -->
 			<div class="pinboard-bookmarks-section">
 
-				<p>
+				<p><em>
 					<?php
 					esc_html_e(
 						'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter a username on Pinboard. Then click on Save button.',
 						'pinboard-bookmarks'
 					);
 					?>
-				</p>
+				</em></p>
 
-				<p>
+				<p><em>
 					<?php
 					esc_html_e(
 						'Note that a username is required, at least.',
 						'pinboard-bookmarks'
 					);
 					?>
-				</p>
+				</em></p>
 
 				<h4>
 					<?php esc_html_e( 'Basic setup', 'pinboard-bookmarks' ); ?>
@@ -265,14 +265,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 				<div class="pinboard-bookmarks-container">
 
-					<p>
+					<p><em>
 						<?php
 						esc_html_e(
 							'Define here some aspects regarding the bookmarks retrieval.',
 							'pinboard-bookmarks'
 						);
 						?>
-					</p>
+					</em></p>
 
 					<div class="pinboard-bookmarks-section">
 
@@ -399,14 +399,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 				<div class="pinboard-bookmarks-container">
 
-					<p>
+					<p><em>
 						<?php
 						esc_html_e(
 							'Define here which elements you want to display in the widget.',
 							'pinboard-bookmarks'
 						);
 						?>
-					</p>
+					</em></p>
 
 					<div class="pinboard-bookmarks-section">
 
@@ -526,7 +526,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'display_site_url' ),
 									$instance['display_site_url'],
 									sprintf(
-										// translators: placeholder are two URL examples.
+										// translators: Placeholders are two URL examples.
 										esc_html__(
 											'Remove the path from the URL. For example, if the URL of the article is %1$s, the base URL %2$s will be displayed.',
 											'pinboard-bookmarks'
@@ -543,7 +543,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'leave_domain' ),
 									$instance['leave_domain'],
 									sprintf(
-										// translators: placeholders is http(s)://www.
+										// translators: Placeholder is http(s)://www.
 										esc_html__(
 											'Remove the %s part.',
 											'pinboard-bookmarks'
@@ -611,7 +611,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'new_tab' ),
 									$instance['new_tab'],
 									sprintf(
-										// translators: The placeholder is the "noopener rel attribute.
+										// translators: The noopener rel attribute.
 										esc_html__( 'If activated, the rel attribute %s will be added.', 'pinboard-bookmarks' ),
 										'<code>noopener</code>'
 									)
@@ -619,7 +619,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 								// No follow.
 								pinboard_bookmarks_form_checkbox(
-									// translators: %s is a rel attribute for links.
+									// translators: The rel attribute for links.
 									sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>nofollow</code>' ),
 									$this->get_field_id( 'nofollow' ),
 									$this->get_field_name( 'nofollow' ),
@@ -633,7 +633,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 								<?php
 								// No referrer.
 								pinboard_bookmarks_form_checkbox(
-									// translators: %s is a rel attribute for links.
+									// translators: The rel attribute for links.
 									sprintf( esc_html__( 'Add %s to links', 'pinboard-bookmarks' ), '<code>noreferrer</code>' ),
 									$this->get_field_id( 'noreferrer' ),
 									$this->get_field_name( 'noreferrer' ),
@@ -642,7 +642,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 								);
 
 								printf(
-									// translators: the placeholder is a link.
+									// translators: The placeholder is a link.
 									esc_html__( 'For more information about links attributes, please visit %s.', 'pinboard-bookmarks' ),
 									'<a rel="external noopener noreferrer nofollow" href="https://www.w3schools.com/tags/att_a_rel.asp" target="_blank">w3schools.com</a>'
 								);
@@ -666,14 +666,14 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 				<div class="pinboard-bookmarks-container">
 
-					<p>
+					<p><em>
 						<?php
 						esc_html_e(
 							'Define here some aspects of the style of the widget.',
 							'pinboard-bookmarks'
 						);
 						?>
-					</p>
+					</em></p>
 
 					<div class="pinboard-bookmarks-section">
 
@@ -758,7 +758,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 					<p>
 						<?php
 						printf(
-							// translators: %s is version of the plugin.
+							// translators: The version of the plugin.
 							esc_html__( 'You are using Pinboard Bookmarks version %s', 'pinboard-bookmarks' ),
 							'<strong>' . esc_attr( PINBOARD_BOOKMARKS_PLUGIN_VERSION ) . '</strong>'
 						);

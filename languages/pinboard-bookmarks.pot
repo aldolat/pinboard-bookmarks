@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-05T21:03:38+01:00\n"
+"POT-Creation-Date: 2021-01-05T21:11:24+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: pinboard-bookmarks\n"
@@ -260,7 +260,7 @@ msgstr ""
 msgid "Display the base URL of the original site"
 msgstr ""
 
-#. translators: placeholder are two URL examples.
+#. translators: Placeholders are two URL examples.
 #: inc/class-pinboard-bookmarks-widget.php:530
 msgid "Remove the path from the URL. For example, if the URL of the article is %1$s, the base URL %2$s will be displayed."
 msgstr ""
@@ -269,7 +269,7 @@ msgstr ""
 msgid "Leave the domain only"
 msgstr ""
 
-#. translators: placeholders is http(s)://www.
+#. translators: Placeholder is http(s)://www.
 #: inc/class-pinboard-bookmarks-widget.php:547
 msgid "Remove the %s part."
 msgstr ""
@@ -318,12 +318,12 @@ msgstr ""
 msgid "Open links in a new browser tab"
 msgstr ""
 
-#. translators: The placeholder is the "noopener rel attribute.
+#. translators: The noopener rel attribute.
 #: inc/class-pinboard-bookmarks-widget.php:615
 msgid "If activated, the rel attribute %s will be added."
 msgstr ""
 
-#. translators: %s is a rel attribute for links.
+#. translators: The rel attribute for links.
 #: inc/class-pinboard-bookmarks-widget.php:623
 #: inc/class-pinboard-bookmarks-widget.php:637
 msgid "Add %s to links"
@@ -334,7 +334,7 @@ msgstr ""
 msgid "It will be added to all external links."
 msgstr ""
 
-#. translators: the placeholder is a link.
+#. translators: The placeholder is a link.
 #: inc/class-pinboard-bookmarks-widget.php:646
 msgid "For more information about links attributes, please visit %s."
 msgstr ""
@@ -387,7 +387,7 @@ msgstr ""
 msgid "Debugging"
 msgstr ""
 
-#. translators: %s is version of the plugin.
+#. translators: The version of the plugin.
 #: inc/class-pinboard-bookmarks-widget.php:762
 msgid "You are using Pinboard Bookmarks version %s"
 msgstr ""
