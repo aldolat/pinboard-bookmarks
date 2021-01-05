@@ -189,9 +189,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				<p>
 					<?php
 					esc_html_e(
-						'This widget allows you to publish a list of Pinboard bookmarks in your sidebar.
-						Simply enter a username on Pinboard.
-						Then click on Save button.',
+						'This widget allows you to publish a list of Pinboard bookmarks in your sidebar. Simply enter a username on Pinboard. Then click on Save button.',
 						'pinboard-bookmarks'
 					);
 					?>
@@ -267,11 +265,22 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 				<div class="pinboard-bookmarks-container">
 
+					<p>
+						<?php
+						esc_html_e(
+							'Define here some aspects regarding the bookmarks retrieval.',
+							'pinboard-bookmarks'
+						);
+						?>
+					</p>
+
 					<div class="pinboard-bookmarks-section">
 
 						<div class="pinboard-bookmarks-column-container pinboard-bookmarks-2col">
 
 							<div class="pinboard-bookmarks-column">
+
+								<h5><?php esc_html_e( 'Tags', 'pinboard-bookmarks' ); ?></h5>
 
 								<?php
 								// Tags.
@@ -283,7 +292,11 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									esc_html__( 'books reading comics', 'pinboard-bookmarks' ),
 									esc_html__( 'Enter a space separated list of tags, up to 4 tags. The plugin will fetch bookmarks from this list of tags.', 'pinboard-bookmarks' )
 								);
+								?>
 
+								<h5><?php esc_html_e( 'Source', 'pinboard-bookmarks' ); ?></h5>
+
+								<?php
 								// Source.
 								$options = array(
 									'none'       => array(
@@ -320,24 +333,31 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'source' ),
 									$options,
 									$instance['source'],
-									// translators: %s is the name of a bookmarking service like Instapaper.
+									// translators: The name of a bookmarking service like Instapaper.
 									sprintf( esc_html__( 'Select the source of the bookmarks, like %s. Since Pinboard accepts tags or a source, the tags from the field above will be ignored if you activate this option.', 'pinboard-bookmarks' ), '<code>from:pocket</code>' )
 								);
 								?>
 							</div>
 
 							<div class="pinboard-bookmarks-column">
+
+								<h5><?php esc_html_e( 'Quantity of bookmarks', 'pinboard-bookmarks' ); ?></h5>
+
 								<?php
 								// Number of items.
 								pinboard_bookmarks_form_input_text(
-									esc_html__( 'Maximum number of items:', 'pinboard-bookmarks' ),
+									esc_html__( 'Get this number of bookmarks:', 'pinboard-bookmarks' ),
 									$this->get_field_id( 'quantity' ),
 									$this->get_field_name( 'quantity' ),
 									esc_attr( $instance['quantity'] ),
 									'5',
 									esc_html__( 'Maximum 400 items.', 'pinboard-bookmarks' )
 								);
+								?>
 
+								<h5><?php esc_html_e( 'Random order', 'pinboard-bookmarks' ); ?></h5>
+
+								<?php
 								// Random order.
 								pinboard_bookmarks_form_checkbox(
 									esc_html__( 'Display items in random order', 'pinboard-bookmarks' ),
@@ -345,15 +365,19 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'random' ),
 									$instance['random']
 								);
+								?>
 
+								<h5><?php esc_html_e( 'Cache', 'pinboard-bookmarks' ); ?></h5>
+
+								<?php
 								// Time between two requests.
 								pinboard_bookmarks_form_input_text(
-									esc_html__( 'Minimum time between two requests to Pinboard server:', 'pinboard-bookmarks' ),
+									esc_html__( 'Cache duration:', 'pinboard-bookmarks' ),
 									$this->get_field_id( 'time' ),
 									$this->get_field_name( 'time' ),
 									esc_attr( $instance['time'] ),
 									'1800',
-									esc_html__( 'In seconds. Minimum 1800 seconds (30 minutes).', 'pinboard-bookmarks' )
+									esc_html__( 'This is the minimum time, in seconds, between two requests to Pinboard server. Minimum 1800 seconds (30 minutes).', 'pinboard-bookmarks' )
 								);
 								?>
 							</div>
@@ -374,6 +398,15 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				</h4>
 
 				<div class="pinboard-bookmarks-container">
+
+					<p>
+						<?php
+						esc_html_e(
+							'Define here which elements you want to display in the widget.',
+							'pinboard-bookmarks'
+						);
+						?>
+					</p>
 
 					<div class="pinboard-bookmarks-section">
 
@@ -398,7 +431,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'truncate' ),
 									esc_attr( $instance['truncate'] ),
 									'50',
-									// translators: the number of words for the bookmark description.
+									// translators: The number of words for the bookmark description.
 									sprintf( esc_html__( '(In words. %s means full text)', 'pinboard-bookmarks' ), '<code>0</code>' )
 								);
 								?>
@@ -456,7 +489,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 								// Hashtag.
 								pinboard_bookmarks_form_checkbox(
-									// translators: %s is an hashtag.
+									// translators: Placeholder is an hashtag.
 									sprintf( esc_html__( 'Display an hashtag %s before each tag', 'pinboard-bookmarks' ), '(<code>#</code>)' ),
 									$this->get_field_id( 'display_hashtag' ),
 									$this->get_field_name( 'display_hashtag' ),
@@ -465,7 +498,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 
 								// Comma.
 								pinboard_bookmarks_form_checkbox(
-									// translators: %s is a comma.
+									// translators: Placeholder is a comma.
 									sprintf( esc_html__( 'Use a comma %s after each tag', 'pinboard-bookmarks' ), '(<code>,</code>)' ),
 									$this->get_field_id( 'use_comma' ),
 									$this->get_field_name( 'use_comma' ),
@@ -578,7 +611,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 									$this->get_field_name( 'new_tab' ),
 									$instance['new_tab'],
 									sprintf(
-										// translators: the placeholder is the "noopener rel attribute.
+										// translators: The placeholder is the "noopener rel attribute.
 										esc_html__( 'If activated, the rel attribute %s will be added.', 'pinboard-bookmarks' ),
 										'<code>noopener</code>'
 									)
@@ -632,6 +665,15 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 				</h4>
 
 				<div class="pinboard-bookmarks-container">
+
+					<p>
+						<?php
+						esc_html_e(
+							'Define here some aspects of the style of the widget.',
+							'pinboard-bookmarks'
+						);
+						?>
+					</p>
 
 					<div class="pinboard-bookmarks-section">
 
@@ -726,6 +768,7 @@ class Pinboard_Bookmarks_Widget extends WP_Widget {
 					<p>
 						<?php
 						printf(
+							// translators: The ID of the widget.
 							esc_html__( 'The ID of this widget is: %s' ),
 							'<strong>' . $instance['widget_id'] . '</strong>'
 						);
