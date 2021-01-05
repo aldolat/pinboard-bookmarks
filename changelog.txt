@@ -4,6 +4,7 @@
 
 * Added collapsible panels.
 * Minimum height for text fields is 80 pixels now.
+* More cleaned and beutified HTML code.
 
 = 1.14.1 =
 

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Added collapsible panels.
 ### Changed
 * Minimum height for text fields is 80 pixels now.
+* More cleaned and beutified HTML code.
 
 ## [1.14.1] - 2020-11-21
 ### Added

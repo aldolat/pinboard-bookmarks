@@ -171,6 +171,7 @@ This section describes how to install the plugin and get it working.
 
 * Added collapsible panels.
 * Minimum height for text fields is 80 pixels now.
+* More cleaned and beutified HTML code.
 
 == Upgrade Notice ==
 
