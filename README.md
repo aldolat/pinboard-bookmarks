@@ -23,8 +23,9 @@ Publish Pinboard bookmarks on your WordPress blog.
     * [Privacy Policy](#privacy-policy)
   * [Installation](#installation)
   * [Screenshots](#screenshots)
-    * [1. The dashboard panel to set up the widget](#1-the-dashboard-panel-to-set-up-the-widget)
-    * [2. An example of rendered widget](#2-an-example-of-rendered-widget)
+    * [1. The dashboard panel to set up the widget (all panels closed)](#1-the-dashboard-panel-to-set-up-the-widget-all-panels-closed)
+    * [2. The dashboard panel to set up the widget (all panels opened)](#2-the-dashboard-panel-to-set-up-the-widget-all-panels-opened)
+    * [3. An example of rendered widget](#3-an-example-of-rendered-widget)
   * [Changelog](#changelog)
     * [1.15.0](#1150)
   * [Upgrade Notice](#upgrade-notice)
@@ -182,13 +183,17 @@ This section describes how to install the plugin and get it working.
 
 ## Screenshots
 
-### 1. The dashboard panel to set up the widget
+### 1. The dashboard panel to set up the widget (all panels closed)
 
-![1. The dashboard panel to set up the widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-1.png)
+![1. The dashboard panel to set up the widget (all panels closed).](http://ps.w.org/pinboard-bookmarks/assets/screenshot-1.png)
 
-### 2. An example of rendered widget
+### 2. The dashboard panel to set up the widget (all panels opened)
 
-![2. An example of rendered widget](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
+![2. The dashboard panel to set up the widget (all panels opened).](http://ps.w.org/pinboard-bookmarks/assets/screenshot-2.png)
+
+### 3. An example of rendered widget
+
+![3. An example of rendered widget.](http://ps.w.org/pinboard-bookmarks/assets/screenshot-3.png)
 
 ## Changelog
 
@@ -196,6 +201,7 @@ This section describes how to install the plugin and get it working.
 
 * Added collapsible panels.
 * Minimum height for text fields is 80 pixels now.
+* Cleaned and beautified HTML code.
 
 For the complete changelog see [here](https://github.com/aldolat/pinboard-bookmarks/blob/master/CHANGELOG.md).
 

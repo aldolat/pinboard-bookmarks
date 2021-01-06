@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.15.0] - 2021-01-06
 ### Added
 * Added collapsible panels.
 ### Changed
 * Minimum height for text fields is 80 pixels now.
-* More cleaned and beutified HTML code.
+* Cleaned and beautified HTML code.
 
 ## [1.14.1] - 2020-11-21
 ### Added
@@ -158,6 +160,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * First release of the plugin.
 
 [Unreleased]: https://github.com/aldolat/pinboard-bookmarks/commits/develop
+[1.15.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.14.1...1.15.0
 [1.14.1]: https://github.com/aldolat/pinboard-bookmarks/compare/1.14.0...1.14.1
 [1.14.0]: https://github.com/aldolat/pinboard-bookmarks/compare/1.13.1...1.14.0
 [1.13.1]: https://github.com/aldolat/pinboard-bookmarks/compare/1.13.0...1.13.1

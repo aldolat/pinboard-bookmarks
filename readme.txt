@@ -162,8 +162,9 @@ This section describes how to install the plugin and get it working.
 
 == Screenshots ==
 
-1. The dashboard panel to set up the widget
-2. An example of rendered widget
+1. The dashboard panel to set up the widget (all panels closed).
+2. The dashboard panel to set up the widget (all panels opened).
+3. An example of rendered widget.
 
 == Changelog ==
 
@@ -171,7 +172,7 @@ This section describes how to install the plugin and get it working.
 
 * Added collapsible panels.
 * Minimum height for text fields is 80 pixels now.
-* More cleaned and beutified HTML code.
+* Cleaned and beautified HTML code.
 
 == Upgrade Notice ==
 
