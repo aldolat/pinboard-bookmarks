@@ -217,18 +217,18 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		default:
 			$list_element = 'ul';
 	}
-	$output .= '<' . $list_element . ' class="pinboard-bookmarks-list">';
+	$output .= '<' . $list_element . ' class="pinboard-bookmarks-list">' . "\n";
 
 	if ( is_wp_error( $rss ) ) {
-		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-error">';
+		$output .= "\t" . '<li class="pinboard-bookmarks-li pinboard-bookmarks-error">' . "\n";
 		if ( current_user_can( 'create_users' ) ) {
 			// translators: %s is the feed error.
-			$output .= sprintf( esc_html__( 'There was a problem with your feed! The error is %s', 'pinboard-bookmarks' ), '<code>' . $rss->get_error_message() . '</code>' );
+			$output .= sprintf( esc_html__( 'There was a problem with your feed! The error is %s', 'pinboard-bookmarks' ), '<code>' . $rss->get_error_message() . '</code>' ) . "\n";
 		} else {
-			$output .= esc_html__( 'The feed is currently unavailable.', 'pinboard-bookmarks' );
+			$output .= esc_html__( 'The feed is currently unavailable.', 'pinboard-bookmarks' ) . "\n";
 		}
-		$output .= '</li>';
-		$output .= '</' . $list_element . '>';
+		$output .= "\t" . '</li>' . "\n";
+		$output .= '</' . $list_element . '>' . "\n";
 		return $output;
 	}
 
@@ -244,9 +244,9 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 	}
 	// If the feed is empty.
 	if ( 0 === $maxitems ) {
-		$output .= '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">';
+		$output .= "\t" . '<li class="pinboard-bookmarks-li pinboard-bookmarks-no-items">' . "\n";
 		$output .= esc_html__( 'No items.', 'pinboard-bookmarks' );
-		$output .= '</li>';
+		$output .= "\t" . '</li>' . "\n";
 	} else {
 		// Get the items from 0 to $maxitems.
 		$rss_items = $rss->get_items( 0, $maxitems );
@@ -259,7 +259,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 		$displayed_items = count( $rss_items );
 		// Start the loop.
 		foreach ( $rss_items as $item ) {
-			$output .= '<li class="pinboard-bookmarks-li">';
+			$output .= "\t" . '<li class="pinboard-bookmarks-li">' . "\n";
 
 			// Title part.
 			$title_part  = '';
@@ -269,7 +269,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 				'new_tab_link' => $new_tab_link,
 				'arrow'        => $arrow,
 			);
-			$title_part .= pinboard_bookmarks_get_title( $params );
+			$title_part .= "\t\t" . pinboard_bookmarks_get_title( $params ) . "\n";
 
 			// Original site URL.
 			$site_part = '';
@@ -279,7 +279,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					'leave_domain'  => $leave_domain,
 					'site_url_text' => $site_url_text,
 				);
-				$site_part = pinboard_bookmarks_get_site( $params );
+				$site_part = "\t\t" . pinboard_bookmarks_get_site( $params ) . "\n";
 			}
 
 			// Description part.
@@ -290,7 +290,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					'truncate' => $truncate,
 				);
 
-				$description_part .= pinboard_bookmarks_get_description( $params );
+				$description_part .= "\t\t" . pinboard_bookmarks_get_description( $params ) . "\n";
 			}
 
 			// Date part.
@@ -304,7 +304,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					'new_tab_link' => $new_tab_link,
 				);
 
-				$date_part .= pinboard_bookmarks_get_date( $params );
+				$date_part .= "\t\t" . pinboard_bookmarks_get_date( $params ) . "\n";
 			}
 
 			// Tags part.
@@ -323,7 +323,7 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 					'pinboard_user_source_url' => $pinboard_user_source_url,
 				);
 
-				$tags_part .= pinboard_bookmarks_get_tags( $params );
+				$tags_part .= "\t\t" . pinboard_bookmarks_get_tags( $params ) . "\n";
 			}
 
 			/*
@@ -357,11 +357,11 @@ function get_pinboard_bookmarks_fetch_feed( $args ) {
 			}
 			$items_order = implode( ' ', $items_order );
 
-			$output .= '</li>';
+			$output .= "\t" . '</li>' . "\n";
 		}
 	}
 
-	$output .= '</' . $list_element . '>';
+	$output .= '</' . $list_element . '>' . "\n";
 
 	// The archive link.
 	if ( ! is_wp_error( $rss ) && $display_archive ) {

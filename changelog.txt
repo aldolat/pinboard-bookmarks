@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 1.15.0 =
+
+* Added collapsible panels.
+* Minimum height for text fields is 80 pixels now.
+* Cleaned and beautified HTML code.
+
 = 1.14.1 =
 
 * Added new link to plugin line in the WordPress plugins management page.

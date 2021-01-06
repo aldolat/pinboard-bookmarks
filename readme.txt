@@ -5,7 +5,7 @@ Tags: pinboard, bookmarks, sidebar, widget, shortcode
 Requires at least: 3.0
 Tested up to: 5.6
 Requires PHP: 5.3
-Stable tag: 1.14.1
+Stable tag: 1.15.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -162,8 +162,17 @@ This section describes how to install the plugin and get it working.
 
 == Screenshots ==
 
-1. The dashboard panel to set up the widget
-2. An example of rendered widget
+1. The dashboard panel to set up the widget (all panels closed).
+2. The dashboard panel to set up the widget (all panels opened).
+3. An example of rendered widget.
+
+== Changelog ==
+
+= 1.15.0 =
+
+* Added collapsible panels.
+* Minimum height for text fields is 80 pixels now.
+* Cleaned and beautified HTML code.
 
 == Upgrade Notice ==
 

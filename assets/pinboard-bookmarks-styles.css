@@ -3,16 +3,153 @@
  * @since 1.0
  */
 
-.pinboard-bookmarks-widget-content h4 {
-	border-top: 1px solid #a0a5aa;
-	padding-top: 1em;
+.pinboard-bookmarks-section {
+	clear: both;
+	margin: 1em 0;
+}
+.pinboard-bookmarks-section:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+.pinboard-bookmarks-container {
+	display: none;
+	overflow: hidden;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 15px;
+	margin: 0;
+}
+.pinboard-bookmarks-column-container {
+	clear: both;
+	overflow: hidden;
+}
+.pinboard-bookmarks-column {
+	float: left;
+	width: 31%;
+	margin: 0 2% 1em 0;
+}
+.pinboard-bookmarks-column:last-child {
+	margin-right: 0;
+}
+.pinboard-bookmarks-2col .pinboard-bookmarks-column {
+	width: 48%;
 }
 
-.pinboard-bookmarks-widget-content h4.no-border {
-	border-top: 0 none;
-	padding-top: 0;
+/* Typography */
+.pinboard-bookmarks-widget-title {
+	clear: both;
+	padding: 12px;
+	border: 1px solid #ddd;
+	background-color: #fafafa;
+	font-size: 1em;
+	cursor: pointer;
+	margin: 0;
 }
-
+h4.pinboard-bookmarks-widget-title {
+	background-color: #cee7a5;
+	border: 1px solid #cee7a5;
+}
+h5.pinboard-bookmarks-widget-title {
+	background-color: #bfe7f4;
+	border: 1px solid #bfe7f4;
+}
+h6.pinboard-bookmarks-widget-title {
+	background-color: #cdc5e1;
+	border: 1px solid #cdc5e1;
+}
+h4.pinboard-bookmarks-widget-title:hover {
+	border-color: #859668;
+}
+h5.pinboard-bookmarks-widget-title:hover {
+	border-color: #81a2ad;
+}
+h6.pinboard-bookmarks-widget-title:hover {
+	border-color: #7f7b89;
+}
+h4.pinboard-bookmarks-widget-title + .pinboard-bookmarks-container,
+h5.pinboard-bookmarks-widget-title + .pinboard-bookmarks-container,
+h6.pinboard-bookmarks-widget-title + .pinboard-bookmarks-container {
+	border-width: 2px;
+	border-style: solid;
+	border-top-width: 0;
+}
+h4.pinboard-bookmarks-widget-title + .pinboard-bookmarks-container {
+	border-color: #cee7a5;
+}
+h5.pinboard-bookmarks-widget-title + .pinboard-bookmarks-container {
+	border-color: #bfe7f4;
+}
+h6.pinboard-bookmarks-widget-title + .pinboard-bookmarks-container {
+	border-color: #cdc5e1;
+}
+.pinboard-bookmarks-title-center {
+	text-align: center;
+}
+.pinboard-bookmarks-boxed {
+	border-width: 1px;
+	border-style: solid;
+	padding: 1em;
+}
+.pinboard-bookmarks-boxed-gray {
+	border-color: rgba(128, 128, 128, 0.5);
+	background-color: rgba(128, 128, 128, 0.15);
+}
+.pinboard-bookmarks-boxed-light-blue {
+	border-color: rgba(191, 231, 244, 1);
+	background-color: rgba(191, 231, 244, 0.5);
+}
+.pinboard-bookmarks-boxed-orange {
+	border-color: rgba(243, 166, 33, 0.5);
+	background-color: rgba(243, 166, 33, 0.15);
+}
+.pinboard-bookmarks-boxed-red {
+	border-color: rgba(233, 30, 99, 0.5);
+	background-color: rgba(233, 30, 99, 0.15);
+}
+.pinboard-bookmarks-section select {
+	width: 99%;
+}
+.pinboard-bookmarks-column.centered {
+	float: none;
+	margin: 0px auto 13px;
+}
+.pinboard-bookmarks-section ::-webkit-input-placeholder {
+	color: #ccc;
+}
+.pinboard-bookmarks-section :-moz-placeholder {  /* Firefox 18- */
+	color: #ccc;
+}
+.pinboard-bookmarks-section ::-moz-placeholder { /* Firefox 19+ */
+	color: #ccc;
+}
+.pinboard-bookmarks-section :-ms-input-placeholder {
+	color: #ccc;
+}
+.pinboard-bookmarks-section h5,
+.pinboard-bookmarks-section h6 {
+	font-size: 1em;
+}
+.pinboard-bookmarks-container p:last-child {
+	margin-bottom: 0;
+}
+.pinboard-bookmarks-container h5,
+.pinboard-bookmarks-section h4 {
+	margin-top: 1em;
+	margin-bottom: 0;
+}
+.pinboard-bookmarks-boxed h5 {
+	margin-top: 0;
+}
+.pinboard-bookmarks-container h6 {
+	margin-bottom: 1.67em;
+	margin-top: 1em;
+}
+.pinboard-bookmarks-container h6.pinboard-bookmarks-widget-title {
+	margin-bottom: 0;
+	margin-top: 1em;
+}
 .pinboard-bookmarks-widget-content ::-webkit-input-placeholder {
 	color: #ccc;
 }
@@ -25,7 +162,6 @@
 .pinboard-bookmarks-widget-content :-ms-input-placeholder {
 	color: #ccc;
 }
-
 .pinboard-bookmarks-alert {
 	background-color: #F7F2D2;
 	padding: 1em;

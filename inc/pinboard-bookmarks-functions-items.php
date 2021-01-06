@@ -372,7 +372,7 @@ function pinboard_bookmarks_get_archive_link( $args ) {
 
 	$display_arch_arr ? $arrow = '&nbsp;<span class="pinboard-bookmarks-arrow">&rarr;</span>' : $arrow = '';
 
-	$output = '<p class="pinboard-bookmarks-archive">';
+	$output = '<p class="pinboard-bookmarks-archive">' . "\n";
 
 	if ( 0 === $maxitems ) {
 		if ( $username ) {
@@ -384,9 +384,9 @@ function pinboard_bookmarks_get_archive_link( $args ) {
 		$url_to_archive = $archive_url;
 	}
 
-	$output .= '<a class="pinboard-bookmarks-archive-link"' . $rel_txt . ' href="' . esc_url( $url_to_archive ) . '"' . $new_tab_link . '>';
-	$output .= esc_html( $archive_text ) . $arrow;
-	$output .= '</a>';
+	$output .= "\t" . '<a class="pinboard-bookmarks-archive-link"' . $rel_txt . ' href="' . esc_url( $url_to_archive ) . '"' . $new_tab_link . '>' . "\n";
+	$output .= "\t\t" . esc_html( $archive_text ) . $arrow . "\n";
+	$output .= "\t" . '</a>' . "\n";
 	$output .= '</p>';
 
 	return $output;
@@ -432,20 +432,21 @@ function pinboard_bookmarks_debug( $args ) {
 	// Environment information.
 	if ( $debug_options || $debug_urls ) {
 		global $wp_version;
-		$output .= '<div class="pinboard-bookmarks-debug-group">';
+		$output .= "\n" . '<div class="pinboard-bookmarks-debug-group">' . "\n";
 		// Title.
-		$output .= '<h3 class="pinboard-bookmarks-debug-title">' . sprintf(
+		$output .= "\t" . '<h3 class="pinboard-bookmarks-debug-title">' . sprintf(
 			// translators: %s is the name of the plugin.
 			esc_html__( '%s Debug', 'pinboard-bookmarks' ),
 			'Pinboard Bookmarks'
-		) . '</h3>';
+		) . '</h3>' . "\n";
 		// Subtitle.
-		$output .= '<h4 class="pinboard-bookmarks-debug-env"><strong>' . esc_html__(
+		$output .= "\t" . '<h4 class="pinboard-bookmarks-debug-env">' . esc_html__(
 			'Environment information:',
 			'pinboard-bookmarks'
-		) . '</strong></h4>';
+		) . '</h4>' . "\n";
+		$output .= "\t" . '<ul class="pinboard-bookmarks-debug-ul">' . "\n";
 		// Site URL.
-		$output .= '<ul class="pinboard-bookmarks-debug-ul"><li class="pinboard-bookmarks-debug-li">' . sprintf(
+		$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the URL of the site.
 			esc_html__(
 				'Site URL: %s',
@@ -454,87 +455,89 @@ function pinboard_bookmarks_debug( $args ) {
 			esc_url(
 				site_url()
 			) . '</li>'
-		);
+		) . "\n";
 		// WordPress version.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the WordPress version.
 			esc_html__(
 				'WordPress version: %s',
 				'pinboard-bookmarks'
 			),
 			$wp_version . '</li>'
-		);
+		) . "\n";
 		// Pinboard Bookmarks version.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the plugin version.
 			esc_html__(
 				'Plugin version: %s',
 				'pinboard-bookmarks'
 			),
 			PINBOARD_BOOKMARKS_PLUGIN_VERSION . '</li>'
-		);
+		) . "\n";
 		// ID of the widget/shortcode.
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the ID of the widget.
 			esc_html__(
 				'ID of this widget: %s',
 				'pinboard-bookmarks'
 			),
 			$widget_id . '</li>'
-		);
+		) . "\n";
 
 		// Cache information.
 		$cache_info = pinboard_bookmarks_get_cache_info( $urls['complete_feed_url'] );
 
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . esc_html__(
+		$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . esc_html__(
 			'Cache information:',
 			'pinboard-bookmarks'
-		);
+		) . "\n";
 
-		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+		$output .= "\t\t\t" . '<ul class="pinboard-bookmarks-debug-ul">' . "\n";
 
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		$output .= "\t\t\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the time when the cache was created.
 			esc_html__(
 				'Created on: %s',
 				'pinboard-bookmarks'
 			),
 			$cache_info['cache_created'] . '</li>'
-		);
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		) . "\n";
+		$output .= "\t\t\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the duration of the cache.
 			esc_html__(
 				'Duration: %s',
 				'pinboard-bookmarks'
 			),
 			$cache_info['cache_duration'] . '</li>'
-		);
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		) . "\n";
+		$output .= "\t\t\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the time when the cache will expire.
 			esc_html__(
 				'Will expire on: %s',
 				'pinboard-bookmarks'
 			),
 			$cache_info['cache_expires'] . '</li>'
-		);
-		$output .= '<li class="pinboard-bookmarks-debug-li">' . sprintf(
+		) . "\n";
+		$output .= "\t\t\t\t" . '<li class="pinboard-bookmarks-debug-li">' . sprintf(
 			// translators: %s is the remaining time.
 			esc_html__(
 				'Remaining time: %s',
 				'pinboard-bookmarks'
 			),
 			$cache_info['cache_remaining_time'] . '</li>'
-		);
-		$output .= '</ul></li></ul>';
+		) . "\n";
+		$output .= "\t\t\t" . '</ul>' . "\n";
+		$output .= "\t\t" . '</li>' . "\n";
+		$output .= "\t" . '</ul>' . "\n";
 	}
 
 	// Debug section.
 	if ( $debug_options ) {
-		$output .= '<h4 class="pinboard-bookmarks-debug-opts"><strong>' . esc_html__(
+		$output .= "\t" . '<h4 class="pinboard-bookmarks-debug-opts">' . esc_html__(
 			'The options:',
 			'pinboard-bookmarks'
-		) . '</strong></h4>';
-		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+		) . '</h4>' . "\n";
+		$output .= "\t" . '<ul class="pinboard-bookmarks-debug-ul">' . "\n";
 
 		foreach ( $options as $key => $value ) {
 			/*
@@ -553,23 +556,23 @@ function pinboard_bookmarks_debug( $args ) {
 				}
 			}
 
-			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . esc_html( $value ) . '</code></li>';
+			$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . esc_html( $value ) . '</code></li>' . "\n";
 		}
 
-		$output .= '</ul>';
+		$output .= "\t" . '</ul>' . "\n";
 	}
 
 	// URLs section.
 	if ( $debug_urls ) {
-		$output .= '<h4 class="pinboard-bookmarks-debug-urls"><strong>' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</strong></h4>';
-		$output .= '<ul class="pinboard-bookmarks-debug-ul">';
+		$output .= "\t" . '<h4 class="pinboard-bookmarks-debug-urls">' . esc_html__( 'URLs and components:', 'pinboard-bookmarks' ) . '</h4>' . "\n";
+		$output .= "\t" . '<ul class="pinboard-bookmarks-debug-ul">' . "\n";
 		foreach ( $urls as $key => $value ) {
 			if ( empty( $value ) ) {
 				$value = esc_html__( '(empty)', 'pinboard-bookmarks' );
 			}
-			$output .= '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . $value . '</code></li>';
+			$output .= "\t\t" . '<li class="pinboard-bookmarks-debug-li">' . $key . ': <code>' . $value . '</code></li>' . "\n";
 		}
-		$output .= '</ul>';
+		$output .= "\t" . '</ul>' . "\n";
 	}
 
 	if ( $debug_options || $debug_urls ) {
