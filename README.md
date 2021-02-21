@@ -6,7 +6,7 @@
 **Donate link:** <http://dev.aldolat.it/projects/pinboard-bookmarks/>  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
-**Tested up to:** 5.6  
+**Tested up to:** 5.7  
 **Requires PHP:** 5.3  
 **Stable tag:** 1.15.0  
 **License:** GPLv3 or later  
@@ -20,6 +20,7 @@ Publish Pinboard bookmarks on your WordPress blog.
     * [Usage as shortcode](#usage-as-shortcode)
     * [Usage as PHP function](#usage-as-php-function)
     * [Help, Bugs, and Contributing](#help-bugs-and-contributing)
+    * [Credits](#credits)
     * [Privacy Policy](#privacy-policy)
   * [Installation](#installation)
   * [Screenshots](#screenshots)
@@ -169,6 +170,16 @@ If you have found a bug, please report it on [GitHub](https://github.com/aldolat
 
 This plugin is developed using [GitHub](https://github.com/aldolat/pinboard-bookmarks). If you wrote an enhancement and would share it with the world, please send me a [Pull request](https://github.com/aldolat/pinboard-bookmarks/pulls).
 
+### Credits
+
+I would like to say *Thank You* to all the people who helped me in making this plugin better and translated it into their respective languages.
+
+This plugin uses the following Javascript code, released under the terms of the GNU GPLv2 or later:
+
+* a modified version of @kometschuh's code for "Category Posts Widget" plugin, used to open and close panels in the widget admin user interface.
+
+Thanks to these developers for their work and for using the GNU General Public License.
+
 ### Privacy Policy
 
 This plugin does not collect any user data.
@@ -203,7 +214,7 @@ This section describes how to install the plugin and get it working.
 * Minimum height for text fields is 80 pixels now.
 * Cleaned and beautified HTML code.
 
-For the complete changelog see [here](https://github.com/aldolat/pinboard-bookmarks/blob/master/CHANGELOG.md).
+The full changelog is documented in the changelog file released along with the plugin package and is hosted on [GitHub](https://github.com/aldolat/pinboard-bookmarks/blob/master/CHANGELOG.md).
 
 ## Upgrade Notice
 
