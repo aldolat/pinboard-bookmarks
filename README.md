@@ -6,7 +6,7 @@
 **Donate link:** <http://dev.aldolat.it/projects/pinboard-bookmarks/>  
 **Tags:** pinboard, bookmarks, sidebar, widget, shortcode  
 **Requires at least:** 3.0  
-**Tested up to:** 5.7  
+**Tested up to:** 5.8  
 **Requires PHP:** 5.3  
 **Stable tag:** 1.15.0  
 **License:** GPLv3 or later  
@@ -174,7 +174,7 @@ This plugin is developed using [GitHub](https://github.com/aldolat/pinboard-book
 
 I would like to say *Thank You* to all the people who helped me in making this plugin better and translated it into their respective languages.
 
-This plugin uses the following Javascript code, released under the terms of the GNU GPLv2 or later:
+This plugin uses the following JavaScript code, released under the terms of the GNU GPLv2 or later:
 
 * a modified version of @kometschuh's code for "Category Posts Widget" plugin, used to open and close panels in the widget admin user interface.
 
